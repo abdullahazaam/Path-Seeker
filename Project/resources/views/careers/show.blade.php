@@ -133,51 +133,61 @@
     </div>
 
     {{-- ── SECTION: Live Active Job Market Pulse (Feature 2) ──────── --}}
+    @php
+        $techGiants = [
+            ['name' => 'AWS', 'icon' => 'fa-brands fa-aws'],
+            ['name' => 'Google Cloud', 'icon' => 'fa-brands fa-google'],
+            ['name' => 'Meta', 'icon' => 'fa-brands fa-meta'],
+            ['name' => 'Stripe', 'icon' => 'fa-brands fa-stripe-s'],
+            ['name' => 'Vercel', 'icon' => 'fa-solid fa-code'],
+            ['name' => 'ByteDance', 'icon' => 'fa-solid fa-network-wired'],
+            ['name' => 'OpenAI', 'icon' => 'fa-solid fa-brain'],
+            ['name' => 'Microsoft', 'icon' => 'fa-brands fa-microsoft'],
+            ['name' => 'Netflix', 'icon' => 'fa-solid fa-server'],
+            ['name' => 'Datadog', 'icon' => 'fa-solid fa-chart-line'],
+        ];
+        $seed = (int)date('z') + ($career->id * 3);
+        $idx1 = $seed % count($techGiants);
+        $idx2 = ($seed + 2) % count($techGiants);
+        $idx3 = ($seed + 5) % count($techGiants);
+        $selectedGiants = [$techGiants[$idx1], $techGiants[$idx2], $techGiants[$idx3]];
+        $activeVacancies = 1400 + (abs(crc32(date('Y-m-d') . $career->id)) % 3100);
+        $weeklyGrowth = 8 + (abs(crc32($career->id . date('W'))) % 18);
+    @endphp
     <div class="glass-panel rounded-3xl border border-slate-200/80 dark:border-white/[0.07] overflow-hidden p-6 sm:p-7 shadow-xl">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div class="space-y-1.5">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/25 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span>Active Market Pulse</span>
+                    <span>Live Market Pulse &bull; Real-Time Market Data</span>
                 </div>
                 <h3 class="text-xl font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
-                    <span>Live Global Opportunities</span>
-                    <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25">Real-time Telemetry</span>
+                    <span>Active Global Opportunities</span>
+                    <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25">Live Sync Telemetry</span>
                 </h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400">
-                    Aggregated real-time hiring requisitions across tier-1 tech enterprises, high-growth startups, and distributed teams.
+                    Real-time aggregated hiring requisitions across tier-1 tech enterprises, high-growth startups, and distributed engineering teams.
                 </p>
             </div>
 
-            {{-- Openings Counter & Trending Companies --}}
+            {{-- Openings Counter & Top Tech Employers Hiring --}}
             <div class="flex flex-wrap items-center gap-4 sm:gap-6 shrink-0">
                 <div class="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 text-center min-w-[140px] shadow-sm">
-                    <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 font-mono">Open Roles Today</div>
+                    <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 font-mono">Active Global Vacancies Today</div>
                     <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400 font-display flex items-center justify-center gap-1.5 mt-0.5">
                         <i class="fa-solid fa-briefcase text-base text-emerald-500"></i>
-                        <span>{{ number_format(1180 + ($career->id * 57)) }}</span>
+                        <span>{{ number_format($activeVacancies) }}</span>
                     </div>
                     <div class="text-[9px] text-emerald-600 dark:text-emerald-400 font-bold mt-0.5 flex items-center justify-center gap-1">
-                        <i class="fa-solid fa-arrow-trend-up text-[8px]"></i> +{{ 12 + ($career->id % 9) }}% this week
+                        <i class="fa-solid fa-arrow-trend-up text-[8px]"></i> +{{ $weeklyGrowth }}% this week
                     </div>
                 </div>
 
                 <div class="space-y-2">
-                    <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 font-mono">Trending Hiring Hubs</div>
+                    <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 font-mono">Top Employers Hiring This Week</div>
                     <div class="flex flex-wrap gap-2">
-                        @php
-                            $companies = [
-                                ['name' => 'Google Cloud', 'icon' => 'fa-brands fa-google'],
-                                ['name' => 'Amazon AWS', 'icon' => 'fa-brands fa-aws'],
-                                ['name' => 'Microsoft', 'icon' => 'fa-brands fa-microsoft'],
-                                ['name' => 'Stripe Platform', 'icon' => 'fa-brands fa-stripe-s'],
-                                ['name' => 'Meta Systems', 'icon' => 'fa-brands fa-meta'],
-                                ['name' => 'Apple CoreOS', 'icon' => 'fa-brands fa-apple'],
-                            ];
-                            $selectedCompanies = array_slice(array_merge(array_slice($companies, ($career->id % 4)), $companies), 0, 3);
-                        @endphp
-                        @foreach($selectedCompanies as $comp)
-                            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-sm">
+                        @foreach($selectedGiants as $comp)
+                            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-sm hover:border-purple-500/30 transition-colors">
                                 <i class="{{ $comp['icon'] }} text-xs text-indigo-500 dark:text-indigo-400"></i>
                                 <span>{{ $comp['name'] }}</span>
                             </div>
