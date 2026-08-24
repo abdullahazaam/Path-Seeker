@@ -12,7 +12,8 @@ class MultimediaController extends Controller
      */
     public function index()
     {
-        $multimedia = Multimedia::latest()->paginate(6);
+        // Order by id ASC so items appear in seeded sequence (Page 1: 1-6, Page 2: 7-12, Page 3: 13-16)
+        $multimedia = Multimedia::orderBy('id')->paginate(6);
         return view('multimedia.index', compact('multimedia'));
     }
 
