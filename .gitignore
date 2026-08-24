@@ -1,0 +1,19 @@
+# Environment & Secret Files
+.env
+.env.backup
+.env.production
+
+# Dependencies
+/Project/vendor/
+/Project/node_modules/
+
+# Logs & Cache
+*.log
+/Project/storage/logs/
+/Project/bootstrap/cache/*.php
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,123 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\User;
+use App\Models\Career;
+use App\Models\Multimedia;
+use App\Models\QuizQuestion;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class RoutesTest extends TestCase
+{
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed();
+    }
+
+    public function test_homepage_loads_successfully(): void
+    {
+        $r = $this->get('/');
+        $r->assertStatus(200);
+        $r->assertSee('PathSeeker');
+    }
+
+    public function test_guest_is_redirected_from_protected_dashboard(): void
+    {
+        $this->get('/dashboard')->assertRedirect('/login');
+    }
+
+    public function test_user_can_register_with_role_and_profile_created(): void
+    {
+        $r = $this->post('/register', [
+            'name' => 'Jane Test',
+            'email' => 'jane.test@pathseeker.com',
+            'password' => 'secret123',
+            'password_confirmation' => 'secret123',
+            'role' => 'graduate',
+            'education_level' => 'Bachelor of IT',
+            'interests' => 'Cloud, DevOps',
+        ]);
+        $r->assertRedirect('/dashboard');
+        $this->assertAuthenticated();
+        $u = User::where('email', 'jane.test@pathseeker.com')->first();
+        $this->assertNotNull($u);
+        $this->assertEquals('graduate', $u->role);
+        $this->assertNotNull($u->profile);
+        $this->assertEquals('Bachelor of IT', $u->profile->education_level);
+    }
+
+    public function test_user_can_login_and_access_personalized_dashboard(): void
+    {
+        $student = User::where('email', 'student@pathseeker.com')->first();
+        $r = $this->post('/login', ['email' => 'student@pathseeker.com', 'password' => 'password123']);
+        $r->assertRedirect('/dashboard');
+        $this->assertAuthenticatedAs($student);
+        $dash = $this->actingAs($student)->get('/dashboard');
+        $dash->assertStatus(200);
+        $dash->assertSee('Alex Rivera');
+        $dash->assertSee('Personalized for Students');
+    }
+
+    public function test_career_search_and_domain_filtering(): void
+    {
+        $this->get('/careers?search=Laravel')->assertStatus(200)->assertSee('Full-Stack Web Developer');
+        $this->get('/careers?domain=Cloud+%26+Infrastructure')->assertStatus(200)->assertSee('Cloud Solutions Architect');
+    }
+
+    public function test_career_pagination_works_correctly(): void
+    {
+        $responsePage1 = $this->get('/careers');
+        $responsePage1->assertStatus(200);
+        $responsePage1->assertSee('Next');
+        $responsePage1->assertSeeText('Showing 1 to 6 of 15 Career Tracks');
+
+        $responsePage2 = $this->get('/careers?page=2');
+        $responsePage2->assertStatus(200);
+        $responsePage2->assertSee('Previous');
+        $responsePage2->assertSeeText('Showing 7 to 12 of 15 Career Tracks');
+    }
+
+    public function test_quiz_listing_and_submission(): void
+    {
+        $this->get('/quiz')->assertStatus(200)->assertSee('Career Interest', false);
+        $answers = [];
+        foreach (QuizQuestion::all() as $q) { $answers[$q->id] = 'A'; }
+        $r = $this->post('/quiz/submit', ['answers' => $answers]);
+        $r->assertStatus(200)->assertSee('Career Alignment', false)->assertSee('Software Engineering', false);
+    }
+
+    public function test_multimedia_pagination_and_detail_routing(): void
+    {
+        // 1. Check listing and pagination
+        $list = $this->get('/multimedia');
+        $list->assertStatus(200);
+        $list->assertSee('Multimedia Center');
+        $list->assertSeeText('Showing 1 to 6 of 16 Multimedia Tracks');
+        $list->assertSee('Next');
+
+        // 2. Check exact detail routing matching
+        $firstItem = Multimedia::first();
+        $detail = $this->get("/multimedia/{$firstItem->id}");
+        $detail->assertStatus(200);
+        $detail->assertSee($firstItem->title);
+        $detail->assertSee($firstItem->url);
+        if ($firstItem->description) {
+            $detail->assertSee($firstItem->description);
+        }
+    }
+
+    public function test_resources_load(): void
+    {
+        $r = $this->get('/resources');
+        $r->assertStatus(200);
+        $r->assertSee('Resource Library');
+        $r->assertSee('System Design', false);
+        $r->assertSee('Download Toolkit');
+        $r->assertSee('Next');
+    }
+}

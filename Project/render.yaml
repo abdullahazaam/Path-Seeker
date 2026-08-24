@@ -1,0 +1,44 @@
+services:
+  - type: web
+    name: pathseeker-app
+    runtime: php
+    plan: free
+    buildCommand: composer install --no-dev --optimize-autoloader && php artisan config:cache && php artisan route:cache && php artisan view:cache
+    startCommand: vendor/bin/heroku-php-apache2 public/
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromDatabase:
+          name: pathseeker-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: pathseeker-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: pathseeker-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: pathseeker-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: pathseeker-db
+          property: password
+
+databases:
+  - name: pathseeker-db
+    plan: free
+    databaseName: pathseeker_db
+    user: pathseeker_user
