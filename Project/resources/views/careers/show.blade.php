@@ -90,7 +90,7 @@
     {{-- ── SECTION 2: Demand & Market Metrics ──────── --}}
     <div class="space-y-4">
         <h2 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2">
-            <i class="fa-solid fa-chart-bar text-indigo-400"></i> Market Intelligence
+            <i class="fa-solid fa-chart-bar text-indigo-400"></i> Market Intelligence Telemetry
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
@@ -100,7 +100,7 @@
                     <div class="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/20 flex items-center justify-center">
                         <i class="fa-solid fa-chart-line text-indigo-400"></i>
                     </div>
-                    <span class="text-2xl font-black text-indigo-500 dark:text-indigo-400 font-display">94%</span>
+                    <span class="text-2xl font-black text-indigo-500 dark:text-indigo-400 font-display">{{ $career->market_metrics['demand_score'] }}%</span>
                 </div>
                 <div>
                     <div class="text-sm font-bold text-slate-900 dark:text-white mb-0.5">Market Demand</div>
@@ -108,11 +108,11 @@
                 </div>
                 <div class="space-y-1">
                     <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-white/[0.06] overflow-hidden">
-                        <div class="detail-bar h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500" data-width="94" style="width:0%;transition:width 1s cubic-bezier(0.4,0,0.2,1)"></div>
+                        <div class="detail-bar h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500" data-width="{{ $career->market_metrics['demand_score'] }}" style="width:0%;transition:width 1s cubic-bezier(0.4,0,0.2,1)"></div>
                     </div>
                     <div class="flex items-center gap-1 text-[10px] text-emerald-500">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span>Very High — Strong hiring activity</span>
+                        <span>{{ $career->market_metrics['hiring_index'] }}</span>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                     <div class="w-10 h-10 rounded-xl bg-pink-500/15 border border-pink-500/20 flex items-center justify-center">
                         <i class="fa-solid fa-arrow-trend-up text-pink-400"></i>
                     </div>
-                    <span class="text-2xl font-black text-pink-500 dark:text-pink-400 font-display">+28%</span>
+                    <span class="text-2xl font-black text-pink-500 dark:text-pink-400 font-display">{{ $career->market_metrics['growth_rate'] }}</span>
                 </div>
                 <div>
                     <div class="text-sm font-bold text-slate-900 dark:text-white mb-0.5">5-Year Growth</div>
@@ -131,11 +131,11 @@
                 </div>
                 <div class="space-y-1">
                     <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-white/[0.06] overflow-hidden">
-                        <div class="detail-bar h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500" data-width="88" style="width:0%;transition:width 1s cubic-bezier(0.4,0,0.2,1) 0.15s"></div>
+                        <div class="detail-bar h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500" data-width="{{ min(100, $career->market_metrics['growth_value'] * 2) }}" style="width:0%;transition:width 1s cubic-bezier(0.4,0,0.2,1) 0.15s"></div>
                     </div>
                     <div class="flex items-center gap-1 text-[10px] text-pink-500">
                         <i class="fa-solid fa-arrow-up text-[9px]"></i>
-                        <span>Accelerating — above industry average</span>
+                        <span>{{ $career->market_metrics['sentiment'] }}</span>
                     </div>
                 </div>
             </div>
@@ -158,6 +158,58 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    {{-- ── SECTION 2.5: 10-Year Predictive Market Trajectory Graph ──────── --}}
+    <div class="glass-panel rounded-3xl border border-slate-200/80 dark:border-white/[0.07] overflow-hidden p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/80 dark:border-white/[0.07]">
+            <div class="space-y-1">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/25 text-xs font-semibold text-purple-700 dark:text-purple-300">
+                    <i class="fa-solid fa-chart-line text-purple-500 dark:text-purple-400 text-xs"></i>
+                    <span>Predictive Telemetry (2021 — 2030)</span>
+                </div>
+                <h3 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white font-display">
+                    10-Year Market Trajectory (2021-2030)
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    Historical industry telemetry (2021-2025) synthesized with predictive machine learning growth modeling (2026-2030).
+                </p>
+            </div>
+            <div class="flex items-center gap-4 text-xs font-mono shrink-0">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-indigo-500 shadow-sm"></span>
+                    <span class="text-slate-600 dark:text-slate-300 font-medium">Historical</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-4 h-0.5 border-t-2 border-dashed border-purple-500 dark:border-purple-400"></span>
+                    <span class="text-purple-600 dark:text-purple-300 font-medium">Predictive Forecast</span>
+                </div>
+            </div>
+        </div>
+
+        {{-- Canvas Chart Container --}}
+        <div class="relative w-full h-64 sm:h-80">
+            <canvas id="careerGrowthChart"></canvas>
+        </div>
+
+        {{-- Chart Bottom Telemetry Indicators --}}
+        <div class="pt-4 border-t border-slate-200/60 dark:border-white/[0.05] grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+            <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/[0.05] space-y-1">
+                <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 font-mono">Current 2026 Index</div>
+                <div class="text-base font-black text-indigo-600 dark:text-indigo-400 font-display">{{ $career->market_metrics['demand_score'] }} pts</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400">Top quartile industry hiring benchmark</div>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/[0.05] space-y-1">
+                <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 font-mono">2030 Forecast Ceiling</div>
+                <div class="text-base font-black text-purple-600 dark:text-purple-400 font-display">{{ end($career->market_metrics['trajectory_data']) }} pts</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400">Compound projected expansion estimate</div>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/[0.05] space-y-1">
+                <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 font-mono">Market Velocity</div>
+                <div class="text-base font-black text-emerald-600 dark:text-emerald-400 font-display">{{ $career->market_metrics['growth_rate'] }}</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400">{{ $career->market_metrics['sentiment'] }}</div>
+            </div>
         </div>
     </div>
 
@@ -338,9 +390,12 @@
 
 </div>
 
+{{-- Chart.js CDN --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Animate bars on scroll-into-view
+    // 1. Animate bars on scroll-into-view
     const allBars = document.querySelectorAll('.detail-bar');
     const salBar  = document.querySelector('.salary-bar');
     const skills  = document.querySelectorAll('.skill-pill');
@@ -367,6 +422,111 @@ document.addEventListener('DOMContentLoaded', () => {
 
     reveal(skills, el => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
     reveal(steps,  el => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
+
+    // 2. Initialize 10-Year Predictive Chart
+    const chartCanvas = document.getElementById('careerGrowthChart');
+    if (chartCanvas) {
+        const ctx = chartCanvas.getContext('2d');
+        const gradientFill = ctx.createLinearGradient(0, 0, 0, 300);
+        gradientFill.addColorStop(0, 'rgba(168, 85, 247, 0.4)');
+        gradientFill.addColorStop(0.5, 'rgba(99, 102, 241, 0.15)');
+        gradientFill.addColorStop(1, 'rgba(99, 102, 241, 0.0)');
+
+        const labels = {!! json_encode($career->market_metrics['trajectory_labels']) !!};
+        const dataValues = {!! json_encode($career->market_metrics['trajectory_data']) !!};
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Market Index',
+                    data: dataValues,
+                    fill: true,
+                    backgroundColor: gradientFill,
+                    borderWidth: 3,
+                    tension: 0.4,
+                    pointRadius: (context) => context.dataIndex === 5 ? 7 : 4,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: (context) => {
+                        if (context.dataIndex === 5) return '#ec4899';
+                        return context.dataIndex > 5 ? '#a855f7' : '#6366f1';
+                    },
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    segment: {
+                        borderColor: (ctx) => ctx.p0DataIndex >= 5 ? '#a855f7' : '#6366f1',
+                        borderDash: (ctx) => ctx.p0DataIndex >= 5 ? [6, 6] : undefined,
+                    }
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#e2e8f0',
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1,
+                        padding: 12,
+                        cornerRadius: 12,
+                        displayColors: false,
+                        callbacks: {
+                            title: (tooltipItems) => {
+                                const item = tooltipItems[0];
+                                return `Year: ${item.label}`;
+                            },
+                            label: (context) => {
+                                const isProj = context.dataIndex > 5;
+                                const isCurrent = context.dataIndex === 5;
+                                const status = isCurrent ? ' (Current Telemetry)' : (isProj ? ' (Predictive Forecast)' : ' (Historical Telemetry)');
+                                return `Market Capitalization Index: ${context.parsed.y} pts${status}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#94a3b8',
+                            font: {
+                                size: 11,
+                                family: "'Plus Jakarta Sans', sans-serif"
+                            }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: 'rgba(148, 163, 184, 0.08)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#94a3b8',
+                            font: {
+                                size: 11,
+                                family: "'Plus Jakarta Sans', sans-serif"
+                            },
+                            callback: (value) => `${value} pts`
+                        },
+                        suggestedMin: 40
+                    }
+                }
+            }
+        });
+    }
 });
 </script>
 @endsection
