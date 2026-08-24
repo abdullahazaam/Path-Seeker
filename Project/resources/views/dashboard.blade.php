@@ -1160,7 +1160,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: ADD NEW USER ══════════════════ --}}
-        <div x-show="showAddUser" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="showAddUser" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
             <div @click.outside="showAddUser = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
@@ -1202,7 +1202,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: ADD CAREER TRACK ══════════════════ --}}
-        <div x-show="showAddCareer" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="showAddCareer" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
             <div @click.outside="showAddCareer = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
@@ -1243,7 +1243,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: EDIT CAREER TRACK ══════════════════ --}}
-        <div x-show="editCareerModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="editCareerModal" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
             <div @click.outside="editCareerModal = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
@@ -1285,7 +1285,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: ADD MULTIMEDIA ASSET ══════════════════ --}}
-        <div x-show="showAddMedia" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="showAddMedia" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
             <div @click.outside="showAddMedia = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
@@ -1331,7 +1331,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: ADD RESOURCE TOOLKIT ══════════════════ --}}
-        <div x-show="showAddResource" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="showAddResource" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
             <div @click.outside="showAddResource = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">

@@ -67,6 +67,7 @@
         }
     </script>
     <style>
+        [x-cloak] { display: none !important; }
         body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
         .font-display { font-family: 'Space Grotesk', sans-serif; }
 
