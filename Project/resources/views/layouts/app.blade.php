@@ -550,6 +550,7 @@
         @yield('content')
     </main>
 
+    @if(!request()->routeIs('login') && !request()->routeIs('register'))
     <!-- ══════════════════ 6. FINAL POWER CTA & GLOBAL FOOTER ══════════════════ -->
     <section class="relative z-10 my-10 md:my-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <!-- The Bold Closing Statement Banner -->
@@ -578,6 +579,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     <!-- Structured Slate Footer Component with Newsletter -->
     @include('components.footer')
