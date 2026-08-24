@@ -39,45 +39,49 @@
             <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1.5 transition-transform"></i>
             <span>Back to Career Bank</span>
         </a>
-        <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-slate-400">
-            <span class="text-purple-400 font-bold">TRACK</span>
+        <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/80 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/[0.08] text-xs font-mono text-slate-600 dark:text-slate-400 shadow-sm">
+            <span class="text-purple-600 dark:text-purple-400 font-bold">TRACK</span>
             <span>&bull;</span>
             <span>#{{ str_pad($career->id, 3, '0', STR_PAD_LEFT) }}</span>
         </div>
     </div>
 
     {{-- ── SECTION 1: Hero Header ───────────────────── --}}
-    <div class="relative rounded-3xl overflow-hidden border border-white/[0.08] bg-gradient-to-br from-[#0d0e1a] to-[#060710] shadow-2xl">
+    <div class="relative rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+        {{-- Ambient Corner Glows --}}
+        <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
+
         {{-- Top accent bar --}}
         <div class="h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
 
-        <div class="p-8 sm:p-10 lg:p-12">
+        <div class="p-8 sm:p-10 lg:p-12 relative z-10">
             <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
                 <div class="space-y-4 flex-1">
                     <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold border {{ $badgeClass }}">
                         <i class="fa-solid {{ $domIcon }} text-[10px]"></i>
                         <span>{{ $career->domain }}</span>
                     </span>
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight font-display">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white leading-tight font-display">
                         {{ $career->title }}
                     </h1>
                     <div class="flex flex-wrap items-center gap-3">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/25">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">
                             <i class="fa-solid fa-circle-check text-[10px]"></i> Verified 2026 Role
                         </span>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/15 text-indigo-300 border border-indigo-500/25">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25">
                             <i class="fa-solid fa-chart-line text-[10px]"></i> High Demand
                         </span>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-purple-500/15 text-purple-300 border border-purple-500/25">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25">
                             <i class="fa-solid fa-trophy text-[10px]"></i> Top Earning Track
                         </span>
                     </div>
                 </div>
                 {{-- Salary Callout --}}
-                <div class="shrink-0 p-6 rounded-2xl bg-white/[0.04] border border-emerald-500/25 text-center min-w-[160px]">
-                    <div class="text-[10px] font-semibold text-emerald-400 mb-1 uppercase tracking-widest">Salary Benchmark</div>
-                    <div class="text-2xl font-black text-white font-display">{{ $career->expected_salary }}</div>
-                    <div class="text-[10px] text-slate-400 mt-1">Annual Median</div>
+                <div class="shrink-0 p-6 rounded-2xl bg-slate-100/80 dark:bg-slate-950/60 border border-emerald-500/30 text-center min-w-[160px] shadow-sm backdrop-blur-md">
+                    <div class="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 mb-1 uppercase tracking-widest font-mono">Salary Benchmark</div>
+                    <div class="text-2xl font-black text-slate-900 dark:text-white font-display">{{ $career->expected_salary }}</div>
+                    <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-medium">Annual Median</div>
                 </div>
             </div>
         </div>
@@ -226,32 +230,32 @@
         </div>
         <div class="p-7">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                <div class="p-5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/[0.06] text-center space-y-1">
-                    <div class="text-[10px] font-semibold text-slate-500 uppercase tracking-widest">Entry Level</div>
+                <div class="p-5 rounded-2xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/[0.06] text-center space-y-1">
+                    <div class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono">Entry Level</div>
                     <div class="text-xl font-black text-slate-800 dark:text-slate-200 font-display">$70k–$90k</div>
-                    <div class="text-[10px] text-slate-400">0–2 years experience</div>
+                    <div class="text-[10px] text-slate-500 dark:text-slate-400">0–2 years experience</div>
                 </div>
-                <div class="p-5 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/25 text-center space-y-1 relative overflow-hidden">
-                    <div class="absolute top-2 right-2 px-1.5 py-0.5 rounded text-[8px] font-bold bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">MEDIAN</div>
-                    <div class="text-[10px] font-semibold text-indigo-400 uppercase tracking-widest">Mid Level</div>
-                    <div class="text-xl font-black text-white font-display">{{ $career->expected_salary }}</div>
-                    <div class="text-[10px] text-slate-400">3–6 years experience</div>
+                <div class="p-5 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 dark:from-indigo-950/40 dark:to-purple-950/40 border border-indigo-500/30 text-center space-y-1 relative overflow-hidden">
+                    <div class="absolute top-2 right-2 px-1.5 py-0.5 rounded text-[8px] font-bold bg-indigo-500/20 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 font-mono">MEDIAN</div>
+                    <div class="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest font-mono">Mid Level</div>
+                    <div class="text-xl font-black text-slate-900 dark:text-white font-display">{{ $career->expected_salary }}</div>
+                    <div class="text-[10px] text-slate-500 dark:text-slate-400">3–6 years experience</div>
                 </div>
-                <div class="p-5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/[0.06] text-center space-y-1">
-                    <div class="text-[10px] font-semibold text-slate-500 uppercase tracking-widest">Senior / Lead</div>
+                <div class="p-5 rounded-2xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/[0.06] text-center space-y-1">
+                    <div class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono">Senior / Lead</div>
                     <div class="text-xl font-black text-emerald-600 dark:text-emerald-400 font-display">$160k+</div>
-                    <div class="text-[10px] text-slate-400">7+ years experience</div>
+                    <div class="text-[10px] text-slate-500 dark:text-slate-400">7+ years experience</div>
                 </div>
             </div>
             {{-- Visual salary bar --}}
             <div class="space-y-2">
-                <div class="relative h-3 rounded-full bg-slate-100 dark:bg-white/[0.05] overflow-hidden">
+                <div class="relative h-3 rounded-full bg-slate-200/80 dark:bg-white/[0.05] overflow-hidden">
                     <div class="absolute left-0 inset-y-0 w-[30%] bg-slate-300 dark:bg-white/10 rounded-l-full"></div>
                     <div class="absolute left-[30%] inset-y-0 w-[40%] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 salary-bar" style="width:0%;transition:width 1.2s cubic-bezier(0.4,0,0.2,1)"></div>
                     <div class="absolute right-0 inset-y-0 w-[30%] bg-emerald-400/40 rounded-r-full"></div>
                 </div>
-                <div class="flex justify-between text-[9px] text-slate-400 px-1">
-                    <span>$70k</span><span class="text-indigo-400 font-semibold">Median Range</span><span>$200k+</span>
+                <div class="flex justify-between text-[9px] text-slate-500 dark:text-slate-400 px-1 font-mono">
+                    <span>$70k</span><span class="text-indigo-600 dark:text-indigo-400 font-semibold">Median Range</span><span>$200k+</span>
                 </div>
             </div>
         </div>
@@ -262,11 +266,11 @@
         <div class="px-7 py-4 border-b border-slate-200/80 dark:border-white/[0.07] flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-xl bg-purple-500/15 flex items-center justify-center border border-purple-500/20">
-                    <i class="fa-solid fa-map-location-dot text-purple-400 text-sm"></i>
+                    <i class="fa-solid fa-map-location-dot text-purple-600 dark:text-purple-400 text-sm"></i>
                 </div>
                 <h2 class="text-sm font-black text-slate-900 dark:text-white">Career Path Progression Flow</h2>
             </div>
-            <span class="text-xs text-purple-400 font-mono font-semibold">4 Milestones</span>
+            <span class="text-xs text-purple-600 dark:text-purple-400 font-mono font-semibold">4 Milestones</span>
         </div>
         <div class="p-7">
             <div class="relative">
@@ -277,9 +281,9 @@
                     @foreach($roadmap as $i => $stage)
                     @php
                         $statusStyles = [
-                            'Completed'   => ['badge' => 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30', 'dot' => 'bg-emerald-400', 'ring' => 'bg-emerald-600', 'glow' => 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'],
-                            'In Progress' => ['badge' => 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40',   'dot' => 'bg-indigo-400 animate-ping', 'ring' => 'bg-indigo-600', 'glow' => 'bg-indigo-500/15 border-indigo-500/40 text-indigo-400 shadow-lg shadow-indigo-500/20'],
-                            'Upcoming'    => ['badge' => 'bg-white/5 text-slate-400 border-white/10',                'dot' => 'bg-slate-500', 'ring' => 'bg-slate-700', 'glow' => 'bg-white/[0.03] border-white/[0.08] text-slate-400'],
+                            'Completed'   => ['badge' => 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30', 'dot' => 'bg-emerald-500', 'ring' => 'bg-emerald-600', 'glow' => 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400'],
+                            'In Progress' => ['badge' => 'bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border-indigo-500/40',   'dot' => 'bg-indigo-500 animate-ping', 'ring' => 'bg-indigo-600', 'glow' => 'bg-indigo-500/15 border-indigo-500/40 text-indigo-600 dark:text-indigo-400 shadow-lg shadow-indigo-500/20'],
+                            'Upcoming'    => ['badge' => 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-white/10', 'dot' => 'bg-slate-400', 'ring' => 'bg-slate-600', 'glow' => 'bg-slate-100/80 dark:bg-white/[0.03] border-slate-200/80 dark:border-white/[0.08] text-slate-500 dark:text-slate-400'],
                         ];
                         $st = $statusStyles[$stage['status']];
                     @endphp
@@ -291,7 +295,7 @@
                             <div class="w-16 h-16 rounded-2xl {{ $st['glow'] }} border flex items-center justify-center group-hover:scale-105 transition-transform backdrop-blur-md">
                                 <i class="fa-solid {{ $stage['icon'] }} text-xl"></i>
                             </div>
-                            <div class="absolute -top-2 -right-2 w-6 h-6 rounded-full {{ $st['ring'] }} text-white text-[9px] font-black flex items-center justify-center border-2 border-[#090b14]">{{ $stage['step'] }}</div>
+                            <div class="absolute -top-2 -right-2 w-6 h-6 rounded-full {{ $st['ring'] }} text-white text-[9px] font-black flex items-center justify-center border-2 border-white dark:border-[#090b14]">{{ $stage['step'] }}</div>
                         </div>
 
                         {{-- Node Details & Status Badge --}}
@@ -301,7 +305,7 @@
                                 <span>{{ $stage['status'] }}</span>
                             </span>
                             <h4 class="text-sm font-black text-slate-900 dark:text-white leading-snug">{{ $stage['phase'] }}</h4>
-                            <p class="text-[11px] text-slate-400 leading-relaxed sm:max-w-[170px]">{{ $stage['desc'] }}</p>
+                            <p class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed sm:max-w-[170px]">{{ $stage['desc'] }}</p>
                         </div>
                     </div>
                     @endforeach
