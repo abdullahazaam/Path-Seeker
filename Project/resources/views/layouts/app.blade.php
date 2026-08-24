@@ -587,9 +587,9 @@
 
     <!-- ══════════════════ GLOBAL FLOATING ACTIONS (SCROLL TO TOP & AI GUIDE CHATBOT) ══════════════════ -->
     <div x-data="initChatbot()"
-         class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-[9999] flex flex-col gap-3.5 items-end pointer-events-none">
+         class="fixed bottom-6 right-6 z-[99999] flex flex-col gap-3.5 items-end pointer-events-none">
         
-        <!-- Floating AI Chat Window Modal (Elevated with z-[9999]) -->
+        <!-- Floating AI Chat Window Modal (Elevated with z-[99999]) -->
         <div x-show="openAI"
              x-transition:enter="transition ease-out duration-300 transform"
              x-transition:enter-start="opacity-0 translate-y-6 scale-95"
@@ -599,7 +599,7 @@
              x-transition:leave-end="opacity-0 translate-y-6 scale-95"
              @click.outside="openAI = false"
              style="display: none;"
-             class="w-[calc(100vw-2.5rem)] sm:w-[26rem] max-w-[26rem] h-[32rem] max-h-[calc(100vh-6.5rem)] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] flex flex-col overflow-hidden pointer-events-auto mb-2 z-[9999]">
+             class="w-[90vw] max-w-[380px] h-[32rem] max-h-[calc(100vh-7rem)] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] flex flex-col overflow-hidden pointer-events-auto mb-2 z-[99999]">
             
             {{-- Top Header --}}
             <div class="px-5 py-4 bg-white/90 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between shrink-0">
@@ -680,7 +680,7 @@
                 onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
                 title="Scroll to Top"
                 aria-label="Scroll to top"
-                class="w-12 h-12 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white shadow-xl flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer z-[9999] pointer-events-auto opacity-0 translate-y-4 duration-300">
+                class="w-12 h-12 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white shadow-xl flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer z-[99999] pointer-events-auto opacity-0 translate-y-4 duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-700 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
             </svg>
@@ -690,7 +690,7 @@
         <button @click="openAI = !openAI"
                 id="floatingAiGuideBtn"
                 title="Toggle AI Career Guide"
-                class="w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(147,51,234,0.5)] hover:scale-110 transition-transform cursor-pointer pointer-events-auto z-[9999] border border-white/20">
+                class="w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(147,51,234,0.5)] hover:scale-110 transition-transform cursor-pointer pointer-events-auto z-[99999] border border-white/20">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
