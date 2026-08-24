@@ -248,42 +248,48 @@
         @endforelse
     </div>
 
-    {{-- Pagination --}}
-    @if($careers->hasPages())
+    {{-- ══════════════════ PAGINATION ══════════════════ --}}
+    @if ($careers->hasPages())
         <div class="glass-panel rounded-2xl p-4 border border-slate-200/80 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="text-xs text-slate-700 dark:text-slate-400 font-semibold">
-                Showing <span class="font-bold text-slate-950 dark:text-slate-200">{{ $careers->firstItem() }}</span> to <span class="font-bold text-slate-950 dark:text-slate-200">{{ $careers->lastItem() }}</span> of <span class="font-bold text-slate-950 dark:text-slate-200">{{ $careers->total() }}</span> Career Tracks
-            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">
+                Showing <strong class="text-slate-900 dark:text-white">{{ $careers->firstItem() }}</strong> to <strong class="text-slate-900 dark:text-white">{{ $careers->lastItem() }}</strong> of <strong class="text-slate-900 dark:text-white">{{ $careers->total() }}</strong> Career Tracks
+            </p>
+
             <div class="flex items-center gap-2">
+                {{-- Previous Button --}}
                 @if ($careers->onFirstPage())
-                    <span class="px-4 py-2 glass-panel rounded-full text-xs font-bold text-slate-400 dark:text-slate-600 cursor-not-allowed opacity-50 flex items-center gap-1.5 select-none">
-                        <i class="fa-solid fa-chevron-left text-[10px]"></i> Previous
+                    <span class="px-4 py-2 text-xs font-bold rounded-full glass-panel text-slate-400 dark:text-slate-600 border border-slate-200 dark:border-white/5 cursor-not-allowed select-none">
+                        <i class="fa-solid fa-chevron-left mr-1"></i> Previous
                     </span>
                 @else
-                    <a href="{{ $careers->previousPageUrl() }}" class="px-4 py-2 glass-panel rounded-full text-xs font-bold text-slate-800 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:border-purple-500/40 transition-all flex items-center gap-1.5">
-                        <i class="fa-solid fa-chevron-left text-[10px]"></i> Previous
+                    <a href="{{ $careers->appends(request()->query())->previousPageUrl() }}" class="px-4 py-2 text-xs font-bold rounded-full glass-panel text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white border border-slate-200/80 dark:border-white/10 hover:border-purple-500/40 transition-all">
+                        <i class="fa-solid fa-chevron-left mr-1"></i> Previous
                     </a>
                 @endif
+
+                {{-- Numeric Page Buttons --}}
                 <div class="hidden sm:flex items-center gap-1.5">
-                    @foreach ($careers->getUrlRange(1, $careers->lastPage()) as $page => $url)
+                    @foreach ($careers->appends(request()->query())->getUrlRange(1, $careers->lastPage()) as $page => $url)
                         @if ($page == $careers->currentPage())
                             <span class="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-bold text-xs flex items-center justify-center shadow-lg shadow-purple-500/25">
                                 {{ $page }}
                             </span>
                         @else
-                            <a href="{{ $url }}" class="w-8 h-8 rounded-full glass-panel text-slate-700 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white hover:border-purple-500/30 text-xs font-bold flex items-center justify-center transition-all">
+                            <a href="{{ $url }}" class="w-8 h-8 rounded-full glass-panel text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white border border-slate-200/80 dark:border-white/10 hover:border-purple-500/40 font-bold text-xs flex items-center justify-center transition-all">
                                 {{ $page }}
                             </a>
                         @endif
                     @endforeach
                 </div>
+
+                {{-- Next Button --}}
                 @if ($careers->hasMorePages())
-                    <a href="{{ $careers->nextPageUrl() }}" class="px-4 py-2 glass-panel rounded-full text-xs font-bold text-slate-800 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:border-purple-500/40 transition-all flex items-center gap-1.5">
-                        Next <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    <a href="{{ $careers->appends(request()->query())->nextPageUrl() }}" class="px-4 py-2 text-xs font-bold rounded-full glass-panel text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white border border-slate-200/80 dark:border-white/10 hover:border-purple-500/40 transition-all">
+                        Next <i class="fa-solid fa-chevron-right ml-1"></i>
                     </a>
                 @else
-                    <span class="px-4 py-2 glass-panel rounded-full text-xs font-bold text-slate-400 dark:text-slate-600 cursor-not-allowed opacity-50 flex items-center gap-1.5 select-none">
-                        Next <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    <span class="px-4 py-2 text-xs font-bold rounded-full glass-panel text-slate-400 dark:text-slate-600 border border-slate-200 dark:border-white/5 cursor-not-allowed select-none">
+                        Next <i class="fa-solid fa-chevron-right ml-1"></i>
                     </span>
                 @endif
             </div>
