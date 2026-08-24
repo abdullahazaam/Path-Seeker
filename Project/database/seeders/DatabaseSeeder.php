@@ -21,70 +21,65 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Users & UserProfiles
-        $admin = User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@pathseeker.com',
-            'password' => Hash::make('password123'),
-            'role' => 'admin',
-            'education_level' => 'Master of Science in Computer Science',
-            'interests' => 'Cloud Architecture, System Design, AI Research',
-        ]);
+        // 1. Users & UserProfiles (Safe Idempotent Creation)
+        $users = [
+            [
+                'name' => 'Admin User',
+                'email' => 'admin@pathseeker.com',
+                'password' => Hash::make('password123'),
+                'role' => 'admin',
+                'education_level' => 'Master of Science in Computer Science',
+                'interests' => 'Cloud Architecture, System Design, AI Research',
+            ],
+            [
+                'name' => 'Alex Rivera',
+                'email' => 'student@pathseeker.com',
+                'password' => Hash::make('password123'),
+                'role' => 'student',
+                'education_level' => 'Undergraduate (Year 3)',
+                'interests' => 'Full-Stack Development, Cyber Security, UI/UX',
+            ],
+            [
+                'name' => 'Sarah Connor',
+                'email' => 'graduate@pathseeker.com',
+                'password' => Hash::make('password123'),
+                'role' => 'graduate',
+                'education_level' => 'Bachelor of Engineering',
+                'interests' => 'DevOps, Machine Learning, Mobile Apps',
+            ],
+            [
+                'name' => 'David Miller',
+                'email' => 'pro@pathseeker.com',
+                'password' => Hash::make('password123'),
+                'role' => 'professional',
+                'education_level' => 'B.S. Software Engineering',
+                'interests' => 'Tech Leadership, Enterprise Architecture',
+            ],
+            [
+                'name' => 'Abdullah Azaam',
+                'email' => 'abdullahazaam1505@gmail.com',
+                'password' => Hash::make('password123'),
+                'role' => 'student',
+                'education_level' => 'Bachelor of Science in Computer Science',
+                'interests' => 'Full-Stack Development, Cloud Architecture, AI Systems',
+            ],
+        ];
 
-        UserProfile::create([
-            'user_id' => $admin->id,
-            'education_level' => 'Master of Science in Computer Science',
-            'interests' => 'Cloud Architecture, System Design, AI Research',
-            'profile_image' => null,
-        ]);
+        foreach ($users as $userData) {
+            $user = User::firstOrCreate(
+                ['email' => $userData['email']],
+                $userData
+            );
 
-        $student = User::create([
-            'name' => 'Alex Rivera',
-            'email' => 'student@pathseeker.com',
-            'password' => Hash::make('password123'),
-            'role' => 'student',
-            'education_level' => 'Undergraduate (Year 3)',
-            'interests' => 'Full-Stack Development, Cyber Security, UI/UX',
-        ]);
-
-        UserProfile::create([
-            'user_id' => $student->id,
-            'education_level' => 'Undergraduate (Year 3)',
-            'interests' => 'Full-Stack Development, Cyber Security, UI/UX',
-            'profile_image' => null,
-        ]);
-
-        $graduate = User::create([
-            'name' => 'Sarah Connor',
-            'email' => 'graduate@pathseeker.com',
-            'password' => Hash::make('password123'),
-            'role' => 'graduate',
-            'education_level' => 'Bachelor of Engineering',
-            'interests' => 'DevOps, Machine Learning, Mobile Apps',
-        ]);
-
-        UserProfile::create([
-            'user_id' => $graduate->id,
-            'education_level' => 'Bachelor of Engineering',
-            'interests' => 'DevOps, Machine Learning, Mobile Apps',
-            'profile_image' => null,
-        ]);
-
-        $professional = User::create([
-            'name' => 'David Miller',
-            'email' => 'pro@pathseeker.com',
-            'password' => Hash::make('password123'),
-            'role' => 'professional',
-            'education_level' => 'B.S. Software Engineering',
-            'interests' => 'Tech Leadership, Enterprise Architecture',
-        ]);
-
-        UserProfile::create([
-            'user_id' => $professional->id,
-            'education_level' => 'B.S. Software Engineering',
-            'interests' => 'Tech Leadership, Enterprise Architecture',
-            'profile_image' => null,
-        ]);
+            UserProfile::firstOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'education_level' => $userData['education_level'],
+                    'interests' => $userData['interests'],
+                    'profile_image' => null,
+                ]
+            );
+        }
 
         // 2. 15 Diverse, High-Demand Career Tracks
         $careers = [
@@ -196,7 +191,10 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($careers as $career) {
-            Career::create($career);
+            Career::firstOrCreate(
+                ['title' => $career['title']],
+                $career
+            );
         }
 
         // 3. 16 Comprehensive Multimedia Items with Valid, Open YouTube Embed URLs
@@ -348,7 +346,10 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($multimedia as $item) {
-            Multimedia::create($item);
+            Multimedia::firstOrCreate(
+                ['title' => $item['title']],
+                $item
+            );
         }
 
         // 4. Resources
@@ -389,44 +390,38 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($quizQuestions as $q) {
-            QuizQuestion::create($q);
+            QuizQuestion::firstOrCreate(
+                ['question_text' => $q['question_text']],
+                $q
+            );
         }
 
         // 6. Success Stories
-        SuccessStory::create([
-            'title' => 'From University Sophomore to Full-Stack Software Engineer',
-            'domain' => 'Software Engineering',
-            'story_text' => 'Using PathSeeker Career Bank and practice assessments, Alex mastered Laravel and JavaScript, landing a competitive software engineering fellowship.',
-            'image_url' => null,
-            'submitted_by' => $student->id,
-        ]);
+        $studentUser = User::where('email', 'student@pathseeker.com')->first();
+        $proUser = User::where('email', 'pro@pathseeker.com')->first();
 
-        SuccessStory::create([
-            'title' => 'Pivoting from Sysadmin to Certified Cloud Solutions Architect',
-            'domain' => 'Cloud & Infrastructure',
-            'story_text' => 'David leveraged the career roadmap and certification resources to pivot into AWS Solutions Architecture with a 40% salary bump.',
-            'image_url' => null,
-            'submitted_by' => $professional->id,
-        ]);
+        if ($studentUser) {
+            SuccessStory::firstOrCreate(
+                ['title' => 'From University Sophomore to Full-Stack Software Engineer'],
+                [
+                    'domain' => 'Software Engineering',
+                    'story_text' => 'Using PathSeeker Career Bank and practice assessments, Alex mastered Laravel and JavaScript, landing a competitive software engineering fellowship.',
+                    'image_url' => null,
+                    'submitted_by' => $studentUser->id,
+                ]
+            );
+        }
 
-        // 7. Bookmarks & Feedback
-        Bookmark::create([
-            'user_id' => $student->id,
-            'item_id' => 1,
-            'item_type' => 'career',
-        ]);
-
-        Bookmark::create([
-            'user_id' => $student->id,
-            'item_id' => 1,
-            'item_type' => 'multimedia',
-        ]);
-
-        Feedback::create([
-            'user_id' => $student->id,
-            'category' => 'Platform Suggestion',
-            'message' => 'PathSeeker has helped clarify my graduate career roadmap immensely! Would love to see more interview simulations.',
-            'status' => 'reviewed',
-        ]);
+        if ($proUser) {
+            SuccessStory::firstOrCreate(
+                ['title' => 'Pivoting from Sysadmin to Certified Cloud Solutions Architect'],
+                [
+                    'domain' => 'Cloud & Infrastructure',
+                    'story_text' => 'David leveraged the career roadmap and certification resources to pivot into AWS Solutions Architecture with a 40% salary bump.',
+                    'image_url' => null,
+                    'submitted_by' => $proUser->id,
+                ]
+            );
+        }
     }
 }
