@@ -302,7 +302,7 @@
                 </div>
                 <div class="p-2.5 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/[0.05]">
                     <div class="text-[9px] uppercase font-bold text-slate-400 font-mono">2030 Proj</div>
-                    <div class="text-sm font-black text-purple-600 dark:text-purple-400 font-display">{{ end($career->market_metrics['trajectory_data']) }} pts</div>
+                    <div class="text-sm font-black text-purple-600 dark:text-purple-400 font-display">{{ collect($career->market_metrics['trajectory_data'])->last() }} pts</div>
                 </div>
                 <div class="p-2.5 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/[0.05]">
                     <div class="text-[9px] uppercase font-bold text-slate-400 font-mono">Growth</div>
