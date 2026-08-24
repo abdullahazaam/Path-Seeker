@@ -172,12 +172,13 @@
 
             {{-- 4 Step Cards Grid --}}
             <div class="relative">
+                {{-- Background Connector Line (Underneath cards) --}}
                 <div class="hidden lg:block absolute top-[44px] left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-indigo-500/30 via-purple-500/50 to-pink-500/30 rounded-full z-0 pointer-events-none"></div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
                     
                     {{-- Step 01: Discover --}}
-                    <div class="group relative flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/90 dark:bg-slate-950/50 border border-slate-200 dark:border-white/5 hover:border-purple-500/30 dark:hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/95 dark:bg-slate-900/90 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 dark:bg-indigo-500/15 border border-indigo-500/25 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-xl group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all shadow-sm">
@@ -202,7 +203,7 @@
                     </div>
 
                     {{-- Step 02: Explore --}}
-                    <div class="group relative flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/90 dark:bg-slate-950/50 border border-slate-200 dark:border-white/5 hover:border-purple-500/30 dark:hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/95 dark:bg-slate-900/90 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-14 h-14 rounded-2xl bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl group-hover:scale-110 group-hover:bg-purple-500/20 transition-all shadow-sm">
@@ -227,7 +228,7 @@
                     </div>
 
                     {{-- Step 03: Understand --}}
-                    <div class="group relative flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/90 dark:bg-slate-950/50 border border-slate-200 dark:border-white/5 hover:border-purple-500/30 dark:hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/95 dark:bg-slate-900/90 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-14 h-14 rounded-2xl bg-pink-500/10 dark:bg-pink-500/15 border border-pink-500/25 flex items-center justify-center text-pink-600 dark:text-pink-400 text-xl group-hover:scale-110 group-hover:bg-pink-500/20 transition-all shadow-sm">
@@ -252,7 +253,7 @@
                     </div>
 
                     {{-- Step 04: Build --}}
-                    <div class="group relative flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/90 dark:bg-slate-950/50 border border-slate-200 dark:border-white/5 hover:border-purple-500/30 dark:hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/95 dark:bg-slate-900/90 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xl group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all shadow-sm">
@@ -274,7 +275,8 @@
                                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                             </a>
                         </div>
-                             </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
