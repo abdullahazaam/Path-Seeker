@@ -12,7 +12,7 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        $resources = Resource::latest()->paginate(6);
+        $resources = Resource::orderBy('id', 'asc')->paginate(6);
         return view('resources.index', compact('resources'));
     }
 
