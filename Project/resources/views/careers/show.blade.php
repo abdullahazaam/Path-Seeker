@@ -1,5 +1,33 @@
 @extends('layouts.app')
-@section('title', $career->title . ' — PathSeeker Career Detail')
+@section('title', $career->title . ' — 2026 Career Roadmap, Salary & Market Intelligence')
+@section('meta_description', 'Complete roadmap for ' . $career->title . ' in ' . $career->domain . '. Verified 2026 median salary benchmark (' . $career->expected_salary . '), 10-year growth trajectory, core skill competencies, and video masterclasses.')
+@section('og_type', 'article')
+@section('schema')
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "Occupation",
+  "name": "{{ addslashes($career->title) }}",
+  "description": "{{ addslashes($career->description) }}",
+  "occupationalCategory": "{{ addslashes($career->domain) }}",
+  "skills": "{{ addslashes($career->required_skills) }}",
+  "estimatedSalary": [
+    {
+      "@@type": "MonetaryAmountDistribution",
+      "name": "Annual Median Salary",
+      "currency": "USD",
+      "duration": "P1Y",
+      "value": "{{ addslashes($career->expected_salary) }}"
+    }
+  ],
+  "mainEntityOfPage": {
+    "@@type": "WebPage",
+    "@@id": "{{ url()->current() }}"
+  }
+}
+</script>
+@endsection
+
 @section('content')
 
 @php

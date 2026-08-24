@@ -4,7 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'PathSeeker — Career Passport')</title>
+    
+    {{-- Dynamic Technical SEO Meta Tags --}}
+    <title>@yield('title', 'PathSeeker | AI-Powered Career Intelligence & Tech Roadmaps 2026')</title>
+    <meta name="description" content="@yield('meta_description', 'Discover high-growth tech career paths, 10-year predictive market trajectories, real-time salary benchmarks, skill analysis, and verified toolkits on PathSeeker.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'tech careers, salary benchmarks, career roadmap, web development, cloud computing, AI machine learning, cybersecurity, DevOps')">
+    <meta name="author" content="PathSeeker AI">
+    <meta name="robots" content="@yield('meta_robots', 'index, follow')">
+    <link rel="canonical" href="@yield('canonical_url', url()->current())">
+
+    {{-- Open Graph / Facebook --}}
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:url" content="@yield('og_url', url()->current())">
+    <meta property="og:title" content="@yield('title', 'PathSeeker | AI-Powered Career Intelligence & Tech Roadmaps 2026')">
+    <meta property="og:description" content="@yield('meta_description', 'Discover high-growth tech career paths, 10-year predictive market trajectories, real-time salary benchmarks, skill analysis, and verified toolkits on PathSeeker.')">
+    <meta property="og:image" content="@yield('og_image', asset('images/og-preview.png'))">
+    <meta property="og:site_name" content="PathSeeker">
+
+    {{-- Twitter Cards --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="@yield('twitter_url', url()->current())">
+    <meta name="twitter:title" content="@yield('title', 'PathSeeker | AI-Powered Career Intelligence & Tech Roadmaps 2026')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Discover high-growth tech career paths, 10-year predictive market trajectories, real-time salary benchmarks, skill analysis, and verified toolkits on PathSeeker.')">
+    <meta name="twitter:image" content="@yield('twitter_image', asset('images/og-preview.png'))">
+
+    {{-- JSON-LD Structured Schema Markup --}}
+    @if(trim($__env->yieldContent('schema')))
+        @yield('schema')
+    @else
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "SoftwareApplication",
+      "name": "PathSeeker",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "AI-Powered Career Intelligence, 10-Year Market Growth Trajectories, Real-Time Tech Salary Benchmarks, and Verified Industry Toolkits.",
+      "url": "{{ url('/') }}",
+      "publisher": {
+        "@@type": "Organization",
+        "name": "PathSeeker",
+        "url": "{{ url('/') }}"
+      }
+    }
+    </script>
+    @endif
     
     <!-- Instant Theme Detection Script (Eliminates FOUC / Light-mode dark flash on refresh) -->
     <script>
