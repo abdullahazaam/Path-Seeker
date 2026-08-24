@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Admin User',
                 'email' => 'admin@pathseeker.com',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('password'),
                 'role' => 'admin',
                 'education_level' => 'Master of Science in Computer Science',
                 'interests' => 'Cloud Architecture, System Design, AI Research',
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Alex Rivera',
                 'email' => 'student@pathseeker.com',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('password'),
                 'role' => 'student',
                 'education_level' => 'Undergraduate (Year 3)',
                 'interests' => 'Full-Stack Development, Cyber Security, UI/UX',
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Sarah Connor',
                 'email' => 'graduate@pathseeker.com',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('password'),
                 'role' => 'graduate',
                 'education_level' => 'Bachelor of Engineering',
                 'interests' => 'DevOps, Machine Learning, Mobile Apps',
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'David Miller',
                 'email' => 'pro@pathseeker.com',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('password'),
                 'role' => 'professional',
                 'education_level' => 'B.S. Software Engineering',
                 'interests' => 'Tech Leadership, Enterprise Architecture',
@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Abdullah Azaam',
                 'email' => 'abdullahazaam1505@gmail.com',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('password'),
                 'role' => 'student',
                 'education_level' => 'Bachelor of Science in Computer Science',
                 'interests' => 'Full-Stack Development, Cloud Architecture, AI Systems',
@@ -197,13 +197,13 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        // 3. 16 Comprehensive Multimedia Items with Valid, Open YouTube Embed URLs
+        // 3. 16 Comprehensive Multimedia Items with Proven, Embeddable YouTube URLs
         $multimedia = [
             [
                 'title' => 'Full-Stack Web Development 2026: Architecture & Frameworks',
                 'description' => 'Master modern full-stack web engineering from frontend reactivity (Vue/React) to robust backend APIs (Laravel/Node) and relational databases.',
                 'type' => 'video',
-                'url' => 'https://www.youtube.com/embed/kJQP7kiw5Fk',
+                'url' => 'https://www.youtube.com/embed/ysEN5RaKOlA',
                 'thumbnail_url' => 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80',
                 'duration' => '28:45',
                 'tags' => 'Software Engineering, Laravel, React, Full-Stack',
@@ -257,7 +257,7 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Advanced System Design & Microservices Architecture Masterclass',
                 'description' => 'Comprehensive masterclass on designing low-latency distributed architectures, event-driven microservices, database partitioning, and high-availability patterns.',
                 'type' => 'video',
-                'url' => 'https://www.youtube.com/embed/un6ZyFkqFJU',
+                'url' => 'https://www.youtube.com/embed/rExDs1yxL5I',
                 'thumbnail_url' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80',
                 'duration' => '38:15',
                 'tags' => 'Software Engineering, System Design, Microservices, Distributed Systems',
@@ -293,7 +293,7 @@ class DatabaseSeeder extends Seeder
                 'title' => 'High-Performance Distributed Systems & Golang Microservices',
                 'description' => 'Architecture patterns for low-latency backend systems, event streaming with Apache Kafka, gRPC communication, and distributed caching.',
                 'type' => 'video',
-                'url' => 'https://www.youtube.com/embed/un6ZyFkqFJU',
+                'url' => 'https://www.youtube.com/embed/rExDs1yxL5I',
                 'thumbnail_url' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80',
                 'duration' => '33:20',
                 'tags' => 'Software Engineering, Golang, Microservices, Distributed Systems',
@@ -346,7 +346,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($multimedia as $item) {
-            Multimedia::firstOrCreate(
+            Multimedia::updateOrCreate(
                 ['title' => $item['title']],
                 $item
             );
