@@ -120,4 +120,17 @@ class RoutesTest extends TestCase
         $r->assertSee('Download Toolkit');
         $r->assertSee('Next');
     }
+
+    public function test_chatbot_endpoint_returns_real_time_ai_guidance(): void
+    {
+        $response = $this->postJson('/chat/message', [
+            'message' => 'Tell me about Full-Stack Web Developer salary and requirements',
+        ]);
+
+        $response->assertStatus(200)
+                 ->assertJsonStructure(['status', 'reply', 'source'])
+                 ->assertJson(['status' => 'success']);
+
+        $this->assertStringContainsString('Full-Stack Web Developer', $response->json('reply'));
+    }
 }

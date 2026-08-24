@@ -41,6 +41,11 @@ Route::resource('stories', SuccessStoryController::class);
 Route::get('/quiz', [QuizController::class, 'index'])->name('quiz.index');
 Route::post('/quiz/submit', [QuizController::class, 'submit'])->name('quiz.submit');
 
+use App\Http\Controllers\ChatController;
+
+// Real-Time AI Career Guide Chatbot Endpoint
+Route::post('/chat/message', [ChatController::class, 'sendMessage'])->name('chat.message');
+
 use App\Http\Controllers\AdminController;
 
 // Protected User Dashboard & Admin Master Suite

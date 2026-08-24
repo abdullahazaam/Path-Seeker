@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'PathSeeker — Career Passport')</title>
     
     <!-- Instant Theme Detection Script (Eliminates FOUC / Light-mode dark flash on refresh) -->
@@ -584,8 +585,9 @@
     <!-- ══════════════════ GLOBAL FLOATING ACTIONS (SCROLL TO TOP & AI GUIDE CHATBOT) ══════════════════ -->
     <div x-data="{
             openAI: false,
+            loading: false,
             messages: [
-                { sender: 'ai', text: 'Hello! I am your career AI. Ask me about tech domains, roadmaps, or your next step!', time: 'Just now' }
+                { sender: 'ai', text: 'Hello! I am your PathSeeker AI Career Navigator. Ask me about tech domains, roadmaps, salaries, or skills!', time: 'Just now' }
             ],
             userInput: '',
             quickQuestions: [
@@ -593,54 +595,82 @@
                 'How should I prepare for Full-Stack?',
                 'Which track matches my skills?'
             ],
-            sendMessage(text) {
+            formatText(text) {
+                if (!text) return '';
+                let escaped = text
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+                // Markdown bold: **text**
+                escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong class=\"font-bold text-slate-950 dark:text-white\">$1</strong>');
+                // Markdown links: [title](url)
+                escaped = escaped.replace(/\[(.*?)\]\((https?:\/\/[^\s]+|\/[^\s]+)\)/g, '<a href=\"$2\" class=\"text-indigo-600 dark:text-indigo-400 font-bold underline hover:text-purple-600 dark:hover:text-purple-300\">$1</a>');
+                // Line breaks
+                escaped = escaped.replace(/\n/g, '<br>');
+                return escaped;
+            },
+            async sendMessage(text) {
                 const msg = (text || this.userInput).trim();
-                if (!msg) return;
-                this.messages.push({ sender: 'user', text: msg, time: 'Just now' });
+                if (!msg || this.loading) return;
+                
+                const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                this.messages.push({ sender: 'user', text: msg, time: now });
                 this.userInput = '';
+                this.loading = true;
+                
                 this.$nextTick(() => {
                     const box = document.getElementById('chatMessagesContainer');
                     if (box) box.scrollTop = box.scrollHeight;
                 });
                 
-                setTimeout(() => {
-                    let reply = 'I recommend exploring our Career Bank and taking the 5-minute Interest Assessment to get high-accuracy role scoring!';
-                    const lower = msg.toLowerCase();
-                    if (lower.includes('full-stack') || lower.includes('web') || lower.includes('frontend')) {
-                        reply = 'Full-Stack development is in massive demand! Focus on modern TypeScript, Laravel/Node architectures, responsive UI design systems, and cloud deployment pipelines.';
-                    } else if (lower.includes('roles') || lower.includes('demand') || lower.includes('salary')) {
-                        reply = 'Top 2026 roles include AI/ML Systems Engineer ($145k+), Full-Stack Platform Engineer ($120k+), Cloud DevOps Architect ($135k+), and Cybersecurity Specialist.';
-                    } else if (lower.includes('quiz') || lower.includes('skills') || lower.includes('match')) {
-                        reply = 'Head over to our Interest Quiz to analyze your cognitive strengths across 10 structured dimensions with instantaneous domain recommendations!';
-                    } else if (lower.includes('roadmap') || lower.includes('prepare')) {
-                        reply = 'Check out our Resource Library for curated Blueprint cheat sheets, system design architectures, and interview milestone checklists.';
-                    }
-                    this.messages.push({ sender: 'ai', text: reply, time: 'Just now' });
+                try {
+                    const csrfToken = document.querySelector('meta[name=\"csrf-token\"]')?.getAttribute('content') || '';
+                    const response = await fetch('{{ url('/chat/message') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        body: JSON.stringify({ message: msg })
+                    });
+                    
+                    const data = await response.json();
+                    const reply = data.reply || 'I am ready to help you navigate your career options. Explore our Career Bank and Interest Quiz for structured roadmaps!';
+                    this.messages.push({ sender: 'ai', text: reply, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+                } catch (error) {
+                    this.messages.push({ 
+                        sender: 'ai', 
+                        text: 'I recommend taking our **[Interest Quiz](' + '{{ url('/quiz') }}' + ')** or exploring the **[Career Bank](' + '{{ url('/careers') }}' + ')** to discover matched pathways!', 
+                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+                    });
+                } finally {
+                    this.loading = false;
                     this.$nextTick(() => {
                         const box = document.getElementById('chatMessagesContainer');
                         if (box) box.scrollTop = box.scrollHeight;
                     });
-                }, 500);
+                }
             }
          }"
-         class="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-center pointer-events-none">
+         class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-[9999] flex flex-col gap-3.5 items-end pointer-events-none">
         
-        <!-- Floating AI Chat Window Modal -->
+        <!-- Floating AI Chat Window Modal (Elevated with z-[9999]) -->
         <div x-show="openAI"
              x-transition:enter="transition ease-out duration-300 transform"
-             x-transition:enter-start="opacity-0 translate-y-8 scale-95"
+             x-transition:enter-start="opacity-0 translate-y-6 scale-95"
              x-transition:enter-end="opacity-100 translate-y-0 scale-100"
              x-transition:leave="transition ease-in duration-200 transform"
              x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-             x-transition:leave-end="opacity-0 translate-y-8 scale-95"
+             x-transition:leave-end="opacity-0 translate-y-6 scale-95"
              @click.outside="openAI = false"
              style="display: none;"
-             class="w-80 sm:w-96 h-[30rem] bg-slate-50/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col overflow-hidden pointer-events-auto mb-2">
+             class="w-[calc(100vw-2.5rem)] sm:w-[26rem] max-w-[26rem] h-[32rem] max-h-[calc(100vh-6.5rem)] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] flex flex-col overflow-hidden pointer-events-auto mb-2 z-[9999]">
             
             {{-- Top Header --}}
-            <div class="px-5 py-4 bg-white/90 dark:bg-slate-950/80 border-b border-slate-200 dark:border-white/10 flex items-center justify-between shrink-0">
+            <div class="px-5 py-4 bg-white/90 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between shrink-0">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center text-white shadow-neon-purple shrink-0">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center text-white shadow-neon-purple shrink-0">
                         <i class="fa-solid fa-wand-magic-sparkles text-xs text-white"></i>
                     </div>
                     <div>
@@ -660,18 +690,28 @@
             <div id="chatMessagesContainer" class="flex-1 p-4 overflow-y-auto space-y-3.5 scrollbar-thin">
                 <template x-for="(msg, index) in messages" :key="index">
                     <div class="flex flex-col" :class="msg.sender === 'user' ? 'items-end' : 'items-start'">
-                        <div class="max-w-[85%] rounded-2xl p-3.5 text-xs sm:text-[13px] leading-relaxed shadow-sm"
+                        <div class="max-w-[88%] rounded-2xl p-3.5 text-xs sm:text-[13px] leading-relaxed shadow-sm"
                              :class="msg.sender === 'user' 
                                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-br-none' 
-                                 : 'bg-white dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-white/5 rounded-bl-none'">
-                            <p x-text="msg.text"></p>
+                                 : 'bg-slate-100/90 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-white/5 rounded-bl-none'">
+                            <div x-html="formatText(msg.text)"></div>
                         </div>
                         <span class="text-[9px] text-slate-400 dark:text-slate-500 mt-1 px-1 font-mono" x-text="msg.time"></span>
                     </div>
                 </template>
 
+                {{-- Typing / Thinking Indicator --}}
+                <div x-show="loading" class="flex flex-col items-start">
+                    <div class="bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200/80 dark:border-white/10 rounded-2xl rounded-bl-none px-4 py-3 text-xs flex items-center gap-1.5 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-purple-500 animate-bounce" style="animation-delay: 0ms"></span>
+                        <span class="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style="animation-delay: 150ms"></span>
+                        <span class="w-2 h-2 rounded-full bg-pink-500 animate-bounce" style="animation-delay: 300ms"></span>
+                        <span class="text-[11px] font-mono text-slate-500 dark:text-slate-400 ml-1.5 font-medium">PathSeeker AI is thinking...</span>
+                    </div>
+                </div>
+
                 {{-- Quick Prompt Suggestions --}}
-                <div x-show="messages.length <= 2" class="pt-2 space-y-1.5">
+                <div x-show="messages.length <= 2 && !loading" class="pt-2 space-y-1.5">
                     <p class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 tracking-wider font-mono px-1">Suggested Inquiries</p>
                     <div class="flex flex-wrap gap-1.5">
                         <template x-for="(q, qIndex) in quickQuestions" :key="qIndex">
@@ -684,15 +724,17 @@
             </div>
 
             {{-- Bottom Input Form --}}
-            <form @submit.prevent="sendMessage()" class="p-3 bg-white/90 dark:bg-slate-950/80 border-t border-slate-200 dark:border-white/10 flex items-center gap-2 shrink-0">
+            <form @submit.prevent="sendMessage()" class="p-3 bg-white/90 dark:bg-slate-950/80 border-t border-slate-200/80 dark:border-white/10 flex items-center gap-2 shrink-0">
                 <div class="relative flex-1">
                     <input type="text"
                            x-model="userInput"
+                           :disabled="loading"
                            placeholder="Ask about careers, skills, roadmaps..."
-                           class="w-full bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-white/10 rounded-full px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500/80 dark:focus:border-purple-400">
+                           class="w-full bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-white/10 rounded-full px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500/80 dark:focus:border-purple-400 disabled:opacity-50">
                 </div>
                 <button type="submit"
-                        class="w-9 h-9 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white flex items-center justify-center shadow-md hover:scale-105 transition-transform shrink-0 cursor-pointer"
+                        :disabled="loading"
+                        class="w-9 h-9 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white flex items-center justify-center shadow-md hover:scale-105 transition-transform shrink-0 cursor-pointer disabled:opacity-50"
                         title="Send Message">
                     <i class="fa-solid fa-paper-plane text-xs"></i>
                 </button>
@@ -704,7 +746,7 @@
                 onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
                 title="Scroll to Top"
                 aria-label="Scroll to top"
-                class="w-12 h-12 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white shadow-xl flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer z-50 pointer-events-auto opacity-0 translate-y-4 duration-300">
+                class="w-12 h-12 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white shadow-xl flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer z-[9999] pointer-events-auto opacity-0 translate-y-4 duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-700 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
             </svg>
@@ -714,7 +756,7 @@
         <button @click="openAI = !openAI"
                 id="floatingAiGuideBtn"
                 title="Toggle AI Career Guide"
-                class="w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(147,51,234,0.5)] hover:scale-110 transition-transform cursor-pointer pointer-events-auto z-50 border border-white/20">
+                class="w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(147,51,234,0.5)] hover:scale-110 transition-transform cursor-pointer pointer-events-auto z-[9999] border border-white/20">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
