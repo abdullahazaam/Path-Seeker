@@ -1,9 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark" data-theme="dark">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'PathSeeker — Career Passport')</title>
+    
+    <!-- Instant Theme Detection Script (Eliminates FOUC / Light-mode dark flash on refresh) -->
+    <script>
+        (function() {
+            try {
+                var theme = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (theme === 'light' || (!theme && !prefersDark)) {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.setAttribute('data-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (e) {
+                document.documentElement.classList.add('dark');
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
     
     <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -894,26 +914,38 @@
     <script>
         // 1. Theme Management
         const html = document.documentElement;
-        const icon = document.getElementById('themeIcon');
-        const saved = localStorage.getItem('theme');
+
+        function syncThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (!icon) return;
+            if (theme === 'light') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
 
         function applyTheme(theme) {
             if (theme === 'light') {
                 html.classList.remove('dark');
-                if (icon) {
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                }
+                html.setAttribute('data-theme', 'light');
             } else {
                 html.classList.add('dark');
-                if (icon) {
-                    icon.classList.remove('fa-sun');
-                    icon.classList.add('fa-moon');
-                }
+                html.setAttribute('data-theme', 'dark');
             }
+            syncThemeIcon(theme);
         }
 
-        applyTheme(saved || 'dark');
+        // Synchronize icon state on load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                syncThemeIcon(html.classList.contains('dark') ? 'dark' : 'light');
+            });
+        } else {
+            syncThemeIcon(html.classList.contains('dark') ? 'dark' : 'light');
+        }
 
         function toggleTheme() {
             const isDark = html.classList.contains('dark');
