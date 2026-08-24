@@ -140,9 +140,12 @@
                             $skEsc = addslashes($career->required_skills);
                             $urlEsc = route('careers.show', $career->id);
                             $diffLevel = ($cId % 3 === 0) ? 'Advanced' : (($cId % 3 === 2) ? 'Intermediate' : 'Beginner / Intermediate');
+                            $demandVal = $career->market_metrics['demand_score'] ?? 94;
+                            $growthVal = $career->market_metrics['growth_rate'] ?? '+28%';
+                            $growthNum = $career->market_metrics['growth_value'] ?? 28;
                         @endphp
                         <button type="button"
-                                onclick="toggleCompare({{ $cId }}, '{{ $tEsc }}', '{{ $dEsc }}', '{{ $sEsc }}', '94%', '{{ $diffLevel }}', '{{ $skEsc }}', '{{ $urlEsc }}', '{{ $badgeClass }}', '{{ $domIcon }}')"
+                                onclick="toggleCompare({{ $cId }}, '{{ $tEsc }}', '{{ $dEsc }}', '{{ $sEsc }}', '{{ $demandVal }}%', '{{ $diffLevel }}', '{{ $skEsc }}', '{{ $urlEsc }}', '{{ $badgeClass }}', '{{ $domIcon }}')"
                                 id="btn-compare-{{ $cId }}"
                                 class="compare-toggle-btn px-3 py-1 text-[11px] font-bold rounded-full border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:border-purple-500/30 transition-all flex items-center gap-1.5 bg-white/60 dark:bg-white/[0.04] backdrop-blur-sm shrink-0 shadow-sm"
                                 title="Add to career comparison matrix">
@@ -172,11 +175,11 @@
                                 <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span> High
                                 </span>
-                                <span class="text-xs font-black text-indigo-600 dark:text-indigo-400">94%</span>
+                                <span class="text-xs font-black text-indigo-600 dark:text-indigo-400">{{ $career->market_metrics['demand_score'] ?? '94' }}%</span>
                             </div>
                         </div>
                         <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/[0.06] overflow-hidden">
-                            <div class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 career-bar" data-width="94" style="width:0%;transition:width 0.9s cubic-bezier(0.4,0,0.2,1)"></div>
+                            <div class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 career-bar" data-width="{{ $career->market_metrics['demand_score'] ?? 94 }}" style="width:0%;transition:width 0.9s cubic-bezier(0.4,0,0.2,1)"></div>
                         </div>
 
                         {{-- Growth Rate --}}
@@ -185,10 +188,10 @@
                                 <i class="fa-solid fa-arrow-trend-up text-pink-500 dark:text-pink-400 text-[9px]"></i>
                                 <span>5-Year Growth</span>
                             </div>
-                            <span class="text-xs font-black text-pink-600 dark:text-pink-400">+28%</span>
+                            <span class="text-xs font-black text-pink-600 dark:text-pink-400">{{ $career->market_metrics['growth_rate'] ?? '+28%' }}</span>
                         </div>
                         <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/[0.06] overflow-hidden">
-                            <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 career-bar" data-width="88" style="width:0%;transition:width 0.9s cubic-bezier(0.4,0,0.2,1) 0.1s"></div>
+                            <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 career-bar" data-width="{{ min(100, ($career->market_metrics['growth_value'] ?? 28) * 2) }}" style="width:0%;transition:width 0.9s cubic-bezier(0.4,0,0.2,1) 0.1s"></div>
                         </div>
                     </div>
 
