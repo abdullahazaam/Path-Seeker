@@ -586,20 +586,19 @@
     @include('components.footer')
 
     <!-- ══════════════════ GLOBAL FLOATING ACTIONS (SCROLL TO TOP & AI GUIDE CHATBOT) ══════════════════ -->
-    <div x-data="initChatbot()"
-         class="fixed bottom-6 right-6 z-[99999] flex flex-col gap-3 items-end pointer-events-none">
+    <div x-data="initChatbot()">
         
-        <!-- Floating AI Chat Window Modal (Origin Bottom Right Morph Animation) -->
+        <!-- Floating AI Chat Window Modal (Morphs from bottom-6 right-6) -->
         <div x-show="openAI"
-             x-transition:enter="transition-all ease-out duration-300 transform"
-             x-transition:enter-start="opacity-0 scale-75 translate-y-4"
-             x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-             x-transition:leave="transition-all ease-in duration-200 transform"
-             x-transition:leave-start="opacity-100 scale-100 translate-y-0"
-             x-transition:leave-end="opacity-0 scale-75 translate-y-4"
+             x-transition:enter="transition ease-out duration-300 transform"
+             x-transition:enter-start="opacity-0 scale-75"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-300 transform"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-75"
              @click.outside="openAI = false"
              style="display: none; transform-origin: bottom right;"
-             class="w-[90vw] max-w-[380px] h-[32rem] max-h-[calc(100vh-8.5rem)] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] flex flex-col overflow-hidden pointer-events-auto mb-1 origin-bottom-right z-[99999]">
+             class="fixed bottom-6 right-6 z-[99999] w-[90vw] max-w-[380px] h-[32rem] max-h-[calc(100vh-5rem)] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] flex flex-col overflow-hidden origin-bottom-right transition-all duration-300 ease-in-out">
             
             {{-- Top Header --}}
             <div class="px-5 py-4 bg-white/90 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between shrink-0">
@@ -675,34 +674,42 @@
             </form>
         </div>
 
-        <!-- Scroll to Top Button -->
-        <button id="scrollToTopBtn"
-                onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                title="Scroll to Top"
-                aria-label="Scroll to top"
-                class="w-12 h-12 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white shadow-xl flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer z-[99999] pointer-events-auto opacity-0 translate-y-4 duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-700 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-            </svg>
-        </button>
-
-        <!-- Floating AI Guide Circular Bot Button with Morphing Icon -->
+        <!-- Floating AI Guide Circular Bot Button with Morphing Animation & Shared bottom-6 right-6 Positioning -->
         <button @click="openAI = !openAI"
+                x-show="!openAI"
+                x-transition:enter="transition ease-out duration-300 transform"
+                x-transition:enter-start="opacity-0 scale-75"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-300 transform"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-75"
                 id="floatingAiGuideBtn"
                 title="Toggle AI Career Guide"
-                class="relative w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center shadow-[0_0_25px_rgba(147,51,234,0.55)] hover:shadow-[0_0_35px_rgba(236,72,153,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer pointer-events-auto z-[99999] border border-white/20 overflow-hidden">
+                style="transform-origin: bottom right;"
+                class="fixed bottom-6 right-6 z-[99999] w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center shadow-[0_0_25px_rgba(147,51,234,0.55)] hover:shadow-[0_0_35px_rgba(236,72,153,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer origin-bottom-right border border-white/20 overflow-hidden">
             
-            {{-- Chat Sparkles Icon (visible when closed) --}}
+            {{-- Chat Sparkles Icon --}}
             <span class="absolute inset-0 flex items-center justify-center transition-all duration-300 transform"
                   :class="openAI ? 'opacity-0 scale-50 rotate-90 pointer-events-none' : 'opacity-100 scale-100 rotate-0'">
                 <i class="fa-solid fa-wand-magic-sparkles text-lg text-white"></i>
             </span>
 
-            {{-- Close 'X' Icon (visible when open) --}}
+            {{-- Close 'X' Icon --}}
             <span class="absolute inset-0 flex items-center justify-center transition-all duration-300 transform"
                   :class="openAI ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 -rotate-90 pointer-events-none'">
                 <i class="fa-solid fa-xmark text-xl text-white"></i>
             </span>
+        </button>
+
+        <!-- Scroll to Top Button -->
+        <button id="scrollToTopBtn"
+                onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                title="Scroll to Top"
+                aria-label="Scroll to top"
+                class="fixed bottom-24 right-7 z-[9999] w-11 h-11 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white shadow-xl flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer opacity-0 translate-y-4 duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-700 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+            </svg>
         </button>
     </div>
 
