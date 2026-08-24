@@ -4,40 +4,6 @@
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 space-y-8 md:space-y-10 my-6 md:my-8">
 
-    {{-- Global Flash Messages & Alert Notifications --}}
-    @if(session('success'))
-        <div class="p-4 sm:p-5 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 backdrop-blur-xl flex items-center justify-between gap-3 shadow-lg">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                    <i class="fa-solid fa-circle-check text-base"></i>
-                </div>
-                <p class="text-xs sm:text-sm font-bold">{{ session('success') }}</p>
-            </div>
-            <button onclick="this.parentElement.remove()" class="text-emerald-600 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-200 text-sm">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-    @endif
-
-    @if(session('error') || $errors->any())
-        <div class="p-4 sm:p-5 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 backdrop-blur-xl flex items-center justify-between gap-3 shadow-lg">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0">
-                    <i class="fa-solid fa-triangle-exclamation text-base"></i>
-                </div>
-                <div class="text-xs sm:text-sm font-bold">
-                    @if(session('error'))
-                        <p>{{ session('error') }}</p>
-                    @else
-                        <p>Validation errors: {{ implode(', ', $errors->all()) }}</p>
-                    @endif
-                </div>
-            </div>
-            <button onclick="this.parentElement.remove()" class="text-rose-600 hover:text-rose-800 dark:text-rose-400 dark:hover:text-rose-200 text-sm">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-    @endif
 
 @if(auth()->user()->role !== 'admin' && auth()->user()->email !== 'admin@pathseeker.com')
     {{-- Passport User Profile Header --}}
