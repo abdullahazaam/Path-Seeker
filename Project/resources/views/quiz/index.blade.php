@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 @section('title', 'Career Interest Quiz — PathSeeker')
 @section('content')
 
@@ -32,7 +32,7 @@
             <p class="text-base font-bold text-slate-900 dark:text-slate-300">No assessment questions found in database.</p>
         </div>
     @else
-        <form action="{{ route('quiz.submit') }}" method="POST" class="space-y-6 max-w-7xl mx-auto w-full">
+        <form action="{{ url('/quiz/submit') }}" method="POST" class="space-y-6 max-w-7xl mx-auto w-full">
             @csrf
             @foreach($questions as $index => $question)
                 <div class="bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 space-y-5 border border-slate-200/80 dark:border-white/10 hover:border-purple-500/40 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:-translate-y-1 transition-all duration-300">

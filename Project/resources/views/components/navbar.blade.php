@@ -71,7 +71,7 @@
                 </a>
 
                 <!-- Sleek Circular Sign Out Button Matching Theme Toggle -->
-                <form action="{{ route('logout') }}" method="POST" class="inline shrink-0 flex-shrink-0 m-0 p-0">
+                <form action="{{ url('/logout') }}" method="POST" class="inline shrink-0 flex-shrink-0 m-0 p-0">
                     @csrf
                     <button type="submit"
                         title="Sign Out"
@@ -163,7 +163,7 @@
                     <i class="fa-solid {{ $isAdmin ? 'fa-screwdriver-wrench' : 'fa-gauge-high' }} mr-1"></i>
                     <span>{{ $isAdmin ? 'Admin Control Panel' : 'My Passport Dashboard' }}</span>
                 </a>
-                <form action="{{ route('logout') }}" method="POST" class="inline m-0 p-0">
+                <form action="{{ url('/logout') }}" method="POST" class="inline m-0 p-0">
                     @csrf
                     <button type="submit" class="px-4 py-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 font-bold text-xs border border-rose-500/20">
                         Sign Out

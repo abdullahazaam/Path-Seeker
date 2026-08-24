@@ -32,7 +32,7 @@
 
     {{-- Search & Filter Console --}}
     <div class="relative rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-4 overflow-hidden">
-        <form action="{{ route('careers.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end relative z-10">
+        <form action="{{ url('/careers') }}" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end relative z-10">
             <div class="md:col-span-6">
                 <div class="flex items-center justify-between mb-2">
                     <label for="search" class="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">

@@ -971,7 +971,7 @@
                                 </td>
                                 <td class="py-4 pr-3 text-slate-500 text-[11px] font-mono">{{ $u->created_at ? $u->created_at->format('M d, Y') : 'N/A' }}</td>
                                 <td class="py-4 pr-3">
-                                    <form action="{{ route('admin.users.role', $u->id) }}" method="POST" class="flex items-center gap-1.5">
+                                    <form action="{{ url('/admin/users/' . $u->id . '/role') }}" method="POST" class="flex items-center gap-1.5">
                                         @csrf
                                         @method('PATCH')
                                         <select name="role" onchange="this.form.submit()" class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 rounded-lg px-2.5 py-1 text-[11px] text-slate-800 dark:text-slate-200 focus:outline-none focus:border-purple-500">
@@ -984,7 +984,7 @@
                                 </td>
                                 <td class="py-4 text-right">
                                     @if($u->email !== 'admin@pathseeker.com' && $u->id !== auth()->id())
-                                        <form action="{{ route('admin.users.destroy', $u->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete user {{ $u->name }}?');" class="inline">
+                                        <form action="{{ url('/admin/users/' . $u->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete user {{ $u->name }}?');" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-600 hover:text-white border border-rose-500/20 text-[11px] font-bold transition-all cursor-pointer" title="Delete User">
@@ -1051,7 +1051,7 @@
                                     <button @click="openEditCareer({{ json_encode($c) }})" class="px-2.5 py-1 rounded-lg bg-indigo-500/10 hover:bg-indigo-600 hover:text-white text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 text-[11px] font-bold transition-all cursor-pointer">
                                         <i class="fa-solid fa-pencil text-[10px]"></i> Edit
                                     </button>
-                                    <form action="{{ route('admin.careers.destroy', $c->id) }}" method="POST" onsubmit="return confirm('Delete career track {{ $c->title }}?');" class="inline">
+                                    <form action="{{ url('/admin/careers/' . $c->id) }}" method="POST" onsubmit="return confirm('Delete career track {{ $c->title }}?');" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-600 hover:text-white border border-rose-500/20 text-[11px] font-bold transition-all cursor-pointer">
@@ -1100,7 +1100,7 @@
                             <a href="{{ $m->url }}" target="_blank" class="text-xs font-bold text-pink-600 dark:text-pink-400 hover:underline flex items-center gap-1">
                                 <i class="fa-solid fa-play text-[10px]"></i> Stream Asset &rarr;
                             </a>
-                            <form action="{{ route('admin.multimedia.destroy', $m->id) }}" method="POST" onsubmit="return confirm('Delete multimedia item {{ $m->title }}?');" class="inline">
+                            <form action="{{ url('/admin/multimedia/' . $m->id) }}" method="POST" onsubmit="return confirm('Delete multimedia item {{ $m->title }}?');" class="inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-600 hover:text-white border border-rose-500/20 text-[11px] font-bold transition-all cursor-pointer">
@@ -1144,7 +1144,7 @@
                             <a href="{{ $r->file_url }}" target="_blank" class="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1">
                                 <i class="fa-solid fa-download text-[10px]"></i> View File &rarr;
                             </a>
-                            <form action="{{ route('admin.resources.destroy', $r->id) }}" method="POST" onsubmit="return confirm('Delete resource blueprint {{ $r->title }}?');" class="inline">
+                            <form action="{{ url('/admin/resources/' . $r->id) }}" method="POST" onsubmit="return confirm('Delete resource blueprint {{ $r->title }}?');" class="inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-600 hover:text-white border border-rose-500/20 text-[11px] font-bold transition-all cursor-pointer">
@@ -1170,7 +1170,7 @@
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
                 </div>
-                <form action="{{ route('admin.users.store') }}" method="POST" class="space-y-4">
+                <form action="{{ url('/admin/users') }}" method="POST" class="space-y-4">
                     @csrf
                     <div>
                         <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Full Name</label>
@@ -1212,7 +1212,7 @@
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
                 </div>
-                <form action="{{ route('admin.careers.store') }}" method="POST" class="space-y-4">
+                <form action="{{ url('/admin/careers') }}" method="POST" class="space-y-4">
                     @csrf
                     <div>
                         <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Track Title</label>
@@ -1295,7 +1295,7 @@
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
                 </div>
-                <form action="{{ route('admin.multimedia.store') }}" method="POST" class="space-y-4">
+                <form action="{{ url('/admin/multimedia') }}" method="POST" class="space-y-4">
                     @csrf
                     <div>
                         <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Asset Title</label>
@@ -1341,7 +1341,7 @@
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
                 </div>
-                <form action="{{ route('admin.resources.store') }}" method="POST" class="space-y-4">
+                <form action="{{ url('/admin/resources') }}" method="POST" class="space-y-4">
                     @csrf
                     <div>
                         <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Toolkit Title</label>
