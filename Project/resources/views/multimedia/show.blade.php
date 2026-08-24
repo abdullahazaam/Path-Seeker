@@ -28,14 +28,21 @@
         <div class="relative z-10 p-6 sm:p-8 space-y-6">
             <div class="rounded-2xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-slate-950 shadow-2xl relative">
                 @if($item->type === 'video' || str_contains($item->url, 'youtube') || str_contains($item->url, 'youtu.be'))
-                    <div class="aspect-video w-full">
+                    <div class="aspect-video w-full bg-slate-950 relative">
                         <iframe class="w-full h-full rounded-2xl"
-                                src="{{ $item->getEmbedUrl() }}?rel=0&modestbranding=1"
+                                src="{{ $item->getEmbedUrl() }}?rel=0&modestbranding=1&enablejsapi=1"
                                 title="{{ $item->title }}"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 referrerpolicy="strict-origin-when-cross-origin"
                                 allowfullscreen></iframe>
+                    </div>
+                    <div class="p-3 bg-slate-900/90 border-t border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
+                        <span class="flex items-center gap-1.5"><i class="fa-brands fa-youtube text-rose-500"></i> Interactive Masterclass Stream</span>
+                        <a href="{{ $item->url }}" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 font-bold flex items-center gap-1 transition-colors">
+                            <span>Watch on YouTube</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
                     </div>
                 @else
                     <div class="py-14 px-8 text-center space-y-6">
