@@ -583,76 +583,7 @@
     @include('components.footer')
 
     <!-- ══════════════════ GLOBAL FLOATING ACTIONS (SCROLL TO TOP & AI GUIDE CHATBOT) ══════════════════ -->
-    <div x-data="{
-            openAI: false,
-            loading: false,
-            messages: [
-                { sender: 'ai', text: 'Hello! I am your PathSeeker AI Career Navigator. Ask me about tech domains, roadmaps, salaries, or skills!', time: 'Just now' }
-            ],
-            userInput: '',
-            quickQuestions: [
-                'Top in-demand tech roles for 2026',
-                'How should I prepare for Full-Stack?',
-                'Which track matches my skills?'
-            ],
-            formatText(text) {
-                if (!text) return '';
-                let escaped = text
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;');
-                // Markdown bold: **text**
-                escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong class=\"font-bold text-slate-950 dark:text-white\">$1</strong>');
-                // Markdown links: [title](url)
-                escaped = escaped.replace(/\[(.*?)\]\((https?:\/\/[^\s]+|\/[^\s]+)\)/g, '<a href=\"$2\" class=\"text-indigo-600 dark:text-indigo-400 font-bold underline hover:text-purple-600 dark:hover:text-purple-300\">$1</a>');
-                // Line breaks
-                escaped = escaped.replace(/\n/g, '<br>');
-                return escaped;
-            },
-            async sendMessage(text) {
-                const msg = (text || this.userInput).trim();
-                if (!msg || this.loading) return;
-                
-                const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                this.messages.push({ sender: 'user', text: msg, time: now });
-                this.userInput = '';
-                this.loading = true;
-                
-                this.$nextTick(() => {
-                    const box = document.getElementById('chatMessagesContainer');
-                    if (box) box.scrollTop = box.scrollHeight;
-                });
-                
-                try {
-                    const csrfToken = document.querySelector('meta[name=\"csrf-token\"]')?.getAttribute('content') || '';
-                    const response = await fetch('{{ url('/chat/message') }}', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                            'X-CSRF-TOKEN': csrfToken
-                        },
-                        body: JSON.stringify({ message: msg })
-                    });
-                    
-                    const data = await response.json();
-                    const reply = data.reply || 'I am ready to help you navigate your career options. Explore our Career Bank and Interest Quiz for structured roadmaps!';
-                    this.messages.push({ sender: 'ai', text: reply, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
-                } catch (error) {
-                    this.messages.push({ 
-                        sender: 'ai', 
-                        text: 'I recommend taking our **[Interest Quiz](' + '{{ url('/quiz') }}' + ')** or exploring the **[Career Bank](' + '{{ url('/careers') }}' + ')** to discover matched pathways!', 
-                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
-                    });
-                } finally {
-                    this.loading = false;
-                    this.$nextTick(() => {
-                        const box = document.getElementById('chatMessagesContainer');
-                        if (box) box.scrollTop = box.scrollHeight;
-                    });
-                }
-            }
-         }"
+    <div x-data="initChatbot()"
          class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-[9999] flex flex-col gap-3.5 items-end pointer-events-none">
         
         <!-- Floating AI Chat Window Modal (Elevated with z-[9999]) -->
@@ -954,6 +885,80 @@
 
     <!-- ══════════════════ SCRIPTS: THEME, SCROLL OBSERVER, CURSOR & COMMAND PALETTE ══════════════════ -->
     <script>
+        // 0. Real-Time AI Career Guide Chatbot Controller
+        function initChatbot() {
+            return {
+                openAI: false,
+                loading: false,
+                messages: [
+                    { sender: 'ai', text: 'Hello! I am your PathSeeker AI Career Navigator. Ask me about tech domains, roadmaps, salaries, or skills!', time: 'Just now' }
+                ],
+                userInput: '',
+                quickQuestions: [
+                    'Top in-demand tech roles for 2026',
+                    'How should I prepare for Full-Stack?',
+                    'Which track matches my skills?'
+                ],
+                formatText(text) {
+                    if (!text) return '';
+                    let escaped = text
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;');
+                    // Markdown bold: **text**
+                    escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-950 dark:text-white">$1</strong>');
+                    // Markdown links: [title](url)
+                    escaped = escaped.replace(/\[(.*?)\]\((https?:\/\/[^\s]+|\/[^\s]+)\)/g, '<a href="$2" class="text-indigo-600 dark:text-indigo-400 font-bold underline hover:text-purple-600 dark:hover:text-purple-300">$1</a>');
+                    // Line breaks
+                    escaped = escaped.replace(/\n/g, '<br>');
+                    return escaped;
+                },
+                async sendMessage(text) {
+                    const msg = (text || this.userInput).trim();
+                    if (!msg || this.loading) return;
+                    
+                    const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    this.messages.push({ sender: 'user', text: msg, time: now });
+                    this.userInput = '';
+                    this.loading = true;
+                    
+                    this.$nextTick(() => {
+                        const box = document.getElementById('chatMessagesContainer');
+                        if (box) box.scrollTop = box.scrollHeight;
+                    });
+                    
+                    try {
+                        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+                        const response = await fetch('{{ url('/chat/message') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': csrfToken
+                            },
+                            body: JSON.stringify({ message: msg })
+                        });
+                        
+                        const data = await response.json();
+                        const reply = data.reply || 'I am ready to help you navigate your career options. Explore our Career Bank and Interest Quiz for structured roadmaps!';
+                        this.messages.push({ sender: 'ai', text: reply, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+                    } catch (error) {
+                        this.messages.push({ 
+                            sender: 'ai', 
+                            text: 'I recommend taking our **[Interest Quiz]({{ url('/quiz') }})** or exploring the **[Career Bank]({{ url('/careers') }})** to discover matched pathways!', 
+                            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+                        });
+                    } finally {
+                        this.loading = false;
+                        this.$nextTick(() => {
+                            const box = document.getElementById('chatMessagesContainer');
+                            if (box) box.scrollTop = box.scrollHeight;
+                        });
+                    }
+                }
+            };
+        }
+
         // 1. Theme Management
         const html = document.documentElement;
 
