@@ -41,6 +41,11 @@ Route::resource('stories', SuccessStoryController::class);
 Route::get('/quiz', [QuizController::class, 'index'])->name('quiz.index');
 Route::post('/quiz/submit', [QuizController::class, 'submit'])->name('quiz.submit');
 
+use App\Http\Controllers\SitemapController;
+
+// Dynamic Technical SEO XML Sitemap
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
 use App\Http\Controllers\ChatController;
 
 // Real-Time AI Career Guide Chatbot Endpoint

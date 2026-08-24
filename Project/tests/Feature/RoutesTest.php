@@ -133,4 +133,18 @@ class RoutesTest extends TestCase
 
         $this->assertStringContainsString('Full-Stack Web Developer', $response->json('reply'));
     }
+
+    public function test_sitemap_xml_endpoint_generates_valid_schema(): void
+    {
+        $response = $this->get('/sitemap.xml');
+        $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'application/xml; charset=UTF-8');
+        $content = $response->getContent();
+        $this->assertStringContainsString('<?xml version="1.0" encoding="UTF-8"?>', $content);
+        $this->assertStringContainsString('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', $content);
+        $this->assertStringContainsString('/careers', $content);
+        $this->assertStringContainsString('/quiz', $content);
+        $this->assertStringContainsString('/multimedia', $content);
+        $this->assertStringContainsString('/resources', $content);
+    }
 }
