@@ -286,7 +286,7 @@
 {{-- ══════════════════ FLOATING COMPARISON BOTTOM DOCK ══════════════════ --}}
 <div id="compareDock"
      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 transform translate-y-32 opacity-0 pointer-events-none max-w-2xl w-[92%] sm:w-auto">
-    <div class="px-5 py-3.5 rounded-2xl bg-[#0b0c16]/95 backdrop-blur-2xl border border-purple-500/40 shadow-[0_10px_40px_rgba(0,0,0,0.6)] flex items-center justify-between gap-4 sm:gap-6">
+    <div class="px-5 py-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200 dark:border-slate-800 shadow-[0_10px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.6)] flex items-center justify-between gap-4 sm:gap-6">
         
         <div class="flex items-center gap-3">
             <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white text-xs shrink-0 shadow-lg shadow-purple-500/30">
@@ -294,9 +294,9 @@
             </div>
             
             <div class="space-y-0.5">
-                <div class="text-xs font-bold text-white flex items-center gap-2">
+                <div class="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <span>Career Comparison</span>
-                    <span id="compareCountBadge" class="px-2 py-0.2 rounded-full text-[10px] font-extrabold bg-purple-500/25 text-purple-300 border border-purple-500/30">
+                    <span id="compareCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-purple-500/15 dark:bg-purple-500/25 text-purple-700 dark:text-purple-300 border border-purple-500/30">
                         0 / 3 Selected
                     </span>
                 </div>
@@ -318,7 +318,7 @@
 
             <button type="button"
                     onclick="clearCompare()"
-                    class="p-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors text-xs"
+                    class="p-2.5 rounded-xl text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors text-xs"
                     title="Clear comparison">
                 <i class="fa-solid fa-trash-can"></i>
             </button>
@@ -328,30 +328,30 @@
 
 {{-- ══════════════════ COMPARISON MATRIX MODAL ══════════════════ --}}
 <div id="compareModal"
-     class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300"
+     class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 pt-24 sm:pt-28 bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300"
      onclick="handleModalBackdropClick(event)">
     
-    <div class="relative w-full max-w-5xl max-h-[90vh] flex flex-col rounded-2xl bg-slate-900/90 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 shadow-2xl overflow-hidden scale-95 transition-transform duration-300"
+    <div class="relative w-full max-w-5xl max-h-[85vh] flex flex-col rounded-3xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-2xl overflow-hidden scale-95 transition-transform duration-300"
          id="compareModalContent">
         
         {{-- Modal Top Gradient Accent --}}
         <div class="h-1.5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shrink-0 rounded-full mb-4"></div>
 
         {{-- Modal Header --}}
-        <div class="pb-6 border-b border-white/10 flex items-center justify-between gap-4 shrink-0">
+        <div class="pb-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4 shrink-0">
             <div class="space-y-1.5">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/25 text-xs font-semibold text-purple-300">
-                    <i class="fa-solid fa-code-compare text-purple-400 text-xs"></i>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/25 text-xs font-semibold text-purple-700 dark:text-purple-300">
+                    <i class="fa-solid fa-code-compare text-purple-500 dark:text-purple-400 text-xs"></i>
                     <span>Career Track Intelligence Matrix</span>
                 </div>
-                <h3 class="text-xl sm:text-2xl font-black text-white font-display">
+                <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display">
                     Side-by-Side <span class="grad-text">Career Comparison</span>
                 </h3>
             </div>
 
             <button type="button"
                     onclick="closeCompareModal()"
-                    class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-slate-300 hover:text-white flex items-center justify-center transition-all shadow-md"
+                    class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 border border-slate-200 dark:border-white/15 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition-all shadow-sm"
                     title="Close comparison modal">
                 <i class="fa-solid fa-xmark text-base"></i>
             </button>
@@ -360,15 +360,15 @@
         {{-- Modal Scrollable Body / Comparison Matrix Table --}}
         <div class="py-6 overflow-y-auto flex-1 space-y-6 scrollbar-thin">
             
-            <div class="overflow-x-auto rounded-xl border border-white/10 bg-white/[0.02]">
+            <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-white/[0.02]">
                 <table class="w-full text-left border-collapse" id="matrixTable">
                     <thead>
-                        <tr class="border-b border-white/10 bg-white/[0.03]" id="matrixHeaderRow">
-                            <th class="p-5 text-xs font-black text-slate-300 uppercase tracking-wider w-1/4 border-r border-white/10">Key Dimensions</th>
+                        <tr class="border-b border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-white/[0.03]" id="matrixHeaderRow">
+                            <th class="p-5 text-xs font-black text-slate-700 dark:text-slate-300 uppercase tracking-wider w-1/4 border-r border-slate-200 dark:border-slate-800">Key Dimensions</th>
                             <!-- Dynamic Career Columns will be injected here -->
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-white/[0.08] text-sm" id="matrixBody">
+                    <tbody class="divide-y divide-slate-200 dark:divide-white/[0.08] text-sm" id="matrixBody">
                         <!-- Dynamic Rows injected by JS -->
                     </tbody>
                 </table>
@@ -377,9 +377,9 @@
         </div>
 
         {{-- Modal Footer --}}
-        <div class="pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
-            <div class="flex items-center gap-2 text-xs text-slate-400">
-                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <div class="pt-5 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
+            <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                <i class="fa-solid fa-circle-check text-emerald-500 dark:text-emerald-400"></i>
                 <span>Comparing verified 2026 tech economy pathways &amp; compensations.</span>
             </div>
             <button type="button"
@@ -429,7 +429,7 @@ function updateCompareUI() {
     document.querySelectorAll('.compare-toggle-btn').forEach(btn => {
         const icon = btn.querySelector('.icon-state');
         const label = btn.querySelector('.label-state');
-        btn.classList.remove('border-purple-500/60', 'text-purple-300', 'bg-purple-500/20');
+        btn.classList.remove('border-purple-500/60', 'text-purple-600', 'dark:text-purple-300', 'bg-purple-500/20');
         btn.classList.add('border-slate-200', 'dark:border-white/10', 'text-slate-500', 'dark:text-slate-400');
         if (icon) { icon.className = 'fa-solid fa-plus text-[9px] icon-state'; }
         if (label) { label.textContent = 'Compare'; }
@@ -439,10 +439,10 @@ function updateCompareUI() {
         const btn = document.getElementById(`btn-compare-${item.id}`);
         if (btn) {
             btn.classList.remove('border-slate-200', 'dark:border-white/10', 'text-slate-500', 'dark:text-slate-400');
-            btn.classList.add('border-purple-500/60', 'text-purple-300', 'bg-purple-500/20');
+            btn.classList.add('border-purple-500/60', 'text-purple-600', 'dark:text-purple-300', 'bg-purple-500/20');
             const icon = btn.querySelector('.icon-state');
             const label = btn.querySelector('.label-state');
-            if (icon) { icon.className = 'fa-solid fa-check text-[9px] icon-state text-purple-400'; }
+            if (icon) { icon.className = 'fa-solid fa-check text-[9px] icon-state text-purple-600 dark:text-purple-400'; }
             if (label) { label.textContent = 'Selected'; }
         }
     });
@@ -456,10 +456,10 @@ function updateCompareUI() {
         pillsContainer.innerHTML = '';
         compareState.items.forEach(item => {
             const pill = document.createElement('span');
-            pill.className = 'inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] text-slate-300';
+            pill.className = 'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-medium text-slate-700 dark:text-slate-300';
             pill.innerHTML = `
                 <span class="max-w-[90px] truncate">${item.title}</span>
-                <button type="button" onclick="toggleCompare(${item.id})" class="text-slate-500 hover:text-rose-400 transition-colors">
+                <button type="button" onclick="toggleCompare(${item.id})" class="text-slate-400 hover:text-rose-500 transition-colors">
                     <i class="fa-solid fa-xmark text-[8px]"></i>
                 </button>
             `;
@@ -525,7 +525,7 @@ function renderComparisonMatrix() {
     const body = document.getElementById('matrixBody');
 
     // Header Row with dismissal actions
-    headerRow.innerHTML = `<th class="p-5 text-xs font-black text-slate-300 uppercase tracking-wider w-1/4 min-w-[170px] border-r border-white/10">Key Dimensions</th>`;
+    headerRow.innerHTML = `<th class="p-5 text-xs font-black text-slate-700 dark:text-slate-300 uppercase tracking-wider w-1/4 min-w-[170px] border-r border-slate-200 dark:border-slate-800">Key Dimensions</th>`;
     items.forEach(item => {
         const th = document.createElement('th');
         th.className = 'p-5 text-left min-w-[220px] align-top';
@@ -536,11 +536,11 @@ function renderComparisonMatrix() {
                         <i class="fa-solid ${item.domIcon} text-[8px]"></i>
                         <span>${item.domain}</span>
                     </span>
-                    <button type="button" onclick="toggleCompare(${item.id}); if(compareState.items.length < 2) closeCompareModal(); else renderComparisonMatrix();" class="w-6 h-6 rounded-full bg-white/5 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 flex items-center justify-center transition-colors text-[10px]" title="Remove from comparison">
+                    <button type="button" onclick="toggleCompare(${item.id}); if(compareState.items.length < 2) closeCompareModal(); else renderComparisonMatrix();" class="w-6 h-6 rounded-full bg-slate-100 dark:bg-white/5 hover:bg-rose-500/20 text-slate-500 dark:text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 flex items-center justify-center transition-colors text-[10px]" title="Remove from comparison">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-                <h4 class="text-base sm:text-lg font-black text-white font-display leading-tight">${item.title}</h4>
+                <h4 class="text-base sm:text-lg font-black text-slate-900 dark:text-white font-display leading-tight">${item.title}</h4>
             </div>
         `;
         headerRow.appendChild(th);
@@ -548,18 +548,18 @@ function renderComparisonMatrix() {
 
     // Difficulty badge helper
     const diffStyles = {
-        'Advanced': 'bg-purple-500/20 text-purple-300 border-purple-500/30',
-        'Intermediate': 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-        'Beginner / Intermediate': 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+        'Advanced': 'bg-purple-500/15 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-500/30',
+        'Intermediate': 'bg-amber-500/15 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300 border-amber-500/30',
+        'Beginner / Intermediate': 'bg-emerald-500/15 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-500/30'
     };
 
     // Body Rows
     body.innerHTML = `
         {{-- Row: Salary Range --}}
-        <tr class="hover:bg-white/[0.01] transition-colors">
-            <td class="p-5 font-bold text-slate-300 text-xs border-r border-white/10 bg-white/[0.01]">
+        <tr class="hover:bg-slate-50/70 dark:hover:bg-white/[0.01] transition-colors">
+            <td class="p-5 font-bold text-slate-700 dark:text-slate-300 text-xs border-r border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-white/[0.01]">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-xs shrink-0">
+                    <div class="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xs shrink-0">
                         <i class="fa-solid fa-money-bill-wave"></i>
                     </div>
                     <span>Salary Range</span>
@@ -567,17 +567,17 @@ function renderComparisonMatrix() {
             </td>
             ${items.map(item => `
                 <td class="p-5 align-middle">
-                    <div class="text-lg font-black text-emerald-400 font-display">${item.salary}</div>
-                    <div class="text-[11px] text-slate-400 font-medium mt-0.5">Annual Median Benchmark</div>
+                    <div class="text-lg font-black text-emerald-600 dark:text-emerald-400 font-display">${item.salary}</div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">Annual Median Benchmark</div>
                 </td>
             `).join('')}
         </tr>
 
         {{-- Row: Market Demand --}}
-        <tr class="hover:bg-white/[0.01] transition-colors">
-            <td class="p-5 font-bold text-slate-300 text-xs border-r border-white/10 bg-white/[0.01]">
+        <tr class="hover:bg-slate-50/70 dark:hover:bg-white/[0.01] transition-colors">
+            <td class="p-5 font-bold text-slate-700 dark:text-slate-300 text-xs border-r border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-white/[0.01]">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center text-xs shrink-0">
+                    <div class="w-7 h-7 rounded-lg bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs shrink-0">
                         <i class="fa-solid fa-chart-line"></i>
                     </div>
                     <span>Market Demand</span>
@@ -586,13 +586,13 @@ function renderComparisonMatrix() {
             ${items.map(item => `
                 <td class="p-5 align-middle space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
                             <span>High Growth</span>
                         </span>
-                        <span class="text-xs font-black text-indigo-300 font-mono">${item.demand}</span>
+                        <span class="text-xs font-black text-indigo-600 dark:text-indigo-300 font-mono">${item.demand}</span>
                     </div>
-                    <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                    <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
                         <div class="h-full rounded-full bg-gradient-to-r from-emerald-500 via-indigo-500 to-purple-500" style="width: 94%;"></div>
                     </div>
                 </td>
@@ -600,17 +600,17 @@ function renderComparisonMatrix() {
         </tr>
 
         {{-- Row: Core Difficulty --}}
-        <tr class="hover:bg-white/[0.01] transition-colors">
-            <td class="p-5 font-bold text-slate-300 text-xs border-r border-white/10 bg-white/[0.01]">
+        <tr class="hover:bg-slate-50/70 dark:hover:bg-white/[0.01] transition-colors">
+            <td class="p-5 font-bold text-slate-700 dark:text-slate-300 text-xs border-r border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-white/[0.01]">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-pink-500/15 text-pink-400 flex items-center justify-center text-xs shrink-0">
+                    <div class="w-7 h-7 rounded-lg bg-pink-500/15 text-pink-600 dark:text-pink-400 flex items-center justify-center text-xs shrink-0">
                         <i class="fa-solid fa-layer-group"></i>
                     </div>
                     <span>Core Difficulty</span>
                 </div>
             </td>
             ${items.map(item => {
-                const dClass = diffStyles[item.difficulty] || 'bg-purple-500/20 text-purple-300 border-purple-500/30';
+                const dClass = diffStyles[item.difficulty] || 'bg-purple-500/15 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-500/30';
                 return `
                     <td class="p-5 align-middle">
                         <span class="px-3 py-1 rounded-lg text-xs font-bold border ${dClass} inline-flex items-center gap-1.5">
@@ -623,10 +623,10 @@ function renderComparisonMatrix() {
         </tr>
 
         {{-- Row: Primary Skills --}}
-        <tr class="hover:bg-white/[0.01] transition-colors">
-            <td class="p-5 font-bold text-slate-300 text-xs border-r border-white/10 bg-white/[0.01]">
+        <tr class="hover:bg-slate-50/70 dark:hover:bg-white/[0.01] transition-colors">
+            <td class="p-5 font-bold text-slate-700 dark:text-slate-300 text-xs border-r border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-white/[0.01]">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center text-xs shrink-0">
+                    <div class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xs shrink-0">
                         <i class="fa-solid fa-code"></i>
                     </div>
                     <span>Primary Skills</span>
@@ -638,7 +638,7 @@ function renderComparisonMatrix() {
                     <td class="p-5 align-middle">
                         <div class="flex flex-wrap gap-1.5">
                             ${skillsArr.map(s => `
-                                <span class="px-2.5 py-1 text-[11px] font-semibold rounded-lg bg-white/[0.05] border border-white/10 text-slate-200 shadow-sm">
+                                <span class="px-2.5 py-1 text-[11px] font-semibold rounded-lg bg-slate-100 dark:bg-white/[0.05] border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 shadow-sm">
                                     ${s}
                                 </span>
                             `).join('')}
@@ -649,10 +649,10 @@ function renderComparisonMatrix() {
         </tr>
 
         {{-- Row: Full Roadmap Action --}}
-        <tr class="hover:bg-white/[0.01] transition-colors">
-            <td class="p-5 font-bold text-slate-300 text-xs border-r border-white/10 bg-white/[0.01]">
+        <tr class="hover:bg-slate-50/70 dark:hover:bg-white/[0.01] transition-colors">
+            <td class="p-5 font-bold text-slate-700 dark:text-slate-300 text-xs border-r border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-white/[0.01]">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center text-xs shrink-0">
+                    <div class="w-7 h-7 rounded-lg bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xs shrink-0">
                         <i class="fa-solid fa-route"></i>
                     </div>
                     <span>Full Roadmap</span>
