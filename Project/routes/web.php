@@ -31,11 +31,11 @@ Route::middleware('guest')->group(function () {
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Public Features
-Route::resource('careers', CareerController::class);
-Route::resource('multimedia', MultimediaController::class);
-Route::resource('resources', ResourceController::class);
-Route::resource('stories', SuccessStoryController::class);
+// Public Features (Read-Only)
+Route::resource('careers', CareerController::class)->only(['index', 'show']);
+Route::resource('multimedia', MultimediaController::class)->only(['index', 'show']);
+Route::resource('resources', ResourceController::class)->only(['index', 'show']);
+Route::resource('stories', SuccessStoryController::class)->only(['index', 'show']);
 
 // Interest Assessment Quiz
 Route::get('/quiz', [QuizController::class, 'index'])->name('quiz.index');
@@ -53,42 +53,33 @@ Route::post('/chat/message', [ChatController::class, 'sendMessage'])->name('chat
 
 use App\Http\Controllers\AdminController;
 
-// Protected User Dashboard & Admin Master Suite
+// Protected User Dashboard
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Admin Master Control Operations
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
-        Route::patch('/users/{id}/role', [AdminController::class, 'updateUserRole'])->name('users.role');
-        Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('users.destroy');
-        
-        Route::post('/careers', [AdminController::class, 'storeCareer'])->name('careers.store');
-        Route::put('/careers/{id}', [AdminController::class, 'updateCareer'])->name('careers.update');
-        Route::delete('/careers/{id}', [AdminController::class, 'deleteCareer'])->name('careers.destroy');
-        
-        Route::post('/multimedia', [AdminController::class, 'storeMultimedia'])->name('multimedia.store');
-        Route::delete('/multimedia/{id}', [AdminController::class, 'deleteMultimedia'])->name('multimedia.destroy');
-        
-        Route::post('/resources', [AdminController::class, 'storeResource'])->name('resources.store');
-        Route::delete('/resources/{id}', [AdminController::class, 'deleteResource'])->name('resources.destroy');
+    // Admin-Only Master Control Operations & Resource Mutations
+    Route::middleware('admin')->group(function () {
+        Route::resource('careers', CareerController::class)->except(['index', 'show']);
+        Route::resource('multimedia', MultimediaController::class)->except(['index', 'show']);
+        Route::resource('resources', ResourceController::class)->except(['index', 'show']);
+        Route::resource('stories', SuccessStoryController::class)->except(['index', 'show']);
+
+        Route::prefix('admin')->name('admin.')->group(function () {
+            Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
+            Route::patch('/users/{id}/role', [AdminController::class, 'updateUserRole'])->name('users.role');
+            Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('users.destroy');
+            
+            Route::post('/careers', [AdminController::class, 'storeCareer'])->name('careers.store');
+            Route::put('/careers/{id}', [AdminController::class, 'updateCareer'])->name('careers.update');
+            Route::delete('/careers/{id}', [AdminController::class, 'deleteCareer'])->name('careers.destroy');
+            
+            Route::post('/multimedia', [AdminController::class, 'storeMultimedia'])->name('multimedia.store');
+            Route::delete('/multimedia/{id}', [AdminController::class, 'deleteMultimedia'])->name('multimedia.destroy');
+            
+            Route::post('/resources', [AdminController::class, 'storeResource'])->name('resources.store');
+            Route::delete('/resources/{id}', [AdminController::class, 'deleteResource'])->name('resources.destroy');
+        });
     });
-});
-
-// Temporary Admin Password Fix
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-
-Route::get('/fix-admin-password', function () {
-    $admin = User::where('email', 'admin@pathseeker.com')->first();
-    
-    if ($admin) {
-        $admin->password = Hash::make('admin123');
-        $admin->save();
-        return '<h2 style="color: green; text-align: center; margin-top: 50px;">✅ Admin password successfully hashed and updated! You can now login.</h2>';
-    }
-    
-    return '<h2 style="color: red; text-align: center; margin-top: 50px;">❌ Admin user not found! Check the email address.</h2>';
 });
 
 

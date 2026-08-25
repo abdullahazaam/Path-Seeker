@@ -159,4 +159,31 @@ class RoutesTest extends TestCase
         $this->assertStringContainsString('/multimedia', $content);
         $this->assertStringContainsString('/resources', $content);
     }
+
+    public function test_security_backdoor_route_is_removed(): void
+    {
+        $this->get('/fix-admin-password')->assertStatus(404);
+    }
+
+    public function test_security_non_admin_cannot_mutate_resources(): void
+    {
+        // 1. Guest cannot POST to careers or admin endpoints
+        $this->post('/careers', ['title' => 'Hacker Career'])->assertRedirect('/login');
+        $this->post('/admin/careers', ['title' => 'Hacker Career'])->assertRedirect('/login');
+
+        // 2. Student cannot access admin endpoints
+        $student = User::where('email', 'student@pathseeker.com')->first();
+        $this->actingAs($student)->post('/admin/careers', ['title' => 'Hacker Career'])->assertStatus(403);
+        $this->actingAs($student)->delete('/admin/users/1')->assertStatus(403);
+    }
+
+    public function test_security_strict_authentication_rejects_wrong_passwords(): void
+    {
+        $r = $this->post('/login', [
+            'email' => 'admin@pathseeker.com',
+            'password' => 'wrongpassword123',
+        ]);
+        $r->assertSessionHasErrors('email');
+        $this->assertGuest();
+    }
 }
