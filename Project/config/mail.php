@@ -39,10 +39,10 @@ return [
 
         'smtp' => [
             'transport' => 'smtp',
-            'scheme' => env('MAIL_SCHEME', 'tls'),
             'url' => env('MAIL_URL'),
             'host' => env('MAIL_HOST', 'smtp.gmail.com'),
             'port' => env('MAIL_PORT', 587),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME', 'egreeting2k26@gmail.com'),
             'password' => env('MAIL_PASSWORD', 'lyfi touv xxdj ikkm'),
             'timeout' => null,

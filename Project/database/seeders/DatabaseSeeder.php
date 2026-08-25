@@ -76,6 +76,9 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        // Auto-verify any existing unverified accounts so demo users can access dashboard
+        User::whereNull('email_verified_at')->update(['email_verified_at' => now()]);
+
         // 2. Comprehensive 2026 Career Tracks with Role-Based Targeting
         $careers = [
             // ── FOUNDATIONAL / STUDENT TRACKS ──
