@@ -59,19 +59,19 @@
 
     {{-- Role-Personalized Guidance Banner --}}
     @if(isset($rolePersonalization))
-        <div class="relative rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-purple-50 via-indigo-50/70 to-purple-100/50 dark:bg-gradient-to-r dark:from-indigo-950/80 dark:via-purple-950/60 dark:to-slate-900 border border-purple-200/80 dark:border-purple-500/30 shadow-xl dark:shadow-2xl overflow-hidden">
+        <div class="relative rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
             {{-- Ambient glow --}}
-            <div class="absolute -top-16 -right-16 w-60 h-60 rounded-full bg-purple-400/10 dark:bg-purple-500/15 blur-2xl pointer-events-none"></div>
+            <div class="absolute -top-16 -right-16 w-60 h-60 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-2xl pointer-events-none"></div>
             <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div class="space-y-1">
-                    <div class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-purple-700 dark:text-purple-300 font-mono">
+                    <div class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-purple-700 dark:text-purple-400 font-mono">
                         <i class="fa-solid fa-bullseye text-purple-600 dark:text-purple-400"></i>
                         <span>Personalized for {{ $userRole === 'student' ? 'Students' : ($userRole === 'graduate' ? 'Graduates' : ($userRole === 'professional' ? 'Professionals' : 'Users')) }}</span>
                     </div>
                     <h3 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white font-display">{{ $rolePersonalization['tagline'] ?? 'Role Guidance' }}</h3>
-                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">{{ $rolePersonalization['focus'] ?? 'Explore your specialized resources and career trajectories.' }}</p>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{{ $rolePersonalization['focus'] ?? 'Explore your specialized resources and career trajectories.' }}</p>
                 </div>
-                <a href="{{ $rolePersonalization['action_route'] ?? route('careers.index') }}" class="px-5 py-2.5 rounded-full font-bold text-xs text-purple-700 dark:text-white bg-purple-100/80 dark:bg-white/10 hover:bg-purple-200 dark:hover:bg-white/20 border border-purple-300/80 dark:border-white/20 transition-all shrink-0 flex items-center gap-2 shadow-sm">
+                <a href="{{ $rolePersonalization['action_route'] ?? route('careers.index') }}" class="px-5 py-2.5 rounded-xl font-bold text-xs text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-white/[0.06] hover:bg-slate-200 dark:hover:bg-white/[0.12] border border-slate-200 dark:border-white/10 transition-all shrink-0 flex items-center gap-2 shadow-sm hover:scale-105">
                     <span>{{ $rolePersonalization['action_label'] ?? 'Explore' }}</span>
                     <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
