@@ -70,6 +70,7 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\PassportShareController;
 use App\Http\Controllers\PassportExportController;
+use App\Http\Controllers\NotificationController;
 
 // Public Resource Previews & Safe Rate-Limited Downloads
 Route::get('/resources/{id}/preview', [ResourceController::class, 'preview'])->name('resources.preview');
@@ -78,6 +79,9 @@ Route::get('/resources/{id}/download', [ResourceController::class, 'download'])-
 // Public Privacy-Safe Shared Passport (Opaque Token)
 Route::get('/passport/share/{token}', [PassportShareController::class, 'showSharedPassport'])->name('passport.shared');
 
+// Public Homepage Feedback Submission (Rate-Limited)
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store')->middleware('throttle:6,1');
+
 // Newsletter Subscription & Unsubscribe
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe')->middleware('throttle:10,1');
 Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
@@ -85,6 +89,11 @@ Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'uns
 // Protected User Features
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Live Real-Time Notifications API
+    Route::get('/api/notifications', [NotificationController::class, 'index'])->name('api.notifications.index');
+    Route::post('/api/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('api.notifications.read');
+    Route::post('/api/notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('api.notifications.read-all');
 
     // Passport Sharing & Rate-Limited PDF Export
     Route::get('/passport/share-link', [PassportShareController::class, 'getShareLink'])->name('passport.share-link');
@@ -104,9 +113,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/multimedia/{id}/progress', [MultimediaController::class, 'saveProgress'])->name('multimedia.progress');
     Route::post('/resources/{id}/rate', [ResourceController::class, 'rate'])->name('resources.rate');
 
-    // Feedback Submission & History
+    // Feedback History for Auth User
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
-    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store')->middleware('throttle:6,1');
 
     // Story Submission by User
     Route::post('/stories', [SuccessStoryController::class, 'store'])->name('stories.store');

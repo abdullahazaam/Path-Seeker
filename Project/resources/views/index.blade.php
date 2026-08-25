@@ -699,6 +699,113 @@
     </div>
 </section>
 
+{{-- ══════════════════ SECTION 6: HOMEPAGE COMMUNITY FEEDBACK & SUGGESTIONS ══════════════════ --}}
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
+    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
+        
+        {{-- Ambient Corner Glows --}}
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {{-- Left Column: Description & Community Callout --}}
+            <div class="lg:col-span-5 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/25 text-xs font-black uppercase tracking-wider text-purple-700 dark:text-purple-300">
+                    <i class="fa-solid fa-comments text-purple-500"></i>
+                    <span>Community &amp; Engineering Hub</span>
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight font-display">
+                    Help Shape the Future of <span class="grad-text">PathSeeker</span>
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                    Have a technical suggestion, identified a roadmap gap, or encountered a platform bug? Submit your feedback directly to our engineering team.
+                </p>
+                
+                <div class="pt-2 space-y-2.5 text-xs text-slate-600 dark:text-slate-400">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>
+                        <span>Reviewed directly by core platform architects</span>
+                    </div>
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-circle-check text-indigo-500 text-sm"></i>
+                        <span>Real-time in-app notification when your ticket is resolved</span>
+                    </div>
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-circle-check text-pink-500 text-sm"></i>
+                        <span>Guaranteed privacy and discrete handling</span>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Right Column: Interactive Feedback Form --}}
+            <div class="lg:col-span-7">
+                <div class="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10 shadow-xl">
+                    <form action="{{ route('feedback.store') }}" method="POST" class="space-y-4">
+                        @csrf
+                        
+                        <div>
+                            <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
+                                Feedback Category
+                            </label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" x-data="{ selectedCategory: 'suggestion' }">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="category" value="suggestion" class="sr-only" x-model="selectedCategory">
+                                    <div :class="selectedCategory === 'suggestion' ? 'bg-purple-500/20 border-purple-500/50 text-purple-700 dark:text-purple-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
+                                        <i class="fa-solid fa-lightbulb text-xs text-amber-500"></i>
+                                        <span>Suggestion</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="category" value="bug" class="sr-only" x-model="selectedCategory">
+                                    <div :class="selectedCategory === 'bug' ? 'bg-rose-500/20 border-rose-500/50 text-rose-700 dark:text-rose-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
+                                        <i class="fa-solid fa-bug text-xs text-rose-500"></i>
+                                        <span>Bug Report</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="category" value="query" class="sr-only" x-model="selectedCategory">
+                                    <div :class="selectedCategory === 'query' ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-700 dark:text-indigo-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
+                                        <i class="fa-solid fa-circle-question text-xs text-indigo-500"></i>
+                                        <span>Inquiry</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="category" value="general" class="sr-only" x-model="selectedCategory">
+                                    <div :class="selectedCategory === 'general' ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-700 dark:text-emerald-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
+                                        <i class="fa-solid fa-comment-dots text-xs text-emerald-500"></i>
+                                        <span>General</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
+                                Your Message &amp; Feedback
+                            </label>
+                            <textarea name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Share your recommendations, feature requests, or issue details with us..." class="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500 focus:outline-none shadow-inner"></textarea>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2">
+                            <p class="text-[10px] text-slate-500 font-mono">
+                                @auth Signed in as {{ Auth::user()->name }} @else Submitting as Guest Visitor @endauth
+                            </p>
+                            <button type="submit" class="btn-sweep px-7 py-3 rounded-full text-xs font-bold text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-md hover:shadow-neon-purple transition-all flex items-center gap-2 cursor-pointer">
+                                <span>Submit Feedback</span>
+                                <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
 {{-- ══════════════════ FLOATING COMPARISON BOTTOM DOCK ══════════════════ --}}
 <div id="compareDock"
      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 transform translate-y-32 opacity-0 pointer-events-none max-w-2xl w-[92%] sm:w-auto">

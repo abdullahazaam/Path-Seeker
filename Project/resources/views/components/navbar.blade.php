@@ -65,6 +65,76 @@
                     $firstName = explode(' ', trim(Auth::user()->name))[0];
                     $isAdmin = Auth::user()->role === 'admin' || Auth::user()->email === 'admin@pathseeker.com';
                 @endphp
+
+                <!-- Live Notification Center Dropdown (Real-Time Reactive) -->
+                <div x-data="notificationCenter()" class="relative shrink-0 flex-shrink-0">
+                    <button type="button" @click="toggleDropdown()"
+                        title="Notifications" aria-label="View notifications"
+                        class="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-white/80 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/40 transition-all shadow-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        <i class="fa-solid fa-bell text-xs sm:text-sm"></i>
+                        <span x-show="unreadCount > 0"
+                              x-text="unreadCount"
+                              style="display: none;"
+                              class="absolute -top-1 -right-1 px-1.5 py-0.5 min-w-[18px] text-[9px] font-black font-mono text-white bg-gradient-to-r from-rose-500 to-pink-600 rounded-full border border-white dark:border-slate-900 shadow-md animate-pulse text-center">
+                        </span>
+                    </button>
+
+                    <!-- Notifications Dropdown Flyout -->
+                    <div x-show="open"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                         @click.outside="open = false"
+                         style="display: none;"
+                         class="absolute right-0 mt-3 w-80 sm:w-96 rounded-3xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden z-50">
+                        
+                        <div class="px-5 py-4 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between bg-slate-50/80 dark:bg-white/[0.02]">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-bell text-purple-500 text-xs"></i>
+                                <span class="text-xs font-black text-slate-900 dark:text-white font-display">Notifications</span>
+                                <span x-show="unreadCount > 0" class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-purple-500/15 text-purple-600 dark:text-purple-300" x-text="unreadCount + ' new'"></span>
+                            </div>
+                            <button type="button" @click="markAllAsRead()" x-show="unreadCount > 0" class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
+                                Mark all read
+                            </button>
+                        </div>
+
+                        <div class="max-h-80 overflow-y-auto divide-y divide-slate-100 dark:divide-white/5 scrollbar-thin">
+                            <template x-if="notifications.length === 0">
+                                <div class="p-8 text-center text-xs text-slate-400 space-y-1">
+                                    <i class="fa-regular fa-bell-slash text-base text-slate-300 dark:text-slate-600"></i>
+                                    <p>No notifications yet</p>
+                                </div>
+                            </template>
+
+                            <template x-for="item in notifications" :key="item.id">
+                                <div class="p-3.5 hover:bg-slate-50 dark:hover:bg-white/[0.03] transition-colors flex items-start gap-3 relative" :class="{'bg-purple-50/50 dark:bg-purple-950/20': !item.read}">
+                                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-500/20 to-indigo-500/20 border border-purple-500/30 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xs shrink-0 mt-0.5">
+                                        <i :class="item.icon || 'fa-solid fa-bell'"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0 space-y-1">
+                                        <div class="flex items-center justify-between gap-1">
+                                            <h4 class="text-xs font-bold text-slate-900 dark:text-white truncate" x-text="item.title"></h4>
+                                            <span class="text-[9px] text-slate-400 font-mono shrink-0" x-text="item.time_ago"></span>
+                                        </div>
+                                        <p class="text-[11px] text-slate-600 dark:text-slate-400 leading-snug line-clamp-2" x-text="item.message"></p>
+                                        <div class="pt-1 flex items-center gap-3">
+                                            <a :href="item.action_url" @click="markAsRead(item.id)" class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
+                                                View &rarr;
+                                            </a>
+                                            <button type="button" x-show="!item.read" @click="markAsRead(item.id)" class="text-[9px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                                Mark read
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
                 
                 <!-- User Profile Badge -->
                 <div class="hidden sm:flex items-center gap-2 px-3 py-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-full border border-slate-200 dark:border-white/10 shrink-0 flex-shrink-0 shadow-sm">

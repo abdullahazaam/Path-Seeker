@@ -1289,6 +1289,74 @@
                 }
             };
         }
+
+        // Live Real-Time Notification Center (Dropdown & Poller)
+        function notificationCenter() {
+            return {
+                open: false,
+                unreadCount: 0,
+                notifications: [],
+                pollInterval: null,
+                init() {
+                    this.fetchNotifications();
+                    // Poll for new notifications every 45 seconds if authenticated
+                    this.pollInterval = setInterval(() => {
+                        this.fetchNotifications();
+                    }, 45000);
+                },
+                toggleDropdown() {
+                    this.open = !this.open;
+                    if (this.open) {
+                        this.fetchNotifications();
+                    }
+                },
+                fetchNotifications() {
+                    fetch('/api/notifications', {
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        this.unreadCount = data.unread_count || 0;
+                        this.notifications = data.notifications || [];
+                    })
+                    .catch(() => {});
+                },
+                markAsRead(id) {
+                    fetch(`/api/notifications/${id}/read`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        this.unreadCount = data.unread_count || 0;
+                        const target = this.notifications.find(n => n.id === id);
+                        if (target) target.read = true;
+                    })
+                    .catch(() => {});
+                },
+                markAllAsRead() {
+                    fetch('/api/notifications/read-all', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        this.unreadCount = 0;
+                        this.notifications.forEach(n => n.read = true);
+                    })
+                    .catch(() => {});
+                }
+            };
+        }
     </script>
 </body>
 </html>
