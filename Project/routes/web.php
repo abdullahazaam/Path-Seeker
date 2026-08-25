@@ -7,6 +7,8 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SuccessStoryController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FeedbackController;
 use App\Models\Career;
 use App\Models\Multimedia;
 use App\Models\Resource;
@@ -65,7 +67,6 @@ use App\Http\Controllers\FileUploadController;
 // Production Service & DB Health-Check API
 Route::get('/api/health', [HealthController::class, 'check'])->name('api.health');
 
-use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\PassportShareController;
@@ -137,9 +138,11 @@ Route::middleware('auth')->group(function () {
             Route::delete('/careers/{id}', [AdminController::class, 'deleteCareer'])->name('careers.destroy');
             
             Route::post('/multimedia', [AdminController::class, 'storeMultimedia'])->name('multimedia.store');
+            Route::put('/multimedia/{id}', [AdminController::class, 'updateMultimedia'])->name('multimedia.update');
             Route::delete('/multimedia/{id}', [AdminController::class, 'deleteMultimedia'])->name('multimedia.destroy');
             
             Route::post('/resources', [AdminController::class, 'storeResource'])->name('resources.store');
+            Route::put('/resources/{id}', [AdminController::class, 'updateResource'])->name('resources.update');
             Route::delete('/resources/{id}', [AdminController::class, 'deleteResource'])->name('resources.destroy');
 
             // Success Story Moderation & Feedback Response & Deletion

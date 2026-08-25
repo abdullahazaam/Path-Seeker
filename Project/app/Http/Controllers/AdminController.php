@@ -143,6 +143,38 @@ class AdminController extends Controller
     }
 
     /**
+     * Update Multimedia Asset.
+     */
+    public function updateMultimedia(Request $request, $id)
+    {
+        $media = Multimedia::findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'type' => 'required|in:video,audio',
+            'url' => 'required|url',
+            'thumbnail_url' => 'nullable|string',
+            'duration' => 'nullable|string|max:50',
+            'tags' => 'nullable|string',
+            'thumbnail_file' => 'nullable|image|max:5120',
+        ]);
+
+        if ($request->hasFile('thumbnail_file')) {
+            $file = $request->file('thumbnail_file');
+            $filename = 'media_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/multimedia'), $filename);
+            $validated['thumbnail_url'] = '/uploads/multimedia/' . $filename;
+        }
+
+        unset($validated['thumbnail_file']);
+
+        $media->update($validated);
+
+        return redirect()->route('dashboard', ['tab' => 'multimedia'])->with('success', "Multimedia asset '{$media->title}' updated successfully!");
+    }
+
+    /**
      * Delete Multimedia Asset.
      */
     public function deleteMultimedia($id)
@@ -163,12 +195,52 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
             'file_url' => 'required|url',
-            'thumbnail_url' => 'nullable|url',
+            'thumbnail_url' => 'nullable|string',
+            'thumbnail_file' => 'nullable|image|max:5120',
         ]);
+
+        if ($request->hasFile('thumbnail_file')) {
+            $file = $request->file('thumbnail_file');
+            $filename = 'resource_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/resources'), $filename);
+            $validated['thumbnail_url'] = '/uploads/resources/' . $filename;
+        }
+
+        unset($validated['thumbnail_file']);
 
         $res = Resource::create($validated);
 
         return redirect()->route('dashboard', ['tab' => 'resources'])->with('success', "Resource Blueprint '{$res->title}' added successfully!");
+    }
+
+    /**
+     * Update Resource Toolkit.
+     */
+    public function updateResource(Request $request, $id)
+    {
+        $res = Resource::findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'file_url' => 'required|url',
+            'thumbnail_url' => 'nullable|string',
+            'description' => 'nullable|string',
+            'thumbnail_file' => 'nullable|image|max:5120',
+        ]);
+
+        if ($request->hasFile('thumbnail_file')) {
+            $file = $request->file('thumbnail_file');
+            $filename = 'resource_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/resources'), $filename);
+            $validated['thumbnail_url'] = '/uploads/resources/' . $filename;
+        }
+
+        unset($validated['thumbnail_file']);
+
+        $res->update($validated);
+
+        return redirect()->route('dashboard', ['tab' => 'resources'])->with('success', "Resource Blueprint '{$res->title}' updated successfully!");
     }
 
     /**

@@ -124,4 +124,53 @@ class LiveNotificationAndFeedbackTest extends TestCase
             'id' => $feedback->id,
         ]);
     }
+
+    public function test_admin_can_edit_and_update_multimedia_and_resources(): void
+    {
+        $admin = User::where('email', 'admin@pathseeker.com')->first();
+        $student = User::where('email', 'student@pathseeker.com')->first();
+
+        $media = \App\Models\Multimedia::first();
+        $resource = \App\Models\Resource::first();
+
+        // 1. Admin updates multimedia item
+        $mediaUpdate = $this->actingAs($admin)->put("/admin/multimedia/{$media->id}", [
+            'title' => 'Updated Distributed Cloud Architecture',
+            'description' => 'Updated deep dive description for 2026.',
+            'type' => 'video',
+            'url' => 'https://www.youtube.com/watch?v=updated123',
+            'thumbnail_url' => 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800',
+            'duration' => '1h 45m',
+            'tags' => 'Cloud, Architecture, Kubernetes',
+        ]);
+        $mediaUpdate->assertRedirect('/dashboard?tab=multimedia');
+        $this->assertDatabaseHas('multimedia', [
+            'id' => $media->id,
+            'title' => 'Updated Distributed Cloud Architecture',
+            'duration' => '1h 45m',
+        ]);
+
+        // 2. Admin updates resource item
+        $resUpdate = $this->actingAs($admin)->put("/admin/resources/{$resource->id}", [
+            'title' => 'Updated React 19 & Next.js Architecture Blueprint',
+            'category' => 'Frontend Playbook',
+            'file_url' => 'https://github.com/example/react-blueprint',
+            'thumbnail_url' => 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800',
+            'description' => 'Updated enterprise frontend blueprint.',
+        ]);
+        $resUpdate->assertRedirect('/dashboard?tab=resources');
+        $this->assertDatabaseHas('resources', [
+            'id' => $resource->id,
+            'title' => 'Updated React 19 & Next.js Architecture Blueprint',
+            'category' => 'Frontend Playbook',
+        ]);
+
+        // 3. Non-admin is rejected
+        $studentMediaUpdate = $this->actingAs($student)->put("/admin/multimedia/{$media->id}", [
+            'title' => 'Hacked title',
+            'type' => 'video',
+            'url' => 'https://hacked.com',
+        ]);
+        $studentMediaUpdate->assertStatus(403);
+    }
 }

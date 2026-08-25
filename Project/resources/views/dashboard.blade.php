@@ -912,6 +912,18 @@
         openEditCareer(track) {
             this.editCareer = { ...track };
             this.editCareerModal = true;
+        },
+        editMediaModal: false,
+        editMedia: { id: '', title: '', description: '', type: 'video', url: '', thumbnail_url: '', duration: '', tags: '' },
+        openEditMedia(item) {
+            this.editMedia = { ...item };
+            this.editMediaModal = true;
+        },
+        editResourceModal: false,
+        editResource: { id: '', title: '', category: '', file_url: '', thumbnail_url: '', description: '' },
+        openEditResource(item) {
+            this.editResource = { ...item };
+            this.editResourceModal = true;
         }
     }" class="space-y-8 md:space-y-10">
 
@@ -1242,28 +1254,46 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($allMultimedia as $m)
-                    <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/10 flex flex-col justify-between gap-4 shadow-sm hover:border-pink-500/30 transition-all">
+                    <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/10 flex flex-col justify-between gap-4 shadow-sm hover:border-pink-500/30 transition-all group">
                         <div class="space-y-3">
-                            <div class="flex items-center justify-between">
-                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase font-mono bg-pink-500/15 text-pink-700 dark:text-pink-300 border border-pink-500/20">
-                                    {{ $m->type ?? 'video' }}
-                                </span>
-                                <span class="text-[11px] font-mono text-slate-500">{{ $m->duration ?? '15m' }}</span>
+                            {{-- Thumbnail Preview --}}
+                            <div class="relative w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10">
+                                <img src="{{ $m->thumbnail_url ?? 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80' }}" alt="{{ $m->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                                <div class="absolute top-2.5 left-2.5">
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase font-mono bg-pink-500/90 text-white shadow-sm">
+                                        {{ $m->type ?? 'video' }}
+                                    </span>
+                                </div>
+                                <div class="absolute bottom-2.5 right-2.5">
+                                    <span class="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-black/80 text-white backdrop-blur-sm">
+                                        <i class="fa-regular fa-clock text-[9px] mr-1"></i>{{ $m->duration ?? '15m' }}
+                                    </span>
+                                </div>
                             </div>
-                            <h4 class="font-bold text-slate-900 dark:text-white text-sm line-clamp-1">{{ $m->title }}</h4>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">{{ $m->description }}</p>
+
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-sm line-clamp-1 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">{{ $m->title }}</h4>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1">{{ $m->description }}</p>
+                            </div>
                         </div>
+
                         <div class="pt-3 border-t border-slate-200 dark:border-white/10 flex items-center justify-between gap-2">
                             <a href="{{ $m->url }}" target="_blank" class="text-xs font-bold text-pink-600 dark:text-pink-400 hover:underline flex items-center gap-1">
-                                <i class="fa-solid fa-play text-[10px]"></i> Stream Asset &rarr;
+                                <i class="fa-solid fa-play text-[10px]"></i> Stream &rarr;
                             </a>
-                            <form action="{{ url('/admin/multimedia/' . $m->id) }}" method="POST" onsubmit="return confirm('Delete multimedia item {{ $m->title }}?');" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-600 hover:text-white border border-rose-500/20 text-[11px] font-bold transition-all cursor-pointer">
-                                    <i class="fa-solid fa-trash-can"></i>
+                            <div class="flex items-center gap-1.5">
+                                <button @click="openEditMedia({{ json_encode($m) }})" class="px-2.5 py-1 rounded-lg bg-pink-500/10 hover:bg-pink-600 hover:text-white text-pink-600 dark:text-pink-400 border border-pink-500/20 text-[11px] font-bold transition-all cursor-pointer inline-flex items-center gap-1" title="Edit Multimedia Asset">
+                                    <i class="fa-solid fa-pencil text-[10px]"></i> Edit
                                 </button>
-                            </form>
+                                <form action="{{ url('/admin/multimedia/' . $m->id) }}" method="POST" onsubmit="return confirm('Delete multimedia item {{ $m->title }}?');" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-600 hover:text-white border border-rose-500/20 text-[11px] font-bold transition-all cursor-pointer" title="Delete Asset">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @empty
@@ -1276,7 +1306,7 @@
         <div x-show="currentTab === 'resources'" class="rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">Resource Toolkits & Blueprints</h3>
+                    <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">Resource Toolkits &amp; Blueprints</h3>
                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Upload downloadable cheat sheets, architectural blueprints, and interview templates</p>
                 </div>
                 <button @click="showAddResource = true" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md transition-all cursor-pointer">
@@ -1287,27 +1317,46 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($allResources as $r)
-                    <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/10 flex flex-col justify-between gap-4 shadow-sm hover:border-emerald-500/30 transition-all">
+                    <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/10 flex flex-col justify-between gap-4 shadow-sm hover:border-emerald-500/30 transition-all group">
                         <div class="space-y-3">
-                            <div class="flex items-center justify-between">
-                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
-                                    {{ $r->category }}
-                                </span>
-                                <i class="fa-solid fa-file-pdf text-rose-500 text-base"></i>
+                            {{-- Thumbnail Preview --}}
+                            <div class="relative w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10">
+                                <img src="{{ $r->thumbnail_url ?? 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=80' }}" alt="{{ $r->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                                <div class="absolute top-2.5 left-2.5">
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono bg-emerald-500/90 text-white shadow-sm">
+                                        {{ $r->category }}
+                                    </span>
+                                </div>
+                                <div class="absolute bottom-2.5 right-2.5">
+                                    <span class="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-black/80 text-white backdrop-blur-sm">
+                                        <i class="fa-solid fa-file-arrow-down text-[9px] mr-1 text-emerald-400"></i>{{ $r->download_count ?? 0 }} dl
+                                    </span>
+                                </div>
                             </div>
-                            <h4 class="font-bold text-slate-900 dark:text-white text-sm line-clamp-1">{{ $r->title }}</h4>
+
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-sm line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{{ $r->title }}</h4>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1">{{ $r->description ?? 'Production-ready technical documentation and implementation blueprint.' }}</p>
+                            </div>
                         </div>
+
                         <div class="pt-3 border-t border-slate-200 dark:border-white/10 flex items-center justify-between gap-2">
                             <a href="{{ $r->file_url }}" target="_blank" class="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1">
                                 <i class="fa-solid fa-download text-[10px]"></i> View File &rarr;
                             </a>
-                            <form action="{{ url('/admin/resources/' . $r->id) }}" method="POST" onsubmit="return confirm('Delete resource blueprint {{ $r->title }}?');" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-600 hover:text-white border border-rose-500/20 text-[11px] font-bold transition-all cursor-pointer">
-                                    <i class="fa-solid fa-trash-can"></i>
+                            <div class="flex items-center gap-1.5">
+                                <button @click="openEditResource({{ json_encode($r) }})" class="px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-600 hover:text-white text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[11px] font-bold transition-all cursor-pointer inline-flex items-center gap-1" title="Edit Resource Blueprint">
+                                    <i class="fa-solid fa-pencil text-[10px]"></i> Edit
                                 </button>
-                            </form>
+                                <form action="{{ url('/admin/resources/' . $r->id) }}" method="POST" onsubmit="return confirm('Delete resource blueprint {{ $r->title }}?');" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-600 hover:text-white border border-rose-500/20 text-[11px] font-bold transition-all cursor-pointer" title="Delete Resource">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @empty
@@ -1554,7 +1603,7 @@
 
         {{-- ══════════════════ MODAL: ADD MULTIMEDIA ASSET ══════════════════ --}}
         <div x-show="showAddMedia" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
-            <div @click.outside="showAddMedia = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6">
+            <div @click.outside="showAddMedia = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
                         <i class="fa-solid fa-film text-pink-500"></i> Publish Multimedia Asset
@@ -1563,7 +1612,7 @@
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
                 </div>
-                <form action="{{ url('/admin/multimedia') }}" method="POST" class="space-y-4">
+                <form action="{{ url('/admin/multimedia') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                     @csrf
                     <div>
                         <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Asset Title</label>
@@ -1579,12 +1628,24 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Duration</label>
-                            <input type="text" name="duration" placeholder="e.g., 24m" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
+                            <input type="text" name="duration" placeholder="e.g., 2h 15m" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Stream URL (YouTube / Direct)</label>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Stream / Video URL (YouTube, Vimeo, MP4)</label>
                         <input type="url" name="url" required placeholder="https://www.youtube.com/watch?v=..." class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Thumbnail Image URL</label>
+                        <input type="text" name="thumbnail_url" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Or Upload Thumbnail Image (Optional)</label>
+                        <input type="file" name="thumbnail_file" accept="image/*" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-pink-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-pink-600 file:text-white hover:file:bg-pink-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Tags (Comma-separated)</label>
+                        <input type="text" name="tags" placeholder="AI, Python, Full-Stack" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Description (Optional)</label>
@@ -1598,9 +1659,68 @@
             </div>
         </div>
 
+        {{-- ══════════════════ MODAL: EDIT MULTIMEDIA ASSET ══════════════════ --}}
+        <div x-show="editMediaModal" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+            <div @click.outside="editMediaModal = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
+                    <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
+                        <i class="fa-solid fa-pencil text-pink-500"></i> Edit Multimedia Asset
+                    </h3>
+                    <button @click="editMediaModal = false" class="text-slate-400 hover:text-slate-900 dark:hover:text-white">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+                <form :action="'/admin/multimedia/' + editMedia.id" method="POST" enctype="multipart/form-data" class="space-y-4">
+                    @csrf
+                    @method('PUT')
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Asset Title</label>
+                        <input type="text" name="title" x-model="editMedia.title" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Type</label>
+                            <select name="type" x-model="editMedia.type" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
+                                <option value="video">Video</option>
+                                <option value="audio">Audio / Podcast</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Duration</label>
+                            <input type="text" name="duration" x-model="editMedia.duration" placeholder="e.g., 2h 15m" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Stream / Video URL (YouTube, Vimeo, MP4)</label>
+                        <input type="url" name="url" x-model="editMedia.url" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Thumbnail Image URL</label>
+                        <input type="text" name="thumbnail_url" x-model="editMedia.thumbnail_url" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Or Upload New Thumbnail Image (Optional)</label>
+                        <input type="file" name="thumbnail_file" accept="image/*" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-pink-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-pink-600 file:text-white hover:file:bg-pink-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Tags (Comma-separated)</label>
+                        <input type="text" name="tags" x-model="editMedia.tags" placeholder="AI, Figma, Web Development" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Description</label>
+                        <textarea name="description" x-model="editMedia.description" rows="3" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500"></textarea>
+                    </div>
+                    <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-200 dark:border-white/10">
+                        <button type="button" @click="editMediaModal = false" class="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200">Cancel</button>
+                        <button type="submit" class="px-6 py-2.5 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-bold text-xs shadow-md">Update Multimedia</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         {{-- ══════════════════ MODAL: ADD RESOURCE TOOLKIT ══════════════════ --}}
         <div x-show="showAddResource" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
-            <div @click.outside="showAddResource = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6">
+            <div @click.outside="showAddResource = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
                         <i class="fa-solid fa-file-arrow-up text-emerald-500"></i> Upload Resource Toolkit
@@ -1609,7 +1729,7 @@
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
                 </div>
-                <form action="{{ url('/admin/resources') }}" method="POST" class="space-y-4">
+                <form action="{{ url('/admin/resources') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                     @csrf
                     <div>
                         <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Toolkit Title</label>
@@ -1623,9 +1743,67 @@
                         <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Download / Direct File URL</label>
                         <input type="url" name="file_url" required placeholder="https://..." class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
                     </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Thumbnail / Preview Image URL</label>
+                        <input type="text" name="thumbnail_url" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Or Upload Thumbnail Image (Optional)</label>
+                        <input type="file" name="thumbnail_file" accept="image/*" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Description (Optional)</label>
+                        <textarea name="description" rows="3" placeholder="Description of this technical blueprint..." class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
+                    </div>
                     <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-200 dark:border-white/10">
                         <button type="button" @click="showAddResource = false" class="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200">Cancel</button>
                         <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md">Upload Blueprint</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {{-- ══════════════════ MODAL: EDIT RESOURCE TOOLKIT ══════════════════ --}}
+        <div x-show="editResourceModal" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+            <div @click.outside="editResourceModal = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
+                    <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
+                        <i class="fa-solid fa-pencil text-emerald-500"></i> Edit Resource Toolkit
+                    </h3>
+                    <button @click="editResourceModal = false" class="text-slate-400 hover:text-slate-900 dark:hover:text-white">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+                <form :action="'/admin/resources/' + editResource.id" method="POST" enctype="multipart/form-data" class="space-y-4">
+                    @csrf
+                    @method('PUT')
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Toolkit Title</label>
+                        <input type="text" name="title" x-model="editResource.title" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Category</label>
+                        <input type="text" name="category" x-model="editResource.category" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Download / Direct File URL</label>
+                        <input type="url" name="file_url" x-model="editResource.file_url" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Thumbnail / Preview Image URL</label>
+                        <input type="text" name="thumbnail_url" x-model="editResource.thumbnail_url" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Or Upload New Thumbnail Image (Optional)</label>
+                        <input type="file" name="thumbnail_file" accept="image/*" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Description (Optional)</label>
+                        <textarea name="description" x-model="editResource.description" rows="3" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
+                    </div>
+                    <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-200 dark:border-white/10">
+                        <button type="button" @click="editResourceModal = false" class="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200">Cancel</button>
+                        <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md">Update Resource</button>
                     </div>
                 </form>
             </div>
