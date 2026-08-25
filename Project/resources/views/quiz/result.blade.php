@@ -5,7 +5,7 @@
 <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 space-y-8 md:space-y-10 my-6 md:my-8">
 
     {{-- Result Hero Card --}}
-    <div class="relative rounded-3xl p-8 sm:p-12 text-center space-y-6 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+    <div class="relative rounded-3xl p-8 sm:p-12 text-center space-y-6 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] reveal-on-scroll">
         
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
@@ -76,7 +76,7 @@
     </div>
 
     {{-- Recommended Career Pathways with Explainability --}}
-    <div class="space-y-6">
+    <div class="space-y-6 reveal-on-scroll">
         <div class="space-y-1">
             <div class="text-xs font-black uppercase tracking-wider text-cyan-600 dark:text-cyan-400 flex items-center gap-1.5 font-mono">
                 <i class="fa-solid fa-route"></i>

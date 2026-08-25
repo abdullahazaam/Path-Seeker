@@ -28,7 +28,7 @@
 }">
     
     {{-- Header Banner --}}
-    <div class="relative p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden">
+    <div class="relative p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden reveal-on-scroll">
         <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-amber-500/10 dark:bg-amber-500/15 blur-3xl pointer-events-none"></div>
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div class="space-y-2">

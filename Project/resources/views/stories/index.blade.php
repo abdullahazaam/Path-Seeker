@@ -5,7 +5,7 @@
 <div x-data="{ submitStoryModal: false }" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
     
     {{-- Header Banner --}}
-    <div class="relative overflow-hidden p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+    <div class="relative overflow-hidden p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 reveal-on-scroll">
         <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-pink-500/10 dark:bg-pink-500/15 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
 
@@ -42,7 +42,7 @@
     {{-- Timeline Stories Grid --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
         @forelse($stories as $story)
-            <div class="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div class="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group reveal-on-scroll">
                 
                 <div class="space-y-4">
                     
