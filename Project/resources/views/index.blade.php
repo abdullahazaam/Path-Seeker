@@ -253,143 +253,152 @@
     </div>
 </section>
 
-{{-- SECTION 2: HOW YOUR PATH COMES TOGETHER (HORIZONTAL CONNECTED TIMELINE) --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
+{{-- SECTION 2: HOW YOUR PATH COMES TOGETHER (HORIZONTAL / STAGGERED SCROLL STORYTELLING) --}}
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-12 md:my-16 reveal-element">
     <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         {{-- Ambient Corner Glows --}}
-        <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
 
         <div class="relative z-10 space-y-12">
             {{-- Header Title & Subtitle --}}
-            <div class="text-center space-y-3 max-w-2xl mx-auto">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/20 text-xs font-semibold text-purple-700 dark:text-purple-300 shadow-sm">
-                    <i class="fa-solid fa-route text-purple-600 dark:text-purple-400"></i>
-                    <span>The PathSeeker Architecture</span>
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200/80 dark:border-white/10">
+                <div class="space-y-3 max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                        <span>02 / FOUR-STAGE SYSTEM STORYTELLING</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white font-display tracking-tight uppercase">
+                        HOW YOUR PATH <span class="bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-400 bg-clip-text text-transparent">COMES TOGETHER</span>
+                    </h2>
                 </div>
-                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white font-display tracking-tight">
-                    How Your Path <span class="grad-text">Comes Together</span>
-                </h2>
-                <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
-                    Four intelligent, connected milestones guiding you from initial curiosity to verified industry readiness.
+                <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm font-mono max-w-xs text-left md:text-right">
+                    4 CONNECTED MILESTONES // FROM INITIAL CURIOSITY TO VERIFIED INDUSTRY READINESS.
                 </p>
             </div>
 
-            {{-- Horizontal Connected Journey Timeline --}}
-            <div class="relative">
-                
-                {{-- Horizontal Connecting Progress Rail (Visible on Desktop) --}}
-                <div class="hidden lg:block absolute top-7 left-[10%] right-[10%] h-1 bg-slate-200 dark:bg-white/10 rounded-full z-0">
-                    {{-- Active Progress Indicator Rail --}}
-                    <div class="h-full w-2/3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full shadow-[0_0_12px_rgba(168,85,247,0.5)]"></div>
+            {{-- Horizontal / Staggered Connected Journey Track --}}
+            <div class="relative overflow-x-auto pb-4 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:bg-cyan-500/30 [&::-webkit-scrollbar-track]:bg-slate-900/20">
+                {{-- Continuous Electric Connecting Rail --}}
+                <div class="hidden lg:block absolute top-9 left-12 right-12 h-0.5 bg-slate-200 dark:bg-white/10 z-0">
+                    <div class="h-full w-full bg-gradient-to-r from-cyan-400 via-purple-500 to-emerald-400 opacity-60"></div>
                 </div>
 
-                {{-- Connected Milestone Cards --}}
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+                {{-- Editorial Storytelling Steps Grid --}}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-w-[760px] lg:min-w-0 relative z-10">
                     
-                    {{-- Step 01: Discover (Active/Completed State) --}}
-                    <div class="group relative flex flex-col justify-between p-6 rounded-3xl bg-slate-50 dark:bg-[#0c101d] border border-indigo-500/40 dark:border-indigo-500/30 hover:border-indigo-500 hover:-translate-y-1 transition-all duration-300 shadow-lg space-y-5">
+                    {{-- Step 01: DISCOVER --}}
+                    <div class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-cyan-500/40 dark:border-cyan-500/30 hover:border-cyan-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="w-14 h-14 rounded-2xl bg-indigo-500 text-white flex items-center justify-center text-xl shadow-lg shadow-indigo-500/30 ring-4 ring-indigo-500/20">
-                                    <i class="fa-solid fa-compass"></i>
+                                <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-lg font-mono font-black shadow-md shadow-cyan-500/10">
+                                    01
                                 </div>
-                                <span class="px-2.5 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-600 dark:text-indigo-400 text-[10px] font-mono font-black flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-ping"></span> Phase 01
+                                <span class="px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 text-[10px] font-mono font-black flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span> STAGE 01
                                 </span>
                             </div>
-                            <div class="space-y-1.5">
-                                <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">Discover</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                    Browse 15+ high-growth tech domains and align your passions with global industry landscapes.
+                            <div class="space-y-2">
+                                <h3 class="text-xl font-black text-slate-900 dark:text-white font-display tracking-tight uppercase group-hover:text-cyan-400 transition-colors">
+                                    DISCOVER
+                                </h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
+                                    Map 15+ verified technology domains. Explore industry landscape macro-trends and align individual curiosity with market trajectory.
                                 </p>
                             </div>
                         </div>
-                        <div class="pt-3 border-t border-slate-200 dark:border-white/5">
-                            <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors">
-                                <span>Browse domains</span>
+                        <div class="pt-4 border-t border-slate-200 dark:border-white/5">
+                            <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-2 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 hover:text-cyan-300 transition-colors">
+                                <span>Browse Domains</span>
                                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                             </a>
                         </div>
                     </div>
 
-                    {{-- Step 02: Explore (Active State) --}}
-                    <div class="group relative flex flex-col justify-between p-6 rounded-3xl bg-slate-50 dark:bg-[#0c101d] border border-purple-500/40 dark:border-purple-500/30 hover:border-purple-500 hover:-translate-y-1 transition-all duration-300 shadow-lg space-y-5">
+                    {{-- Step 02: EXPLORE WHAT'S POSSIBLE --}}
+                    <div class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-purple-500/40 dark:border-purple-500/30 hover:border-purple-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="w-14 h-14 rounded-2xl bg-purple-600 text-white flex items-center justify-center text-xl shadow-lg shadow-purple-500/30 ring-4 ring-purple-500/20">
-                                    <i class="fa-solid fa-layer-group"></i>
+                                <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center text-lg font-mono font-black shadow-md shadow-purple-500/10">
+                                    02
                                 </div>
-                                <span class="px-2.5 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-600 dark:text-purple-400 text-[10px] font-mono font-black flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span> Phase 02
+                                <span class="px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-600 dark:text-purple-400 text-[10px] font-mono font-black flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span> STAGE 02
                                 </span>
                             </div>
-                            <div class="space-y-1.5">
-                                <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">Explore</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                    Deep-dive into verified core competencies, required toolchains, salary benchmarks, and growth metrics.
+                            <div class="space-y-2">
+                                <h3 class="text-xl font-black text-slate-900 dark:text-white font-display tracking-tight uppercase group-hover:text-purple-400 transition-colors">
+                                    EXPLORE WHAT'S POSSIBLE
+                                </h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
+                                    Deconstruct verified toolchains, required competencies, 5-year growth rates, and compensation benchmarks across candidate tiers.
                                 </p>
                             </div>
                         </div>
-                        <div class="pt-3 border-t border-slate-200 dark:border-white/5">
-                            <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors">
-                                <span>View career tracks</span>
+                        <div class="pt-4 border-t border-slate-200 dark:border-white/5">
+                            <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-2 text-xs font-mono font-bold text-purple-600 dark:text-purple-400 hover:text-purple-300 transition-colors">
+                                <span>Inspect Career Tracks</span>
                                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                             </a>
                         </div>
                     </div>
 
-                    {{-- Step 03: Understand --}}
-                    <div class="group relative flex flex-col justify-between p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-pink-500/40 hover:-translate-y-1 transition-all duration-300 shadow-md space-y-5">
+                    {{-- Step 03: UNDERSTAND YOUR FIT --}}
+                    <div class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-pink-500/40 dark:border-pink-500/30 hover:border-pink-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="w-14 h-14 rounded-2xl bg-pink-500/15 border border-pink-500/25 text-pink-500 flex items-center justify-center text-xl group-hover:scale-105 transition-all">
-                                    <i class="fa-solid fa-brain"></i>
+                                <div class="w-12 h-12 rounded-2xl bg-pink-500/15 border border-pink-500/30 text-pink-400 flex items-center justify-center text-lg font-mono font-black shadow-md shadow-pink-500/10">
+                                    03
                                 </div>
-                                <span class="px-2.5 py-1 rounded-full bg-pink-500/10 text-pink-600 dark:text-pink-400 text-[10px] font-mono font-bold">
-                                    Phase 03
+                                <span class="px-3 py-1 rounded-full bg-pink-500/15 border border-pink-500/30 text-pink-600 dark:text-pink-400 text-[10px] font-mono font-black flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span> STAGE 03
                                 </span>
                             </div>
-                            <div class="space-y-1.5">
-                                <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">Understand</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                    Take the interactive cognitive interest quiz to calculate match precision and tailored recommendations.
+                            <div class="space-y-2">
+                                <h3 class="text-xl font-black text-slate-900 dark:text-white font-display tracking-tight uppercase group-hover:text-pink-400 transition-colors">
+                                    UNDERSTAND YOUR FIT
+                                </h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
+                                    Execute cognitive RIASEC evaluations. Compute probabilistic match percentages and generate explainable trajectory rankings.
                                 </p>
                             </div>
                         </div>
-                        <div class="pt-3 border-t border-slate-200 dark:border-white/5">
-                            <a href="{{ route('quiz.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-pink-600 dark:text-pink-400 hover:text-pink-700 dark:hover:text-pink-300 transition-colors">
-                                <span>Take the quiz</span>
+                        <div class="pt-4 border-t border-slate-200 dark:border-white/5">
+                            <a href="{{ route('quiz.index') }}" class="inline-flex items-center gap-2 text-xs font-mono font-bold text-pink-600 dark:text-pink-400 hover:text-pink-300 transition-colors">
+                                <span>Take Assessment</span>
                                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                             </a>
                         </div>
                     </div>
 
-                    {{-- Step 04: Build --}}
-                    <div class="group relative flex flex-col justify-between p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-emerald-500/40 hover:-translate-y-1 transition-all duration-300 shadow-md space-y-5">
+                    {{-- Step 04: BUILD YOUR PATH --}}
+                    <div class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-emerald-500/40 dark:border-emerald-500/30 hover:border-emerald-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/25 text-emerald-500 flex items-center justify-center text-xl group-hover:scale-105 transition-all">
-                                    <i class="fa-solid fa-rocket"></i>
+                                <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg font-mono font-black shadow-md shadow-emerald-500/10">
+                                    04
                                 </div>
-                                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-bold">
-                                    Phase 04
+                                <span class="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-black flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> STAGE 04
                                 </span>
                             </div>
-                            <div class="space-y-1.5">
-                                <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">Build</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                    Download verified blueprints, curated video toolkits, and execute your live Career OS roadmap.
+                            <div class="space-y-2">
+                                <h3 class="text-xl font-black text-slate-900 dark:text-white font-display tracking-tight uppercase group-hover:text-emerald-400 transition-colors">
+                                    BUILD YOUR PATH
+                                </h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
+                                    Download verified domain blueprints, video toolkits, and link private notes to your permanent digital career passport.
                                 </p>
                             </div>
                         </div>
-                        <div class="pt-3 border-t border-slate-200 dark:border-white/5">
-                            <a href="{{ route('resources.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
-                                <span>Access resources</span>
+                        <div class="pt-4 border-t border-slate-200 dark:border-white/5">
+                            <a href="{{ route('resources.index') }}" class="inline-flex items-center gap-2 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-300 transition-colors">
+                                <span>Access Toolkits</span>
                                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                             </a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -582,7 +591,8 @@
             </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+        {{-- Featured Careers Editorial Rows --}}
+        <div class="space-y-4 relative z-10">
             @forelse($featuredCareers as $career)
                 @php
                     $domLower = strtolower($career->domain);
@@ -610,64 +620,71 @@
                     $skEsc = addslashes($career->required_skills);
                     $urlEsc = route('careers.show', $career->id);
                     $diffLevel = ($cId % 3 === 0) ? 'Advanced' : (($cId % 3 === 2) ? 'Intermediate' : 'Beginner / Intermediate');
+                    $demandVal = $career->market_metrics['demand_score'] ?? 94;
+                    $rowIndex = sprintf('%02d', $loop->iteration);
                 @endphp
 
-                <div class="career-card bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 rounded-3xl flex flex-col justify-between group relative overflow-hidden shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300">
-                    <div class="p-6 flex flex-col flex-1 space-y-5">
-                        {{-- Domain Badge + Salary Badge + Compare Button --}}
-                        <div class="flex items-center justify-between gap-2.5">
-                            <div class="flex items-center gap-2">
-                                <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full border {{ $badgeClass }} flex items-center gap-1.5 shadow-sm">
-                                    <i class="fa-solid {{ $domIcon }} text-[10px]"></i>
-                                    <span>{{ $career->domain }}</span>
+                <div class="career-card relative p-6 sm:p-7 rounded-3xl bg-slate-50/80 dark:bg-[#0b0f19] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-100/90 dark:hover:bg-[#0e1424] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
+                    {{-- Ambient Hover Glow --}}
+                    <div class="absolute -right-20 -top-20 w-48 h-48 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+                        {{-- Left Column: Index · Domain — Title & Description --}}
+                        <div class="space-y-2 flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3">
+                                <span class="text-xs font-mono font-black text-cyan-600 dark:text-cyan-400 tracking-wider">
+                                    {{ $rowIndex }} &middot; {{ strtoupper($career->domain) }}
+                                </span>
+                                <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] font-mono font-black text-emerald-700 dark:text-emerald-400">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block mr-1"></span>{{ $demandVal }}% Match
                                 </span>
                             </div>
-                            
-                            <button type="button"
-                                    onclick="toggleCompare({{ $cId }}, '{{ $tEsc }}', '{{ $dEsc }}', '{{ $sEsc }}', '94%', '{{ $diffLevel }}', '{{ $skEsc }}', '{{ $urlEsc }}', '{{ $badgeClass }}', '{{ $domIcon }}')"
-                                    id="btn-compare-{{ $cId }}"
-                                    class="compare-toggle-btn px-2.5 py-1 text-[10px] font-bold rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:border-purple-500/30 transition-all flex items-center gap-1.5 bg-slate-50 dark:bg-white/[0.04] shrink-0"
-                                    title="Add to career comparison matrix">
-                                <i class="fa-solid fa-plus text-[9px] icon-state"></i>
-                                <span class="label-state">Compare</span>
-                            </button>
-                        </div>
 
-                        {{-- Title & Description --}}
-                        <div class="space-y-2 flex-1">
-                            <h2 class="text-xl font-black text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug font-display">
-                                {{ $career->title }}
-                            </h2>
-                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                                {{ $career->description }}
-                            </p>
-                        </div>
-
-                        {{-- Primary Metric Row --}}
-                        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/5 flex items-center justify-between">
-                            <div>
-                                <span class="block text-[10px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Target Benchmark</span>
-                                <span class="text-sm font-black text-emerald-600 dark:text-emerald-400 font-mono">{{ $career->expected_salary }}</span>
+                            <div class="space-y-1">
+                                <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display tracking-tight group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors truncate">
+                                    {{ $career->title }}
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-1 leading-relaxed">
+                                    {{ $career->description }}
+                                </p>
                             </div>
-                            <div class="text-right">
-                                <span class="block text-[10px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Market Demand</span>
-                                <span class="inline-flex items-center gap-1 text-xs font-black text-indigo-600 dark:text-indigo-400 font-mono">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> 94% High
-                                </span>
+
+                            <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                                @foreach(array_slice($skills, 0, 4) as $sk)
+                                    <span class="px-2 py-0.5 rounded-lg bg-white dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/5 text-[10px] font-mono font-medium text-slate-600 dark:text-slate-300">
+                                        {{ $sk }}
+                                    </span>
+                                @endforeach
                             </div>
                         </div>
-                    </div>
 
-                    {{-- Card Clean CTA Footer --}}
-                    <div class="px-6 py-4 border-t border-slate-200/80 dark:border-white/[0.07] bg-slate-50/50 dark:bg-white/[0.01]">
-                        <a href="{{ route('careers.show', $career->id) }}" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 dark:bg-indigo-500/15 border border-indigo-500/20 hover:bg-indigo-500/20 transition-all flex items-center justify-center gap-2 group/link">
-                            <span>View Full Roadmap</span>
-                            <i class="fa-solid fa-arrow-right text-[10px] group-hover/link:translate-x-1 transition-transform"></i>
-                        </a>
+                        {{-- Right Column: Benchmark Salary & Direct View Path --}}
+                        <div class="flex items-center justify-between lg:justify-end gap-6 pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-200/80 dark:border-white/5 shrink-0">
+                            <div class="text-left lg:text-right">
+                                <span class="block text-[9px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Target Benchmark</span>
+                                <span class="text-base sm:text-lg font-black text-emerald-600 dark:text-emerald-400 font-mono">{{ $career->expected_salary }}</span>
+                            </div>
+
+                            <div class="flex items-center gap-2 shrink-0">
+                                <button type="button"
+                                        onclick="toggleCompare({{ $cId }}, '{{ $tEsc }}', '{{ $dEsc }}', '{{ $sEsc }}', '{{ $demandVal }}%', '{{ $diffLevel }}', '{{ $skEsc }}', '{{ $urlEsc }}', '{{ $badgeClass }}', '{{ $domIcon }}')"
+                                        id="btn-compare-{{ $cId }}"
+                                        class="compare-toggle-btn px-3 py-2 text-xs font-bold rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 transition-all flex items-center gap-1.5 bg-white dark:bg-white/[0.04] shadow-sm"
+                                        title="Add to career comparison matrix">
+                                    <i class="fa-solid fa-plus text-[10px] icon-state"></i>
+                                    <span class="label-state hidden sm:inline">Compare</span>
+                                </button>
+
+                                <a href="{{ route('careers.show', $career->id) }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-mono font-bold text-white bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/35 hover:scale-105 transition-all group/link">
+                                    <span>View Path</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px] group-hover/link:translate-x-1 transition-transform"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @empty
-                <div class="col-span-3 text-center py-16 rounded-3xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/5 text-slate-500">No careers registered yet.</div>
+                <div class="text-center py-16 rounded-3xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/5 text-slate-500 font-mono text-sm">No careers registered yet.</div>
             @endforelse
         </div>
     </div>

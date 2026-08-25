@@ -254,8 +254,8 @@
         </div>
     </div>
 
-    {{-- Career Cards Grid --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {{-- Career Bank — Editorial Career Wall (Full-Width Interactive Rows) --}}
+    <div class="space-y-4">
         @forelse($careers as $career)
             @php
                 $domLower = strtolower($career->domain);
@@ -295,97 +295,122 @@
                     $roleIconSvg = '<svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>';
                     $roleBadge = 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-500/20';
                 }
+
+                $cId = $career->id;
+                $tEsc = addslashes($career->title);
+                $dEsc = addslashes($career->domain);
+                $sEsc = addslashes($career->expected_salary);
+                $skEsc = addslashes($career->required_skills);
+                $urlEsc = route('careers.show', $career->id);
+                $diffLevel = ($cId % 3 === 0) ? 'Advanced' : (($cId % 3 === 2) ? 'Intermediate' : 'Beginner / Intermediate');
+                $demandVal = $career->market_metrics['demand_score'] ?? 94;
+                $isBookmarked = in_array($career->id, $userBookmarkedCareerIds ?? []);
+                $rowIndex = sprintf('%02d', $loop->iteration + (($careers->currentPage() - 1) * $careers->perPage()));
             @endphp
 
-                <div class="career-card bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 rounded-3xl flex flex-col justify-between group relative overflow-hidden shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300">
-                    <div class="p-6 flex flex-col flex-1 space-y-5">
-                        {{-- Domain Badge + Salary Badge + Compare Button --}}
-                        <div class="flex items-center justify-between gap-2.5">
-                            <div class="flex flex-wrap items-center gap-2">
-                                <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full border {{ $badgeClass }} flex items-center gap-1.5 shadow-sm">
-                                    <i class="fa-solid {{ $domIcon }} text-[10px]"></i>
-                                    <span>{{ $career->domain }}</span>
-                                </span>
+            {{-- Full-Width Interactive Editorial Career Row --}}
+            <div class="career-card relative p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#090d18] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-50/90 dark:hover:bg-[#0d1322] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
+                {{-- Ambient Hover Glow Accent --}}
+                <div class="absolute -right-20 -top-20 w-48 h-48 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 
-                                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border {{ $roleBadge }} inline-flex items-center gap-1.5 shadow-sm">
-                                    {!! $roleIconSvg !!}
-                                    <span>{{ $roleLabel }}</span>
-                                </span>
-                            </div>
-                                                       @php
-                                $cId = $career->id;
-                                $tEsc = addslashes($career->title);
-                                $dEsc = addslashes($career->domain);
-                                $sEsc = addslashes($career->expected_salary);
-                                $skEsc = addslashes($career->required_skills);
-                                $urlEsc = route('careers.show', $career->id);
-                                $diffLevel = ($cId % 3 === 0) ? 'Advanced' : (($cId % 3 === 2) ? 'Intermediate' : 'Beginner / Intermediate');
-                                $demandVal = $career->market_metrics['demand_score'] ?? 94;
-                                $isBookmarked = in_array($career->id, $userBookmarkedCareerIds ?? []);
-                            @endphp
-                            <div class="flex items-center gap-1.5 shrink-0">
-                                <button type="button"
-                                        onclick="toggleCompare({{ $cId }}, '{{ $tEsc }}', '{{ $dEsc }}', '{{ $sEsc }}', '{{ $demandVal }}%', '{{ $diffLevel }}', '{{ $skEsc }}', '{{ $urlEsc }}', '{{ $badgeClass }}', '{{ $domIcon }}')"
-                                        id="btn-compare-{{ $cId }}"
-                                        class="compare-toggle-btn px-2.5 py-1 text-[10px] font-bold rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:border-purple-500/30 transition-all flex items-center gap-1.5 bg-slate-50 dark:bg-white/[0.04] shrink-0 shadow-sm"
-                                        title="Add to career comparison matrix">
-                                    <i class="fa-solid fa-plus text-[9px] icon-state"></i>
-                                    <span class="label-state">Compare</span>
-                                </button>
-
-                                {{-- Bookmark / Save Button (AJAX Functional Button) --}}
-                                <button type="button"
-                                        onclick="toggleBookmark(event, {{ $career->id }}, 'career')"
-                                        id="btn-bookmark-{{ $career->id }}"
-                                        data-bookmarked="{{ $isBookmarked ? 'true' : 'false' }}"
-                                        class="w-7 h-7 rounded-full border transition-all flex items-center justify-center text-xs shrink-0 shadow-sm cursor-pointer {{ $isBookmarked ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400 border-purple-500/40 shadow-sm' : 'border-slate-200 dark:border-white/10 text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:border-purple-500/30 bg-slate-50 dark:bg-white/[0.04]' }}"
-                                        title="{{ $isBookmarked ? 'Saved in Passport Bookmarks' : 'Bookmark this career' }}">
-                                    <i class="{{ $isBookmarked ? 'fa-solid text-purple-600 dark:text-purple-400' : 'fa-regular' }} fa-bookmark text-[11px] transition-transform"></i>
-                                </button>
-                            </div>
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+                    {{-- Left Editorial Meta: Numbering · Domain — Role Title — Match Score --}}
+                    <div class="space-y-2.5 flex-1 min-w-0">
+                        {{-- Row Index & Domain Header --}}
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="text-xs font-mono font-black text-cyan-600 dark:text-cyan-400 tracking-wider">
+                                {{ $rowIndex }} &middot; {{ strtoupper($career->domain) }}
+                            </span>
+                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border {{ $roleBadge }} inline-flex items-center gap-1.5 shadow-sm">
+                                {!! $roleIconSvg !!}
+                                <span>{{ $roleLabel }}</span>
+                            </span>
+                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] font-mono font-black text-emerald-700 dark:text-emerald-400">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block mr-1"></span>{{ $demandVal }}% Match
+                            </span>
                         </div>
 
-                        {{-- Title & Description --}}
-                        <div class="space-y-2 flex-1">
-                            <h2 class="text-xl font-black text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug font-display">
+                        {{-- Role Title & Description --}}
+                        <div class="space-y-1">
+                            <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display tracking-tight group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors truncate">
                                 {{ $career->title }}
                             </h2>
-                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-1 leading-relaxed">
                                 {{ $career->description }}
                             </p>
                         </div>
 
-                        {{-- Primary Metric Row --}}
-                        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/5 flex items-center justify-between">
-                            <div>
-                                <span class="block text-[10px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Target Benchmark</span>
-                                <span class="text-sm font-black text-emerald-600 dark:text-emerald-400 font-mono">{{ $career->expected_salary }}</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="block text-[10px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Market Demand</span>
-                                <span class="inline-flex items-center gap-1 text-xs font-black text-indigo-600 dark:text-indigo-400 font-mono">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> {{ $career->market_metrics['demand_score'] ?? '94' }}% High
+                        {{-- Micro-Skill Tags Preview --}}
+                        <div class="flex flex-wrap items-center gap-1.5 pt-1">
+                            @foreach(array_slice($skills, 0, 4) as $sk)
+                                <span class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/5 text-[10px] font-mono font-medium text-slate-600 dark:text-slate-300">
+                                    {{ $sk }}
                                 </span>
-                            </div>
+                            @endforeach
+                            @if(count($skills) > 4)
+                                <span class="text-[10px] font-mono text-slate-400">+{{ count($skills) - 4 }} more</span>
+                            @endif
                         </div>
                     </div>
 
-                    {{-- Card Clean CTA Footer --}}
-                    <div class="px-6 py-4 border-t border-slate-200/80 dark:border-white/[0.07] bg-slate-50/50 dark:bg-white/[0.01]">
-                        <a href="{{ route('careers.show', $career->id) }}" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 dark:bg-indigo-500/15 border border-indigo-500/20 hover:bg-indigo-500/20 transition-all flex items-center justify-center gap-2 group/link">
-                            <span>View Full Roadmap</span>
-                            <i class="fa-solid fa-arrow-right text-[10px] group-hover/link:translate-x-1 transition-transform"></i>
-                        </a>
+                    {{-- Center Telemetry: Benchmark Salary & Demand Sparkline --}}
+                    <div class="flex items-center justify-between lg:justify-end gap-6 sm:gap-8 pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-200/80 dark:border-white/5 shrink-0">
+                        {{-- Salary Benchmark --}}
+                        <div class="text-left lg:text-right">
+                            <span class="block text-[9px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Target Benchmark</span>
+                            <span class="text-base sm:text-lg font-black text-emerald-600 dark:text-emerald-400 font-mono">{{ $career->expected_salary }}</span>
+                        </div>
+
+                        {{-- Abstract Micro-Visualization (Readiness / Demand Gauge) --}}
+                        <div class="hidden sm:block text-right">
+                            <div class="flex items-center justify-end gap-2 mb-1">
+                                <span class="text-[9px] font-mono uppercase font-bold text-slate-500 dark:text-slate-400">Demand Level</span>
+                                <span class="text-xs font-mono font-black text-cyan-600 dark:text-cyan-400">{{ $demandVal }}%</span>
+                            </div>
+                            <div class="w-28 h-2 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden shadow-inner">
+                                <div class="h-full bg-gradient-to-r from-cyan-400 to-indigo-500 rounded-full" style="width: {{ $demandVal }}%;"></div>
+                            </div>
+                        </div>
+
+                        {{-- Right Actions Toolbar --}}
+                        <div class="flex items-center gap-2 shrink-0">
+                            {{-- Compare Button --}}
+                            <button type="button"
+                                    onclick="toggleCompare({{ $cId }}, '{{ $tEsc }}', '{{ $dEsc }}', '{{ $sEsc }}', '{{ $demandVal }}%', '{{ $diffLevel }}', '{{ $skEsc }}', '{{ $urlEsc }}', '{{ $badgeClass }}', '{{ $domIcon }}')"
+                                    id="btn-compare-{{ $cId }}"
+                                    class="compare-toggle-btn px-3 py-2 text-xs font-bold rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 transition-all flex items-center gap-1.5 bg-slate-50 dark:bg-white/[0.04] shadow-sm"
+                                    title="Add to career comparison matrix">
+                                <i class="fa-solid fa-plus text-[10px] icon-state"></i>
+                                <span class="label-state hidden sm:inline">Compare</span>
+                            </button>
+
+                            {{-- Bookmark Button --}}
+                            <button type="button"
+                                    onclick="toggleBookmark(event, {{ $career->id }}, 'career')"
+                                    id="btn-bookmark-{{ $career->id }}"
+                                    data-bookmarked="{{ $isBookmarked ? 'true' : 'false' }}"
+                                    class="w-9 h-9 rounded-xl border transition-all flex items-center justify-center text-xs shrink-0 shadow-sm cursor-pointer {{ $isBookmarked ? 'bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border-cyan-500/40 shadow-sm' : 'border-slate-200 dark:border-white/10 text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 bg-slate-50 dark:bg-white/[0.04]' }}"
+                                    title="{{ $isBookmarked ? 'Saved in Passport Bookmarks' : 'Bookmark this career' }}">
+                                <i class="{{ $isBookmarked ? 'fa-solid text-cyan-600 dark:text-cyan-400' : 'fa-regular' }} fa-bookmark text-xs transition-transform"></i>
+                            </button>
+
+                            {{-- Direct View Path CTA --}}
+                            <a href="{{ route('careers.show', $career->id) }}" class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs font-mono font-bold text-white bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/35 hover:scale-105 transition-all group/link">
+                                <span>View Path</span>
+                                <i class="fa-solid fa-arrow-right text-[10px] group-hover/link:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
+            </div>
         @empty
-            <div class="col-span-full py-16 rounded-3xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/5 text-center space-y-3 shadow-sm">
-                <div class="w-16 h-16 rounded-2xl bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mx-auto mb-2 shadow-sm">
+            <div class="py-16 rounded-3xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/5 text-center space-y-3 shadow-sm">
+                <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-2xl mx-auto mb-2 shadow-sm">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
                 <p class="text-lg font-bold text-slate-900 dark:text-slate-200">No career profiles match your filter.</p>
                 <p class="text-xs text-slate-600 dark:text-slate-500">Try adjusting your search terms or clearing the domain filter.</p>
-                <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-2 mt-2 px-5 py-2.5 rounded-full text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 border border-purple-500/20 hover:border-purple-500/50 transition-all shadow-sm">
+                <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-2 mt-2 px-5 py-2.5 rounded-full text-xs font-bold text-cyan-600 dark:text-cyan-400 bg-white dark:bg-slate-800 border border-cyan-500/20 hover:border-cyan-500/50 transition-all shadow-sm">
                     <i class="fa-solid fa-arrow-rotate-left"></i>
                     <span>Clear All Filters</span>
                 </a>
