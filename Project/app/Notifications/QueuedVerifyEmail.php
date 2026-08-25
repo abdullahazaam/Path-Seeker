@@ -3,10 +3,8 @@
 namespace App\Notifications;
 
 use Illuminate\Auth\Notifications\VerifyEmail;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class QueuedVerifyEmail extends VerifyEmail implements ShouldQueue
+class QueuedVerifyEmail extends VerifyEmail
 {
-    use Queueable;
+    // Synchronous dispatch for immediate delivery
 }
