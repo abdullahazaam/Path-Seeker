@@ -49,6 +49,57 @@
             </div>
         @endif
 
+        {{-- ═══════════════ VERTICAL STORYTELLING TIMELINE BREAKDOWN ═══════════════ --}}
+        <div class="p-6 sm:p-7 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/10 space-y-4">
+            <div class="text-xs font-bold text-purple-600 dark:text-purple-400 font-mono uppercase tracking-wider flex items-center gap-2">
+                <i class="fa-solid fa-route text-xs"></i>
+                <span>Trajectory &amp; Milestone Timeline</span>
+            </div>
+
+            <div class="relative pl-6 space-y-4 border-l-2 border-dashed border-slate-200 dark:border-white/10 ml-2 my-2">
+                
+                {{-- Step 1: Educational Path --}}
+                <div class="relative">
+                    <span class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-indigo-500 border-2 border-white dark:border-[#080B12] flex items-center justify-center text-[8px] text-white shadow-sm">
+                        <i class="fa-solid fa-graduation-cap text-[7px]"></i>
+                    </span>
+                    <div class="text-[10px] font-mono font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                        1. Educational Path &amp; Foundational Prep
+                    </div>
+                    <div class="text-sm text-slate-800 dark:text-slate-200 font-medium mt-0.5">
+                        {{ $story->educational_path ?? 'Foundational Computer Science & Specialized Self-Paced Track' }}
+                    </div>
+                </div>
+
+                {{-- Step 2: Challenges & Obstacles --}}
+                <div class="relative">
+                    <span class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-amber-500 border-2 border-white dark:border-[#080B12] flex items-center justify-center text-[8px] text-white shadow-sm">
+                        <i class="fa-solid fa-bolt text-[7px]"></i>
+                    </span>
+                    <div class="text-[10px] font-mono font-black text-amber-600 dark:text-amber-400 uppercase tracking-wider">
+                        2. Key Obstacles &amp; Challenges Overcome
+                    </div>
+                    <div class="text-sm text-slate-800 dark:text-slate-200 font-medium mt-0.5">
+                        {{ $story->challenges ?? 'Overcoming imposter syndrome, portfolio building, and technical interview screening' }}
+                    </div>
+                </div>
+
+                {{-- Step 3: Outcome & Achievement --}}
+                <div class="relative">
+                    <span class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white dark:border-[#080B12] flex items-center justify-center text-[8px] text-white shadow-sm">
+                        <i class="fa-solid fa-trophy text-[7px]"></i>
+                    </span>
+                    <div class="text-[10px] font-mono font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                        3. Final Outcome &amp; Career Leap
+                    </div>
+                    <div class="text-sm text-emerald-700 dark:text-emerald-300 font-bold mt-0.5">
+                        {{ $story->outcome ?? 'Accelerated career breakthrough into a high-yield technology role' }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <div class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300 whitespace-pre-line border-t border-slate-200/80 dark:border-white/10 pt-6">
             {{ $story->story_text }}
         </div>

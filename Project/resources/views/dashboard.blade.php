@@ -1152,6 +1152,17 @@
                 <i class="fa-solid fa-comments text-xs"></i>
                 <span>Feedback Inbox ({{ count($allFeedbacks ?? []) }})</span>
             </button>
+            <button @click="currentTab = 'stories'"
+                    :class="currentTab === 'stories' ? 'bg-pink-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5'"
+                    class="px-5 py-2.5 rounded-xl font-bold text-xs transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer">
+                <i class="fa-solid fa-feather-pointed text-xs"></i>
+                <span>Stories Review ({{ count($allStories ?? []) }})</span>
+                @if(count($pendingStories ?? []) > 0)
+                    <span class="px-1.5 py-0.5 rounded-full text-[9px] font-black bg-white text-pink-600 shadow-sm animate-pulse">
+                        {{ count($pendingStories) }} Pending
+                    </span>
+                @endif
+            </button>
         </div>
 
         {{-- ══════════════════ TAB 1: USER MANAGEMENT ══════════════════ --}}
@@ -1533,6 +1544,126 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        {{-- ══════════════════ TAB 6: SUCCESS STORIES MODERATION ══════════════════ --}}
+        <div x-show="currentTab === 'stories'" class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">Success Stories Moderation &amp; Approval</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Review user-submitted breakthrough stories, inspect educational milestones, and approve or reject submissions</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-pink-500/15 text-pink-700 dark:text-pink-300 border border-pink-500/25">
+                        Pending: {{ count($pendingStories ?? []) }}
+                    </span>
+                    <a href="{{ route('stories.index') }}" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition-all">
+                        <span>View Public Hub</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                @forelse($allStories ?? [] as $st)
+                    <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/10 space-y-4 hover:border-purple-500/30 transition-all">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-pink-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                                    {{ substr($st->author?->name ?? 'P', 0, 1) }}
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 dark:text-white text-sm font-display">{{ $st->title }}</h4>
+                                    <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-2">
+                                        <span>By {{ $st->author?->name ?? 'Scholar' }} ({{ $st->author?->email ?? 'N/A' }})</span>
+                                        <span>&bull;</span>
+                                        <span>{{ $st->created_at ? $st->created_at->format('M d, Y') : '' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 shrink-0">
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25">
+                                    {{ $st->domain }}
+                                </span>
+                                @php
+                                    $stBadge = match($st->status) {
+                                        'approved' => 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/25',
+                                        'rejected' => 'bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-500/25',
+                                        default => 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/25'
+                                    };
+                                @endphp
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase border {{ $stBadge }}">
+                                    {{ $st->status }}
+                                </span>
+                            </div>
+                        </div>
+
+                        {{-- Timeline Milestone Summary --}}
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/5 text-xs">
+                            <div class="space-y-0.5">
+                                <span class="text-[9px] font-mono font-bold text-indigo-600 dark:text-indigo-400 uppercase">1. Educational Path</span>
+                                <p class="text-[11px] text-slate-700 dark:text-slate-300 line-clamp-2">{{ $st->educational_path ?? 'N/A' }}</p>
+                            </div>
+                            <div class="space-y-0.5">
+                                <span class="text-[9px] font-mono font-bold text-amber-600 dark:text-amber-400 uppercase">2. Challenges</span>
+                                <p class="text-[11px] text-slate-700 dark:text-slate-300 line-clamp-2">{{ $st->challenges ?? 'N/A' }}</p>
+                            </div>
+                            <div class="space-y-0.5">
+                                <span class="text-[9px] font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase">3. Outcome</span>
+                                <p class="text-[11px] text-slate-700 dark:text-slate-300 line-clamp-2">{{ $st->outcome ?? 'N/A' }}</p>
+                            </div>
+                        </div>
+
+                        {{-- Story Excerpt --}}
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed italic line-clamp-2">
+                            &ldquo;{{ $st->story_text }}&rdquo;
+                        </p>
+
+                        {{-- Actions Row --}}
+                        <div class="pt-3 border-t border-slate-200 dark:border-white/10 flex flex-wrap items-center justify-between gap-3">
+                            <a href="{{ route('stories.show', $st->id) }}" target="_blank" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline inline-flex items-center gap-1">
+                                <span>Preview Full Story</span>
+                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                            </a>
+
+                            <div class="flex items-center gap-2">
+                                @if($st->status !== 'approved')
+                                    <form action="{{ route('admin.stories.moderate', $st->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        <input type="hidden" name="status" value="approved">
+                                        <button type="submit" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-sm transition-all flex items-center gap-1.5 cursor-pointer">
+                                            <i class="fa-solid fa-circle-check text-xs"></i>
+                                            <span>Approve</span>
+                                        </button>
+                                    </form>
+                                @endif
+
+                                @if($st->status !== 'rejected')
+                                    <form action="{{ route('admin.stories.moderate', $st->id) }}" method="POST" class="inline-flex items-center gap-1.5">
+                                        @csrf
+                                        <input type="hidden" name="status" value="rejected">
+                                        <input type="text" name="reason" placeholder="Rejection reason..." required class="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-xs text-slate-900 dark:text-white">
+                                        <button type="submit" class="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold shadow-sm transition-all flex items-center gap-1 cursor-pointer">
+                                            <i class="fa-solid fa-circle-xmark text-xs"></i>
+                                            <span>Reject</span>
+                                        </button>
+                                    </form>
+                                @endif
+
+                                <form action="{{ route('stories.destroy', $st->id) }}" method="POST" onsubmit="return confirm('Delete this success story permanently?');" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="px-2.5 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500 text-rose-600 hover:text-white border border-rose-500/20 text-xs font-bold transition-all cursor-pointer" title="Delete Story">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="py-12 text-center text-slate-400 text-xs">No success stories in database yet.</div>
+                @endforelse
             </div>
         </div>
 

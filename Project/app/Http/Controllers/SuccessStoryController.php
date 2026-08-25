@@ -44,11 +44,17 @@ class SuccessStoryController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'domain' => 'required|string|max:255',
+            'educational_path' => 'nullable|string|max:1000',
+            'challenges' => 'nullable|string|max:1000',
+            'outcome' => 'nullable|string|max:1000',
+            'timeline_path' => 'nullable|string|max:1000',
             'story_text' => 'required|string|min:20',
             'image_url' => 'nullable|url',
         ]);
 
-        $validated['submitted_by'] = Auth::id();
+        $userId = Auth::id();
+        $validated['submitted_by'] = $userId;
+        $validated['user_id'] = $userId;
         $validated['status'] = SuccessStory::STATUS_PENDING;
 
         $story = SuccessStory::create($validated);

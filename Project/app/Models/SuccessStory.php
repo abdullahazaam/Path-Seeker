@@ -10,6 +10,7 @@ class SuccessStory extends Model
 {
     public const STATUS_DRAFT = 'draft';
     public const STATUS_PENDING = 'pending_review';
+    public const STATUS_PENDING_ALT = 'pending';
     public const STATUS_APPROVED = 'approved';
     public const STATUS_REJECTED = 'rejected';
     public const STATUS_ARCHIVED = 'archived';
@@ -17,6 +18,7 @@ class SuccessStory extends Model
     public const ALLOWED_STATUSES = [
         self::STATUS_DRAFT,
         self::STATUS_PENDING,
+        self::STATUS_PENDING_ALT,
         self::STATUS_APPROVED,
         self::STATUS_REJECTED,
         self::STATUS_ARCHIVED,
@@ -26,7 +28,12 @@ class SuccessStory extends Model
         'title',
         'domain',
         'story_text',
+        'timeline_path',
+        'educational_path',
+        'challenges',
+        'outcome',
         'image_url',
+        'user_id',
         'submitted_by',
         'status',
         'reviewer_id',
@@ -40,12 +47,12 @@ class SuccessStory extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'submitted_by');
+        return $this->belongsTo(User::class, 'submitted_by') ?: $this->belongsTo(User::class, 'user_id');
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'submitted_by');
+        return $this->belongsTo(User::class, 'user_id') ?: $this->belongsTo(User::class, 'submitted_by');
     }
 
     public function reviewer(): BelongsTo
@@ -60,7 +67,7 @@ class SuccessStory extends Model
 
     public function scopePending($query)
     {
-        return $query->where('status', self::STATUS_PENDING);
+        return $query->whereIn('status', [self::STATUS_PENDING, self::STATUS_PENDING_ALT]);
     }
 
     /**
@@ -79,7 +86,8 @@ class SuccessStory extends Model
         }
 
         // 1. Protection: An author must NEVER moderate (approve, reject, or archive) their own story
-        if ($this->submitted_by && $actor && $actor->id === $this->submitted_by) {
+        $authorId = $this->submitted_by ?: $this->user_id;
+        if ($authorId && $actor && $actor->id === $authorId) {
             if (in_array($newStatus, [self::STATUS_APPROVED, self::STATUS_REJECTED, self::STATUS_ARCHIVED], true)) {
                 throw new DomainException("Security Violation: Authors are prohibited from moderating their own success stories.");
             }
@@ -89,15 +97,16 @@ class SuccessStory extends Model
         $valid = false;
         switch ($currentStatus) {
             case self::STATUS_DRAFT:
-                $valid = ($newStatus === self::STATUS_PENDING);
+                $valid = in_array($newStatus, [self::STATUS_PENDING, self::STATUS_PENDING_ALT], true);
                 break;
 
             case self::STATUS_PENDING:
+            case self::STATUS_PENDING_ALT:
                 $valid = in_array($newStatus, [self::STATUS_APPROVED, self::STATUS_REJECTED, self::STATUS_DRAFT], true);
                 break;
 
             case self::STATUS_REJECTED:
-                $valid = in_array($newStatus, [self::STATUS_DRAFT, self::STATUS_PENDING], true);
+                $valid = in_array($newStatus, [self::STATUS_DRAFT, self::STATUS_PENDING, self::STATUS_PENDING_ALT], true);
                 break;
 
             case self::STATUS_APPROVED:

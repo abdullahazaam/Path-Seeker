@@ -78,6 +78,8 @@ class DashboardController extends Controller
         $allResources = Resource::latest()->get();
         $allFeedbacks = Feedback::with(['user', 'responder'])->latest()->get();
         $userFeedbacks = Feedback::where('user_id', $user?->id)->with('responder')->latest()->get();
+        $allStories = SuccessStory::with(['author', 'user'])->latest()->get();
+        $pendingStories = SuccessStory::with(['author', 'user'])->whereIn('status', ['pending', 'pending_review', 'draft'])->latest()->get();
 
         return view('dashboard', compact(
             'user',
@@ -98,7 +100,9 @@ class DashboardController extends Controller
             'allMultimedia',
             'allResources',
             'allFeedbacks',
-            'userFeedbacks'
+            'userFeedbacks',
+            'allStories',
+            'pendingStories'
         ));
     }
 }
