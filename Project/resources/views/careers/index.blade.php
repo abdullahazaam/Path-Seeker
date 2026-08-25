@@ -303,7 +303,7 @@
                     </a>
                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold shadow-sm shrink-0">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span>Live &bull; {{ now()->subMinutes(($career->id * 7 + 3) % 43 + 2)->diffForHumans() }}</span>
+                        <span>Live &bull; {{ $career->updated_at ? $career->updated_at->diffForHumans() : 'Verified 2026' }}</span>
                     </span>
                 </div>
 

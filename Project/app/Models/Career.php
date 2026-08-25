@@ -118,10 +118,10 @@ class Career extends Model
 
         $trajectoryData = [
             round($base2021, 1),
-            round($base2021 + ($historyStep * 1) + (rand(-10, 10) / 10), 1),
-            round($base2021 + ($historyStep * 2) + (rand(-10, 10) / 10), 1),
-            round($base2021 + ($historyStep * 3) + (rand(-10, 10) / 10), 1),
-            round($base2021 + ($historyStep * 4) + (rand(-10, 10) / 10), 1),
+            round($base2021 + ($historyStep * 1), 1),
+            round($base2021 + ($historyStep * 2), 1),
+            round($base2021 + ($historyStep * 3), 1),
+            round($base2021 + ($historyStep * 4), 1),
             round($demand, 1), // 2026 current
             round($demand * (1 + $futureAnnualGrowth * 1), 1),
             round($demand * (1 + $futureAnnualGrowth * 2), 1),

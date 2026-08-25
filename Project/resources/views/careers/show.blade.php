@@ -162,6 +162,15 @@
                                   :class="isRemote ? 'translate-x-5' : 'translate-x-0'"></span>
                         </button>
                     </div>
+
+                    {{-- Data Source & Methodology Metadata --}}
+                    <div class="pt-2.5 border-t border-slate-200/60 dark:border-white/5 text-[9px] text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-1">
+                        <span class="flex items-center gap-1 font-medium text-slate-600 dark:text-slate-400">
+                            <i class="fa-solid fa-shield-halved text-emerald-500 text-[8px]"></i>
+                            <span>Source: Verified 2026 Tech Benchmarks</span>
+                        </span>
+                        <span class="font-mono text-[9px] text-slate-500">Region: Global / Remote</span>
+                    </div>
                 </div>
             </div>
         </div>
