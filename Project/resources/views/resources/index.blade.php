@@ -331,12 +331,21 @@
 
             {{-- Modal Document Preview Frame --}}
             <div class="relative z-10 p-4 sm:p-6 flex-1 overflow-y-auto space-y-4">
-                <div class="w-full h-80 sm:h-[450px] rounded-2xl bg-slate-950 border border-slate-200 dark:border-white/10 overflow-hidden relative shadow-inner">
+                <div class="w-full h-80 sm:h-[480px] rounded-2xl bg-slate-950 border border-slate-200 dark:border-white/10 overflow-hidden relative shadow-inner">
                     <template x-if="activeResource">
-                        <iframe :src="activeResource.file_url + '#toolbar=0'"
-                                class="w-full h-full border-0"
-                                :title="activeResource.title"
-                                loading="lazy"></iframe>
+                        <object :data="activeResource.file_url + '#toolbar=0&view=FitH'" 
+                                type="application/pdf" 
+                                class="w-full h-full border-0">
+                            <iframe :src="activeResource.file_url + '#toolbar=0'"
+                                    class="w-full h-full border-0"
+                                    :title="activeResource.title"
+                                    loading="lazy">
+                                <div class="p-8 text-center space-y-3">
+                                    <p class="text-sm text-slate-300">Your browser does not support in-line PDF previews.</p>
+                                    <a :href="activeResource.download_url" class="btn-sweep px-5 py-2 rounded-xl text-xs text-white">Download PDF</a>
+                                </div>
+                            </iframe>
+                        </object>
                     </template>
                 </div>
 

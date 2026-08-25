@@ -2282,8 +2282,12 @@
                         <input type="text" name="category" required placeholder="e.g., Resume Template, System Design, Cheat Sheet" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Download / Direct File URL</label>
-                        <input type="url" name="file_url" required placeholder="https://..." class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Upload Topic PDF Document (.pdf)</label>
+                        <input type="file" name="pdf_file" accept="application/pdf,.pdf" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Or Direct File URL (Optional if PDF uploaded)</label>
+                        <input type="text" name="file_url" placeholder="/storage/resources/pdfs/... or https://..." class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Thumbnail / Preview Image URL</label>
@@ -2328,8 +2332,12 @@
                         <input type="text" name="category" x-model="editResource.category" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Download / Direct File URL</label>
-                        <input type="url" name="file_url" x-model="editResource.file_url" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Upload New Topic PDF (.pdf)</label>
+                        <input type="file" name="pdf_file" accept="application/pdf,.pdf" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Direct File URL</label>
+                        <input type="text" name="file_url" x-model="editResource.file_url" placeholder="/storage/resources/pdfs/... or https://..." class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Thumbnail / Preview Image URL</label>

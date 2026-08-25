@@ -194,10 +194,23 @@ class AdminController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'file_url' => 'required|url',
+            'file_url' => 'nullable|string|max:500',
+            'pdf_file' => 'nullable|file|mimes:pdf|max:20480',
             'thumbnail_url' => 'nullable|string',
             'thumbnail_file' => 'nullable|image|max:5120',
+            'description' => 'nullable|string',
         ]);
+
+        if ($request->hasFile('pdf_file')) {
+            $pdf = $request->file('pdf_file');
+            $pdfFilename = 'resource_pdf_' . time() . '_' . uniqid() . '.pdf';
+            $pdf->move(public_path('storage/resources/pdfs'), $pdfFilename);
+            $validated['file_url'] = '/storage/resources/pdfs/' . $pdfFilename;
+        }
+
+        if (empty($validated['file_url'])) {
+            $validated['file_url'] = '/storage/resources/pdfs/tech-resume-portfolio-ats-template.pdf';
+        }
 
         if ($request->hasFile('thumbnail_file')) {
             $file = $request->file('thumbnail_file');
@@ -206,7 +219,7 @@ class AdminController extends Controller
             $validated['thumbnail_url'] = '/uploads/resources/' . $filename;
         }
 
-        unset($validated['thumbnail_file']);
+        unset($validated['thumbnail_file'], $validated['pdf_file']);
 
         $res = Resource::create($validated);
 
@@ -223,11 +236,25 @@ class AdminController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'file_url' => 'required|url',
+            'file_url' => 'nullable|string|max:500',
+            'pdf_file' => 'nullable|file|mimes:pdf|max:20480',
             'thumbnail_url' => 'nullable|string',
             'description' => 'nullable|string',
             'thumbnail_file' => 'nullable|image|max:5120',
         ]);
+
+        if ($request->hasFile('pdf_file')) {
+            $pdf = $request->file('pdf_file');
+            $pdfFilename = 'resource_pdf_' . time() . '_' . uniqid() . '.pdf';
+            $pdf->move(public_path('storage/resources/pdfs'), $pdfFilename);
+            $validated['file_url'] = '/storage/resources/pdfs/' . $pdfFilename;
+        }
+
+        if (empty($validated['file_url']) && empty($res->file_url)) {
+            $validated['file_url'] = '/storage/resources/pdfs/tech-resume-portfolio-ats-template.pdf';
+        } elseif (empty($validated['file_url'])) {
+            $validated['file_url'] = $res->file_url;
+        }
 
         if ($request->hasFile('thumbnail_file')) {
             $file = $request->file('thumbnail_file');
@@ -236,7 +263,7 @@ class AdminController extends Controller
             $validated['thumbnail_url'] = '/uploads/resources/' . $filename;
         }
 
-        unset($validated['thumbnail_file']);
+        unset($validated['thumbnail_file'], $validated['pdf_file']);
 
         $res->update($validated);
 

@@ -67,8 +67,40 @@ class ResourceController extends Controller
             return redirect()->route('login')->with('error', 'Authentication required to download this specialized toolkit.');
         }
 
-        // 2. Strict Allowlisted URL destination verification (Open Redirect prevention)
+        // 2. Local File vs Allowlisted External URL
         $url = $resource->file_url;
+        $localRelative = ltrim($url, '/');
+        $publicPath = public_path($localRelative);
+        $storagePath = storage_path('app/public/' . preg_replace('#^storage/#', '', $localRelative));
+
+        // Check if file exists locally in public storage
+        if (file_exists($publicPath) && is_file($publicPath)) {
+            $resource->increment('download_count');
+            if (Auth::check()) {
+                RecentlyViewed::updateOrCreate(
+                    ['user_id' => Auth::id(), 'viewable_type' => 'resource', 'viewable_id' => $resource->id],
+                    ['viewed_at' => now()]
+                );
+            }
+            return response()->download($publicPath, basename($publicPath), [
+                'Content-Type' => 'application/pdf',
+            ]);
+        }
+
+        if (file_exists($storagePath) && is_file($storagePath)) {
+            $resource->increment('download_count');
+            if (Auth::check()) {
+                RecentlyViewed::updateOrCreate(
+                    ['user_id' => Auth::id(), 'viewable_type' => 'resource', 'viewable_id' => $resource->id],
+                    ['viewed_at' => now()]
+                );
+            }
+            return response()->download($storagePath, basename($storagePath), [
+                'Content-Type' => 'application/pdf',
+            ]);
+        }
+
+        // Strict Allowlisted URL destination verification (Open Redirect prevention)
         $parsedUrl = parse_url($url);
         $host = strtolower($parsedUrl['host'] ?? '');
 
@@ -84,7 +116,7 @@ class ResourceController extends Controller
             abort(403, 'Download destination rejected by security policy.');
         }
 
-        // 3. Increment download telemetry
+        // Increment download telemetry
         $resource->increment('download_count');
 
         if (Auth::check()) {

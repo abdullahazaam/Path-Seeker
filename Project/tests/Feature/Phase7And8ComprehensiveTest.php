@@ -95,22 +95,46 @@ class Phase7And8ComprehensiveTest extends TestCase
         $resource = Resource::create([
             'title' => '2026 AWS Cloud Blueprint',
             'category' => 'Resume Blueprints',
-            'file_url' => 'https://raw.githubusercontent.com/pathseeker/blueprints/main/aws-cloud.pdf',
+            'file_url' => '/storage/resources/pdfs/aws-solutions-architect-cheatsheet.pdf',
             'is_premium' => false,
             'download_count' => 0,
         ]);
 
-        // Preview Endpoint
+        // 1. Preview Metadata Endpoint
         $previewRes = $this->get(route('resources.preview', $resource->id));
         $previewRes->assertStatus(200);
         $previewRes->assertJsonFragment(['title' => '2026 AWS Cloud Blueprint']);
 
-        // Safe Download
+        // 2. Safe Local Storage PDF Download
         $downloadRes = $this->get(route('resources.download', $resource->id));
-        $downloadRes->assertRedirect('https://raw.githubusercontent.com/pathseeker/blueprints/main/aws-cloud.pdf');
+        $downloadRes->assertStatus(200);
+        $downloadRes->assertHeader('content-type', 'application/pdf');
 
         $resource->refresh();
         $this->assertEquals(1, $resource->download_count);
+
+        // 3. Admin PDF Upload Test
+        $admin = User::where('role', 'admin')->first() ?? User::create([
+            'name' => 'Admin User',
+            'email' => 'admin_test@pathseeker.com',
+            'password' => bcrypt('password123'),
+            'role' => 'admin',
+            'email_verified_at' => now(),
+        ]);
+
+        $pdfFile = \Illuminate\Http\UploadedFile::fake()->create('custom_guide.pdf', 100, 'application/pdf');
+
+        $uploadRes = $this->actingAs($admin)->post('/admin/resources', [
+            'title' => 'Custom Uploaded Guide',
+            'category' => 'Custom Guides',
+            'pdf_file' => $pdfFile,
+        ]);
+
+        $uploadRes->assertRedirect('/dashboard?tab=resources');
+        $this->assertDatabaseHas('resources', [
+            'title' => 'Custom Uploaded Guide',
+            'category' => 'Custom Guides',
+        ]);
     }
 
     public function test_bookmark_crud_and_private_notes(): void
