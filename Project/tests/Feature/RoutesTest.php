@@ -272,4 +272,54 @@ class RoutesTest extends TestCase
         $authRes->assertSee($student->name);
         $authRes->assertSee('Verified ID');
     }
+
+    public function test_visual_sitemap_loads_successfully(): void
+    {
+        $response = $this->get('/sitemap');
+        $response->assertStatus(200);
+        $response->assertSee('Visual Platform');
+        $response->assertSee('Platform Navigation Blueprint');
+        $response->assertSee('Software Engineering');
+    }
+
+    public function test_user_can_upload_and_download_resume(): void
+    {
+        \Illuminate\Support\Facades\Storage::fake('public');
+
+        $student = User::where('email', 'student@pathseeker.com')->first();
+        $file = \Illuminate\Http\UploadedFile::fake()->create('alex_rivera_resume.pdf', 150, 'application/pdf');
+
+        $res = $this->actingAs($student)->put('/profile', [
+            'name' => 'Alex Rivera',
+            'email' => 'student@pathseeker.com',
+            'resume' => $file,
+        ]);
+
+        $res->assertRedirect('/profile');
+        $res->assertSessionHas('success');
+
+        $student->refresh();
+        $this->assertNotNull($student->profile->resume_path);
+        $this->assertEquals('alex_rivera_resume.pdf', $student->profile->resume_filename);
+
+        // Test download endpoint
+        $downloadRes = $this->actingAs($student)->get('/profile/resume/download');
+        $downloadRes->assertStatus(200);
+    }
+
+    public function test_dashboard_renders_recently_viewed_and_suggestion_engine(): void
+    {
+        $student = User::where('email', 'student@pathseeker.com')->first();
+        $career = Career::first();
+
+        // 1. Visit career detail to register recently viewed
+        $this->actingAs($student)->get('/careers/' . $career->id);
+
+        // 2. Open dashboard
+        $res = $this->actingAs($student)->get('/dashboard');
+        $res->assertStatus(200);
+        $res->assertSee('Recently Viewed Careers');
+        $res->assertSee('Because you liked');
+        $res->assertSee($career->title);
+    }
 }

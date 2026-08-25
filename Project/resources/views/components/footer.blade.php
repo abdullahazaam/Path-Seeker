@@ -86,7 +86,7 @@
                     <li><a href="{{ route('feedback.index') }}" class="hover:text-indigo-400 transition-colors">User Feedback</a></li>
                     <li><a href="{{ route('stories.index') }}" class="hover:text-indigo-400 transition-colors">Share Your Story</a></li>
                     <li><a href="{{ route('resources.index') }}" class="hover:text-indigo-400 transition-colors">Resource Library</a></li>
-                    <li><a href="{{ route('sitemap') }}" target="_blank" class="hover:text-indigo-400 transition-colors">Sitemap Directory</a></li>
+                    <li><a href="{{ route('sitemap.visual') }}" class="hover:text-indigo-400 transition-colors">Visual Sitemap</a></li>
                 </ul>
             </div>
 

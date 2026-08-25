@@ -51,7 +51,7 @@
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Update your personal account credentials and career preferences.</p>
         </div>
 
-        <form action="{{ route('profile.update') }}" method="POST" class="space-y-6">
+        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
             @method('PUT')
 
@@ -85,6 +85,50 @@
                     <label for="interests" class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase font-mono mb-1.5">Primary Focus / Specializations</label>
                     <input type="text" name="interests" id="interests" value="{{ old('interests', $profile->interests) }}" placeholder="e.g. AI Architecture, Full-Stack Development, Cloud Ops" class="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500">
                 </div>
+            </div>
+
+            {{-- Resume Document Upload & Download Section --}}
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div class="space-y-1">
+                        <label for="resume" class="block text-xs font-bold text-slate-900 dark:text-white font-display uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-file-arrow-up text-indigo-500"></i>
+                            <span>Career Resume &amp; CV (PDF, DOCX)</span>
+                        </label>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400">
+                            Upload your updated resume for talent matching and toolkit evaluation (Max 10MB).
+                        </p>
+                    </div>
+
+                    @if(!empty($profile->resume_path))
+                        <a href="{{ route('profile.resume.download') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all shrink-0">
+                            <i class="fa-solid fa-cloud-arrow-down text-xs"></i>
+                            <span>Download Resume</span>
+                        </a>
+                    @endif
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <input type="file" 
+                           name="resume" 
+                           id="resume" 
+                           accept=".pdf,.docx,.doc"
+                           class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-xs text-slate-700 dark:text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-indigo-500/15 file:text-indigo-600 dark:file:text-indigo-300 hover:file:bg-indigo-500/25 cursor-pointer">
+                </div>
+
+                @if(!empty($profile->resume_path))
+                    <div class="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                        <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                        <span>Current file: <strong>{{ $profile->resume_filename ?? 'resume.pdf' }}</strong></span>
+                        @if($profile->resume_updated_at)
+                            <span class="text-slate-400 dark:text-slate-600">&bull; Uploaded {{ \Carbon\Carbon::parse($profile->resume_updated_at)->diffForHumans() }}</span>
+                        @endif
+                    </div>
+                @endif
+
+                @error('resume')
+                    <p class="text-rose-500 text-xs font-mono">{{ $message }}</p>
+                @enderror
             </div>
 
             {{-- Security & Password Change Section --}}

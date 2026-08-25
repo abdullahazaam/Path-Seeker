@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Career;
+use App\Models\RecentlyViewed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CareerController extends Controller
 {
@@ -160,6 +162,32 @@ class CareerController extends Controller
     public function show(string $id)
     {
         $career = Career::findOrFail($id);
+
+        // 1. Session tracking (for instant guest and user persistence)
+        $recent = session()->get('recently_viewed_careers', []);
+        $recent = array_values(array_diff($recent, [$career->id]));
+        array_unshift($recent, $career->id);
+        $recent = array_slice($recent, 0, 10);
+        session()->put('recently_viewed_careers', $recent);
+
+        // 2. Database tracking for authenticated users
+        if (Auth::check()) {
+            try {
+                RecentlyViewed::updateOrCreate(
+                    [
+                        'user_id' => Auth::id(),
+                        'viewable_type' => Career::class,
+                        'viewable_id' => $career->id,
+                    ],
+                    [
+                        'viewed_at' => now(),
+                    ]
+                );
+            } catch (\Throwable $e) {
+                // Fail-safe
+            }
+        }
+
         return view('careers.show', compact('career'));
     }
 

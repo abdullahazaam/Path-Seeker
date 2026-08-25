@@ -11,6 +11,9 @@ class UserProfile extends Model
         'education_level',
         'interests',
         'profile_image',
+        'resume_path',
+        'resume_filename',
+        'resume_updated_at',
     ];
 
     public function user()

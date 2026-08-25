@@ -81,6 +81,67 @@ class DashboardController extends Controller
         $allStories = SuccessStory::with(['author', 'user'])->latest()->get();
         $pendingStories = SuccessStory::with(['author', 'user'])->whereIn('status', ['pending', 'pending_review', 'draft'])->latest()->get();
 
+        // 1. Dynamic System Intelligence: Recently Viewed Careers (DB & Session)
+        $recentlyViewedIds = [];
+        if ($user) {
+            $recentlyViewedIds = \App\Models\RecentlyViewed::where('user_id', $user->id)
+                ->where('viewable_type', Career::class)
+                ->orderByDesc('viewed_at')
+                ->take(6)
+                ->pluck('viewable_id')
+                ->toArray();
+        }
+        if (empty($recentlyViewedIds)) {
+            $recentlyViewedIds = session()->get('recently_viewed_careers', []);
+        }
+
+        $recentlyViewedCareers = collect();
+        if (!empty($recentlyViewedIds)) {
+            $careersMap = Career::whereIn('id', $recentlyViewedIds)->get()->keyBy('id');
+            foreach ($recentlyViewedIds as $rId) {
+                if (isset($careersMap[$rId])) {
+                    $recentlyViewedCareers->push($careersMap[$rId]);
+                }
+            }
+        }
+
+        // 2. Dynamic Suggestion Engine ("Because you liked X...")
+        $bookmarkedCareerId = $bookmarks->firstWhere('item_type', 'career')?->item_id;
+        $anchorCareer = null;
+        if ($bookmarkedCareerId) {
+            $anchorCareer = Career::find($bookmarkedCareerId);
+        }
+        if (!$anchorCareer && $recentlyViewedCareers->isNotEmpty()) {
+            $anchorCareer = $recentlyViewedCareers->first();
+        }
+        if (!$anchorCareer) {
+            $anchorCareer = Career::where('domain', $rolePersonalization['recommended_domain'])->first() ?? Career::first();
+        }
+
+        $suggestedCareers = collect();
+        if ($anchorCareer) {
+            $excludeIds = array_filter(array_merge([$anchorCareer->id], $bookmarks->where('item_type', 'career')->pluck('item_id')->toArray()));
+            
+            $skills = array_filter(array_map('trim', explode(',', $anchorCareer->required_skills ?? '')));
+            
+            $query = Career::whereNotIn('id', $excludeIds);
+            $query->where(function($q) use ($anchorCareer, $skills) {
+                $q->where('domain', $anchorCareer->domain);
+                foreach (array_slice($skills, 0, 3) as $skill) {
+                    $q->orWhere('required_skills', 'like', "%{$skill}%");
+                }
+            });
+            
+            $suggestedCareers = $query->take(3)->get();
+            
+            if ($suggestedCareers->count() < 3) {
+                $extra = Career::whereNotIn('id', array_merge($excludeIds, $suggestedCareers->pluck('id')->toArray()))
+                    ->take(3 - $suggestedCareers->count())
+                    ->get();
+                $suggestedCareers = $suggestedCareers->concat($extra);
+            }
+        }
+
         return view('dashboard', compact(
             'user',
             'userRole',
@@ -102,7 +163,10 @@ class DashboardController extends Controller
             'allFeedbacks',
             'userFeedbacks',
             'allStories',
-            'pendingStories'
+            'pendingStories',
+            'recentlyViewedCareers',
+            'anchorCareer',
+            'suggestedCareers'
         ));
     }
 }

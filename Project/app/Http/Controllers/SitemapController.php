@@ -90,4 +90,22 @@ class SitemapController extends Controller
             'Content-Type' => 'application/xml; charset=UTF-8',
         ]);
     }
+
+    /**
+     * Render the dedicated visual hierarchical sitemap page.
+     */
+    public function visual()
+    {
+        $careers = Career::select('id', 'title', 'domain', 'expected_salary', 'target_role')
+            ->orderBy('domain')
+            ->get();
+            
+        $domains = $careers->groupBy('domain');
+        
+        $multimediaCount = Multimedia::count();
+        $resourcesCount = \App\Models\Resource::count();
+        $storiesCount = \App\Models\SuccessStory::where('status', 'approved')->count();
+
+        return view('sitemap', compact('careers', 'domains', 'multimediaCount', 'resourcesCount', 'storiesCount'));
+    }
 }

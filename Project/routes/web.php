@@ -129,8 +129,9 @@ Route::get('/quiz/results/{id}', [QuizController::class, 'results'])->name('quiz
 
 use App\Http\Controllers\SitemapController;
 
-// Dynamic Technical SEO XML Sitemap
+// Dynamic Technical SEO XML Sitemap & Mandatory Visual Platform Sitemap
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/sitemap', [SitemapController::class, 'visual'])->name('sitemap.visual');
 
 use App\Http\Controllers\ChatController;
 
@@ -192,9 +193,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/multimedia/{id}/progress', [MultimediaController::class, 'saveProgress'])->name('multimedia.progress');
     Route::post('/resources/{id}/rate', [ResourceController::class, 'rate'])->name('resources.rate');
 
-    // User Profile & Account Settings
+    // User Profile & Account Settings & Resume Download
     Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [UserProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile/resume/download', [UserProfileController::class, 'downloadResume'])->name('profile.resume.download');
 
     // Feedback History & Conversation Thread for Auth User
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
