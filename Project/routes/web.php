@@ -52,18 +52,31 @@ use App\Http\Controllers\ChatController;
 // Real-Time AI Career Guide Chatbot Endpoint
 Route::post('/chat/message', [ChatController::class, 'sendMessage'])->name('chat.message');
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\NewsletterController;
 
-// Protected User Dashboard
+// Newsletter Subscription & Unsubscribe
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe')->middleware('throttle:10,1');
+Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
+
+// Protected User Features
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Admin-Only Master Control Operations & Resource Mutations
+    // Feedback Submission & History
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
+    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store')->middleware('throttle:6,1');
+
+    // Story Submission by User
+    Route::post('/stories', [SuccessStoryController::class, 'store'])->name('stories.store');
+    Route::post('/stories/{id}/submit-review', [SuccessStoryController::class, 'submitForReview'])->name('stories.submit-review');
+    Route::delete('/stories/{id}', [SuccessStoryController::class, 'destroy'])->name('stories.destroy');
+
+    // Admin-Only Master Control Operations & Moderation Suite
     Route::middleware('admin')->group(function () {
         Route::resource('careers', CareerController::class)->except(['index', 'show']);
         Route::resource('multimedia', MultimediaController::class)->except(['index', 'show']);
         Route::resource('resources', ResourceController::class)->except(['index', 'show']);
-        Route::resource('stories', SuccessStoryController::class)->except(['index', 'show']);
 
         Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
@@ -79,6 +92,10 @@ Route::middleware('auth')->group(function () {
             
             Route::post('/resources', [AdminController::class, 'storeResource'])->name('resources.store');
             Route::delete('/resources/{id}', [AdminController::class, 'deleteResource'])->name('resources.destroy');
+
+            // Success Story Moderation & Feedback Response
+            Route::post('/stories/{id}/moderate', [SuccessStoryController::class, 'moderate'])->name('stories.moderate');
+            Route::post('/feedback/{id}/respond', [FeedbackController::class, 'respond'])->name('feedback.respond');
         });
     });
 });

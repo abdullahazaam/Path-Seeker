@@ -511,18 +511,24 @@ class DatabaseSeeder extends Seeder
                 'domain' => 'Artificial Intelligence & Data',
                 'story_text' => 'PathSeeker mapped out the exact mathematics, PyTorch roadmap, and vector search milestones I needed. Within 9 months, I transitioned from manual QA to training production LLM agents at a DeepMind / Google Partner.',
                 'image_url' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+                'status' => SuccessStory::STATUS_APPROVED,
+                'reviewed_at' => now(),
             ],
             [
                 'title' => 'Marcus Vance — Support Tech to AWS Cloud Solutions Architect',
                 'domain' => 'Cloud & Infrastructure',
                 'story_text' => 'The multi-cloud architecture guides and verified cheat sheets helped me pass my AWS Solutions Architect Professional exam on the first attempt and secure a six-figure remote role at AWS.',
                 'image_url' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80',
+                'status' => SuccessStory::STATUS_APPROVED,
+                'reviewed_at' => now(),
             ],
             [
                 'title' => 'Amina Al-Mansoor — Full-Stack Engineer at Stripe',
                 'domain' => 'Software Engineering',
                 'story_text' => 'The skill radar benchmarks and interview kits gave me the confidence to stand out among thousands of applicants. PathSeeker is truly the modern compass for software engineers.',
                 'image_url' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80',
+                'status' => SuccessStory::STATUS_APPROVED,
+                'reviewed_at' => now(),
             ],
         ];
 

@@ -1,4 +1,4 @@
-﻿<!-- ══════════════════ STRUCTURED SLATE FOOTER COMPONENT ══════════════════ -->
+<!-- ══════════════════ STRUCTURED SLATE FOOTER COMPONENT ══════════════════ -->
 <footer class="relative z-10 mt-16 border-t border-white/[0.08] dark:border-white/[0.06] bg-[#050507] text-slate-400">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         
@@ -16,9 +16,11 @@
             </div>
 
             {{-- Sleek Subscription Input Form --}}
-            <form onsubmit="event.preventDefault(); this.querySelector('button span').innerText='Subscribed!'; this.querySelector('input').value=''; setTimeout(() => this.querySelector('button span').innerText='Join Feed', 3000);" class="flex items-center gap-2 w-full lg:w-auto">
+            <form action="{{ route('newsletter.subscribe') }}" method="POST" class="flex items-center gap-2 w-full lg:w-auto">
+                @csrf
                 <div class="relative w-full sm:w-80">
                     <input type="email"
+                           name="email"
                            required
                            placeholder="Enter your email..."
                            class="bg-slate-900/80 border border-white/15 rounded-full pl-10 pr-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 w-full focus:outline-none focus:border-purple-500/60 focus:ring-2 focus:ring-purple-500/20 backdrop-blur-xl shadow-inner">
@@ -61,8 +63,10 @@
                     <li><a href="{{ route('home') }}" class="hover:text-indigo-400 transition-colors">Home Portal</a></li>
                     <li><a href="{{ route('careers.index') }}" class="hover:text-indigo-400 transition-colors">Career Bank</a></li>
                     <li><a href="{{ route('quiz.index') }}" class="hover:text-indigo-400 transition-colors">Interest Quiz</a></li>
+                    <li><a href="{{ route('stories.index') }}" class="hover:text-indigo-400 transition-colors">Success Stories</a></li>
                     <li><a href="{{ route('multimedia.index') }}" class="hover:text-indigo-400 transition-colors">Multimedia Hub</a></li>
                     <li><a href="{{ route('resources.index') }}" class="hover:text-indigo-400 transition-colors">Resource Library</a></li>
+                    <li><a href="{{ route('feedback.index') }}" class="hover:text-indigo-400 transition-colors">User Feedback</a></li>
                 </ul>
             </div>
 
