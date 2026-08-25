@@ -449,11 +449,51 @@ class DatabaseSeeder extends Seeder
                 'question_text' => 'What type of daily workflow aligns best with your strengths?',
                 'options' => [
                     'A' => 'Designing fluid mobile and native cross-platform experiences on iOS and Android',
-                    'B' => 'Extracting predictive insights from complex datasets and designing analytics dashboards',
-                    'C' => 'Crafting comprehensive UI/UX design systems, wireframes, and accessible design tokens',
-                    'D' => 'Architecting decentralized EVM smart contracts, Web3 protocols, and cryptographic dApps',
+                    'B' => 'Orchestrating automated infrastructure-as-code and Terraform modules',
+                    'C' => 'Extracting predictive insights from complex datasets and designing analytics dashboards',
+                    'D' => 'Conducting penetration tests, SOC threat hunting, and security compliance audits',
                 ],
-                'correct_answer' => 'B',
+                'correct_answer' => 'C',
+            ],
+            [
+                'question_text' => 'When tackling a technical system, what layer do you naturally prioritize?',
+                'options' => [
+                    'A' => 'API architecture, microservices contracts, and clean frontend component hierarchies',
+                    'B' => 'Zero-downtime deployment pipelines, container security, and cloud scalability',
+                    'C' => 'Neural network architecture, loss function optimization, and model inference latency',
+                    'D' => 'Identity access management (IAM), firewall rules, and encryption protocols',
+                ],
+                'correct_answer' => 'A',
+            ],
+            [
+                'question_text' => 'Which development tooling ecosystem excites you the most?',
+                'options' => [
+                    'A' => 'TypeScript, React, Next.js, Node.js, and modern full-stack web frameworks',
+                    'B' => 'Docker, Kubernetes, AWS CloudFormation, Terraform, and Linux internals',
+                    'C' => 'Python, PyTorch, LangChain, Hugging Face transformers, and BigQuery',
+                    'D' => 'Kali Linux, Wireshark, Burp Suite, Metasploit, and SIEM monitoring suites',
+                ],
+                'correct_answer' => 'C',
+            ],
+            [
+                'question_text' => 'What kind of high-impact deliverable gives you the most satisfaction?',
+                'options' => [
+                    'A' => 'A lightning-fast, high-converting digital product used by millions of global consumers',
+                    'B' => 'A 99.999% uptime multi-region cloud backbone that gracefully survives disaster recovery',
+                    'C' => 'An autonomous multi-agent AI system that automates complex reasoning and decision making',
+                    'D' => 'A bulletproof zero-trust architecture that prevents sophisticated ransomware attacks',
+                ],
+                'correct_answer' => 'A',
+            ],
+            [
+                'question_text' => 'In architectural code reviews, what is your primary focus?',
+                'options' => [
+                    'A' => 'Code readability, clean domain boundaries, UI responsiveness, and state management',
+                    'B' => 'Serverless resource efficiency, automated rollback strategies, and system telemetry',
+                    'C' => 'Data pipeline lineage, feature store integrity, and prevention of model drift',
+                    'D' => 'Input sanitization, OWASP top 10 prevention, and least-privilege security controls',
+                ],
+                'correct_answer' => 'D',
             ],
         ];
 

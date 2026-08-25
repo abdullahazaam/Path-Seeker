@@ -40,6 +40,7 @@ Route::resource('stories', SuccessStoryController::class)->only(['index', 'show'
 // Interest Assessment Quiz
 Route::get('/quiz', [QuizController::class, 'index'])->name('quiz.index');
 Route::post('/quiz/submit', [QuizController::class, 'submit'])->name('quiz.submit');
+Route::get('/quiz/results/{id}', [QuizController::class, 'results'])->name('quiz.results');
 
 use App\Http\Controllers\SitemapController;
 

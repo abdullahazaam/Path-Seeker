@@ -91,7 +91,9 @@ class RoutesTest extends TestCase
         $answers = [];
         foreach (QuizQuestion::all() as $q) { $answers[$q->id] = 'A'; }
         $r = $this->post('/quiz/submit', ['answers' => $answers]);
-        $r->assertStatus(200)->assertSee('Career Alignment', false)->assertSee('Software Engineering', false);
+        $r->assertRedirect();
+        $resultsPage = $this->followRedirects($r);
+        $resultsPage->assertStatus(200)->assertSee('Career Alignment', false)->assertSee('Software Engineering', false);
     }
 
     public function test_multimedia_pagination_and_detail_routing(): void

@@ -2,78 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\QuizAttempt;
 use App\Models\QuizQuestion;
-use App\Models\Career;
+use App\Services\QuizRecommendationEngine;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class QuizController extends Controller
 {
+    public function __construct(
+        protected QuizRecommendationEngine $engine
+    ) {}
+
     public function index()
     {
         $questions = QuizQuestion::all();
-        return view('quiz.index', compact('questions'));
+        $idempotencyToken = (string) Str::uuid();
+
+        return view('quiz.index', compact('questions', 'idempotencyToken'));
     }
 
     public function submit(Request $request)
     {
         $request->validate([
-            'answers' => 'required|array',
+            'answers' => 'required|array|min:1',
+            'idempotency_token' => 'nullable|string',
         ]);
 
         $answers = $request->input('answers', []);
-        $questions = QuizQuestion::all();
+        $token = $request->input('idempotency_token');
+        $user = Auth::user();
 
-        $score = 0;
-        $totalQuestions = $questions->count();
-        $domainCounts = [
-            'Software Engineering' => 0,
-            'Cloud & Infrastructure' => 0,
-            'Artificial Intelligence & Data' => 0,
-            'Cybersecurity' => 0,
-        ];
+        $attempt = $this->engine->evaluateAndPersist($answers, $user, $token);
 
-        // Domain mapping for options A, B, C, D
-        $optionDomainMap = [
-            'A' => 'Software Engineering',
-            'B' => 'Cloud & Infrastructure',
-            'C' => 'Artificial Intelligence & Data',
-            'D' => 'Cybersecurity',
-        ];
-
-        $details = [];
-
-        foreach ($questions as $question) {
-            $userAns = $answers[$question->id] ?? null;
-            $isCorrect = ($userAns === $question->correct_answer);
-
-            if ($isCorrect) {
-                $score++;
-            }
-
-            if ($userAns && isset($optionDomainMap[$userAns])) {
-                $domainCounts[$optionDomainMap[$userAns]]++;
-            }
-
-            $details[] = [
-                'question' => $question->question_text,
-                'user_answer' => $userAns,
-                'correct_answer' => $question->correct_answer,
-                'is_correct' => $isCorrect,
-                'options' => $question->options,
-            ];
+        if (!$user) {
+            session(['guest_quiz_attempt_id' => $attempt->id]);
         }
 
-        // Determine top aligned domain
-        arsort($domainCounts);
-        $recommendedDomain = array_key_first($domainCounts) ?? 'Software Engineering';
+        return redirect()->route('quiz.results', $attempt->id)->with('success', 'Career alignment evaluated successfully!');
+    }
 
-        // Fetch careers in the recommended domain or top careers
-        $recommendedCareers = Career::where('domain', 'like', "%{$recommendedDomain}%")->get();
-        if ($recommendedCareers->isEmpty()) {
-            $recommendedCareers = Career::take(3)->get();
+    public function results(int $id)
+    {
+        $attempt = QuizAttempt::with('answers')->findOrFail($id);
+
+        // Strict Privacy: Users can only view their own attempts (admins can inspect all)
+        if ($attempt->user_id) {
+            if (!Auth::check() || (Auth::id() !== $attempt->user_id && Auth::user()->role !== 'admin')) {
+                abort(403, 'Unauthorized access. You can only view your own assessment history.');
+            }
         }
+
+        $score = $attempt->total_score;
+        $totalQuestions = $attempt->answers->count() ?: 6;
+        $recommendedDomain = $attempt->top_domain;
+        $recommendedCareers = $attempt->recommended_careers ?? [];
+        $domainCounts = $attempt->domain_scores ?? [];
+        $details = $attempt->answers;
 
         return view('quiz.result', compact(
+            'attempt',
             'score',
             'totalQuestions',
             'recommendedDomain',

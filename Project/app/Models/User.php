@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(SuccessStory::class, 'submitted_by');
     }
+
+    public function quizAttempts()
+    {
+        return $this->hasMany(QuizAttempt::class);
+    }
 }

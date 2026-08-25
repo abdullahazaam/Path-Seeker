@@ -297,6 +297,140 @@
         </div>
     </div>
 
+    {{-- ══════════════════ 4.5 QUIZ ASSESSMENT HISTORY & EXPLAINABLE CAREER FIT ══════════════════ --}}
+    <div class="relative rounded-3xl p-8 sm:p-10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 space-y-8 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
+        
+        {{-- Section Header --}}
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200/80 dark:border-white/[0.08]">
+            <div class="space-y-1">
+                <div class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-400 font-mono">
+                    <i class="fa-solid fa-brain text-indigo-500"></i>
+                    <span>Evaluation Records &amp; Career Recommendations</span>
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white font-display">
+                    Interest Assessment <span class="grad-text">History</span>
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-xl">
+                    Persistent, versioned cognitive assessment records and deterministic explainable career recommendations.
+                </p>
+            </div>
+            <a href="{{ route('quiz.index') }}" class="px-5 py-2.5 rounded-full font-bold text-xs text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 shadow-neon-purple transition-all shrink-0 flex items-center gap-2">
+                <i class="fa-solid fa-rotate-left text-[11px]"></i>
+                <span>Take New Assessment</span>
+            </a>
+        </div>
+
+        @if($quizAttempts->isEmpty())
+            <div class="p-8 sm:p-12 text-center space-y-4 rounded-2xl bg-slate-100/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-white/5">
+                <div class="w-14 h-14 rounded-2xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-2xl mx-auto shadow-sm">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                </div>
+                <div class="space-y-1 max-w-md mx-auto">
+                    <h4 class="text-base font-black text-slate-900 dark:text-white font-display">No Assessment History Found</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">
+                        Take the 2026 Career Alignment Quiz to uncover your top technology affinity domain, recommended career tracks, and personalized milestones.
+                    </p>
+                </div>
+                <a href="{{ route('quiz.index') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-black text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:scale-105 transition-all shadow-md">
+                    <i class="fa-solid fa-play text-[10px]"></i>
+                    <span>Start Career Assessment</span>
+                </a>
+            </div>
+        @else
+            <div class="space-y-6">
+                @foreach($quizAttempts as $attempt)
+                    <div class="p-6 sm:p-7 rounded-3xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/10 space-y-6 shadow-md hover:border-purple-500/30 transition-all">
+                        {{-- Attempt Header --}}
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200/80 dark:border-white/5">
+                            <div class="flex flex-wrap items-center gap-2.5">
+                                <span class="px-3 py-1 rounded-full text-xs font-black bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25 font-mono">
+                                    <i class="fa-solid fa-bullseye text-[10px] mr-1"></i>{{ $attempt->top_domain }}
+                                </span>
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold text-slate-600 dark:text-slate-400 bg-slate-200/70 dark:bg-white/5 font-mono">
+                                    Version {{ $attempt->quiz_version }}
+                                </span>
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 font-mono">
+                                    {{ $attempt->total_score }} Pts
+                                </span>
+                            </div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5">
+                                <i class="fa-regular fa-calendar text-[11px]"></i>
+                                <span>{{ $attempt->completed_at ? $attempt->completed_at->format('M d, Y · h:i A') : $attempt->created_at->format('M d, Y') }}</span>
+                            </div>
+                        </div>
+
+                        {{-- Domain Scores Progress Mini Bars --}}
+                        @if(!empty($attempt->domain_scores))
+                            <div class="space-y-2">
+                                <div class="text-[10px] font-black uppercase tracking-widest text-slate-500 font-mono">Domain Affinity Scores</div>
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                                    @foreach($attempt->domain_scores as $domain => $scorePct)
+                                        <div class="p-2.5 rounded-xl bg-white/80 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/5 space-y-1">
+                                            <div class="flex justify-between text-[11px] font-bold">
+                                                <span class="text-slate-700 dark:text-slate-300 truncate text-[10px]">{{ $domain }}</span>
+                                                <span class="font-mono text-indigo-600 dark:text-indigo-400 text-[10px]">{{ $scorePct }}%</span>
+                                            </div>
+                                            <div class="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                                                <div class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style="width: {{ $scorePct }}%"></div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+                        {{-- Top Recommended Careers with Explainability --}}
+                        @if(!empty($attempt->recommended_careers))
+                            <div class="space-y-2.5">
+                                <div class="text-[10px] font-black uppercase tracking-widest text-slate-500 font-mono">Recommended Careers &amp; Explainability Factors</div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    @foreach($attempt->recommended_careers as $rec)
+                                        <div class="p-4 rounded-2xl bg-white/90 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex flex-col justify-between space-y-3">
+                                            <div class="space-y-1.5">
+                                                <div class="flex items-center justify-between gap-2">
+                                                    <h5 class="text-sm font-black text-slate-900 dark:text-white font-display">{{ $rec['title'] }}</h5>
+                                                    <span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/25 font-mono shrink-0">
+                                                        {{ $rec['match_percentage'] ?? 90 }}% Match
+                                                    </span>
+                                                </div>
+                                                <div class="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
+                                                    {{ $rec['expected_salary'] ?? 'Tech Benchmark' }}
+                                                </div>
+                                                @if(!empty($rec['reason']))
+                                                    <p class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed bg-slate-50 dark:bg-white/[0.02] p-2.5 rounded-xl border border-slate-200/60 dark:border-white/5">
+                                                        <strong class="text-indigo-600 dark:text-indigo-400 font-semibold"><i class="fa-solid fa-sparkles text-[9px] mr-1"></i>Match Factor:</strong> {{ $rec['reason'] }}
+                                                    </p>
+                                                @endif
+                                            </div>
+                                            <div class="pt-2 border-t border-slate-200/60 dark:border-white/5 flex justify-end">
+                                                <a href="{{ route('careers.show', $rec['career_id'] ?? $rec['id']) }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors">
+                                                    <span>View Career Track</span>
+                                                    <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+                        {{-- Card Footer Link --}}
+                        <div class="flex items-center justify-between pt-2">
+                            <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                {{ $attempt->answers->count() }} question answers persisted
+                            </span>
+                            <a href="{{ route('quiz.results', $attempt->id) }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline">
+                                <span>View Full Assessment Audit</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+    </div>
+
     {{-- ══════════════════ 5. INTERACTIVE CAREER PATH BUILDER ══════════════════ --}}
     <div class="relative rounded-3xl p-8 sm:p-10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-purple-500/25 space-y-8 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden" id="pathBuilderSection">
         

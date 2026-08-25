@@ -9,6 +9,7 @@ use App\Models\Resource;
 use App\Models\Bookmark;
 use App\Models\Feedback;
 use App\Models\QuizQuestion;
+use App\Models\QuizAttempt;
 use App\Models\SuccessStory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,8 @@ class DashboardController extends Controller
         ];
 
         $bookmarks = Bookmark::where('user_id', $user?->id)->latest()->get();
+        $quizAttempts = QuizAttempt::where('user_id', $user?->id)->with('answers')->latest()->get();
+        $latestAttempt = $quizAttempts->first();
         $recentCareers = Career::latest()->take(3)->get();
         $recentMultimedia = Multimedia::latest()->take(3)->get();
         $recentResources = Resource::latest()->take(3)->get();
@@ -80,6 +83,8 @@ class DashboardController extends Controller
             'rolePersonalization',
             'stats',
             'bookmarks',
+            'quizAttempts',
+            'latestAttempt',
             'recentCareers',
             'recentMultimedia',
             'recentResources',

@@ -32,8 +32,10 @@
             <p class="text-base font-bold text-slate-900 dark:text-slate-300">No assessment questions found in database.</p>
         </div>
     @else
-        <form action="{{ url('/quiz/submit') }}" method="POST" class="space-y-6 max-w-7xl mx-auto w-full">
+        <form action="{{ route('quiz.submit') }}" method="POST" class="space-y-6 max-w-7xl mx-auto w-full" x-data="{ submitting: false }" @submit="submitting = true">
             @csrf
+            <input type="hidden" name="idempotency_token" value="{{ $idempotencyToken }}">
+            
             @foreach($questions as $index => $question)
                 <div class="bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 space-y-5 border border-slate-200/80 dark:border-white/10 hover:border-purple-500/40 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:-translate-y-1 transition-all duration-300">
                     <div class="flex items-start gap-4">
@@ -60,10 +62,22 @@
             @endforeach
 
             <div class="text-center pt-4">
-                <button type="submit" class="group inline-flex items-center gap-3 px-10 py-4 text-sm font-black text-white rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple hover:shadow-neon-pink transition-all duration-300 hover:scale-105">
-                    <i class="fa-solid fa-calculator text-base text-white"></i>
-                    <span class="text-white font-black">Submit &amp; Calculate Alignment</span>
-                    <i class="fa-solid fa-arrow-right text-xs text-white group-hover:translate-x-1.5 transition-transform"></i>
+                <button type="submit" 
+                        :disabled="submitting"
+                        class="group inline-flex items-center gap-3 px-10 py-4 text-sm font-black text-white rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple hover:shadow-neon-pink transition-all duration-300 hover:scale-105 disabled:opacity-75 disabled:cursor-not-allowed">
+                    <template x-if="!submitting">
+                        <span class="inline-flex items-center gap-3">
+                            <i class="fa-solid fa-calculator text-base text-white"></i>
+                            <span class="text-white font-black">Submit &amp; Calculate Alignment</span>
+                            <i class="fa-solid fa-arrow-right text-xs text-white group-hover:translate-x-1.5 transition-transform"></i>
+                        </span>
+                    </template>
+                    <template x-if="submitting">
+                        <span class="inline-flex items-center gap-3">
+                            <i class="fa-solid fa-circle-notch fa-spin text-base text-white"></i>
+                            <span class="text-white font-black">Evaluating Responses...</span>
+                        </span>
+                    </template>
                 </button>
             </div>
         </form>
