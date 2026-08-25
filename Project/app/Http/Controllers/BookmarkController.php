@@ -78,4 +78,27 @@ class BookmarkController extends Controller
 
         return redirect()->back()->with('success', 'Bookmark removed.');
     }
+
+    /**
+     * Printable / PDF export view for a specific bookmark.
+     */
+    public function exportPdf(string $id)
+    {
+        $bookmark = Bookmark::where('user_id', Auth::id())->findOrFail($id);
+        $user = Auth::user();
+        $item = $bookmark->item;
+
+        return view('bookmarks.pdf-export', compact('bookmark', 'user', 'item'));
+    }
+
+    /**
+     * Printable / PDF export view for all user bookmarks.
+     */
+    public function exportAllPdf()
+    {
+        $bookmarks = Bookmark::where('user_id', Auth::id())->latest()->get();
+        $user = Auth::user();
+
+        return view('bookmarks.pdf-export-all', compact('bookmarks', 'user'));
+    }
 }

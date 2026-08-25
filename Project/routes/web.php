@@ -178,8 +178,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Secure Candidate Document / Resume Upload
     Route::post('/api/upload/resume', [FileUploadController::class, 'uploadResume'])->name('api.upload.resume')->middleware('throttle:10,1');
 
-    // Bookmarks CRUD & Private Notes
+    // Bookmarks CRUD, Private Sticky Notes & PDF Export
     Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
+    Route::get('/bookmarks/export-all-pdf', [BookmarkController::class, 'exportAllPdf'])->name('bookmarks.export-all-pdf')->middleware('throttle:10,1');
+    Route::get('/bookmarks/{id}/export-pdf', [BookmarkController::class, 'exportPdf'])->name('bookmarks.export-pdf')->middleware('throttle:10,1');
     Route::post('/bookmarks', [BookmarkController::class, 'store'])->name('bookmarks.store');
     Route::put('/bookmarks/{id}', [BookmarkController::class, 'update'])->name('bookmarks.update');
     Route::delete('/bookmarks/{id}', [BookmarkController::class, 'destroy'])->name('bookmarks.destroy');

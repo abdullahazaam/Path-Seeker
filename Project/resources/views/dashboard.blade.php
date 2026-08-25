@@ -858,6 +858,238 @@
         </div>
     </div>
 
+    {{-- ══════════════════════════════════════════════════════════════════
+         7. SAVED BOOKMARKS & STICKY NOTES WITH PDF EXPORT & SOCIAL SHARE
+    ══════════════════════════════════════════════════════════════════ --}}
+    <div class="space-y-6" x-data="{
+        copiedBmId: null,
+        copyShareUrl(url, id) {
+            navigator.clipboard.writeText(url).then(() => {
+                this.copiedBmId = id;
+                setTimeout(() => { this.copiedBmId = null; }, 2500);
+            });
+        },
+        exportSinglePdf(elementId, title) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            const opt = {
+                margin: 10,
+                filename: 'PathSeeker-' + title.toLowerCase().replace(/[^a-z0-9]/g, '-') + '-Notes.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+    }">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-1">
+                <div class="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5 font-mono uppercase tracking-wider">
+                    <i class="fa-solid fa-note-sticky text-amber-500"></i> Candidate Study Space
+                </div>
+                <h2 class="text-2xl font-black text-slate-900 dark:text-white font-display">
+                    Saved Bookmarks &amp; <span class="grad-text">Sticky Notes</span>
+                </h2>
+                <p class="text-xs text-slate-600 dark:text-slate-400">
+                    Your bookmarked career tracks, masterclasses, and learning toolkits with private revision notes.
+                </p>
+            </div>
+            
+            <div class="flex items-center gap-2.5 flex-wrap">
+                @if(count($bookmarks ?? []) > 0)
+                    <a href="{{ route('bookmarks.export-all-pdf') }}" target="_blank" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-indigo-600 hover:from-amber-500 hover:to-indigo-500 text-white font-bold text-xs shadow-md transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-pdf text-xs"></i>
+                        <span>Export All Dossier (PDF)</span>
+                    </a>
+                @endif
+                <a href="{{ route('bookmarks.index') }}" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 dark:text-slate-300 transition-all flex items-center gap-1">
+                    <span>Manage All ({{ count($bookmarks ?? []) }})</span> &rarr;
+                </a>
+            </div>
+        </div>
+
+        @if(($bookmarks ?? collect())->isEmpty())
+            <div class="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 text-center space-y-3 shadow-xl">
+                <div class="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl mx-auto">
+                    <i class="fa-solid fa-note-sticky"></i>
+                </div>
+                <div class="space-y-1 max-w-sm mx-auto">
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white font-display">No Bookmarks Saved Yet</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                        Explore career tracks or toolkits, click the bookmark icon to save items, and attach private sticky notes.
+                    </p>
+                </div>
+                <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 shadow transition-all">
+                    <i class="fa-solid fa-compass text-[10px]"></i>
+                    <span>Browse Careers</span>
+                </a>
+            </div>
+        @else
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach(($bookmarks ?? [])->take(6) as $bm)
+                    @php 
+                        $item = $bm->item;
+                        $itemTitle = $item->title ?? 'Saved Resource';
+                        $shareUrl = match($bm->item_type) {
+                            'career' => $item ? route('careers.show', $item->id) : url('/careers'),
+                            'multimedia' => $item ? route('multimedia.show', $item->id) : url('/multimedia'),
+                            'resource' => $item ? route('resources.show', $item->id) : url('/resources'),
+                            default => url('/'),
+                        };
+                    @endphp
+                    <div id="db-bm-{{ $bm->id }}" x-data="{ 
+                        editingNote: false, 
+                        showShare: false,
+                        noteContent: '{{ addslashes($bm->notes ?? '') }}',
+                        saving: false,
+                        saveNote() {
+                            this.saving = true;
+                            fetch('{{ route('bookmarks.update', $bm->id) }}', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'X-HTTP-Method-Override': 'PUT',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify({ notes: this.noteContent })
+                            })
+                            .then(r => r.json())
+                            .then(data => {
+                                this.saving = false;
+                                this.editingNote = false;
+                            })
+                            .catch(() => {
+                                this.saving = false;
+                            });
+                        }
+                    }" class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-4 flex flex-col justify-between hover:border-amber-500/30 transition-all group">
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase font-mono bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25">
+                                    {{ ucfirst($bm->item_type) }}
+                                </span>
+                                
+                                <div class="flex items-center gap-1">
+                                    {{-- Export PDF --}}
+                                    <a href="{{ route('bookmarks.export-pdf', $bm->id) }}" target="_blank" class="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-all text-xs" title="Export as PDF">
+                                        <i class="fa-solid fa-file-pdf"></i>
+                                    </a>
+
+                                    {{-- Social Share Button & Dropdown --}}
+                                    <div class="relative">
+                                        <button @click="showShare = !showShare" class="p-1.5 rounded-lg text-slate-400 hover:text-amber-500 hover:bg-slate-100 dark:hover:bg-white/5 transition-all text-xs" title="Share">
+                                            <i class="fa-solid fa-share-nodes"></i>
+                                        </button>
+                                        
+                                        <div x-show="showShare" @click.outside="showShare = false" x-cloak style="display: none;" class="absolute right-0 top-7 z-30 w-44 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-1.5 space-y-1 text-xs">
+                                            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode($shareUrl) }}" target="_blank" class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300">
+                                                <i class="fa-brands fa-linkedin text-[#0A66C2]"></i>
+                                                <span>LinkedIn</span>
+                                            </a>
+                                            <a href="https://twitter.com/intent/tweet?text={{ urlencode('Exploring ' . $itemTitle . ' on PathSeeker!') }}&url={{ urlencode($shareUrl) }}" target="_blank" class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300">
+                                                <i class="fa-brands fa-x-twitter text-slate-900 dark:text-white"></i>
+                                                <span>Twitter / X</span>
+                                            </a>
+                                            <a href="https://api.whatsapp.com/send?text={{ urlencode('PathSeeker Career: ' . $itemTitle . ' - ' . $shareUrl) }}" target="_blank" class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300">
+                                                <i class="fa-brands fa-whatsapp text-[#25D366]"></i>
+                                                <span>WhatsApp</span>
+                                            </a>
+                                            <a href="mailto:?subject={{ urlencode('PathSeeker Track: ' . $itemTitle) }}&body={{ urlencode('Check this out: ' . $shareUrl) }}" class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300">
+                                                <i class="fa-regular fa-envelope text-indigo-500"></i>
+                                                <span>Email</span>
+                                            </a>
+                                            <button @click="copyShareUrl('{{ $shareUrl }}', {{ $bm->id }})" class="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-left">
+                                                <i class="fa-solid fa-link text-amber-500"></i>
+                                                <span x-text="copiedBmId === {{ $bm->id }} ? 'Copied!' : 'Copy Link'"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {{-- Delete Bookmark --}}
+                                    <form action="{{ route('bookmarks.destroy', $bm->id) }}" method="POST" onsubmit="return confirm('Remove this bookmark?');" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 transition-all text-xs" title="Remove">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-sm font-display line-clamp-1">
+                                    {{ $itemTitle }}
+                                </h4>
+                                @if($item && isset($item->expected_salary))
+                                    <p class="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono font-semibold mt-0.5">{{ $item->expected_salary }}</p>
+                                @endif
+                            </div>
+
+                            {{-- Sticky Note Box --}}
+                            <div class="p-3.5 rounded-2xl bg-amber-50/90 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-500/25 space-y-1.5">
+                                <div class="flex items-center justify-between pb-1 border-b border-amber-200/80 dark:border-amber-500/20">
+                                    <div class="flex items-center gap-1.5 text-[9px] font-mono font-black uppercase text-amber-900 dark:text-amber-300">
+                                        <i class="fa-solid fa-note-sticky text-amber-600 dark:text-amber-400 text-[10px]"></i>
+                                        <span>Sticky Note</span>
+                                    </div>
+                                    <button type="button" @click="editingNote = !editingNote" class="text-[9px] font-bold text-amber-700 dark:text-amber-300 hover:underline flex items-center gap-1">
+                                        <i class="fa-solid fa-pencil text-[8px]"></i>
+                                        <span x-text="editingNote ? 'Cancel' : (noteContent ? 'Edit' : 'Add Note')"></span>
+                                    </button>
+                                </div>
+
+                                <div x-show="!editingNote" class="text-[11px] text-amber-950 dark:text-amber-100 leading-relaxed whitespace-pre-line line-clamp-3 min-h-[28px]">
+                                    <span x-show="noteContent" x-text="noteContent"></span>
+                                    <span x-show="!noteContent" class="italic text-amber-600/70 dark:text-amber-400/60 text-[10px]">
+                                        Click "Add Note" to write personal revision checkpoints.
+                                    </span>
+                                </div>
+
+                                <div x-show="editingNote" x-cloak style="display: none;" class="space-y-1.5 pt-1">
+                                    <textarea x-model="noteContent" rows="2" placeholder="Write private revision takeaways..." class="w-full px-2.5 py-1.5 text-[11px] rounded-xl bg-white dark:bg-slate-900 border border-amber-300 dark:border-amber-500/40 text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-amber-500"></textarea>
+                                    <div class="flex justify-end gap-1.5">
+                                        <button type="button" @click="editingNote = false" class="px-2 py-0.5 text-[9px] font-bold text-slate-500">Cancel</button>
+                                        <button type="button" @click="saveNote()" :disabled="saving" class="px-2.5 py-0.5 rounded-lg text-[9px] font-bold text-white bg-amber-600 hover:bg-amber-500 shadow-xs flex items-center gap-1">
+                                            <i x-show="saving" class="fa-solid fa-spinner fa-spin text-[8px]"></i>
+                                            <span x-text="saving ? 'Saving...' : 'Save Note'"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Footer Actions --}}
+                        <div class="pt-3 border-t border-slate-200/80 dark:border-white/5 flex items-center justify-between gap-2">
+                            <button type="button" @click="exportSinglePdf('db-bm-{{ $bm->id }}', '{{ addslashes($itemTitle) }}')" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-indigo-500/15 hover:text-indigo-600 dark:hover:text-indigo-400 text-[10px] font-bold text-slate-700 dark:text-slate-300 transition-all flex items-center gap-1">
+                                <i class="fa-solid fa-download text-[9px] text-indigo-500"></i>
+                                <span>PDF</span>
+                            </button>
+
+                            @if($item)
+                                @if($bm->item_type === 'career')
+                                    <a href="{{ route('careers.show', $item->id) }}" class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">
+                                        <span>View Track</span> <i class="fa-solid fa-arrow-right text-[8px]"></i>
+                                    </a>
+                                @elseif($bm->item_type === 'multimedia')
+                                    <a href="{{ route('multimedia.show', $item->id) }}" class="text-[11px] font-bold text-pink-600 dark:text-pink-400 hover:underline flex items-center gap-1">
+                                        <span>Watch</span> <i class="fa-solid fa-arrow-right text-[8px]"></i>
+                                    </a>
+                                @elseif($bm->item_type === 'resource')
+                                    <a href="{{ route('resources.show', $item->id) }}" class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1">
+                                        <span>Open</span> <i class="fa-solid fa-arrow-right text-[8px]"></i>
+                                    </a>
+                                @endif
+                            @endif
+                        </div>
+
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
+
     {{-- Success Stories / Alumni Network --}}
     <div class="space-y-6">
         <div class="space-y-1">
