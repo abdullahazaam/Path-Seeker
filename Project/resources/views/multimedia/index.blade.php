@@ -150,34 +150,31 @@
     {{-- ══════════════════ VIDEO TRACKS GRID ══════════════════ --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
         @forelse($multimedia as $item)
-            <div class="bg-white/90 dark:bg-slate-950/50 border border-slate-200 dark:border-white/5 rounded-3xl p-5 flex flex-col justify-between h-full group relative overflow-hidden shadow-xl dark:shadow-sm hover:shadow-2xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300">
+            <div class="bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 rounded-3xl p-6 flex flex-col justify-between h-full group relative overflow-hidden shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300">
                 
-                {{-- Card Top Glow Line --}}
-                <div class="h-1 w-full bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
                 <div class="relative z-10 flex flex-col flex-grow">
                     
                     {{-- Zoom-on-Hover Thumbnail Container --}}
-                    <div class="relative w-full h-48 overflow-hidden rounded-2xl mb-4 bg-slate-950 border border-slate-200/80 dark:border-white/10 shrink-0 group/thumb">
+                    <div class="relative w-full h-48 overflow-hidden rounded-2xl mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shrink-0 group/thumb">
                         <img src="{{ !empty($item->thumbnail_url) ? $item->thumbnail_url : 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80' }}"
                              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80';"
                              alt="{{ $item->title }}"
                              loading="lazy"
-                             class="w-full h-full object-cover block rounded-2xl group-hover/thumb:scale-110 transition-transform duration-700 ease-out">
+                             class="w-full h-full object-cover block rounded-2xl group-hover/thumb:scale-105 transition-transform duration-500 ease-out">
                         
                         {{-- Vignette Overlay --}}
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-black/20 to-transparent pointer-events-none"></div>
                         
                         {{-- Floating Play Button Overlay --}}
                         <a href="{{ route('multimedia.show', $item->id) }}" class="absolute inset-0 flex items-center justify-center z-10" aria-label="Play {{ $item->title }}">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-indigo-600 via-purple-600 to-rose-600 text-white flex items-center justify-center shadow-lg group-hover/thumb:scale-115 group-hover/thumb:shadow-purple-500/50 transition-all duration-300 pointer-events-auto border border-white/20">
-                                <i class="fa-solid fa-play text-sm text-white ml-0.5"></i>
+                            <div class="w-12 h-12 rounded-full bg-white/90 dark:bg-slate-900/90 text-purple-600 dark:text-purple-400 flex items-center justify-center shadow-lg group-hover/thumb:scale-110 transition-transform duration-300 pointer-events-auto border border-white/40 dark:border-white/20">
+                                <i class="fa-solid fa-play text-sm ml-0.5"></i>
                             </div>
                         </a>
 
                         {{-- Type Badge --}}
                         <div class="absolute top-3 left-3 z-20 pointer-events-none">
-                            <span class="text-[10px] font-semibold uppercase px-2.5 py-1 rounded-full bg-black/70 text-white border border-white/15 backdrop-blur-md flex items-center gap-1.5">
+                            <span class="text-[10px] font-semibold uppercase px-2.5 py-1 rounded-full bg-slate-900/80 dark:bg-black/75 text-white border border-white/15 backdrop-blur-md flex items-center gap-1.5 shadow-sm">
                                 <i class="fa-solid {{ $item->type === 'video' ? 'fa-video text-rose-400' : 'fa-podcast text-purple-400' }} text-[9px]"></i>
                                 <span>{{ $item->type }}</span>
                             </span>
@@ -185,7 +182,7 @@
 
                         {{-- Duration Badge --}}
                         <div class="absolute bottom-3 right-3 z-20 pointer-events-none">
-                            <span class="px-2.5 py-1 text-[10px] font-mono font-semibold text-white bg-black/75 rounded-full backdrop-blur-md flex items-center gap-1.5 border border-white/15">
+                            <span class="px-2.5 py-1 text-[10px] font-mono font-semibold text-white bg-slate-900/80 dark:bg-black/75 rounded-full backdrop-blur-md flex items-center gap-1.5 border border-white/15 shadow-sm">
                                 <i class="fa-regular fa-clock text-[9px] text-indigo-300"></i>
                                 <span>{{ $item->duration ?? '25:00' }}</span>
                             </span>
@@ -207,9 +204,9 @@
                         @endif
 
                         @if($item->tags)
-                            <div class="flex flex-wrap gap-1.5 pt-1 mt-auto">
-                                @foreach(explode(',', $item->tags) as $tag)
-                                    <span class="text-[10px] font-medium bg-white/80 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-lg border border-slate-200/80 dark:border-white/[0.06] flex items-center gap-1">
+                            <div class="flex flex-wrap gap-1.5 pt-2 mt-auto">
+                                @foreach(array_slice(explode(',', $item->tags), 0, 3) as $tag)
+                                    <span class="text-[10px] font-medium bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-lg border border-slate-200 dark:border-white/[0.08] flex items-center gap-1">
                                         <i class="fa-solid fa-tag text-[8px] text-slate-400"></i>
                                         <span>{{ trim($tag) }}</span>
                                     </span>
@@ -220,15 +217,12 @@
 
                 </div>
 
-                {{-- Card Footer --}}
-                <div class="mt-5 pt-4 border-t border-slate-200/80 dark:border-white/[0.07] relative z-10 flex items-center justify-between">
-                    <a href="{{ route('multimedia.show', $item->id) }}" class="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors group/link">
-                        <span>Stream Video</span>
-                        <i class="fa-solid fa-arrow-right text-xs group-hover/link:translate-x-1.5 transition-transform"></i>
+                {{-- Card Clean CTA Footer --}}
+                <div class="mt-5 pt-4 border-t border-slate-200/80 dark:border-white/[0.07] relative z-10">
+                    <a href="{{ route('multimedia.show', $item->id) }}" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-purple-600 dark:text-purple-400 bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/20 hover:bg-purple-500/20 transition-all flex items-center justify-center gap-2 group/link">
+                        <span>Stream {{ ucfirst($item->type) }}</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] group-hover/link:translate-x-1 transition-transform"></i>
                     </a>
-                    <span class="inline-flex items-center gap-1 text-[10px] text-purple-600 dark:text-purple-400 font-semibold px-2 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20">
-                        <i class="fa-solid fa-play text-[8px]"></i> 1080p Stream
-                    </span>
                 </div>
 
             </div>

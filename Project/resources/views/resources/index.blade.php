@@ -138,42 +138,39 @@
                 }
             @endphp
 
-            <div class="bg-white/90 dark:bg-slate-950/50 border border-slate-200 dark:border-white/5 rounded-3xl p-5 flex flex-col justify-between h-full group relative overflow-hidden shadow-xl dark:shadow-sm hover:shadow-2xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300">
+            <div class="bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 rounded-3xl p-6 flex flex-col justify-between h-full group relative overflow-hidden shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300">
                 
-                {{-- Document Spine Accent Line --}}
-                <div class="h-1 w-full bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
                 <div class="relative z-10 flex flex-col flex-grow">
                     
                     {{-- Document Cover Preview Container --}}
-                    <div class="relative w-full h-48 overflow-hidden rounded-2xl mb-4 bg-slate-950 border border-slate-200/80 dark:border-white/10 shrink-0 group/thumb">
+                    <div class="relative w-full h-48 overflow-hidden rounded-2xl mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shrink-0 group/thumb">
                         <img src="{{ !empty($res->thumbnail_url) ? $res->thumbnail_url : 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80' }}"
                              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80';"
                              alt="{{ $res->title }}"
                              loading="lazy"
-                             class="w-full h-full object-cover block rounded-2xl group-hover/thumb:scale-110 transition-transform duration-700 ease-out">
+                             class="w-full h-full object-cover block rounded-2xl group-hover/thumb:scale-105 transition-transform duration-500 ease-out">
                         
                         {{-- Dark Document Overlay --}}
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-black/25 to-transparent pointer-events-none"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-black/20 to-transparent pointer-events-none"></div>
                         
                         {{-- Quick Download Trigger Overlay --}}
                         <a href="{{ $res->file_url }}" target="_blank" class="absolute inset-0 flex items-center justify-center z-10" aria-label="Download {{ $res->title }}">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-sky-600 via-indigo-600 to-purple-600 text-white flex items-center justify-center shadow-lg group-hover/thumb:scale-115 group-hover/thumb:shadow-sky-500/50 transition-all duration-300 pointer-events-auto border border-white/20">
-                                <i class="fa-solid fa-file-arrow-down text-sm text-white"></i>
+                            <div class="w-12 h-12 rounded-full bg-white/90 dark:bg-slate-900/90 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-lg group-hover/thumb:scale-110 transition-transform duration-300 pointer-events-auto border border-white/40 dark:border-white/20">
+                                <i class="fa-solid fa-file-arrow-down text-sm"></i>
                             </div>
                         </a>
 
                         {{-- Category Badge --}}
                         <div class="absolute top-3 left-3 z-20 pointer-events-none">
-                            <span class="text-[10px] font-semibold uppercase px-2.5 py-1 rounded-full bg-black/70 text-white border border-white/15 backdrop-blur-md flex items-center gap-1.5">
-                                <i class="fa-solid fa-folder text-sky-400 text-[9px]"></i>
+                            <span class="text-[10px] font-semibold uppercase px-2.5 py-1 rounded-full bg-slate-900/80 dark:bg-black/75 text-white border border-white/15 backdrop-blur-md flex items-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-folder text-indigo-400 text-[9px]"></i>
                                 <span>{{ $res->category }}</span>
                             </span>
                         </div>
 
                         {{-- Format Badge --}}
                         <div class="absolute bottom-3 right-3 z-20 pointer-events-none">
-                            <span class="px-2.5 py-1 text-[10px] font-mono font-semibold text-white bg-black/75 rounded-full backdrop-blur-md flex items-center gap-1.5 border border-white/15">
+                            <span class="px-2.5 py-1 text-[10px] font-mono font-semibold text-white bg-slate-900/80 dark:bg-black/75 rounded-full backdrop-blur-md flex items-center gap-1.5 border border-white/15 shadow-sm">
                                 <i class="fa-solid {{ $docIcon }} text-[9px]"></i>
                                 <span>{{ $docType }}</span>
                             </span>
@@ -190,7 +187,7 @@
                             <span class="text-[10px] text-slate-400 font-mono">Verified 2026</span>
                         </div>
 
-                        <h3 class="text-base font-black text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors leading-snug font-display">
+                        <h3 class="text-base font-black text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug font-display">
                             <a href="{{ $res->file_url }}" target="_blank" class="hover:underline">
                                 {{ $res->title }}
                             </a>
@@ -204,25 +201,22 @@
                 </div>
 
                 {{-- Bottom Action Row --}}
-                <div class="mt-5 pt-4 border-t border-slate-200/80 dark:border-white/[0.07] relative z-10 flex items-center justify-between">
-                    <a href="{{ $res->file_url }}" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-sky-600 dark:text-sky-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors group/link">
+                <div class="mt-5 pt-4 border-t border-slate-200/80 dark:border-white/[0.07] relative z-10">
+                    <a href="{{ $res->file_url }}" target="_blank" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 dark:bg-indigo-500/15 border border-indigo-500/20 hover:bg-indigo-500/20 transition-all flex items-center justify-center gap-2 group/link">
                         <i class="fa-solid fa-file-arrow-down text-xs"></i>
                         <span>Download Toolkit</span>
-                        <i class="fa-solid fa-arrow-right text-xs group-hover/link:translate-x-1.5 transition-transform"></i>
+                        <i class="fa-solid fa-arrow-right text-[10px] group-hover/link:translate-x-1 transition-transform"></i>
                     </a>
-                    <span class="inline-flex items-center gap-1 text-[10px] text-sky-600 dark:text-sky-400 font-semibold px-2 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/20">
-                        <i class="fa-solid fa-circle-check text-[9px]"></i> Free Access
-                    </span>
                 </div>
 
             </div>
         @empty
             <div class="col-span-full py-16 rounded-3xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/5 text-center space-y-3 shadow-sm">
-                <div class="w-16 h-16 rounded-2xl bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center text-2xl mx-auto mb-2 shadow-sm">
+                <div class="w-16 h-16 rounded-2xl bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-2xl mx-auto mb-2 shadow-sm">
                     <i class="fa-solid fa-folder-open"></i>
                 </div>
                 <p class="text-base font-bold text-slate-900 dark:text-slate-300">No resources matched your filter.</p>
-                <a href="{{ route('resources.index') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-300 border border-sky-500/20 text-xs font-bold hover:bg-sky-500/20 transition-all">
+                <a href="{{ route('resources.index') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-300 border border-purple-500/20 text-xs font-bold hover:bg-purple-500/20 transition-all">
                     <i class="fa-solid fa-rotate-left"></i> Reset Filter
                 </a>
             </div>
