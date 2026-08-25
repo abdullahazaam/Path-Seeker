@@ -68,6 +68,13 @@
                     document.documentElement.classList.add('dark');
                     document.documentElement.setAttribute('data-theme', 'dark');
                 }
+
+                // Instant Font-Size Scaling (Phase 9 A11y)
+                var scaleIndex = localStorage.getItem('fontSizeScaleIndex') || '1';
+                var scales = ['90%', '100%', '115%', '125%'];
+                if (scales[scaleIndex]) {
+                    document.documentElement.style.fontSize = scales[scaleIndex];
+                }
             } catch (e) {
                 document.documentElement.classList.add('dark');
                 document.documentElement.setAttribute('data-theme', 'dark');
@@ -1248,6 +1255,40 @@
                 }
             });
         });
+
+        // Accessible Font-Size Controller (Phase 9 A11y)
+        function fontSizeController() {
+            return {
+                scaleIndex: parseInt(localStorage.getItem('fontSizeScaleIndex') || '1'),
+                scales: ['90%', '100%', '115%', '125%'],
+                init() {
+                    this.applyScale();
+                },
+                decreaseFontSize() {
+                    if (this.scaleIndex > 0) {
+                        this.scaleIndex--;
+                        this.save();
+                    }
+                },
+                resetFontSize() {
+                    this.scaleIndex = 1;
+                    this.save();
+                },
+                increaseFontSize() {
+                    if (this.scaleIndex < this.scales.length - 1) {
+                        this.scaleIndex++;
+                        this.save();
+                    }
+                },
+                save() {
+                    localStorage.setItem('fontSizeScaleIndex', this.scaleIndex);
+                    this.applyScale();
+                },
+                applyScale() {
+                    document.documentElement.style.fontSize = this.scales[this.scaleIndex];
+                }
+            };
+        }
     </script>
 </body>
 </html>

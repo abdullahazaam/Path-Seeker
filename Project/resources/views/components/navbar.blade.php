@@ -41,9 +41,22 @@
 
         <!-- Right Actions: Theme Toggle, User Auth Section, Sign Out & Mobile Toggle -->
         <div class="flex items-center gap-2 sm:gap-3 shrink-0 flex-shrink-0 relative z-10">
+            <!-- Accessible Font-Size Adjustment Controls (Phase 9 A11y SRS Requirement) -->
+            <div x-data="fontSizeController()" class="hidden sm:flex items-center gap-1 px-2 py-1 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-full shrink-0 shadow-sm" role="group" aria-label="Font size adjustment controls">
+                <button type="button" @click="decreaseFontSize()" :class="scaleIndex === 0 ? 'bg-indigo-500/25 text-indigo-600 dark:text-indigo-300 font-black' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'" class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500" title="Decrease Text Size (90%)" aria-label="Decrease text size">
+                    A-
+                </button>
+                <button type="button" @click="resetFontSize()" :class="scaleIndex === 1 ? 'bg-indigo-500/25 text-indigo-600 dark:text-indigo-300 font-black' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'" class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500" title="Default Text Size (100%)" aria-label="Default text size">
+                    A
+                </button>
+                <button type="button" @click="increaseFontSize()" :class="scaleIndex === 2 ? 'bg-indigo-500/25 text-indigo-600 dark:text-indigo-300 font-black' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'" class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500" title="Increase Text Size (115%)" aria-label="Increase text size">
+                    A+
+                </button>
+            </div>
+
             <!-- Theme Toggle -->
-            <button id="themeToggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode"
-                class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-white/80 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/40 transition-all shadow-sm shrink-0 flex-shrink-0 cursor-pointer">
+            <button id="themeToggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode" aria-label="Toggle light or dark theme"
+                class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-white/80 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/40 transition-all shadow-sm shrink-0 flex-shrink-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500">
                 <i id="themeIcon" class="fa-solid fa-moon text-xs sm:text-sm"></i>
             </button>
 

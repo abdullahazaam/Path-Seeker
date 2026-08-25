@@ -98,11 +98,13 @@
         <div class="mt-12 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
             <p>&copy; {{ date('Y') }} PathSeeker Career Passport. Built for global full-stack excellence.</p>
             <div class="flex items-center gap-4">
+                <a href="{{ route('sitemap') }}" target="_blank" class="hover:text-indigo-400 font-mono transition-colors">XML Sitemap</a>
+                <span>&bull;</span>
                 <span>Privacy Policy</span>
                 <span>&bull;</span>
                 <span>Terms of Service</span>
                 <span>&bull;</span>
-                <span>System Status: Online</span>
+                <span class="text-emerald-500 font-mono flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> System Status: Online</span>
             </div>
         </div>
     </div>

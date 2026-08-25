@@ -59,6 +59,12 @@ use App\Http\Controllers\ChatController;
 // Real-Time AI Career Guide Chatbot Endpoint (Rate-Limited)
 Route::post('/chat/message', [ChatController::class, 'sendMessage'])->name('chat.message')->middleware('throttle:20,1');
 
+use App\Http\Controllers\HealthController;
+use App\Http\Controllers\FileUploadController;
+
+// Production Service & DB Health-Check API
+Route::get('/api/health', [HealthController::class, 'check'])->name('api.health');
+
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\BookmarkController;
@@ -83,6 +89,9 @@ Route::middleware('auth')->group(function () {
     // Passport Sharing & Rate-Limited PDF Export
     Route::get('/passport/share-link', [PassportShareController::class, 'getShareLink'])->name('passport.share-link');
     Route::get('/passport/export-pdf', [PassportExportController::class, 'exportPdf'])->name('passport.export-pdf')->middleware('throttle:5,1');
+
+    // Secure Candidate Document / Resume Upload
+    Route::post('/api/upload/resume', [FileUploadController::class, 'uploadResume'])->name('api.upload.resume')->middleware('throttle:10,1');
 
     // Bookmarks CRUD & Private Notes
     Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
