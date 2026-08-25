@@ -566,6 +566,9 @@
     <!-- Top Spacing -->
     <div class="h-20 sm:h-24"></div>
 
+    <!-- Navigation Breadcrumbs Component -->
+    @include('components.breadcrumbs')
+
     <!-- Global Flash Notifications -->
     @include('components.flash-message')
 
@@ -1041,6 +1044,18 @@
             const next = isDark ? 'light' : 'dark';
             localStorage.setItem('theme', next);
             applyTheme(next);
+        }
+
+        // Global Font Size Adjustment (WCAG A11y Scaling)
+        function adjustFontSize(delta) {
+            const scales = ['90%', '100%', '115%', '125%'];
+            let currentIdx = parseInt(localStorage.getItem('fontSizeScaleIndex') || '1');
+            currentIdx = Math.max(0, Math.min(scales.length - 1, currentIdx + delta));
+            localStorage.setItem('fontSizeScaleIndex', currentIdx.toString());
+            html.style.fontSize = scales[currentIdx];
+            
+            // Dispatch notification toast
+            window.dispatchEvent(new CustomEvent('fontsizechange', { detail: { scale: scales[currentIdx] } }));
         }
 
         // 2. Global Command Palette Controller

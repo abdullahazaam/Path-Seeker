@@ -98,6 +98,25 @@
         <!-- Right Actions: Theme Toggle, Notifications, User Auth & Dropdown, Mobile Toggle -->
         <div class="flex items-center gap-1.5 sm:gap-2 lg:gap-2.5 shrink-0 flex-shrink-0 relative z-10">
 
+            <!-- Font-Size Adjustment (WCAG A11y) -->
+            <div class="flex items-center gap-0.5 px-1 sm:px-1.5 py-0.5 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 shadow-sm shrink-0 flex-shrink-0">
+                <button type="button" 
+                        onclick="adjustFontSize(-1)" 
+                        title="Decrease Font Size (A-)" 
+                        aria-label="Decrease base font size"
+                        class="w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-mono font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-200/80 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-purple-300 transition-colors cursor-pointer focus:outline-none">
+                    A-
+                </button>
+                <span class="text-slate-300 dark:text-slate-700 select-none text-[10px] sm:text-xs font-mono">|</span>
+                <button type="button" 
+                        onclick="adjustFontSize(1)" 
+                        title="Increase Font Size (A+)" 
+                        aria-label="Increase base font size"
+                        class="w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-mono font-black text-slate-700 dark:text-slate-300 hover:bg-slate-200/80 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-purple-300 transition-colors cursor-pointer focus:outline-none">
+                    A+
+                </button>
+            </div>
+
             <!-- Theme Toggle -->
             <button id="themeToggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode" aria-label="Toggle light or dark theme"
                 class="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-white/80 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/40 transition-all shadow-sm shrink-0 flex-shrink-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500">
@@ -418,8 +437,20 @@
             <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
         </a>
 
+        <!-- Mobile Font-Size Accessibility Bar -->
+        <div class="pt-2 border-t border-slate-200 dark:border-white/10 flex items-center justify-between px-3 py-2 bg-slate-50 dark:bg-white/[0.02] rounded-2xl">
+            <span class="text-xs font-mono font-bold text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-text-height text-purple-500"></i>
+                <span>Accessibility Scale:</span>
+            </span>
+            <div class="flex items-center gap-1">
+                <button type="button" onclick="adjustFontSize(-1)" class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-white/10 text-xs font-mono font-bold text-slate-800 dark:text-white">A-</button>
+                <button type="button" onclick="adjustFontSize(1)" class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-white/10 text-xs font-mono font-bold text-slate-800 dark:text-white">A+</button>
+            </div>
+        </div>
+
         @auth
-            <div class="pt-3 mt-1 border-t border-slate-200 dark:border-white/10 flex flex-col gap-2">
+            <div class="pt-2 flex flex-col gap-2">
                 <div class="flex items-center gap-2">
                     <a href="{{ route('profile.edit') }}" class="flex-1 py-2.5 px-3 rounded-xl text-center font-bold text-xs bg-slate-100 dark:bg-white/5 text-slate-800 dark:text-slate-200 hover:bg-purple-500/15 hover:text-purple-600 transition-colors flex items-center justify-center gap-1.5">
                         <i class="fa-solid fa-user-gear text-purple-500"></i>
