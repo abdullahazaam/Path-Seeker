@@ -15,9 +15,39 @@ class FeedbackController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $feedbacks = Feedback::where('user_id', $user->id)->latest()->paginate(10);
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Please sign in to view your feedback history.');
+        }
+
+        $feedbacks = Feedback::where('user_id', $user->id)->with('responder')->latest()->paginate(10);
 
         return view('feedback.index', compact('feedbacks'));
+    }
+
+    /**
+     * Display a specific feedback conversation thread with administrator response.
+     */
+    public function show(string $id)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Please sign in to view this feedback thread.');
+        }
+
+        $feedback = Feedback::with(['user', 'responder'])->findOrFail($id);
+
+        // Strict Authorization: Only the author or an administrator can view
+        if ($user->id !== $feedback->user_id && $user->role !== 'admin') {
+            abort(403, 'Unauthorized access to private feedback conversation.');
+        }
+
+        // Auto-mark any matching unread notification as read
+        $user->unreadNotifications()
+            ->where('data->feedback_id', (int) $feedback->id)
+            ->get()
+            ->each(fn ($n) => $n->markAsRead());
+
+        return view('feedback.show', compact('feedback'));
     }
 
     /**

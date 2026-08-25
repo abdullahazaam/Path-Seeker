@@ -897,6 +897,66 @@
         </div>
     </div>
 
+    {{-- Support & Feedback Responses Section --}}
+    @if(isset($userFeedbacks) && $userFeedbacks->isNotEmpty())
+    <div class="space-y-6">
+        <div class="flex items-center justify-between gap-4">
+            <div class="space-y-1">
+                <div class="text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5 font-mono uppercase tracking-wider">
+                    <i class="fa-solid fa-comments"></i> Support Inquiries
+                </div>
+                <h2 class="text-2xl font-black text-slate-900 dark:text-white font-display">My Submitted Feedback &amp; Responses</h2>
+            </div>
+            <a href="{{ route('feedback.index') }}" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">
+                <span>View Full History</span> &rarr;
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @foreach($userFeedbacks->take(4) as $fb)
+                <div class="rounded-3xl p-6 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-4 flex flex-col justify-between hover:border-indigo-500/30 transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase font-mono bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25">
+                                {{ $fb->category }} Ticket
+                            </span>
+                            <span class="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold
+                                {{ $fb->status === 'resolved' ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/25' : ($fb->status === 'in_review' ? 'bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/25' : 'bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-500/25') }}">
+                                {{ ucfirst(str_replace('_', ' ', $fb->status)) }}
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-700 dark:text-slate-300 line-clamp-2 leading-relaxed font-medium">
+                            "{{ $fb->message }}"
+                        </p>
+                        @if($fb->admin_response)
+                            <div class="p-3.5 rounded-2xl bg-emerald-500/[0.08] dark:bg-emerald-500/10 border border-emerald-500/20 text-xs space-y-1">
+                                <div class="flex items-center gap-1.5 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase font-mono">
+                                    <i class="fa-solid fa-headset"></i>
+                                    <span>Staff Reply · {{ $fb->responder?->name ?? 'Admin' }}</span>
+                                </div>
+                                <p class="text-xs text-slate-800 dark:text-slate-200 line-clamp-2">
+                                    {{ $fb->admin_response }}
+                                </p>
+                            </div>
+                        @else
+                            <p class="text-[11px] text-slate-400 font-mono italic">
+                                <i class="fa-solid fa-hourglass-half mr-1"></i>Awaiting engineering review
+                            </p>
+                        @endif
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-200/80 dark:border-white/5 flex items-center justify-between">
+                        <span class="text-[10px] text-slate-400 font-mono">{{ $fb->created_at->format('M d, Y') }}</span>
+                        <a href="{{ route('feedback.show', $fb->id) }}" class="px-3 py-1 rounded-lg bg-indigo-500/10 hover:bg-indigo-600 hover:text-white text-indigo-600 dark:text-indigo-400 text-xs font-bold transition-all inline-flex items-center gap-1">
+                            <span>Open Thread</span> &rarr;
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    @endif
+
 @else
     {{-- ══════════════════════════════════════════════════════════════════════
          ADMIN MASTER CONTROL CENTER & FULL CRUD MANAGEMENT INTERFACE

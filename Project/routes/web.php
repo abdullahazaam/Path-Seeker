@@ -114,8 +114,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/multimedia/{id}/progress', [MultimediaController::class, 'saveProgress'])->name('multimedia.progress');
     Route::post('/resources/{id}/rate', [ResourceController::class, 'rate'])->name('resources.rate');
 
-    // Feedback History for Auth User
+    // Feedback History & Conversation Thread for Auth User
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
+    Route::get('/feedback/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
 
     // Story Submission by User
     Route::post('/stories', [SuccessStoryController::class, 'store'])->name('stories.store');

@@ -58,13 +58,28 @@ class NotificationController extends Controller
             ->get()
             ->map(function ($n) {
                 $data = is_array($n->data) ? $n->data : json_decode($n->data, true) ?? [];
+                
+                $actionUrl = $data['action_url'] ?? null;
+                if (!$actionUrl || $actionUrl === route('dashboard')) {
+                    if (!empty($data['feedback_id'])) {
+                        $actionUrl = route('feedback.show', $data['feedback_id']);
+                    } else {
+                        $actionUrl = route('dashboard');
+                    }
+                }
+
+                $title = $data['title'] ?? null;
+                if (!$title && !empty($data['feedback_id'])) {
+                    $title = 'Admin Reply: ' . ucfirst($data['category'] ?? 'Support') . ' Ticket';
+                }
+
                 return [
                     'id' => $n->id,
-                    'title' => $data['title'] ?? 'System Notification',
+                    'title' => $title ?? 'System Notification',
                     'message' => $data['message'] ?? 'Notification from PathSeeker Platform.',
-                    'action_url' => $data['action_url'] ?? route('dashboard'),
-                    'icon' => $data['icon'] ?? 'fa-solid fa-bell',
-                    'type_badge' => $data['type_badge'] ?? 'Notice',
+                    'action_url' => $actionUrl,
+                    'icon' => $data['icon'] ?? (!empty($data['feedback_id']) ? 'fa-solid fa-reply-all' : 'fa-solid fa-bell'),
+                    'type_badge' => $data['type_badge'] ?? (!empty($data['feedback_id']) ? 'Admin Reply' : 'Notice'),
                     'read' => !is_null($n->read_at),
                     'time_ago' => $n->created_at->diffForHumans(),
                 ];

@@ -26,8 +26,12 @@ class FeedbackRespondedNotification extends Notification
             'feedback_id' => $this->feedback->id,
             'category' => $this->feedback->category,
             'status' => $this->feedback->status,
+            'title' => 'Admin Response: ' . ucfirst($this->feedback->category) . ' Feedback',
             'response' => $this->feedback->admin_response,
-            'message' => "An administrator has responded to your {$this->feedback->category} feedback.",
+            'message' => "Admin reply: \"" . \Illuminate\Support\Str::limit($this->feedback->admin_response, 80) . "\"",
+            'action_url' => route('feedback.show', $this->feedback->id),
+            'icon' => 'fa-solid fa-reply-all',
+            'type_badge' => 'Admin Reply',
             'updated_at' => now()->toIso8601String(),
         ];
     }

@@ -173,4 +173,47 @@ class LiveNotificationAndFeedbackTest extends TestCase
         ]);
         $studentMediaUpdate->assertStatus(403);
     }
+
+    public function test_feedback_notification_direct_routing_and_reply_viewing(): void
+    {
+        $admin = User::where('email', 'admin@pathseeker.com')->first();
+        $student = User::where('email', 'student@pathseeker.com')->first();
+        $otherUser = User::where('role', '!=', 'admin')->where('id', '!=', $student->id)->first() ?? User::factory()->create(['role' => 'graduate']);
+
+        // 1. Student creates feedback
+        $feedback = Feedback::create([
+            'user_id' => $student->id,
+            'name' => $student->name,
+            'email' => $student->email,
+            'category' => 'query',
+            'message' => 'Are there new AI track certifications for Q3 2026?',
+            'status' => 'open',
+        ]);
+
+        // 2. Admin responds
+        $this->actingAs($admin)->post("/admin/feedback/{$feedback->id}/respond", [
+            'status' => 'resolved',
+            'admin_response' => 'Yes, our 2026 AI Architect credentials launch next Monday.',
+        ]);
+
+        // 3. Check student's live notification API payload
+        $notifRes = $this->actingAs($student)->getJson('/api/notifications');
+        $notifRes->assertStatus(200);
+        $notifications = $notifRes->json('notifications');
+        $feedbackNotif = collect($notifications)->first(fn ($n) => str_contains($n['action_url'], "/feedback/{$feedback->id}"));
+        $this->assertNotNull($feedbackNotif, 'Notification should link directly to feedback.show');
+        $this->assertEquals(url("/feedback/{$feedback->id}"), $feedbackNotif['action_url']);
+        $this->assertEquals('Admin Reply', $feedbackNotif['type_badge']);
+
+        // 4. Student views their feedback thread
+        $threadRes = $this->actingAs($student)->get("/feedback/{$feedback->id}");
+        $threadRes->assertStatus(200);
+        $threadRes->assertSee('Feedback Inquiry &amp; Official Response', false);
+        $threadRes->assertSee('Are there new AI track certifications for Q3 2026?');
+        $threadRes->assertSee('Yes, our 2026 AI Architect credentials launch next Monday.');
+
+        // 5. Another unauthorized user cannot view the private feedback thread
+        $unauthRes = $this->actingAs($otherUser)->get("/feedback/{$feedback->id}");
+        $unauthRes->assertStatus(403);
+    }
 }
