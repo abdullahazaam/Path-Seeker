@@ -451,16 +451,57 @@
             transition: left 0.75s ease-in-out;
         }
 
-        /* Scroll Reveal Utility */
-        .reveal-element {
+        /* ══════════════════ ADVANCED SCROLL-TRIGGERED REVEAL SYSTEM ══════════════════ */
+        .reveal-element,
+        .reveal-on-scroll,
+        [data-reveal] {
             opacity: 0;
-            transform: translateY(32px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(28px);
+            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
-        .reveal-element.revealed {
-            opacity: 1;
-            transform: translateY(0px);
+
+        .reveal-element.reveal-fade,
+        .reveal-on-scroll.reveal-fade,
+        [data-reveal="fade"] {
+            transform: none;
         }
+
+        .reveal-element.reveal-left,
+        .reveal-on-scroll.reveal-left,
+        [data-reveal="left"] {
+            transform: translateX(-32px);
+        }
+
+        .reveal-element.reveal-right,
+        .reveal-on-scroll.reveal-right,
+        [data-reveal="right"] {
+            transform: translateX(32px);
+        }
+
+        .reveal-element.reveal-scale,
+        .reveal-on-scroll.reveal-scale,
+        [data-reveal="scale"] {
+            transform: scale(0.94);
+        }
+
+        /* Revealed State */
+        .reveal-element.revealed,
+        .reveal-on-scroll.revealed,
+        [data-reveal].revealed {
+            opacity: 1 !important;
+            transform: translateY(0) translateX(0) scale(1) !important;
+        }
+
+        /* Stagger Delays */
+        .stagger-1, [data-reveal-delay="100"] { transition-delay: 100ms !important; }
+        .stagger-2, [data-reveal-delay="200"] { transition-delay: 200ms !important; }
+        .stagger-3, [data-reveal-delay="300"] { transition-delay: 300ms !important; }
+        .stagger-4, [data-reveal-delay="400"] { transition-delay: 400ms !important; }
+        .stagger-5, [data-reveal-delay="500"] { transition-delay: 500ms !important; }
+        .stagger-6, [data-reveal-delay="600"] { transition-delay: 600ms !important; }
+        .stagger-7, [data-reveal-delay="700"] { transition-delay: 700ms !important; }
+        .stagger-8, [data-reveal-delay="800"] { transition-delay: 800ms !important; }
 
         /* Inputs */
         .app-input {
@@ -543,9 +584,10 @@
             .animate-aurora-drift-1, .animate-aurora-drift-2, .animate-aurora-drift-3, .animate-scanline, .animate-pulse-glow {
                 animation: none !important;
             }
-            .reveal-element {
+            .reveal-element, .reveal-on-scroll, [data-reveal], [data-reveal] * {
                 opacity: 1 !important;
                 transform: none !important;
+                transition: none !important;
             }
         }
 
@@ -1161,26 +1203,91 @@
             });
         }
 
-        // 3. Cinematic Scroll Reveal Observer & Event Listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.12
-            };
+        // 3. Cinematic High-Performance Scroll Reveal Engine (60fps IntersectionObserver)
+        (function initScrollRevealEngine() {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            function setupObserver() {
+                if (prefersReducedMotion) {
+                    document.querySelectorAll('.reveal-element, .reveal-on-scroll, [data-reveal]').forEach(el => {
+                        el.classList.add('revealed');
+                    });
+                    return;
+                }
 
-            const revealObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        observer.unobserve(entry.target);
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px 0px -40px 0px',
+                    threshold: 0.08
+                };
+
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('revealed');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                // Auto-collect all targeted elements
+                const selectors = [
+                    '.reveal-element',
+                    '.reveal-on-scroll',
+                    '[data-reveal]',
+                    'main > section',
+                    'main > div > section',
+                    '.app-card',
+                    '.career-card',
+                    '.glass-panel',
+                    '.card-tilt-3d',
+                    '#aiAdvisorOutput',
+                    '.perspective-stage'
+                ];
+
+                const elements = document.querySelectorAll(selectors.join(', '));
+                elements.forEach(el => {
+                    if (!el.dataset.revealObserved) {
+                        el.dataset.revealObserved = 'true';
+                        
+                        // Check if in initial viewport
+                        const rect = el.getBoundingClientRect();
+                        if (rect.top < window.innerHeight && rect.bottom > 0) {
+                            el.classList.add('revealed');
+                        } else {
+                            if (!el.classList.contains('reveal-element') && !el.classList.contains('reveal-on-scroll') && !el.hasAttribute('data-reveal')) {
+                                el.classList.add('reveal-on-scroll');
+                            }
+                            revealObserver.observe(el);
+                        }
                     }
                 });
-            }, observerOptions);
 
-            document.querySelectorAll('.reveal-element').forEach(el => {
-                revealObserver.observe(el);
-            });
+                // Auto-stagger card grids (.grid > div)
+                document.querySelectorAll('.grid, [data-stagger-grid]').forEach(grid => {
+                    const children = Array.from(grid.children);
+                    if (children.length > 1 && !grid.dataset.staggerInit) {
+                        grid.dataset.staggerInit = 'true';
+                        children.forEach((child, index) => {
+                            if (!child.style.transitionDelay && !child.classList.contains('stagger-1')) {
+                                const delay = Math.min((index % 4) * 80, 400);
+                                child.style.transitionDelay = `${delay}ms`;
+                            }
+                        });
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupObserver);
+            } else {
+                setupObserver();
+            }
+
+            window.initScrollReveals = setupObserver;
+        })();
+
+        document.addEventListener('DOMContentLoaded', () => {
 
             // Universal 3D Tilt & Parallax Physics Engine
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

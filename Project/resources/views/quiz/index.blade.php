@@ -80,7 +80,7 @@
      }">
 
     {{-- Quiz Header Banner with Live Telemetry --}}
-    <div class="relative rounded-3xl p-8 sm:p-10 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
+    <div class="relative rounded-3xl p-8 sm:p-10 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden reveal-element">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
@@ -161,7 +161,7 @@
                     ];
                 @endphp
 
-                <div class="bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 space-y-6 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] transition-all duration-300">
+                <div class="bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 space-y-6 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] transition-all duration-300 reveal-element">
                     
                     {{-- Question Header --}}
                     <div class="flex items-start justify-between gap-4 border-b border-slate-100 dark:border-white/5 pb-4">
@@ -259,7 +259,7 @@
             @endforeach
 
             {{-- Submit Action Console --}}
-            <div class="p-8 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl text-center space-y-4">
+            <div class="p-8 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl text-center space-y-4 reveal-element">
                 <div class="text-xs text-slate-500 dark:text-slate-400">
                     Clicking submit processes your weighted scores and computes real-time career alignment models.
                 </div>
