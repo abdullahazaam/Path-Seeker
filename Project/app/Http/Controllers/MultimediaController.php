@@ -144,11 +144,13 @@ class MultimediaController extends Controller
             'review' => 'nullable|string|max:500',
         ]);
 
-        Rating::updateOrCreate(
+        $item = Multimedia::findOrFail($id);
+
+        $rating = Rating::updateOrCreate(
             [
                 'user_id' => Auth::id(),
                 'rateable_type' => 'multimedia',
-                'rateable_id' => $id,
+                'rateable_id' => $item->id,
             ],
             [
                 'rating' => $validated['rating'],
@@ -156,11 +158,20 @@ class MultimediaController extends Controller
             ]
         );
 
+        $newAverage = round($item->ratings()->avg('rating') ?: $validated['rating'], 1);
+        $totalRatings = $item->ratings()->count();
+
         if ($request->wantsJson()) {
-            return response()->json(['success' => true, 'message' => 'Rating recorded successfully.']);
+            return response()->json([
+                'success' => true,
+                'message' => 'Your ' . $validated['rating'] . '-star rating has been recorded!',
+                'rating' => $validated['rating'],
+                'average_rating' => $newAverage,
+                'total_ratings' => $totalRatings,
+            ]);
         }
 
-        return redirect()->back()->with('success', 'Thank you! Your 5-star review has been recorded.');
+        return redirect()->back()->with('success', 'Thank you! Your ' . $validated['rating'] . '-star rating has been recorded.');
     }
 
     /**

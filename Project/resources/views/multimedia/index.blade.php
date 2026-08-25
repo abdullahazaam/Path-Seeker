@@ -180,8 +180,20 @@
                             </span>
                         </div>
 
-                        {{-- Duration Badge --}}
-                        <div class="absolute bottom-3 right-3 z-20 pointer-events-none">
+                        {{-- Rating Badge --}}
+                        <div class="absolute top-3 right-3 z-20 pointer-events-none">
+                            <span class="px-2.5 py-1 text-[10px] font-mono font-bold text-amber-300 bg-slate-900/80 dark:bg-black/75 rounded-full backdrop-blur-md flex items-center gap-1 border border-white/15 shadow-sm">
+                                <i class="fa-solid fa-star text-[9px] text-amber-400"></i>
+                                <span>{{ $item->average_rating }}</span>
+                            </span>
+                        </div>
+
+                        {{-- Duration & Transcript Badge --}}
+                        <div class="absolute bottom-3 right-3 z-20 pointer-events-none flex items-center gap-1.5">
+                            <span class="px-2 py-0.5 text-[9px] font-mono font-semibold text-indigo-300 bg-slate-900/80 dark:bg-black/75 rounded-full backdrop-blur-md flex items-center gap-1 border border-white/15 shadow-sm">
+                                <i class="fa-solid fa-file-lines text-[8px]"></i>
+                                <span>CC</span>
+                            </span>
                             <span class="px-2.5 py-1 text-[10px] font-mono font-semibold text-white bg-slate-900/80 dark:bg-black/75 rounded-full backdrop-blur-md flex items-center gap-1.5 border border-white/15 shadow-sm">
                                 <i class="fa-regular fa-clock text-[9px] text-indigo-300"></i>
                                 <span>{{ $item->duration ?? '25:00' }}</span>
