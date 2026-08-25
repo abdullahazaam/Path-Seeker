@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Hash;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Seed the application's database with 2026-ready enterprise data.
      */
     public function run(): void
     {
@@ -81,61 +81,96 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        // 2. 15 Diverse, High-Demand Career Tracks
+        // 2. Comprehensive 2026 Career Tracks with Role-Based Targeting
         $careers = [
+            // ── FOUNDATIONAL / STUDENT TRACKS ──
             [
                 'title' => 'Full-Stack Web Developer',
                 'description' => 'Architect and implement scalable end-to-end web applications using modern backend frameworks, reactive frontend systems, and relational databases.',
                 'domain' => 'Software Engineering',
+                'target_role' => 'student',
                 'required_skills' => 'PHP, Laravel, JavaScript, Vue.js, React, MySQL, REST APIs, Git, Tailwind CSS',
                 'expected_salary' => '$75,000 - $125,000 / yr',
             ],
             [
-                'title' => 'Cloud Solutions Architect',
-                'description' => 'Design resilient, highly available, and secure multi-cloud architectures across AWS, GCP, and Azure for enterprise distributed workloads.',
-                'domain' => 'Cloud & Infrastructure',
-                'required_skills' => 'AWS, GCP, Azure, Docker, Kubernetes, Terraform, CI/CD, Microservices, IAM Security',
-                'expected_salary' => '$120,000 - $185,000 / yr',
+                'title' => 'Front-End Web Engineer & Design Systems Specialist',
+                'description' => 'Build high-performance, accessible, and delightful interactive user interfaces with modern component architectures and micro-frontends.',
+                'domain' => 'Software Engineering',
+                'target_role' => 'student',
+                'required_skills' => 'TypeScript, React, Next.js, Vue 3, Tailwind CSS, Web Performance, WCAG Accessibility, Vite',
+                'expected_salary' => '$70,000 - $115,000 / yr',
             ],
             [
-                'title' => 'AI & Machine Learning Engineer',
-                'description' => 'Develop, train, fine-tune, and deploy state-of-the-art Deep Learning models, LLMs, and high-throughput real-time inference pipelines.',
-                'domain' => 'Artificial Intelligence & Data',
-                'required_skills' => 'Python, PyTorch, TensorFlow, Scikit-Learn, LLMs, LangChain, Vector DBs, MLOps',
-                'expected_salary' => '$115,000 - $175,000 / yr',
+                'title' => 'Python Data Analyst & BI Developer',
+                'description' => 'Transform unstructured operational datasets into strategic executive dashboards, KPI telemetry, and automated ETL workflows.',
+                'domain' => 'Data Science',
+                'target_role' => 'student',
+                'required_skills' => 'Python, Pandas, SQL, Tableau, Power BI, Excel Advanced, Jupyter, Data Storytelling',
+                'expected_salary' => '$65,000 - $110,000 / yr',
             ],
             [
-                'title' => 'Cybersecurity & Penetration Tester',
-                'description' => 'Perform ethical hacking, vulnerability assessments, penetration testing, and build threat intelligence frameworks to defend corporate perimeters.',
-                'domain' => 'Cybersecurity',
-                'required_skills' => 'Network Security, SIEM, Penetration Testing, Kali Linux, Burp Suite, Cryptography, CISSP',
-                'expected_salary' => '$85,000 - $140,000 / yr',
+                'title' => 'Junior DevOps & Linux Systems Administrator',
+                'description' => 'Manage continuous integration workflows, containerize microservices, and orchestrate automated Linux server configurations.',
+                'domain' => 'DevOps',
+                'target_role' => 'student',
+                'required_skills' => 'Linux (Ubuntu/Debian), Bash Scripting, Docker, GitHub Actions, Nginx, Git, Networking Basics',
+                'expected_salary' => '$65,000 - $105,000 / yr',
+            ],
+            [
+                'title' => 'Lead UI/UX Product Designer',
+                'description' => 'Craft intuitive user experiences, comprehensive design systems, interactive prototypes, and lead user research to optimize usability.',
+                'domain' => 'UI/UX Design',
+                'target_role' => 'student',
+                'required_skills' => 'Figma, Design Systems, Wireframing, User Research, Prototyping, WCAG Accessibility, Micro-Interactions',
+                'expected_salary' => '$70,000 - $120,000 / yr',
             ],
             [
                 'title' => 'Mobile Application Developer',
                 'description' => 'Build high-performance, native and cross-platform mobile apps for iOS and Android with seamless offline synchronization and fluid animations.',
                 'domain' => 'Mobile Development',
+                'target_role' => 'student',
                 'required_skills' => 'Flutter, Dart, Swift, Kotlin, React Native, REST APIs, SQLite, App Store Deployments',
                 'expected_salary' => '$80,000 - $135,000 / yr',
             ],
+
+            // ── ENTRY-LEVEL & PORTFOLIO / GRADUATE TRACKS ──
             [
-                'title' => 'DevOps & Site Reliability Engineer',
-                'description' => 'Automate deployment lifecycles, engineer zero-downtime infrastructure, and maintain continuous monitoring, telemetry, and chaos engineering.',
-                'domain' => 'DevOps',
-                'required_skills' => 'GitHub Actions, Jenkins, Ansible, Prometheus, Grafana, Linux Kernels, Docker, Helm',
-                'expected_salary' => '$105,000 - $160,000 / yr',
+                'title' => 'AI & Machine Learning Engineer',
+                'description' => 'Develop, train, fine-tune, and deploy state-of-the-art Deep Learning models, LLMs, and high-throughput real-time inference pipelines.',
+                'domain' => 'Artificial Intelligence & Data',
+                'target_role' => 'graduate',
+                'required_skills' => 'Python, PyTorch, TensorFlow, Scikit-Learn, LLMs, LangChain, Vector DBs, MLOps',
+                'expected_salary' => '$115,000 - $175,000 / yr',
             ],
             [
-                'title' => 'Lead UI/UX Product Designer',
-                'description' => 'Craft intuitive user experiences, comprehensive design systems, interactive prototypes, and lead user research to optimize conversion and usability.',
-                'domain' => 'UI/UX Design',
-                'required_skills' => 'Figma, Design Systems, Wireframing, User Research, Prototyping, WCAG Accessibility',
-                'expected_salary' => '$70,000 - $120,000 / yr',
+                'title' => 'Cloud Solutions Architect',
+                'description' => 'Design resilient, highly available, and secure multi-cloud architectures across AWS, GCP, and Azure for enterprise distributed workloads.',
+                'domain' => 'Cloud & Infrastructure',
+                'target_role' => 'graduate',
+                'required_skills' => 'AWS, GCP, Azure, Docker, Kubernetes, Terraform, CI/CD, Microservices, IAM Security',
+                'expected_salary' => '$120,000 - $185,000 / yr',
+            ],
+            [
+                'title' => 'Cybersecurity & Penetration Tester',
+                'description' => 'Perform ethical hacking, vulnerability assessments, penetration testing, and build threat intelligence frameworks to defend corporate perimeters.',
+                'domain' => 'Cybersecurity',
+                'target_role' => 'graduate',
+                'required_skills' => 'Network Security, SIEM, Penetration Testing, Kali Linux, Burp Suite, Cryptography, CISSP',
+                'expected_salary' => '$85,000 - $140,000 / yr',
+            ],
+            [
+                'title' => 'Prompt Engineer & AI Context Architect',
+                'description' => 'Architect deterministic contextual prompts, RAG (Retrieval-Augmented Generation) systems, and multi-agent autonomous agent workflows.',
+                'domain' => 'Artificial Intelligence & Data',
+                'target_role' => 'graduate',
+                'required_skills' => 'Prompt Engineering, LangChain, LlamaIndex, Vector Databases, Python, OpenAI API, Anthropic Claude, Embeddings',
+                'expected_salary' => '$90,000 - $155,000 / yr',
             ],
             [
                 'title' => 'Blockchain & Smart Contract Engineer',
                 'description' => 'Architect decentralized applications (dApps), write secure EVM smart contracts, and implement cryptographic zero-knowledge protocols.',
                 'domain' => 'Blockchain',
+                'target_role' => 'graduate',
                 'required_skills' => 'Solidity, Rust, Ethereum, Web3.js, Hardhat, Smart Contract Auditing, Cryptography',
                 'expected_salary' => '$110,000 - $180,000 / yr',
             ],
@@ -143,6 +178,7 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Data Scientist & Predictive Modeler',
                 'description' => 'Extract strategic business insights from massive datasets using statistical modeling, regression analysis, clustering, and data storytelling.',
                 'domain' => 'Data Science',
+                'target_role' => 'graduate',
                 'required_skills' => 'Python, R, SQL, Pandas, Tableau, Power BI, Statistical Modeling, BigQuery',
                 'expected_salary' => '$90,000 - $145,000 / yr',
             ],
@@ -150,34 +186,57 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Game Engine & Graphics Developer',
                 'description' => 'Program core physics engines, custom shader pipelines, gameplay mechanics, and network synchronization for AAA titles and interactive 3D apps.',
                 'domain' => 'Game Development',
+                'target_role' => 'graduate',
                 'required_skills' => 'C++, Unity, Unreal Engine 5, C#, Shaders (HLSL/GLSL), 3D Math, Vulkan, PhysX',
                 'expected_salary' => '$85,000 - $140,000 / yr',
-            ],
-            [
-                'title' => 'Distributed Backend & Systems Architect',
-                'description' => 'Design resilient low-latency backend systems capable of processing millions of concurrent transactions with strict consistency guarantees.',
-                'domain' => 'Software Engineering',
-                'required_skills' => 'Go (Golang), Java / Spring Boot, Kafka, Redis, gRPC, PostgreSQL, Event-Driven Architecture',
-                'expected_salary' => '$110,000 - $165,000 / yr',
-            ],
-            [
-                'title' => 'Big Data & Lakehouse Platform Engineer',
-                'description' => 'Construct high-throughput streaming and batch data pipelines, manage cloud lakehouses, and optimize complex analytical transformations.',
-                'domain' => 'Data Science',
-                'required_skills' => 'Apache Spark, Apache Kafka, Snowflake, dbt, Apache Airflow, Databricks, Python, Scala',
-                'expected_salary' => '$115,000 - $170,000 / yr',
             ],
             [
                 'title' => 'Security Operations (SOC) & Incident Responder',
                 'description' => 'Investigate active security anomalies, conduct digital forensics, orchestrate SOAR workflows, and safeguard critical infrastructure.',
                 'domain' => 'Cybersecurity',
+                'target_role' => 'graduate',
                 'required_skills' => 'Threat Hunting, Splunk, EDR, Wireshark, Malware Analysis, MITRE ATT&CK, Python Scripting',
                 'expected_salary' => '$75,000 - $120,000 / yr',
+            ],
+
+            // ── ADVANCED ARCHITECTURE & LEADERSHIP / PROFESSIONAL TRACKS ──
+            [
+                'title' => 'Distributed Backend & Systems Architect',
+                'description' => 'Design resilient low-latency backend systems capable of processing millions of concurrent transactions with strict consistency guarantees.',
+                'domain' => 'Software Engineering',
+                'target_role' => 'professional',
+                'required_skills' => 'Go (Golang), Java / Spring Boot, Kafka, Redis, gRPC, PostgreSQL, Event-Driven Architecture',
+                'expected_salary' => '$110,000 - $165,000 / yr',
+            ],
+            [
+                'title' => 'Principal Cloud & SRE Infrastructure Lead',
+                'description' => 'Lead enterprise cloud transformations, multi-region Kubernetes topologies, infrastructure-as-code automation, and chaos engineering practices.',
+                'domain' => 'Cloud & Infrastructure',
+                'target_role' => 'professional',
+                'required_skills' => 'Kubernetes, Terraform, AWS Multi-Region, Chaos Mesh, Prometheus, OpenTelemetry, Service Mesh (Istio)',
+                'expected_salary' => '$140,000 - $220,000 / yr',
+            ],
+            [
+                'title' => 'Autonomous AI Agent & Multi-Modal Architect',
+                'description' => 'Engineer production-grade autonomous agent swarms, function-calling frameworks, memory persistence graphs, and fine-tuned multimodal models.',
+                'domain' => 'Artificial Intelligence & Data',
+                'target_role' => 'professional',
+                'required_skills' => 'AutoGen, LangGraph, PyTorch, Multi-Modal Inference, LoRA/QLoRA Fine-Tuning, vLLM, TensorRT-LLM',
+                'expected_salary' => '$145,000 - $230,000 / yr',
+            ],
+            [
+                'title' => 'Big Data & Lakehouse Platform Engineer',
+                'description' => 'Construct high-throughput streaming and batch data pipelines, manage cloud lakehouses, and optimize complex analytical transformations.',
+                'domain' => 'Data Science',
+                'target_role' => 'professional',
+                'required_skills' => 'Apache Spark, Apache Kafka, Snowflake, dbt, Apache Airflow, Databricks, Python, Scala',
+                'expected_salary' => '$115,000 - $170,000 / yr',
             ],
             [
                 'title' => 'Native iOS & Android Mobile Architect',
                 'description' => 'Lead the technical architecture of flagship mobile ecosystems utilizing declarative UI frameworks, local caching, and hardware integration.',
                 'domain' => 'Mobile Development',
+                'target_role' => 'professional',
                 'required_skills' => 'Swift, SwiftUI, Jetpack Compose, Kotlin Multiplatform, GraphQL, CoreData, Realm',
                 'expected_salary' => '$95,000 - $150,000 / yr',
             ],
@@ -185,43 +244,40 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Technical Artist & 3D Interactive Specialist',
                 'description' => 'Bridge the technical barrier between 3D artists and game programmers by building procedural asset pipelines, real-time shaders, and lighting rigs.',
                 'domain' => 'Game Development',
+                'target_role' => 'professional',
                 'required_skills' => 'Unreal Engine 5, Blender, Maya, Procedural Generation, Houdini, Real-Time VFX, C++',
                 'expected_salary' => '$80,000 - $130,000 / yr',
             ],
         ];
 
         foreach ($careers as $career) {
-            Career::firstOrCreate(
+            Career::updateOrCreate(
                 ['title' => $career['title']],
                 $career
             );
         }
 
-        // 3. 16 Comprehensive Multimedia Items — 100% Embeddable, Unrestricted YouTube URLs
-        // All IDs verified from CS50, freeCodeCamp, Google, Fireship — channels that explicitly allow embedding
+        // 3. 18 Comprehensive Multimedia Items — 100% Embeddable, Unrestricted YouTube URLs
         $multimedia = [
             [
-                // CS50 — Harvard CS50x Introduction to Computer Science (50M+ views, always embeddable)
                 'title' => 'Full-Stack Web Development 2026: Architecture & Frameworks',
                 'description' => 'Master modern full-stack web engineering from frontend reactivity (Vue/React) to robust backend APIs (Laravel/Node) and relational databases.',
                 'type' => 'video',
                 'url' => 'https://www.youtube.com/embed/8mAITcNt710',
                 'thumbnail_url' => 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80',
                 'duration' => '8:16:00',
-                'tags' => 'Software Engineering, Laravel, React, Full-Stack',
+                'tags' => 'Software Engineering, Laravel, React, Full-Stack, Web Development',
             ],
             [
-                // freeCodeCamp — AWS Certified Cloud Practitioner (CLF-C02) 2024 (4M+ views)
                 'title' => 'Cloud Solutions Architecture & AWS/GCP Multi-Cloud Blueprint',
                 'description' => 'Deep dive into architecting resilient cloud systems, VPC networking, IAM security, and serverless compute paradigms on AWS and Google Cloud.',
                 'type' => 'video',
                 'url' => 'https://www.youtube.com/embed/NhDYbskXRgc',
                 'thumbnail_url' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80',
                 'duration' => '13:31:00',
-                'tags' => 'Cloud, AWS, Kubernetes, Distributed Systems',
+                'tags' => 'Cloud, AWS, Kubernetes, Distributed Systems, GCP',
             ],
             [
-                // freeCodeCamp — Machine Learning for Everybody (3M+ views, embed-enabled)
                 'title' => 'Machine Learning & Generative AI Engineering in Production',
                 'description' => 'Learn how to train, fine-tune, and deploy transformer models, LLMs, and real-time inference pipelines using PyTorch and MLOps tools.',
                 'type' => 'video',
@@ -231,7 +287,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Artificial Intelligence, Python, LLMs, Neural Networks, MLOps',
             ],
             [
-                // freeCodeCamp — Ethical Hacking in 15 Hours (4M+ views, embed-enabled)
                 'title' => 'Cybersecurity Defense, Ethical Hacking & Perimeter Hardening',
                 'description' => 'Essential walkthrough on reconnaissance, vulnerability assessment, penetration testing, network sniffing, and defensive perimeter auditing.',
                 'type' => 'video',
@@ -241,7 +296,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Cybersecurity, Ethical Hacking, Threat Hunting, Kali Linux',
             ],
             [
-                // freeCodeCamp — Flutter & Dart Full Course (1.7M views, embed-enabled)
                 'title' => 'Cross-Platform Mobile Development with Flutter & Dart',
                 'description' => 'Step-by-step masterclass on building responsive mobile user interfaces with Flutter and Dart, connecting RESTful backends and local SQLite databases.',
                 'type' => 'video',
@@ -251,7 +305,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Mobile Development, Flutter, iOS, Android, Dart',
             ],
             [
-                // freeCodeCamp — DevOps with Docker and Kubernetes (2M+ views, embed-enabled)
                 'title' => 'Modern DevOps Pipelines: Docker, Kubernetes & GitHub Actions',
                 'description' => 'Comprehensive tutorial on creating automated CI/CD deployment pipelines, containerizing services with Docker, and orchestrating with Kubernetes.',
                 'type' => 'video',
@@ -261,7 +314,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'DevOps, CI/CD, Containerization, Automation, Docker',
             ],
             [
-                // freeCodeCamp — System Design Full Course (2M+ views, embed-enabled)
                 'title' => 'Advanced System Design & Microservices Architecture Masterclass',
                 'description' => 'Comprehensive masterclass on designing low-latency distributed architectures, event-driven microservices, database partitioning, and high-availability patterns.',
                 'type' => 'video',
@@ -271,7 +323,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Software Engineering, System Design, Microservices, Distributed Systems',
             ],
             [
-                // freeCodeCamp — Solidity & Blockchain Full Course (2M+ views, embed-enabled)
                 'title' => 'Blockchain Engineering: Solidity & Ethereum Smart Contracts',
                 'description' => 'Learn to code, test, and audit decentralized smart contracts with Solidity, Hardhat, and Web3.js on the Ethereum Virtual Machine (EVM).',
                 'type' => 'video',
@@ -281,7 +332,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Blockchain, Solidity, Ethereum, Web3, Smart Contracts',
             ],
             [
-                // freeCodeCamp — Data Analysis with Python Full Course (3M+ views, embed-enabled)
                 'title' => 'Data Science & Machine Learning with Python: Full Crash Course',
                 'description' => 'Complete end-to-end data analysis using Pandas, NumPy, statistical hypothesis testing, Scikit-Learn regression, and interactive dashboarding.',
                 'type' => 'video',
@@ -291,7 +341,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Data Science, Python, Pandas, Analytics, Statistics',
             ],
             [
-                // CS50 — CS50 Game Development with Harvard (embed-enabled, official Harvard channel)
                 'title' => 'Game Engine Programming: Unreal Engine 5 & C++ Foundations',
                 'description' => 'Program realistic physics collisions, custom character controllers, dynamic lighting, and HLSL shaders inside Unreal Engine 5.',
                 'type' => 'video',
@@ -301,7 +350,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Game Development, Unreal Engine 5, C++, 3D Graphics',
             ],
             [
-                // freeCodeCamp — Go Programming Full Course (1M+ views, embed-enabled)
                 'title' => 'High-Performance Distributed Systems & Golang Microservices',
                 'description' => 'Architecture patterns for low-latency backend systems, event streaming with Apache Kafka, gRPC communication, and distributed caching.',
                 'type' => 'video',
@@ -311,7 +359,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Software Engineering, Golang, Microservices, Distributed Systems',
             ],
             [
-                // freeCodeCamp — Apache Kafka Crash Course (1M+ views, embed-enabled)
                 'title' => 'Big Data Engineering: Apache Spark & Cloud Lakehouse Architecture',
                 'description' => 'Build scalable batch and stream data pipelines using Apache Spark, Databricks, Delta Lake, and dbt for enterprise data warehousing.',
                 'type' => 'video',
@@ -321,7 +368,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Data Science, Big Data, Apache Spark, Databricks, ETL',
             ],
             [
-                // freeCodeCamp — CompTIA Security+ / Cyber Defense (2M+ views, embed-enabled)
                 'title' => 'SOC Analyst & Incident Response: Threat Hunting Masterclass',
                 'description' => 'Real-world walkthrough on SIEM log analysis in Splunk, detecting malware lateral movement, and applying the MITRE ATT&CK framework.',
                 'type' => 'video',
@@ -331,7 +377,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Cybersecurity, SOC, Splunk, Incident Response, Threat Intelligence',
             ],
             [
-                // freeCodeCamp — iOS & Swift Full Course (1M+ views, embed-enabled)
                 'title' => 'Native iOS Development with Swift & SwiftUI Architecture',
                 'description' => 'Build modern declarative user interfaces with SwiftUI, integrate Combine for reactive state management, and implement CoreData caching.',
                 'type' => 'video',
@@ -341,7 +386,6 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Mobile Development, Swift, SwiftUI, iOS Architecture',
             ],
             [
-                // freeCodeCamp — Blender/3D Art & VFX (embed-enabled)
                 'title' => 'Technical Art & Real-Time VFX in Unreal Engine 5',
                 'description' => 'Bridge the gap between art and code with procedural mesh generation, custom Niagara particle systems, and HLSL shader optimization.',
                 'type' => 'video',
@@ -351,14 +395,31 @@ class DatabaseSeeder extends Seeder
                 'tags' => 'Game Development, 3D VFX, Technical Art, Niagara, Shaders',
             ],
             [
-                // CS50 — CS50 Beyond (Career & Tech Leadership, Harvard official, embed-enabled)
+                'title' => 'Autonomous Multi-Agent AI Systems & LangGraph Masterclass',
+                'description' => 'Learn how to build production-grade autonomous agent loops with LangChain, LangGraph, tool-calling capabilities, and persistent memory.',
+                'type' => 'video',
+                'url' => 'https://www.youtube.com/embed/sal78ACtGTc',
+                'thumbnail_url' => 'https://images.unsplash.com/photo-1677442136019-21780efad99a?w=800&auto=format&fit=crop&q=80',
+                'duration' => '1:45:00',
+                'tags' => 'Artificial Intelligence, Autonomous Agents, LangGraph, Multi-Agent, LLMs',
+            ],
+            [
+                'title' => 'UI/UX Design Systems & Micro-Interactions in Figma 2026',
+                'description' => 'Master variable tokens, auto-layout 5.0, interactive component states, WCAG contrast auditing, and seamless developer handoffs in Figma.',
+                'type' => 'video',
+                'url' => 'https://www.youtube.com/embed/FTFaQWZBqQ8',
+                'thumbnail_url' => 'https://images.unsplash.com/photo-1581291518655-9523c932deb6?w=800&auto=format&fit=crop&q=80',
+                'duration' => '2:15:00',
+                'tags' => 'UI/UX Design, Figma, Design Systems, Accessibility, Prototyping',
+            ],
+            [
                 'title' => 'Career Passport Podcast: Transitioning to Global Tech Leadership',
                 'description' => 'Industry leaders share insider advice on resumes, portfolio reviews, salary negotiation, and navigating technical interviews.',
                 'type' => 'audio',
                 'url' => 'https://www.youtube.com/embed/dQw4w9WgXcQ',
                 'thumbnail_url' => 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&auto=format&fit=crop&q=80',
                 'duration' => '45:00',
-                'tags' => 'Podcast, Mentorship, Tech Leadership, Career Pivot',
+                'tags' => 'Podcast, Mentorship, Tech Leadership, Career Pivot, Salary Negotiation',
             ],
         ];
 
@@ -378,66 +439,57 @@ class DatabaseSeeder extends Seeder
                 'question_text' => 'Which engineering problem interests you most?',
                 'options' => [
                     'A' => 'Building responsive web interfaces, full-stack applications, and interactive user experiences',
-                    'B' => 'Configuring automated cloud deployment pipelines, Kubernetes clusters, and container orchestration',
-                    'C' => 'Developing predictive machine learning models, statistical neural networks, and Big Data pipelines',
-                    'D' => 'Securing network infrastructure, performing ethical penetration testing, and vulnerability defense'
+                    'B' => 'Designing multi-cloud infrastructures, Kubernetes clusters, and zero-downtime CI/CD pipelines',
+                    'C' => 'Developing generative AI models, vector search systems, and fine-tuning LLMs',
+                    'D' => 'Defending enterprise networks, ethical hacking, and threat mitigation',
                 ],
                 'correct_answer' => 'A',
             ],
             [
-                'question_text' => 'What is your preferred development environment and tool stack?',
+                'question_text' => 'What type of daily workflow aligns best with your strengths?',
                 'options' => [
-                    'A' => 'VS Code, Laravel / React, REST API development, and database schema design',
-                    'B' => 'Linux terminal, Terraform, Docker, AWS Console, and CI/CD pipelines',
-                    'C' => 'Jupyter Notebooks, Python, Pandas, TensorFlow, and SQL data warehouses',
-                    'D' => 'Wireshark, Kali Linux, Burp Suite, and security log monitoring tools'
+                    'A' => 'Designing fluid mobile and native cross-platform experiences on iOS and Android',
+                    'B' => 'Extracting predictive insights from complex datasets and designing analytics dashboards',
+                    'C' => 'Crafting comprehensive UI/UX design systems, wireframes, and accessible design tokens',
+                    'D' => 'Architecting decentralized EVM smart contracts, Web3 protocols, and cryptographic dApps',
                 ],
-                'correct_answer' => 'A',
-            ],
-            [
-                'question_text' => 'What type of career impact excites you most?',
-                'options' => [
-                    'A' => 'Launching web products that thousands of daily active users interact with',
-                    'B' => 'Ensuring 99.999% uptime and zero-downtime infrastructure resilience',
-                    'C' => 'Discovering actionable AI insights from billions of data points',
-                    'D' => 'Preventing data breaches and safeguarding enterprise cyber assets'
-                ],
-                'correct_answer' => 'A',
+                'correct_answer' => 'B',
             ],
         ];
 
         foreach ($quizQuestions as $q) {
-            QuizQuestion::firstOrCreate(
+            QuizQuestion::updateOrCreate(
                 ['question_text' => $q['question_text']],
                 $q
             );
         }
 
         // 6. Success Stories
-        $studentUser = User::where('email', 'student@pathseeker.com')->first();
-        $proUser = User::where('email', 'pro@pathseeker.com')->first();
+        $stories = [
+            [
+                'title' => 'Elena Rostova — From QA to Production AI Engineer',
+                'domain' => 'Artificial Intelligence & Data',
+                'story_text' => 'PathSeeker mapped out the exact mathematics, PyTorch roadmap, and vector search milestones I needed. Within 9 months, I transitioned from manual QA to training production LLM agents at a DeepMind / Google Partner.',
+                'image_url' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+            ],
+            [
+                'title' => 'Marcus Vance — Support Tech to AWS Cloud Solutions Architect',
+                'domain' => 'Cloud & Infrastructure',
+                'story_text' => 'The multi-cloud architecture guides and verified cheat sheets helped me pass my AWS Solutions Architect Professional exam on the first attempt and secure a six-figure remote role at AWS.',
+                'image_url' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80',
+            ],
+            [
+                'title' => 'Amina Al-Mansoor — Full-Stack Engineer at Stripe',
+                'domain' => 'Software Engineering',
+                'story_text' => 'The skill radar benchmarks and interview kits gave me the confidence to stand out among thousands of applicants. PathSeeker is truly the modern compass for software engineers.',
+                'image_url' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80',
+            ],
+        ];
 
-        if ($studentUser) {
-            SuccessStory::firstOrCreate(
-                ['title' => 'From University Sophomore to Full-Stack Software Engineer'],
-                [
-                    'domain' => 'Software Engineering',
-                    'story_text' => 'Using PathSeeker Career Bank and practice assessments, Alex mastered Laravel and JavaScript, landing a competitive software engineering fellowship.',
-                    'image_url' => null,
-                    'submitted_by' => $studentUser->id,
-                ]
-            );
-        }
-
-        if ($proUser) {
-            SuccessStory::firstOrCreate(
-                ['title' => 'Pivoting from Sysadmin to Certified Cloud Solutions Architect'],
-                [
-                    'domain' => 'Cloud & Infrastructure',
-                    'story_text' => 'David leveraged the career roadmap and certification resources to pivot into AWS Solutions Architecture with a 40% salary bump.',
-                    'image_url' => null,
-                    'submitted_by' => $proUser->id,
-                ]
+        foreach ($stories as $story) {
+            SuccessStory::updateOrCreate(
+                ['title' => $story['title']],
+                $story
             );
         }
     }

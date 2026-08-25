@@ -33,6 +33,9 @@
     {{-- Search & Filter Console --}}
     <div class="relative rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-4 overflow-hidden">
         <form action="{{ url('/careers') }}" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end relative z-10">
+            @if(request('role'))
+                <input type="hidden" name="role" value="{{ request('role') }}">
+            @endif
             <div class="md:col-span-6">
                 <div class="flex items-center justify-between mb-2">
                     <label for="search" class="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
@@ -64,23 +67,73 @@
                     <i class="fa-solid fa-sliders text-xs text-white"></i>
                     <span class="text-white">Filter</span>
                 </button>
-                @if(request('search') || request('domain'))
+                @if(request('search') || request('domain') || request('role'))
                     <a href="{{ route('careers.index') }}" class="px-3 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 transition-all flex items-center justify-center" title="Reset Filters">
                         <i class="fa-solid fa-rotate-left"></i>
                     </a>
                 @endif
             </div>
         </form>
-        <div class="mt-4 pt-3.5 border-t border-slate-200/60 dark:border-white/[0.06] flex items-center gap-2 overflow-x-auto pb-2.5 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-900/40 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-purple-600/40 hover:[&::-webkit-scrollbar-thumb]:bg-purple-500/70 [&::-webkit-scrollbar-thumb]:rounded-full relative z-10">
-            <span class="text-[10px] font-bold text-slate-500 shrink-0 uppercase tracking-wider">Quick Filter:</span>
-            <a href="{{ route('careers.index') }}" class="px-3 py-1 text-xs font-semibold rounded-full border transition-all shrink-0 {{ !request('domain') ? 'border-purple-500/50 text-purple-700 dark:text-purple-300 bg-purple-500/15 dark:bg-purple-500/20' : 'border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white' }}">
-                All Tracks
-            </a>
-            @foreach($domains as $d)
-                <a href="{{ route('careers.index', ['domain' => $d]) }}" class="px-3 py-1 text-xs font-semibold rounded-full border transition-all shrink-0 {{ request('domain') === $d ? 'border-purple-500/50 text-purple-700 dark:text-purple-300 bg-purple-500/15 dark:bg-purple-500/20' : 'border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white' }}">
-                    {{ $d }}
+
+        {{-- Role-Based Dynamic Filters --}}
+        <div class="mt-4 pt-3.5 border-t border-slate-200/60 dark:border-white/[0.06] space-y-3 relative z-10">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2 overflow-x-auto pb-1.5 [&::-webkit-scrollbar]:h-1">
+                    <span class="text-[10px] font-bold text-slate-500 shrink-0 uppercase tracking-wider">Role Track:</span>
+                    
+                    {{-- All Roles --}}
+                    <a href="{{ route('careers.index', array_merge(request()->query(), ['role' => null])) }}"
+                       class="px-3 py-1.5 text-xs font-bold rounded-xl border transition-all shrink-0 flex items-center gap-1.5 {{ !request('role') ? 'border-purple-500 text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-md shadow-purple-500/20' : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/30 bg-slate-100/80 dark:bg-white/[0.03]' }}">
+                        <i class="fa-solid fa-layer-group text-[10px]"></i>
+                        <span>All Tracks</span>
+                        <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-black/20 text-white">{{ $roleCounts['all'] ?? $careers->total() }}</span>
+                    </a>
+
+                    {{-- Student --}}
+                    <a href="{{ route('careers.index', array_merge(request()->query(), ['role' => 'student'])) }}"
+                       class="px-3 py-1.5 text-xs font-bold rounded-xl border transition-all shrink-0 flex items-center gap-1.5 {{ request('role') === 'student' ? 'border-sky-500 text-white bg-gradient-to-r from-sky-600 to-indigo-600 shadow-md shadow-sky-500/20' : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-sky-500/30 bg-slate-100/80 dark:bg-white/[0.03]' }}">
+                        <i class="fa-solid fa-graduation-cap text-[10px]"></i>
+                        <span>Student &bull; Foundational</span>
+                        <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-sky-500/20 text-sky-700 dark:text-sky-300">{{ $roleCounts['student'] ?? 6 }}</span>
+                    </a>
+
+                    {{-- Graduate --}}
+                    <a href="{{ route('careers.index', array_merge(request()->query(), ['role' => 'graduate'])) }}"
+                       class="px-3 py-1.5 text-xs font-bold rounded-xl border transition-all shrink-0 flex items-center gap-1.5 {{ request('role') === 'graduate' ? 'border-purple-500 text-white bg-gradient-to-r from-purple-600 to-pink-600 shadow-md shadow-purple-500/20' : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/30 bg-slate-100/80 dark:bg-white/[0.03]' }}">
+                        <i class="fa-solid fa-briefcase text-[10px]"></i>
+                        <span>Graduate &bull; Entry &amp; Portfolio</span>
+                        <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-purple-500/20 text-purple-700 dark:text-purple-300">{{ $roleCounts['graduate'] ?? 8 }}</span>
+                    </a>
+
+                    {{-- Professional --}}
+                    <a href="{{ route('careers.index', array_merge(request()->query(), ['role' => 'professional'])) }}"
+                       class="px-3 py-1.5 text-xs font-bold rounded-xl border transition-all shrink-0 flex items-center gap-1.5 {{ request('role') === 'professional' ? 'border-amber-500 text-white bg-gradient-to-r from-amber-600 to-rose-600 shadow-md shadow-amber-500/20' : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-amber-500/30 bg-slate-100/80 dark:bg-white/[0.03]' }}">
+                        <i class="fa-solid fa-crown text-[10px]"></i>
+                        <span>Professional &bull; Architecture</span>
+                        <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-amber-500/20 text-amber-700 dark:text-amber-300">{{ $roleCounts['professional'] ?? 6 }}</span>
+                    </a>
+                </div>
+
+                @auth
+                    <div class="hidden lg:flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+                        <i class="fa-solid fa-circle-user text-purple-500"></i>
+                        <span>Logged in as: <strong class="text-slate-900 dark:text-white capitalize">{{ Auth::user()->role }}</strong></span>
+                    </div>
+                @endauth
+            </div>
+
+            {{-- Domain Filter Quick Pills --}}
+            <div class="flex items-center gap-2 overflow-x-auto pb-1.5 [&::-webkit-scrollbar]:h-1">
+                <span class="text-[10px] font-bold text-slate-500 shrink-0 uppercase tracking-wider">Domains:</span>
+                <a href="{{ route('careers.index', array_merge(request()->query(), ['domain' => null])) }}" class="px-2.5 py-1 text-xs font-semibold rounded-full border transition-all shrink-0 {{ !request('domain') ? 'border-purple-500/50 text-purple-700 dark:text-purple-300 bg-purple-500/15 dark:bg-purple-500/20' : 'border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white' }}">
+                    All Domains
                 </a>
-            @endforeach
+                @foreach($domains as $d)
+                    <a href="{{ route('careers.index', array_merge(request()->query(), ['domain' => $d])) }}" class="px-2.5 py-1 text-xs font-semibold rounded-full border transition-all shrink-0 {{ request('domain') === $d ? 'border-purple-500/50 text-purple-700 dark:text-purple-300 bg-purple-500/15 dark:bg-purple-500/20' : 'border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white' }}">
+                        {{ $d }}
+                    </a>
+                @endforeach
+            </div>
         </div>
     </div>
 
@@ -106,6 +159,21 @@
                     $badgeClass = 'badge-game'; $domIcon = 'fa-gamepad';
                 }
                 $skills = array_filter(array_map('trim', explode(',', $career->required_skills)));
+
+                $cRole = $career->target_role ?? 'all';
+                if ($cRole === 'student') {
+                    $roleLabel = '🎓 Student Foundational';
+                    $roleBadge = 'bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-500/20';
+                } elseif ($cRole === 'graduate') {
+                    $roleLabel = '💼 Graduate Track';
+                    $roleBadge = 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/20';
+                } elseif ($cRole === 'professional') {
+                    $roleLabel = '⚡ Professional Architecture';
+                    $roleBadge = 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/20';
+                } else {
+                    $roleLabel = '🌐 Universal Track';
+                    $roleBadge = 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-500/20';
+                }
             @endphp
 
             <div class="career-card bg-white/90 dark:bg-slate-950/50 border border-slate-200 dark:border-white/5 rounded-3xl flex flex-col group relative overflow-hidden shadow-xl dark:shadow-sm hover:shadow-2xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300">
@@ -123,6 +191,11 @@
                             <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full border {{ $badgeClass }} flex items-center gap-1.5 shadow-sm">
                                 <i class="fa-solid {{ $domIcon }} text-[10px]"></i>
                                 <span>{{ $career->domain }}</span>
+                            </span>
+
+                            {{-- Role Badge --}}
+                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border {{ $roleBadge }}">
+                                {{ $roleLabel }}
                             </span>
                             
                             {{-- Salary Badge --}}

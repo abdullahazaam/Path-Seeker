@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class ResourceSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeds with 2026-ready enterprise technical toolkits.
      */
     public function run(): void
     {
@@ -92,6 +92,18 @@ class ResourceSeeder extends Seeder
                 'thumbnail_url' => 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&auto=format&fit=crop&q=80',
             ],
             [
+                'title' => 'Autonomous Agent Multi-Prompt Engineering & LangGraph Handbook',
+                'category' => 'AI / ML Handbook',
+                'file_url' => 'https://python.langchain.com/docs/get_started/introduction',
+                'thumbnail_url' => 'https://images.unsplash.com/photo-1677442136019-21780efad99a?w=800&auto=format&fit=crop&q=80',
+            ],
+            [
+                'title' => 'Figma Design System Tokens & WCAG 2.2 Accessibility Checklist',
+                'category' => 'UI/UX Design',
+                'file_url' => 'https://www.w3.org/WAI/standards-guidelines/wcag/',
+                'thumbnail_url' => 'https://images.unsplash.com/photo-1581291518655-9523c932deb6?w=800&auto=format&fit=crop&q=80',
+            ],
+            [
                 'title' => 'Tech Resume & Portfolio Template Kit (ATS 99% Rated)',
                 'category' => 'Career Templates',
                 'file_url' => 'https://roadmap.sh/',
@@ -102,6 +114,12 @@ class ResourceSeeder extends Seeder
                 'category' => 'Interview Prep',
                 'file_url' => 'https://github.com/donnemartin/system-design-primer',
                 'thumbnail_url' => 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80',
+            ],
+            [
+                'title' => 'Tech Lead & Principal Architect Engineering Playbook 2026',
+                'category' => 'Leadership Toolkit',
+                'file_url' => 'https://roadmap.sh/software-architect',
+                'thumbnail_url' => 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&auto=format&fit=crop&q=80',
             ],
         ];
 

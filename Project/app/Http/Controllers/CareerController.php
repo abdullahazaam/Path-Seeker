@@ -27,10 +27,21 @@ class CareerController extends Controller
             $query->where('domain', $request->input('domain'));
         }
 
-        $careers = $query->latest()->paginate(6)->withQueryString();
+        if ($request->filled('role')) {
+            $query->forRole($request->input('role'));
+        }
+
+        $careers = $query->orderBy('id', 'asc')->paginate(6)->withQueryString();
         $domains = Career::select('domain')->distinct()->pluck('domain');
 
-        return view('careers.index', compact('careers', 'domains'));
+        $roleCounts = [
+            'all' => Career::count(),
+            'student' => Career::where(function($q){ $q->where('target_role', 'student')->orWhere('target_role', 'all'); })->count(),
+            'graduate' => Career::where(function($q){ $q->where('target_role', 'graduate')->orWhere('target_role', 'all'); })->count(),
+            'professional' => Career::where(function($q){ $q->where('target_role', 'professional')->orWhere('target_role', 'all'); })->count(),
+        ];
+
+        return view('careers.index', compact('careers', 'domains', 'roleCounts'));
     }
 
     /**

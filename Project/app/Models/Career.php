@@ -12,9 +12,26 @@ class Career extends Model
         'domain',
         'required_skills',
         'expected_salary',
+        'target_role',
     ];
 
     protected $appends = ['market_metrics'];
+
+    /**
+     * Scope a query to filter careers by target role (student, graduate, professional).
+     */
+    public function scopeForRole($query, ?string $role)
+    {
+        if (!$role || $role === 'all') {
+            return $query;
+        }
+
+        return $query->where(function ($q) use ($role) {
+            $q->where('target_role', $role)
+              ->orWhere('target_role', 'all')
+              ->orWhereNull('target_role');
+        });
+    }
 
     /**
      * Generate dynamic realistic 2026 market statistics & 10-year growth trajectory.
