@@ -34,7 +34,7 @@
             </form>
         </div>
 
-        {{-- 4 Column Footer Grid --}}
+        {{-- 4 Column Consumer Product Footer Grid --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
             
             <!-- Brand Description -->
@@ -56,21 +56,19 @@
                 </div>
             </div>
 
-            <!-- Column: Platform Navigation -->
+            <!-- Column: Explore Platform -->
             <div class="space-y-3">
-                <h4 class="text-xs font-black uppercase tracking-wider text-slate-200">Platform</h4>
+                <h4 class="text-xs font-black uppercase tracking-wider text-slate-200">Explore</h4>
                 <ul class="space-y-2 text-sm">
                     <li><a href="{{ route('home') }}" class="hover:text-indigo-400 transition-colors">Home Portal</a></li>
                     <li><a href="{{ route('careers.index') }}" class="hover:text-indigo-400 transition-colors">Career Bank</a></li>
                     <li><a href="{{ route('quiz.index') }}" class="hover:text-indigo-400 transition-colors">Interest Quiz</a></li>
                     <li><a href="{{ route('stories.index') }}" class="hover:text-indigo-400 transition-colors">Success Stories</a></li>
                     <li><a href="{{ route('multimedia.index') }}" class="hover:text-indigo-400 transition-colors">Multimedia Hub</a></li>
-                    <li><a href="{{ route('resources.index') }}" class="hover:text-indigo-400 transition-colors">Resource Library</a></li>
-                    <li><a href="{{ route('feedback.index') }}" class="hover:text-indigo-400 transition-colors">User Feedback</a></li>
                 </ul>
             </div>
 
-            <!-- Column: Toolkits -->
+            <!-- Column: Toolkits & Growth -->
             <div class="space-y-3">
                 <h4 class="text-xs font-black uppercase tracking-wider text-slate-200">Toolkits</h4>
                 <ul class="space-y-2 text-sm">
@@ -81,14 +79,14 @@
                 </ul>
             </div>
 
-            <!-- Column: Standards -->
+            <!-- Column: Community & Support -->
             <div class="space-y-3">
-                <h4 class="text-xs font-black uppercase tracking-wider text-slate-200">Standards</h4>
+                <h4 class="text-xs font-black uppercase tracking-wider text-slate-200">Community</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><span class="text-xs text-slate-400">Tech: Laravel 12 + Tailwind</span></li>
-                    <li><span class="text-xs text-slate-400">Database: MySQL InnoDB</span></li>
-                    <li><span class="text-xs text-slate-400">Theme: 2026 Living OS</span></li>
-                    <li><span class="text-xs text-slate-400">Global Competition Ready</span></li>
+                    <li><a href="{{ route('feedback.index') }}" class="hover:text-indigo-400 transition-colors">User Feedback</a></li>
+                    <li><a href="{{ route('stories.index') }}" class="hover:text-indigo-400 transition-colors">Share Your Story</a></li>
+                    <li><a href="{{ route('resources.index') }}" class="hover:text-indigo-400 transition-colors">Resource Library</a></li>
+                    <li><a href="{{ route('sitemap') }}" target="_blank" class="hover:text-indigo-400 transition-colors">Sitemap Directory</a></li>
                 </ul>
             </div>
 
@@ -96,7 +94,7 @@
 
         <!-- Bottom Copyright Bar -->
         <div class="mt-12 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-            <p>&copy; {{ date('Y') }} PathSeeker Career Passport. Built for global full-stack excellence.</p>
+            <p>&copy; {{ date('Y') }} PathSeeker. All rights reserved.</p>
             <div class="flex items-center gap-4">
                 <a href="{{ route('sitemap') }}" target="_blank" class="hover:text-indigo-400 font-mono transition-colors">XML Sitemap</a>
                 <span>&bull;</span>
@@ -104,7 +102,7 @@
                 <span>&bull;</span>
                 <span>Terms of Service</span>
                 <span>&bull;</span>
-                <span class="text-emerald-500 font-mono flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> System Status: Online</span>
+                <span class="text-emerald-500 font-mono flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Systems Operational</span>
             </div>
         </div>
     </div>

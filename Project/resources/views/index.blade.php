@@ -58,50 +58,73 @@
         @endphp
 
         <div class="lg:col-span-6 perspective-stage flex justify-center lg:justify-end items-center my-auto">
-            <div id="passportCard" class="passport-card-3d relative w-full max-w-md bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] rounded-3xl p-6 overflow-hidden cursor-pointer select-none transition-all">
-                {{-- Ambient Aurora Glows --}}
-                <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-purple-500/15 dark:bg-purple-500/20 blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
-                <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-600/10 via-pink-600/10 to-cyan-500/10 dark:from-purple-600/20 dark:via-pink-600/20 dark:to-cyan-500/20 rounded-3xl blur opacity-40 pointer-events-none"></div>
+            {{-- Premium High-End Digital ID Passport Document --}}
+            <div id="passportCard" class="passport-card-3d relative w-full max-w-lg bg-gradient-to-b from-[#0e1322] via-[#090d18] to-[#060810] border border-white/15 shadow-2xl dark:shadow-[0_12px_40px_rgba(0,0,0,0.6)] rounded-3xl p-6 sm:p-7 overflow-hidden cursor-pointer select-none transition-all duration-300">
+                
+                {{-- Document Security Micro-Pattern & Guilloche Background --}}
+                <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-purple-500/15 blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-20 -left-20 w-56 h-56 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"></div>
 
-                <div class="relative z-10 space-y-5">
-                    {{-- Header Section --}}
-                    <div class="flex items-center justify-between pb-1">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-sm shadow-md">
-                                <i class="fa-solid fa-passport"></i>
-                            </div>
-                            <div>
-                                <div class="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase font-mono tracking-wider">Global Career Passport</div>
-                                <div class="text-sm font-black text-slate-900 dark:text-white font-display">PathSeeker Digital ID</div>
+                <div class="relative z-10 space-y-6">
+                    
+                    {{-- Top Header Row: Logo Left | Title Center | Readiness Score Right --}}
+                    <div class="flex items-center justify-between gap-3 pb-5 border-b border-white/10">
+                        {{-- Logo / Emblem Left --}}
+                        <div class="flex items-center gap-3 shrink-0">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500/20 via-purple-600/30 to-indigo-600/30 border border-purple-400/30 flex items-center justify-center text-white shadow-md">
+                                <i class="fa-solid fa-compass text-lg text-purple-300"></i>
                             </div>
                         </div>
-                        @if($dp['is_auth'])
-                            <span class="bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 shadow-sm">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
-                                <span>Verified ID</span>
-                            </span>
-                        @else
-                            <a href="{{ route('login') }}" class="bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 text-purple-700 dark:text-purple-300 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors shadow-sm">
-                                <span class="w-1.5 h-1.5 rounded-full bg-purple-500 dark:bg-purple-400"></span>
-                                <span>Guest Mode &bull; Sign In</span>
-                            </a>
-                        @endif
+
+                        {{-- Title Center --}}
+                        <div class="text-center flex-1 min-w-0">
+                            <div class="text-[9px] font-mono font-black text-purple-400 uppercase tracking-wider">Global Career Passport</div>
+                            <h3 class="text-base sm:text-lg font-black text-white font-display tracking-tight truncate">PathSeeker Digital ID</h3>
+                            <div class="text-[10px] font-mono text-slate-400">ID: {{ $dp['id_code'] }}</div>
+                        </div>
+
+                        {{-- Readiness Score Right --}}
+                        <div class="text-right shrink-0">
+                            <div class="inline-flex flex-col items-end px-3 py-1.5 rounded-2xl bg-white/[0.04] border border-white/10">
+                                <span class="text-base sm:text-lg font-black text-emerald-400 font-mono leading-none">{{ $dp['strength'] }}%</span>
+                                <span class="text-[8px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">Readiness</span>
+                            </div>
+                        </div>
                     </div>
 
-                    {{-- Candidate Profile Box --}}
-                    <div class="bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/5 rounded-2xl p-4 flex items-center gap-4 shadow-sm dark:shadow-inner">
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-500 flex items-center justify-center text-2xl sm:text-3xl shrink-0 shadow-lg">
-                            <i class="fa-solid {{ $dp['is_auth'] ? 'fa-user-graduate' : 'fa-compass' }} text-white text-xl sm:text-2xl"></i>
-                        </div>
-                        <div class="space-y-0.5 min-w-0">
-                            <div class="text-[10px] text-purple-600 dark:text-purple-300 font-bold uppercase tracking-wider">
-                                {{ $dp['is_auth'] ? 'Active Candidate Profile' : 'Demo Passport View' }}
+                    {{-- Candidate Identification Credential Block --}}
+                    <div class="p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center gap-4 sm:gap-5">
+                        {{-- Photo / Holographic Avatar Seal --}}
+                        <div class="relative shrink-0">
+                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg border border-white/20">
+                                <i class="fa-solid {{ $dp['is_auth'] ? 'fa-user-graduate' : 'fa-user' }} text-xl sm:text-2xl"></i>
                             </div>
-                            <div class="text-base sm:text-lg font-black text-slate-900 dark:text-white font-display truncate">
+                            <div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#080B12] border border-white/20 flex items-center justify-center">
+                                <span class="w-2.5 h-2.5 rounded-full {{ $dp['is_auth'] ? 'bg-emerald-400 animate-pulse' : 'bg-purple-400' }}"></span>
+                            </div>
+                        </div>
+
+                        {{-- Core Holder Metadata --}}
+                        <div class="space-y-1 min-w-0 flex-1">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-[9px] font-mono font-bold text-purple-400 uppercase tracking-wider">
+                                    {{ $dp['is_auth'] ? 'Certified Candidate' : 'Guest Document' }}
+                                </span>
+                                @if($dp['is_auth'])
+                                    <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[9px] font-bold text-emerald-400 font-mono">
+                                        Verified ID
+                                    </span>
+                                @else
+                                    <span class="px-2 py-0.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-[9px] font-bold text-purple-300 font-mono">
+                                        Guest Mode
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="text-base sm:text-lg font-black text-white font-display truncate">
                                 {{ $dp['name'] }}
                             </div>
-                            <div class="text-xs text-slate-600 dark:text-slate-400 font-medium capitalize truncate">
+                            <div class="text-xs text-slate-300 font-medium truncate">
                                 {{ $dp['active_track'] }}
                                 @if($dp['education'])
                                     &bull; {{ ucfirst(str_replace('_', ' ', $dp['education'])) }}
@@ -110,57 +133,31 @@
                         </div>
                     </div>
 
-                    {{-- Competency Matrix & Progress Bars --}}
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between text-xs text-slate-700 dark:text-slate-300 font-medium">
-                            <span>Competency Matrix</span>
-                            <span class="text-indigo-600 dark:text-indigo-400 font-bold font-mono">
-                                {{ $dp['is_auth'] ? $dp['strength'] . '% Profile Strength' : 'Industry Standards' }}
-                            </span>
+                    {{-- Bottom Security MRZ Strip & Clean CTA --}}
+                    <div class="pt-2 space-y-3">
+                        <div class="p-2.5 rounded-xl bg-black/40 border border-white/5 font-mono text-[9px] tracking-widest text-slate-500 uppercase truncate select-none">
+                            P&lt;PSK{{ substr(md5($dp['id_code']), 0, 6) }}&lt;&lt;{{ strtoupper(preg_replace('/[^A-Za-z0-9]/', '', $dp['name'])) }}&lt;&lt;&lt;&lt;&lt;&lt;2026&lt;&lt;
                         </div>
-                        <div class="space-y-2.5">
-                            <div class="p-3 rounded-xl bg-slate-100/70 dark:bg-slate-950/40 border border-slate-200/80 dark:border-white/5 space-y-2">
-                                <div class="flex justify-between text-xs text-slate-700 dark:text-slate-300 font-medium">
-                                    <span>Core Domain Proficiency</span>
-                                    <span class="text-purple-600 dark:text-purple-400 font-bold font-mono">
-                                        {{ $dp['is_auth'] ? $dp['core_proficiency'] . '%' : 'Benchmark (' . $dp['core_proficiency'] . '%)' }}
-                                    </span>
-                                </div>
-                                <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
-                                    <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-700" style="width: {{ $dp['core_proficiency'] }}%"></div>
-                                </div>
+
+                        <div class="flex items-center justify-between text-xs text-slate-400 pt-1">
+                            <div class="flex items-center gap-1.5 text-[11px]">
+                                <i class="fa-solid fa-shield-halved text-purple-400"></i>
+                                <span>Official Verified Document</span>
                             </div>
-                            <div class="p-3 rounded-xl bg-slate-100/70 dark:bg-slate-950/40 border border-slate-200/80 dark:border-white/5 space-y-2">
-                                <div class="flex justify-between text-xs text-slate-700 dark:text-slate-300 font-medium">
-                                    <span>Cloud &amp; DevOps Readiness</span>
-                                    <span class="text-pink-600 dark:text-pink-400 font-bold font-mono">
-                                        {{ $dp['is_auth'] ? $dp['cloud_readiness'] . '%' : 'Benchmark (' . $dp['cloud_readiness'] . '%)' }}
-                                    </span>
-                                </div>
-                                <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
-                                    <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-700" style="width: {{ $dp['cloud_readiness'] }}%"></div>
-                                </div>
-                            </div>
+                            <a href="{{ $dp['is_auth'] ? route('dashboard') : route('register') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 hover:text-purple-300 transition-colors">
+                                <span>{{ $dp['is_auth'] ? 'View My Passport' : 'Create Your Passport' }}</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
                         </div>
                     </div>
 
-                    {{-- Footer Metadata --}}
-                    <div class="pt-3.5 border-t border-slate-200/80 dark:border-white/10 flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs">
-                        <span class="font-mono font-medium">
-                            ID: {{ $dp['id_code'] }}
-                        </span>
-                        <a href="{{ $dp['is_auth'] ? route('dashboard') : route('register') }}" class="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium flex items-center gap-1.5 transition-colors">
-                            <i class="fa-solid fa-sparkles text-[10px]"></i>
-                            <span>{{ $dp['is_auth'] ? 'View My Passport' : 'Create Your Passport' }}</span>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-{{-- SECTION 2: HOW YOUR PATH COMES TOGETHER --}}
+{{-- SECTION 2: HOW YOUR PATH COMES TOGETHER (HORIZONTAL CONNECTED TIMELINE) --}}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
     <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         {{-- Ambient Corner Glows --}}
@@ -178,61 +175,68 @@
                     How Your Path <span class="grad-text">Comes Together</span>
                 </h2>
                 <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
-                    Four intelligent, systematic phases designed to transition you from raw curiosity to an industry-ready career roadmap.
+                    Four intelligent, connected milestones guiding you from initial curiosity to verified industry readiness.
                 </p>
             </div>
 
-            {{-- 4 Step Cards Grid --}}
+            {{-- Horizontal Connected Journey Timeline --}}
             <div class="relative">
-                {{-- Background Connector Line (Underneath cards) --}}
-                <div class="hidden lg:block absolute top-[44px] left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-indigo-500/30 via-purple-500/50 to-pink-500/30 rounded-full z-0 pointer-events-none"></div>
+                
+                {{-- Horizontal Connecting Progress Rail (Visible on Desktop) --}}
+                <div class="hidden lg:block absolute top-7 left-[10%] right-[10%] h-1 bg-slate-200 dark:bg-white/10 rounded-full z-0">
+                    {{-- Active Progress Indicator Rail --}}
+                    <div class="h-full w-2/3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full shadow-[0_0_12px_rgba(168,85,247,0.5)]"></div>
+                </div>
 
+                {{-- Connected Milestone Cards --}}
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
                     
-                    {{-- Step 01: Discover --}}
-                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    {{-- Step 01: Discover (Active/Completed State) --}}
+                    <div class="group relative flex flex-col justify-between p-6 rounded-3xl bg-slate-50 dark:bg-[#0c101d] border border-indigo-500/40 dark:border-indigo-500/30 hover:border-indigo-500 hover:-translate-y-1 transition-all duration-300 shadow-lg space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 dark:bg-indigo-500/15 border border-indigo-500/25 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-xl group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all shadow-sm">
+                                <div class="w-14 h-14 rounded-2xl bg-indigo-500 text-white flex items-center justify-center text-xl shadow-lg shadow-indigo-500/30 ring-4 ring-indigo-500/20">
                                     <i class="fa-solid fa-compass"></i>
                                 </div>
-                                <span class="w-7 h-7 rounded-full bg-indigo-600 text-white text-[11px] font-black flex items-center justify-center shadow-md">01</span>
+                                <span class="px-2.5 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-600 dark:text-indigo-400 text-[10px] font-mono font-black flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-ping"></span> Phase 01
+                                </span>
                             </div>
-                            <div class="space-y-2">
-                                <div class="text-[10px] font-mono font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Phase 01</div>
+                            <div class="space-y-1.5">
                                 <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">Discover</h3>
                                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                    Browse 15+ high-growth tech domains and align your passions with modern global industry landscapes.
+                                    Browse 15+ high-growth tech domains and align your passions with global industry landscapes.
                                 </p>
                             </div>
                         </div>
-                        <div class="pt-3 border-t border-slate-200/80 dark:border-white/5">
-                            <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
+                        <div class="pt-3 border-t border-slate-200 dark:border-white/5">
+                            <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors">
                                 <span>Browse domains</span>
                                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                             </a>
                         </div>
                     </div>
 
-                    {{-- Step 02: Explore --}}
-                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    {{-- Step 02: Explore (Active State) --}}
+                    <div class="group relative flex flex-col justify-between p-6 rounded-3xl bg-slate-50 dark:bg-[#0c101d] border border-purple-500/40 dark:border-purple-500/30 hover:border-purple-500 hover:-translate-y-1 transition-all duration-300 shadow-lg space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="w-14 h-14 rounded-2xl bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl group-hover:scale-110 group-hover:bg-purple-500/20 transition-all shadow-sm">
+                                <div class="w-14 h-14 rounded-2xl bg-purple-600 text-white flex items-center justify-center text-xl shadow-lg shadow-purple-500/30 ring-4 ring-purple-500/20">
                                     <i class="fa-solid fa-layer-group"></i>
                                 </div>
-                                <span class="w-7 h-7 rounded-full bg-purple-600 text-white text-[11px] font-black flex items-center justify-center shadow-md">02</span>
+                                <span class="px-2.5 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-600 dark:text-purple-400 text-[10px] font-mono font-black flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span> Phase 02
+                                </span>
                             </div>
-                            <div class="space-y-2">
-                                <div class="text-[10px] font-mono font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider">Phase 02</div>
+                            <div class="space-y-1.5">
                                 <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">Explore</h3>
                                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                    Deep-dive into verified core competencies, required toolchains, salary benchmarks, and 5-year growth metrics.
+                                    Deep-dive into verified core competencies, required toolchains, salary benchmarks, and growth metrics.
                                 </p>
                             </div>
                         </div>
-                        <div class="pt-3 border-t border-slate-200/80 dark:border-white/5">
-                            <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-purple-600 dark:text-purple-400 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
+                        <div class="pt-3 border-t border-slate-200 dark:border-white/5">
+                            <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors">
                                 <span>View career tracks</span>
                                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                             </a>
@@ -240,24 +244,25 @@
                     </div>
 
                     {{-- Step 03: Understand --}}
-                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    <div class="group relative flex flex-col justify-between p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-pink-500/40 hover:-translate-y-1 transition-all duration-300 shadow-md space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="w-14 h-14 rounded-2xl bg-pink-500/10 dark:bg-pink-500/15 border border-pink-500/25 flex items-center justify-center text-pink-600 dark:text-pink-400 text-xl group-hover:scale-110 group-hover:bg-pink-500/20 transition-all shadow-sm">
+                                <div class="w-14 h-14 rounded-2xl bg-pink-500/15 border border-pink-500/25 text-pink-500 flex items-center justify-center text-xl group-hover:scale-105 transition-all">
                                     <i class="fa-solid fa-brain"></i>
                                 </div>
-                                <span class="w-7 h-7 rounded-full bg-pink-600 text-white text-[11px] font-black flex items-center justify-center shadow-md">03</span>
+                                <span class="px-2.5 py-1 rounded-full bg-pink-500/10 text-pink-600 dark:text-pink-400 text-[10px] font-mono font-bold">
+                                    Phase 03
+                                </span>
                             </div>
-                            <div class="space-y-2">
-                                <div class="text-[10px] font-mono font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider">Phase 03</div>
+                            <div class="space-y-1.5">
                                 <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">Understand</h3>
                                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                    Take the interactive cognitive interest quiz to calculate match precision and tailored track recommendations.
+                                    Take the interactive cognitive interest quiz to calculate match precision and tailored recommendations.
                                 </p>
                             </div>
                         </div>
-                        <div class="pt-3 border-t border-slate-200/80 dark:border-white/5">
-                            <a href="{{ route('quiz.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-pink-600 dark:text-pink-400 group-hover:text-pink-700 dark:group-hover:text-pink-300 transition-colors">
+                        <div class="pt-3 border-t border-slate-200 dark:border-white/5">
+                            <a href="{{ route('quiz.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-pink-600 dark:text-pink-400 hover:text-pink-700 dark:hover:text-pink-300 transition-colors">
                                 <span>Take the quiz</span>
                                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                             </a>
@@ -265,24 +270,25 @@
                     </div>
 
                     {{-- Step 04: Build --}}
-                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    <div class="group relative flex flex-col justify-between p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-emerald-500/40 hover:-translate-y-1 transition-all duration-300 shadow-md space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xl group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all shadow-sm">
+                                <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/25 text-emerald-500 flex items-center justify-center text-xl group-hover:scale-105 transition-all">
                                     <i class="fa-solid fa-rocket"></i>
                                 </div>
-                                <span class="w-7 h-7 rounded-full bg-emerald-600 text-white text-[11px] font-black flex items-center justify-center shadow-md">04</span>
+                                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-bold">
+                                    Phase 04
+                                </span>
                             </div>
-                            <div class="space-y-2">
-                                <div class="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Phase 04</div>
+                            <div class="space-y-1.5">
                                 <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">Build</h3>
                                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                    Download verified blueprints, curated video toolkits, and execute your live Career OS milestone roadmap.
+                                    Download verified blueprints, curated video toolkits, and execute your live Career OS roadmap.
                                 </p>
                             </div>
                         </div>
-                        <div class="pt-3 border-t border-slate-200/80 dark:border-white/5">
-                            <a href="{{ route('resources.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
+                        <div class="pt-3 border-t border-slate-200 dark:border-white/5">
+                            <a href="{{ route('resources.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                                 <span>Access resources</span>
                                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                             </a>
