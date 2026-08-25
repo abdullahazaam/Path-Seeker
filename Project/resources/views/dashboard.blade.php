@@ -2,12 +2,12 @@
 @section('title', 'Career Passport Dashboard — PathSeeker')
 @section('content')
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 mt-4 sm:mt-6 space-y-6 md:space-y-8 mb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-3 space-y-6 md:space-y-8 mb-8">
 
 
 @if(auth()->user()->role !== 'admin' && auth()->user()->email !== 'admin@pathseeker.com')
     {{-- Passport User Profile Header --}}
-    <div class="relative rounded-3xl p-8 md:p-10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] mt-2 sm:mt-4">
+    <div class="relative rounded-3xl p-8 md:p-10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-purple-500/15 dark:bg-purple-500/20 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-cyan-500/15 dark:bg-cyan-500/20 blur-3xl pointer-events-none"></div>
