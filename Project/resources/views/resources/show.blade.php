@@ -53,10 +53,19 @@
         <div class="relative z-10 p-6 sm:p-8 space-y-6">
             <div class="rounded-2xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-slate-950 shadow-2xl relative">
                 <div class="w-full h-[550px] bg-slate-900 flex flex-col">
-                    <iframe src="{{ $resource->file_url }}#toolbar=0" 
-                            class="w-full h-full border-0 rounded-2xl"
-                            title="{{ $resource->title }}"
-                            loading="lazy"></iframe>
+                    <object data="{{ route('resources.stream', $resource->id) }}#toolbar=0&view=FitH" 
+                            type="application/pdf" 
+                            class="w-full h-full border-0 rounded-2xl">
+                        <iframe src="{{ route('resources.stream', $resource->id) }}#toolbar=0" 
+                                class="w-full h-full border-0 rounded-2xl"
+                                title="{{ $resource->title }}"
+                                loading="lazy">
+                            <div class="p-8 text-center space-y-3">
+                                <p class="text-sm text-slate-300">Your browser does not support in-line PDF previews.</p>
+                                <a href="{{ route('resources.download', $resource->id) }}" class="btn-sweep px-5 py-2 rounded-xl text-xs text-white">Download PDF</a>
+                            </div>
+                        </iframe>
+                    </object>
                 </div>
             </div>
 

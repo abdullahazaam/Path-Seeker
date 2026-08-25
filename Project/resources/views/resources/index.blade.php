@@ -152,6 +152,7 @@
                     'title' => $res->title,
                     'category' => $res->category,
                     'file_url' => $res->file_url,
+                    'stream_url' => route('resources.stream', $res->id),
                     'download_url' => route('resources.download', $res->id),
                     'description' => $res->description ?? 'Verified engineering blueprint and technical reference checklist.',
                     'file_type' => $res->file_type ?? 'PDF',
@@ -336,10 +337,10 @@
             <div class="relative z-10 p-4 sm:p-6 flex-1 overflow-y-auto space-y-4">
                 <div class="w-full h-80 sm:h-[480px] rounded-2xl bg-slate-950 border border-slate-200 dark:border-white/10 overflow-hidden relative shadow-inner">
                     <template x-if="activeResource">
-                        <object :data="activeResource.file_url + '#toolbar=0&view=FitH'" 
+                        <object :data="(activeResource.stream_url || activeResource.file_url) + '#toolbar=0&view=FitH'" 
                                 type="application/pdf" 
                                 class="w-full h-full border-0">
-                            <iframe :src="activeResource.file_url + '#toolbar=0'"
+                            <iframe :src="(activeResource.stream_url || activeResource.file_url) + '#toolbar=0'"
                                     class="w-full h-full border-0"
                                     :title="activeResource.title"
                                     loading="lazy">

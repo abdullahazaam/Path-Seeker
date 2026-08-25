@@ -150,8 +150,9 @@ use App\Http\Controllers\PassportShareController;
 use App\Http\Controllers\PassportExportController;
 use App\Http\Controllers\NotificationController;
 
-// Public Resource Previews & Safe Rate-Limited Downloads
+// Public Resource Previews, In-line Stream & Safe Rate-Limited Downloads
 Route::get('/resources/{id}/preview', [ResourceController::class, 'preview'])->name('resources.preview');
+Route::get('/resources/{id}/stream', [ResourceController::class, 'stream'])->name('resources.stream');
 Route::get('/resources/{id}/download', [ResourceController::class, 'download'])->name('resources.download')->middleware('throttle:15,1');
 
 // Public Privacy-Safe Shared Passport (Opaque Token)

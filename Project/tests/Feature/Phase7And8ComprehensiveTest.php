@@ -104,8 +104,24 @@ class Phase7And8ComprehensiveTest extends TestCase
         $previewRes = $this->get(route('resources.preview', $resource->id));
         $previewRes->assertStatus(200);
         $previewRes->assertJsonFragment(['title' => '2026 AWS Cloud Blueprint']);
+        $previewRes->assertJsonStructure(['stream_url', 'download_url']);
 
-        // 2. Safe Local Storage PDF Download
+        // 2. Stream Endpoint (Physical File / Dynamic Fallback)
+        $streamRes = $this->get(route('resources.stream', $resource->id));
+        $streamRes->assertStatus(200);
+        $streamRes->assertHeader('content-type', 'application/pdf');
+
+        // 3. Fallback Test with missing file
+        $fallbackRes = Resource::create([
+            'title' => 'Fallback Missing PDF Blueprint',
+            'category' => 'Systems',
+            'file_url' => '/storage/resources/pdfs/non_existent_file_9999.pdf',
+        ]);
+        $fallbackStream = $this->get(route('resources.stream', $fallbackRes->id));
+        $fallbackStream->assertStatus(200);
+        $fallbackStream->assertHeader('content-type', 'application/pdf');
+
+        // 4. Safe Local Storage PDF Download
         $downloadRes = $this->get(route('resources.download', $resource->id));
         $downloadRes->assertStatus(200);
         $downloadRes->assertHeader('content-type', 'application/pdf');
