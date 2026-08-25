@@ -7,7 +7,7 @@
 
 @if(auth()->user()->role !== 'admin' && auth()->user()->email !== 'admin@pathseeker.com')
     {{-- Passport User Profile Header --}}
-    <div class="relative rounded-3xl p-8 md:p-10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+    <div class="relative rounded-3xl p-8 md:p-10 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-purple-500/15 dark:bg-purple-500/20 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-cyan-500/15 dark:bg-cyan-500/20 blur-3xl pointer-events-none"></div>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="flex items-center gap-3 shrink-0">
-                <a href="{{ route('quiz.index') }}" class="btn-sweep group inline-flex items-center gap-3 px-8 py-4 rounded-full font-black text-sm sm:text-base text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple transition-all duration-300 hover:scale-105">
+                <a href="{{ route('quiz.index') }}" class="btn-sweep group inline-flex items-center gap-3 px-8 py-4 rounded-full font-black text-sm sm:text-base text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md transition-all duration-300 hover:scale-105">
                     <i class="fa-solid fa-brain text-sm text-white"></i>
                     <span class="text-white font-black">Take Assessment</span>
                     <i class="fa-solid fa-arrow-right text-xs text-white group-hover:translate-x-1 transition-transform"></i>
@@ -64,7 +64,7 @@
             <div class="absolute -top-16 -right-16 w-60 h-60 rounded-full bg-purple-400/10 dark:bg-purple-500/15 blur-2xl pointer-events-none"></div>
             <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div class="space-y-1">
-                    <div class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-purple-700 dark:text-purple-300 font-mono">
+                    <div class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-purple-700 dark:text-purple-300 font-mono">
                         <i class="fa-solid fa-bullseye text-purple-600 dark:text-purple-400"></i>
                         <span>Personalized for {{ $userRole === 'student' ? 'Students' : ($userRole === 'graduate' ? 'Graduates' : ($userRole === 'professional' ? 'Professionals' : 'Users')) }}</span>
                     </div>
@@ -83,10 +83,10 @@
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
 
         {{-- Widget 1: Career Readiness Index --}}
-        <div class="md:col-span-4 rounded-3xl p-7 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300">
+        <div class="md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300">
             <div class="space-y-2">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest flex items-center gap-1.5 font-mono">
+                    <span class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
                         <i class="fa-solid fa-shield-halved text-purple-600 dark:text-purple-400"></i> Readiness Index
                     </span>
                     <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">Tier 1 Ready</span>
@@ -138,10 +138,10 @@
         </div>
 
         {{-- Widget 2: Active Career Direction --}}
-        <div class="md:col-span-4 rounded-3xl p-7 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300">
+        <div class="md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300">
             <div class="space-y-2">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest flex items-center gap-1.5 font-mono">
+                    <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
                         <i class="fa-solid fa-compass text-indigo-600 dark:text-indigo-400"></i> Target Pathway
                     </span>
                     <span class="text-xs text-emerald-600 dark:text-emerald-400 font-black font-mono">$120k/yr</span>
@@ -176,10 +176,10 @@
         </div>
 
         {{-- Widget 3: Skill Development Progress --}}
-        <div class="md:col-span-4 rounded-3xl p-7 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300">
+        <div class="md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300">
             <div class="space-y-2">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-widest flex items-center gap-1.5 font-mono">
+                    <span class="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
                         <i class="fa-solid fa-code text-pink-600 dark:text-pink-400"></i> Competency Matrix
                     </span>
                     <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">4 Tracks</span>
@@ -238,10 +238,10 @@
     </div>
 
     {{-- ══════════════════ 4. RECOMMENDED NEXT STEPS ROADMAP ══════════════════ --}}
-    <div class="relative rounded-3xl p-8 sm:p-10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 overflow-hidden">
+    <div class="relative rounded-3xl p-8 sm:p-10 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 overflow-hidden">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="space-y-1">
-                <div class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest flex items-center gap-1.5 font-mono">
+                <div class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
                     <i class="fa-solid fa-list-check"></i> Action Plan
                 </div>
                 <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">Recommended Next Steps</h3>
@@ -298,12 +298,12 @@
     </div>
 
     {{-- ══════════════════ 4.5 QUIZ ASSESSMENT HISTORY & EXPLAINABLE CAREER FIT ══════════════════ --}}
-    <div class="relative rounded-3xl p-8 sm:p-10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 space-y-8 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
+    <div class="relative rounded-3xl p-8 sm:p-10 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 space-y-8 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         
         {{-- Section Header --}}
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200/80 dark:border-white/[0.08]">
             <div class="space-y-1">
-                <div class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-400 font-mono">
+                <div class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
                     <i class="fa-solid fa-brain text-indigo-500"></i>
                     <span>Evaluation Records &amp; Career Recommendations</span>
                 </div>
@@ -314,7 +314,7 @@
                     Persistent, versioned cognitive assessment records and deterministic explainable career recommendations.
                 </p>
             </div>
-            <a href="{{ route('quiz.index') }}" class="px-5 py-2.5 rounded-full font-bold text-xs text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 shadow-neon-purple transition-all shrink-0 flex items-center gap-2">
+            <a href="{{ route('quiz.index') }}" class="px-5 py-2.5 rounded-full font-bold text-xs text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 shadow-md transition-all shrink-0 flex items-center gap-2">
                 <i class="fa-solid fa-rotate-left text-[11px]"></i>
                 <span>Take New Assessment</span>
             </a>
@@ -362,7 +362,7 @@
                         {{-- Domain Scores Progress Mini Bars --}}
                         @if(!empty($attempt->domain_scores))
                             <div class="space-y-2">
-                                <div class="text-[10px] font-black uppercase tracking-widest text-slate-500 font-mono">Domain Affinity Scores</div>
+                                <div class="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Domain Affinity Scores</div>
                                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                                     @foreach($attempt->domain_scores as $domain => $scorePct)
                                         <div class="p-2.5 rounded-xl bg-white/80 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/5 space-y-1">
@@ -382,7 +382,7 @@
                         {{-- Top Recommended Careers with Explainability --}}
                         @if(!empty($attempt->recommended_careers))
                             <div class="space-y-2.5">
-                                <div class="text-[10px] font-black uppercase tracking-widest text-slate-500 font-mono">Recommended Careers &amp; Explainability Factors</div>
+                                <div class="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Recommended Careers &amp; Explainability Factors</div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                                     @foreach($attempt->recommended_careers as $rec)
                                         <div class="p-4 rounded-2xl bg-white/90 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex flex-col justify-between space-y-3">
@@ -432,7 +432,7 @@
     </div>
 
     {{-- ══════════════════ 5. INTERACTIVE CAREER PATH BUILDER ══════════════════ --}}
-    <div class="relative rounded-3xl p-8 sm:p-10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-purple-500/25 space-y-8 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden" id="pathBuilderSection">
+    <div class="relative rounded-3xl p-8 sm:p-10 bg-white dark:bg-[#080B12] border border-slate-200/80 dark:border-purple-500/25 space-y-8 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden" id="pathBuilderSection">
         
         {{-- Section Header --}}
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-200/80 dark:border-white/[0.08]">
@@ -650,7 +650,7 @@
 
     {{-- ══════════════════ 6. BENTO STATISTICS SUMMARY ══════════════════ --}}
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
-        <div class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-2">
+        <div class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-2">
             <div class="w-10 h-10 rounded-2xl bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg">
                 <i class="fa-solid fa-briefcase"></i>
             </div>
@@ -658,7 +658,7 @@
             <div class="text-xs text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider font-mono">Active Careers</div>
         </div>
 
-        <div class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-2">
+        <div class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-2">
             <div class="w-10 h-10 rounded-2xl bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center text-lg">
                 <i class="fa-solid fa-play"></i>
             </div>
@@ -666,7 +666,7 @@
             <div class="text-xs text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider font-mono">Video Assets</div>
         </div>
 
-        <div class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-2">
+        <div class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-2">
             <div class="w-10 h-10 rounded-2xl bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center text-lg">
                 <i class="fa-solid fa-book-bookmark"></i>
             </div>
@@ -674,7 +674,7 @@
             <div class="text-xs text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider font-mono">Toolkits</div>
         </div>
 
-        <div class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-2 flex flex-col justify-between hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300">
+        <div class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-2 flex flex-col justify-between hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300">
             <div>
                 <div class="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-lg mb-2">
                     <i class="fa-solid fa-bookmark"></i>
@@ -700,7 +700,7 @@
     {{-- ════════════════════════════════════════════════
          AI CAREER MATCH INTELLIGENCE CARD
     ════════════════════════════════════════════════ --}}
-    <div class="relative rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+    <div class="relative rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#080B12] shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
@@ -744,7 +744,7 @@
                     {{-- Header --}}
                     <div class="flex items-start justify-between gap-3">
                         <div>
-                            <p class="text-[10px] font-semibold text-purple-600 dark:text-purple-400 mb-1 tracking-widest uppercase font-mono">Intelligence Preview</p>
+                            <p class="text-[10px] font-semibold text-purple-600 dark:text-purple-400 mb-1 tracking-wider uppercase font-mono">Intelligence Preview</p>
                             <h4 id="db-roleTitle" class="text-lg sm:text-xl font-black text-slate-900 dark:text-white font-display leading-tight">Full-Stack Web Architect</h4>
                             <p id="db-salary" class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold mt-1 font-mono">$115k – $155k / yr</p>
                         </div>
@@ -837,7 +837,7 @@
 
                     {{-- Core Skills pills --}}
                     <div class="space-y-2">
-                        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-widest font-mono">Core Required Skills</p>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider font-mono">Core Required Skills</p>
                         <div id="db-skills" class="flex flex-wrap gap-1.5"></div>
                     </div>
 
@@ -869,7 +869,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @forelse($stories as $story)
-                <div class="card-tilt rounded-3xl p-6 sm:p-7 flex flex-col justify-between bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:border-purple-500/30 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 space-y-4">
+                <div class="card-tilt rounded-3xl p-6 sm:p-7 flex flex-col justify-between bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:border-purple-500/30 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 space-y-4">
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
                             <span class="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25 shadow-sm font-mono">
@@ -888,7 +888,7 @@
                     </div>
                 </div>
             @empty
-                <div class="col-span-2 text-center py-10 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 text-slate-500 text-xs shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-2">
+                <div class="col-span-2 text-center py-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 text-slate-500 text-xs shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-2">
                     <i class="fa-solid fa-graduation-cap text-2xl text-purple-400 block mb-1"></i>
                     <p class="font-bold text-slate-700 dark:text-slate-300 text-sm">No alumni breakthroughs submitted yet.</p>
                     <p class="text-slate-500">Check back soon for verified career transition stories from our community.</p>
@@ -914,7 +914,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @foreach($userFeedbacks->take(4) as $fb)
-                <div class="rounded-3xl p-6 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-4 flex flex-col justify-between hover:border-indigo-500/30 transition-all">
+                <div class="rounded-3xl p-6 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-4 flex flex-col justify-between hover:border-indigo-500/30 transition-all">
                     <div class="space-y-3">
                         <div class="flex items-center justify-between gap-2">
                             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase font-mono bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25">
@@ -988,7 +988,7 @@
     }" class="space-y-8 md:space-y-10">
 
         {{-- Admin Executive Header --}}
-        <div class="relative rounded-3xl p-8 md:p-10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+        <div class="relative rounded-3xl p-8 md:p-10 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
             {{-- Ambient Glows --}}
             <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-indigo-500/15 dark:bg-indigo-500/20 blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-purple-500/15 dark:bg-purple-500/20 blur-3xl pointer-events-none"></div>
@@ -1024,7 +1024,7 @@
                         <i class="fa-solid fa-user-plus text-xs"></i>
                         <span>Add User</span>
                     </button>
-                    <button @click="showAddCareer = true" class="btn-sweep inline-flex items-center gap-2 px-5 py-3 rounded-full font-bold text-xs text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-neon-purple transition-all">
+                    <button @click="showAddCareer = true" class="btn-sweep inline-flex items-center gap-2 px-5 py-3 rounded-full font-bold text-xs text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-md transition-all">
                         <i class="fa-solid fa-plus text-xs"></i>
                         <span>Add Career Track</span>
                     </button>
@@ -1035,9 +1035,9 @@
         {{-- 1. Top Metrics Row (5 Stat Cards) --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
             {{-- Metric 1: Total Active Users --}}
-            <div @click="currentTab = 'users'" class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-indigo-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'users' ? 'ring-2 ring-indigo-500/50' : ''">
+            <div @click="currentTab = 'users'" class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-indigo-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'users' ? 'ring-2 ring-indigo-500/50' : ''">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest font-mono">User Base</span>
+                    <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider font-mono">User Base</span>
                     <div class="w-10 h-10 rounded-2xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg">
                         <i class="fa-solid fa-users"></i>
                     </div>
@@ -1052,9 +1052,9 @@
             </div>
 
             {{-- Metric 2: Total Career Tracks --}}
-            <div @click="currentTab = 'careers'" class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'careers' ? 'ring-2 ring-purple-500/50' : ''">
+            <div @click="currentTab = 'careers'" class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'careers' ? 'ring-2 ring-purple-500/50' : ''">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest font-mono">Career Tracks</span>
+                    <span class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider font-mono">Career Tracks</span>
                     <div class="w-10 h-10 rounded-2xl bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center justify-center text-lg">
                         <i class="fa-solid fa-compass"></i>
                     </div>
@@ -1069,9 +1069,9 @@
             </div>
 
             {{-- Metric 3: Multimedia Assets --}}
-            <div @click="currentTab = 'multimedia'" class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-pink-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'multimedia' ? 'ring-2 ring-pink-500/50' : ''">
+            <div @click="currentTab = 'multimedia'" class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-pink-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'multimedia' ? 'ring-2 ring-pink-500/50' : ''">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-widest font-mono">Media Assets</span>
+                    <span class="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider font-mono">Media Assets</span>
                     <div class="w-10 h-10 rounded-2xl bg-pink-500/15 text-pink-600 dark:text-pink-400 flex items-center justify-center text-lg">
                         <i class="fa-solid fa-video"></i>
                     </div>
@@ -1086,9 +1086,9 @@
             </div>
 
             {{-- Metric 4: Total Resource Toolkits --}}
-            <div @click="currentTab = 'resources'" class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'resources' ? 'ring-2 ring-emerald-500/50' : ''">
+            <div @click="currentTab = 'resources'" class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'resources' ? 'ring-2 ring-emerald-500/50' : ''">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest font-mono">Resource Toolkits</span>
+                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider font-mono">Resource Toolkits</span>
                     <div class="w-10 h-10 rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg">
                         <i class="fa-solid fa-file-lines"></i>
                     </div>
@@ -1103,9 +1103,9 @@
             </div>
 
             {{-- Metric 5: Feedback Inbox --}}
-            <div @click="currentTab = 'feedback'" class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-amber-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'feedback' ? 'ring-2 ring-amber-500/50' : ''">
+            <div @click="currentTab = 'feedback'" class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-amber-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'feedback' ? 'ring-2 ring-amber-500/50' : ''">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest font-mono">Feedback Inbox</span>
+                    <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-mono">Feedback Inbox</span>
                     <div class="w-10 h-10 rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg">
                         <i class="fa-solid fa-comments"></i>
                     </div>
@@ -1155,7 +1155,7 @@
         </div>
 
         {{-- ══════════════════ TAB 1: USER MANAGEMENT ══════════════════ --}}
-        <div x-show="currentTab === 'users'" class="rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
+        <div x-show="currentTab === 'users'" class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                     <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">Registered Users Directory</h3>
@@ -1236,7 +1236,7 @@
         </div>
 
         {{-- ══════════════════ TAB 2: CAREER TRACKS MANAGEMENT ══════════════════ --}}
-        <div x-show="currentTab === 'careers'" class="rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
+        <div x-show="currentTab === 'careers'" class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                     <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">Career Tracks Catalog</h3>
@@ -1300,7 +1300,7 @@
         </div>
 
         {{-- ══════════════════ TAB 3: MULTIMEDIA ASSETS MANAGEMENT ══════════════════ --}}
-        <div x-show="currentTab === 'multimedia'" class="rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
+        <div x-show="currentTab === 'multimedia'" class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                     <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">Multimedia Asset Library</h3>
@@ -1363,7 +1363,7 @@
         </div>
 
         {{-- ══════════════════ TAB 4: RESOURCE TOOLKITS MANAGEMENT ══════════════════ --}}
-        <div x-show="currentTab === 'resources'" class="rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
+        <div x-show="currentTab === 'resources'" class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                     <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">Resource Toolkits &amp; Blueprints</h3>
@@ -1426,7 +1426,7 @@
         </div>
 
         {{-- ══════════════════ TAB 5: FEEDBACK INBOX MANAGEMENT ══════════════════ --}}
-        <div x-show="currentTab === 'feedback'" class="rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
+        <div x-show="currentTab === 'feedback'" class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                     <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">User Feedback &amp; Suggestions Inbox</h3>
@@ -1537,7 +1537,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: ADD NEW USER ══════════════════ --}}
-        <div x-show="showAddUser" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="showAddUser" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 ">
             <div @click.outside="showAddUser = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
@@ -1579,7 +1579,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: ADD CAREER TRACK ══════════════════ --}}
-        <div x-show="showAddCareer" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="showAddCareer" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 ">
             <div @click.outside="showAddCareer = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
@@ -1620,7 +1620,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: EDIT CAREER TRACK ══════════════════ --}}
-        <div x-show="editCareerModal" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="editCareerModal" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 ">
             <div @click.outside="editCareerModal = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
@@ -1662,7 +1662,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: ADD MULTIMEDIA ASSET ══════════════════ --}}
-        <div x-show="showAddMedia" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="showAddMedia" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 ">
             <div @click.outside="showAddMedia = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
@@ -1720,7 +1720,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: EDIT MULTIMEDIA ASSET ══════════════════ --}}
-        <div x-show="editMediaModal" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="editMediaModal" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 ">
             <div @click.outside="editMediaModal = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
@@ -1779,7 +1779,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: ADD RESOURCE TOOLKIT ══════════════════ --}}
-        <div x-show="showAddResource" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="showAddResource" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 ">
             <div @click.outside="showAddResource = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
@@ -1824,7 +1824,7 @@
         </div>
 
         {{-- ══════════════════ MODAL: EDIT RESOURCE TOOLKIT ══════════════════ --}}
-        <div x-show="editResourceModal" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div x-show="editResourceModal" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 ">
             <div @click.outside="editResourceModal = false" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">

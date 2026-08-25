@@ -37,7 +37,7 @@
 
         {{-- Public Skills & Interests --}}
         <div class="pt-6 border-t border-slate-200/80 dark:border-white/10 space-y-4">
-            <h3 class="text-xs font-black uppercase tracking-widest text-slate-500 font-mono">Core Focus &amp; Interests</h3>
+            <h3 class="text-xs font-black uppercase tracking-wider text-slate-500 font-mono">Core Focus &amp; Interests</h3>
             <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-100/60 dark:bg-white/[0.02] p-4 rounded-2xl border border-slate-200/60 dark:border-white/5">
                 {{ $publicProfile['interests'] }}
             </p>

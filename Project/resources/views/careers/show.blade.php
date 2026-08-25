@@ -75,7 +75,7 @@
     </div>
 
     {{-- ── SECTION 1: Hero Header with Interactive Salary Calculator ───────────────────── --}}
-    <div class="relative rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+    <div class="relative rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#080B12] shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
@@ -113,7 +113,7 @@
                     $rawMax = isset($salaryParts[1]) ? (int)$salaryParts[1] : 130000;
                 @endphp
                 <div x-data="salaryCalculator({{ $rawMin }}, {{ $rawMax }})"
-                     class="shrink-0 p-5 sm:p-6 rounded-3xl bg-slate-100/90 dark:bg-slate-950/70 border border-emerald-500/30 text-center w-full lg:w-80 shadow-xl backdrop-blur-md space-y-4">
+                     class="shrink-0 p-5 sm:p-6 rounded-3xl bg-slate-100/90 dark:bg-slate-950/70 border border-emerald-500/30 text-center w-full lg:w-80 shadow-xl  space-y-4">
                     <div class="flex items-center justify-between">
                         <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
                             <i class="fa-solid fa-calculator text-[10px]"></i> Salary Estimator
@@ -259,7 +259,7 @@
 
     {{-- ── SECTION 2: Demand & Market Metrics ──────── --}}
     <div class="space-y-4">
-        <h2 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2">
+        <h2 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2">
             <i class="fa-solid fa-chart-bar text-indigo-400"></i> Market Intelligence Telemetry
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -479,18 +479,18 @@
         <div class="p-7">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                 <div class="p-5 rounded-2xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/[0.06] text-center space-y-1">
-                    <div class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono">Entry Level</div>
+                    <div class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Entry Level</div>
                     <div class="text-xl font-black text-slate-800 dark:text-slate-200 font-display">$70k–$90k</div>
                     <div class="text-[10px] text-slate-500 dark:text-slate-400">0–2 years experience</div>
                 </div>
                 <div class="p-5 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 dark:from-indigo-950/40 dark:to-purple-950/40 border border-indigo-500/30 text-center space-y-1 relative overflow-hidden">
                     <div class="absolute top-2 right-2 px-1.5 py-0.5 rounded text-[8px] font-bold bg-indigo-500/20 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 font-mono">MEDIAN</div>
-                    <div class="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest font-mono">Mid Level</div>
+                    <div class="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider font-mono">Mid Level</div>
                     <div class="text-xl font-black text-slate-900 dark:text-white font-display">{{ $career->expected_salary }}</div>
                     <div class="text-[10px] text-slate-500 dark:text-slate-400">3–6 years experience</div>
                 </div>
                 <div class="p-5 rounded-2xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/[0.06] text-center space-y-1">
-                    <div class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono">Senior / Lead</div>
+                    <div class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Senior / Lead</div>
                     <div class="text-xl font-black text-emerald-600 dark:text-emerald-400 font-display">$160k+</div>
                     <div class="text-[10px] text-slate-500 dark:text-slate-400">7+ years experience</div>
                 </div>
@@ -540,7 +540,7 @@
                         
                         {{-- Node Icon with Glowing Badge --}}
                         <div class="relative shrink-0">
-                            <div class="w-16 h-16 rounded-2xl {{ $st['glow'] }} border flex items-center justify-center group-hover:scale-105 transition-transform backdrop-blur-md">
+                            <div class="w-16 h-16 rounded-2xl {{ $st['glow'] }} border flex items-center justify-center group-hover:scale-105 transition-transform ">
                                 <i class="fa-solid {{ $stage['icon'] }} text-xl"></i>
                             </div>
                             <div class="absolute -top-2 -right-2 w-6 h-6 rounded-full {{ $st['ring'] }} text-white text-[9px] font-black flex items-center justify-center border-2 border-white dark:border-[#090b14]">{{ $stage['step'] }}</div>

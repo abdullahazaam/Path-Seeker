@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="glass-panel rounded-2xl p-4 border border-slate-200/80 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 backdrop-blur-md shadow-xl">
+    <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="glass-panel rounded-2xl p-4 border border-slate-200/80 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
         <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">
             {!! __('Showing') !!}
             @if ($paginator->firstItem())
@@ -22,7 +22,7 @@
                     <span>Previous</span>
                 </span>
             @else
-                <a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md transition-all flex items-center gap-1.5 hover:scale-105">
+                <a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 transition-all flex items-center gap-1.5 hover:scale-105">
                     <i class="fa-solid fa-chevron-left text-xs"></i>
                     <span>Previous</span>
                 </a>
@@ -44,7 +44,7 @@
                                     {{ $page }}
                                 </span>
                             @else
-                                <a href="{{ $url }}" class="px-3.5 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md transition-all flex items-center justify-center min-w-[38px] hover:scale-105">
+                                <a href="{{ $url }}" class="px-3.5 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 transition-all flex items-center justify-center min-w-[38px] hover:scale-105">
                                     {{ $page }}
                                 </a>
                             @endif
@@ -55,7 +55,7 @@
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
-                <a href="{{ $paginator->nextPageUrl() }}" rel="next" class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md transition-all flex items-center gap-1.5 hover:scale-105">
+                <a href="{{ $paginator->nextPageUrl() }}" rel="next" class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 transition-all flex items-center gap-1.5 hover:scale-105">
                     <span>Next</span>
                     <i class="fa-solid fa-chevron-right text-xs"></i>
                 </a>

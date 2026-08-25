@@ -5,7 +5,7 @@
 <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 space-y-8 md:space-y-10 my-6 md:my-8">
 
     {{-- Result Hero Card --}}
-    <div class="relative rounded-3xl p-8 sm:p-12 text-center space-y-6 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+    <div class="relative rounded-3xl p-8 sm:p-12 text-center space-y-6 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
         
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
@@ -13,7 +13,7 @@
 
         <div class="relative z-10 space-y-4">
             <div class="flex flex-wrap items-center justify-center gap-2">
-                <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-xs font-black uppercase tracking-widest text-emerald-700 dark:text-emerald-300 shadow-sm font-mono">
+                <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-xs font-black uppercase tracking-wider text-emerald-700 dark:text-emerald-300 shadow-sm font-mono">
                     <i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400"></i>
                     <span>Assessment Completed</span>
                 </span>
@@ -33,16 +33,16 @@
 
             {{-- Stat Callouts --}}
             <div class="flex flex-wrap justify-center gap-4 sm:gap-5 pt-4">
-                <div class="bg-slate-100/80 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10 px-8 py-5 rounded-2xl text-left shadow-sm backdrop-blur-md min-w-[200px]">
-                    <div class="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-1 flex items-center gap-1.5 font-mono">
+                <div class="bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 px-8 py-5 rounded-2xl text-left shadow-sm min-w-[200px]">
+                    <div class="text-[10px] font-black uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-1 flex items-center gap-1.5 font-mono">
                         <i class="fa-solid fa-bullseye text-indigo-500"></i>
                         <span>Primary Aligned Domain</span>
                     </div>
                     <div class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display">{{ $recommendedDomain }}</div>
                 </div>
 
-                <div class="bg-slate-100/80 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10 px-8 py-5 rounded-2xl text-left shadow-sm backdrop-blur-md min-w-[200px]">
-                    <div class="text-[10px] font-black uppercase tracking-widest text-purple-600 dark:text-purple-400 mb-1 flex items-center gap-1.5 font-mono">
+                <div class="bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 px-8 py-5 rounded-2xl text-left shadow-sm min-w-[200px]">
+                    <div class="text-[10px] font-black uppercase tracking-wider text-purple-600 dark:text-purple-400 mb-1 flex items-center gap-1.5 font-mono">
                         <i class="fa-solid fa-chart-simple text-purple-500"></i>
                         <span>Total Weighted Points</span>
                     </div>
@@ -53,7 +53,7 @@
             {{-- Domain Breakdown Progress Bars --}}
             @if(!empty($domainCounts))
                 <div class="pt-6 max-w-2xl mx-auto text-left space-y-3">
-                    <div class="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 font-mono flex items-center gap-2">
+                    <div class="text-xs font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono flex items-center gap-2">
                         <i class="fa-solid fa-chart-pie text-indigo-400"></i>
                         <span>Domain Affinity Distribution</span>
                     </div>
@@ -78,7 +78,7 @@
     {{-- Recommended Career Pathways with Explainability --}}
     <div class="space-y-6">
         <div class="space-y-1">
-            <div class="text-xs font-black uppercase tracking-widest text-purple-600 dark:text-purple-400 flex items-center gap-1.5 font-mono">
+            <div class="text-xs font-black uppercase tracking-wider text-purple-600 dark:text-purple-400 flex items-center gap-1.5 font-mono">
                 <i class="fa-solid fa-route"></i>
                 <span>Explainable Recommendations</span>
             </div>
@@ -87,7 +87,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @forelse($recommendedCareers as $career)
-                <div class="bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 rounded-3xl p-6 sm:p-7 flex flex-col justify-between group relative overflow-hidden shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 hover:border-purple-500/40">
+                <div class="bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-7 flex flex-col justify-between group relative overflow-hidden shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 hover:border-purple-500/40">
                     <div class="space-y-4">
                         <div class="flex items-start justify-between gap-2 flex-wrap">
                             <span class="text-[11px] font-black uppercase px-3 py-1 rounded-full bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/20 font-mono shadow-sm">
@@ -142,7 +142,7 @@
 
     {{-- Question-by-Question Response Audit --}}
     @if(isset($details) && count($details) > 0)
-        <div class="bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl rounded-3xl p-7 sm:p-8 space-y-5 border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+        <div class="bg-white dark:bg-[#080B12] rounded-3xl p-7 sm:p-8 space-y-5 border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
             <div class="flex items-center justify-between border-b border-slate-200/80 dark:border-white/10 pb-4">
                 <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2.5 font-display">
                     <i class="fa-solid fa-list-check text-purple-600 dark:text-purple-400"></i>
@@ -175,7 +175,7 @@
             <i class="fa-solid fa-rotate-left text-xs"></i>
             <span>Retake Assessment</span>
         </a>
-        <a href="{{ route('dashboard') }}" class="btn-sweep px-8 py-3.5 rounded-full font-black text-xs sm:text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple hover:shadow-neon-pink transition-all flex items-center gap-2 hover:scale-105 cursor-pointer">
+        <a href="{{ route('dashboard') }}" class="btn-sweep px-8 py-3.5 rounded-full font-black text-xs sm:text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md hover:shadow-md transition-all flex items-center gap-2 hover:scale-105 cursor-pointer">
             <i class="fa-solid fa-gauge-high text-xs text-white"></i>
             <span class="text-white font-black">Back to Dashboard</span>
             <i class="fa-solid fa-arrow-right text-xs text-white"></i>

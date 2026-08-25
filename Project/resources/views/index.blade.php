@@ -162,7 +162,7 @@
 
 {{-- SECTION 2: HOW YOUR PATH COMES TOGETHER --}}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
-    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
+    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
@@ -190,7 +190,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
                     
                     {{-- Step 01: Discover --}}
-                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/95 dark:bg-slate-900/90 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 dark:bg-indigo-500/15 border border-indigo-500/25 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-xl group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all shadow-sm">
@@ -215,7 +215,7 @@
                     </div>
 
                     {{-- Step 02: Explore --}}
-                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/95 dark:bg-slate-900/90 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-14 h-14 rounded-2xl bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl group-hover:scale-110 group-hover:bg-purple-500/20 transition-all shadow-sm">
@@ -240,7 +240,7 @@
                     </div>
 
                     {{-- Step 03: Understand --}}
-                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/95 dark:bg-slate-900/90 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-14 h-14 rounded-2xl bg-pink-500/10 dark:bg-pink-500/15 border border-pink-500/25 flex items-center justify-center text-pink-600 dark:text-pink-400 text-xl group-hover:scale-110 group-hover:bg-pink-500/20 transition-all shadow-sm">
@@ -265,7 +265,7 @@
                     </div>
 
                     {{-- Step 04: Build --}}
-                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/95 dark:bg-slate-900/90 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
+                    <div class="group relative isolate z-10 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 hover:border-purple-500/40 dark:hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl dark:shadow-sm hover:shadow-2xl space-y-5">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xl group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all shadow-sm">
@@ -296,7 +296,7 @@
 
 {{-- SECTION 3: AI CAREER MATCH ADVISOR --}}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
-    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
+    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-pink-500/10 dark:bg-pink-500/15 blur-3xl pointer-events-none"></div>
@@ -336,7 +336,7 @@
                         {{-- Header row --}}
                         <div class="flex items-start justify-between gap-3">
                             <div>
-                                <p class="text-[10px] font-semibold text-purple-600 dark:text-purple-400 mb-1 tracking-widest uppercase font-mono">Intelligence Preview</p>
+                                <p class="text-[10px] font-semibold text-purple-600 dark:text-purple-400 mb-1 tracking-wider uppercase font-mono">Intelligence Preview</p>
                                 <h4 id="advisorRoleTitle" class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display leading-tight">Full-Stack Web Architect</h4>
                                 <p id="advisorSalary" class="text-xs text-emerald-600 dark:text-emerald-400 font-bold font-mono mt-1">$115k – $155k / yr</p>
                             </div>
@@ -444,7 +444,7 @@
 
                         {{-- Core Required Skills pills --}}
                         <div class="space-y-2.5">
-                            <p class="text-[10px] text-slate-600 dark:text-slate-400 font-bold uppercase tracking-widest font-mono">Core Required Skills</p>
+                            <p class="text-[10px] text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider font-mono">Core Required Skills</p>
                             <div id="advisorSkills" class="flex flex-wrap gap-1.5">
                                 {{-- Populated by JS --}}
                             </div>
@@ -465,7 +465,7 @@
 
 {{-- SECTION 4: FEATURED INTELLIGENCE TRACKS --}}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
-    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden space-y-10">
+    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden space-y-10">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
@@ -628,7 +628,7 @@
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {{-- Multimedia Card --}}
-        <div class="relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+        <div class="relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#080B12] shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
             <div class="px-7 py-5 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between bg-slate-50/50 dark:bg-white/[0.02]">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-2xl bg-rose-500/15 border border-rose-500/25 flex items-center justify-center shadow-sm">
@@ -669,7 +669,7 @@
         </div>
 
         {{-- Resource Library Card --}}
-        <div class="relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+        <div class="relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#080B12] shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
             <div class="px-7 py-5 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between bg-slate-50/50 dark:bg-white/[0.02]">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-2xl bg-sky-500/15 border border-sky-500/25 flex items-center justify-center shadow-sm">
@@ -713,7 +713,7 @@
 
 {{-- ══════════════════ SECTION 6: HOMEPAGE COMMUNITY FEEDBACK & SUGGESTIONS ══════════════════ --}}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
-    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
+    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
@@ -820,7 +820,7 @@
                             <p class="text-[10px] text-slate-500 font-mono">
                                 @auth Signed in as {{ Auth::user()->name }} @else Submitting as Guest Visitor @endauth
                             </p>
-                            <button type="submit" class="btn-sweep px-7 py-3 rounded-full text-xs font-bold text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-md hover:shadow-neon-purple transition-all flex items-center gap-2 cursor-pointer">
+                            <button type="submit" class="btn-sweep px-7 py-3 rounded-full text-xs font-bold text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-md hover:shadow-md transition-all flex items-center gap-2 cursor-pointer">
                                 <span>Submit Feedback</span>
                                 <i class="fa-solid fa-paper-plane text-[10px]"></i>
                             </button>
@@ -880,10 +880,10 @@
 
 {{-- ══════════════════ COMPARISON MATRIX MODAL ══════════════════ --}}
 <div id="compareModal"
-     class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300"
+     class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80  opacity-0 pointer-events-none transition-opacity duration-300"
      onclick="handleModalBackdropClick(event)">
     
-    <div class="relative w-full max-w-5xl max-h-[90vh] flex flex-col rounded-2xl bg-slate-900/90 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 shadow-2xl overflow-hidden scale-95 transition-transform duration-300"
+    <div class="relative w-full max-w-5xl max-h-[90vh] flex flex-col rounded-2xl bg-slate-900 border border-white/10 p-6 sm:p-8 shadow-2xl overflow-hidden scale-95 transition-transform duration-300"
          id="compareModalContent">
         
         {{-- Modal Top Gradient Accent --}}

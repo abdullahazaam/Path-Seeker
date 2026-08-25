@@ -73,7 +73,7 @@
 
         {{-- ══════════════════ RIGHT COLUMN: AUTHENTICATION FORM CARD ══════════════════ --}}
         <div class="lg:col-span-5 flex justify-center">
-            <div class="relative w-full max-w-md bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] rounded-3xl p-6 sm:p-8 overflow-hidden">
+            <div class="relative w-full max-w-md bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] rounded-3xl p-6 sm:p-8 overflow-hidden">
                 
                 {{-- Ambient Corner Glows --}}
                 <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-purple-500/15 dark:bg-purple-500/20 blur-3xl pointer-events-none"></div>
@@ -84,7 +84,7 @@
                     {{-- Header Section with Brand Emblem --}}
                     <div class="flex items-center justify-between pb-1">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white text-sm shadow-neon-purple shrink-0">
+                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white text-sm shadow-md shrink-0">
                                 <i class="fa-solid fa-right-to-bracket text-white"></i>
                             </div>
                             <div>
@@ -146,7 +146,7 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="btn-sweep group w-full py-3 rounded-full font-black text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple hover:shadow-neon-pink transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer">
+                        <button type="submit" class="btn-sweep group w-full py-3 rounded-full font-black text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md hover:shadow-md transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer">
                             <i class="fa-solid fa-right-to-bracket text-xs text-white"></i>
                             <span class="text-white font-black">Sign In to Passport</span>
                             <i class="fa-solid fa-arrow-right text-xs text-white group-hover:translate-x-1.5 transition-transform"></i>

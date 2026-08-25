@@ -5,7 +5,7 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
     
     {{-- Header Banner --}}
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 p-8 sm:p-10 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl">
         <div class="space-y-2">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 text-pink-700 dark:text-pink-300 border border-pink-500/20 text-xs font-mono font-bold">
                 <i class="fa-solid fa-award text-pink-500"></i>
@@ -28,7 +28,7 @@
     {{-- Stories Grid --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($stories as $story)
-            <div class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-xl flex flex-col justify-between space-y-4 hover:-translate-y-1 hover:border-purple-500/30 transition-all duration-300">
+            <div class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl flex flex-col justify-between space-y-4 hover:-translate-y-1 hover:border-purple-500/30 transition-all duration-300">
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase font-mono bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25">

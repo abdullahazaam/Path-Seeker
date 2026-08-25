@@ -21,7 +21,7 @@
     </div>
 
     {{-- Main Thread Container --}}
-    <div class="p-6 sm:p-10 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl space-y-8">
+    <div class="p-6 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl space-y-8">
         
         {{-- Thread Header --}}
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-white/10">

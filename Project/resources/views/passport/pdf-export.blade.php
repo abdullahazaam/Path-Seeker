@@ -28,7 +28,7 @@
     {{-- Passport Header --}}
     <div class="border-b-2 border-slate-900 pb-6 mb-8 flex justify-between items-start">
         <div class="space-y-1">
-            <div class="text-xs font-black uppercase tracking-widest text-indigo-600 font-mono">PATHSEEKER &bull; VERIFIED CAREER PASSPORT</div>
+            <div class="text-xs font-black uppercase tracking-wider text-indigo-600 font-mono">PATHSEEKER &bull; VERIFIED CAREER PASSPORT</div>
             <h1 class="text-3xl font-black text-slate-900 font-serif">{{ $exportData['candidate_name'] }}</h1>
             <p class="text-sm text-slate-600">{{ $exportData['role'] }} &bull; {{ $exportData['education_level'] }}</p>
         </div>

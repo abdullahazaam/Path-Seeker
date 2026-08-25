@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="max-w-xl mx-auto px-4 sm:px-6 py-16 text-center space-y-6">
-    <div class="p-8 sm:p-10 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-5">
+    <div class="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-5">
         @if(isset($error) && $error)
             <div class="w-16 h-16 rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 flex items-center justify-center text-3xl mx-auto shadow-sm">
                 <i class="fa-solid fa-triangle-exclamation"></i>

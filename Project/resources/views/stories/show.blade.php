@@ -13,7 +13,7 @@
     </div>
 
     {{-- Story Article --}}
-    <article class="p-8 sm:p-12 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl space-y-8">
+    <article class="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl space-y-8">
         
         <div class="space-y-4">
             <div class="flex flex-wrap items-center gap-2.5">
@@ -56,7 +56,7 @@
         {{-- Admin Moderation Panel if viewing non-approved or admin mode --}}
         @if(auth()->check() && auth()->user()->role === 'admin' && auth()->id() !== $story->submitted_by)
             <div class="p-6 rounded-2xl bg-slate-100 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 space-y-4">
-                <h4 class="text-xs font-black uppercase tracking-widest text-slate-700 dark:text-slate-300 font-mono flex items-center gap-2">
+                <h4 class="text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono flex items-center gap-2">
                     <i class="fa-solid fa-shield-halved text-indigo-500"></i>
                     <span>Admin Moderation Controls</span>
                 </h4>

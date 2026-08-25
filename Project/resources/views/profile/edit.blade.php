@@ -19,9 +19,9 @@
     </div>
 
     {{-- Header Banner --}}
-    <div class="p-8 sm:p-10 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+    <div class="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div class="flex items-center gap-5">
-            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white font-black text-2xl sm:text-3xl shadow-neon-purple shrink-0">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white font-black text-2xl sm:text-3xl shadow-md shrink-0">
                 {{ substr($user->name, 0, 1) }}
             </div>
             <div class="space-y-1">
@@ -41,7 +41,7 @@
     </div>
 
     {{-- Edit Profile Form --}}
-    <div class="p-6 sm:p-10 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-xl space-y-8">
+    <div class="p-6 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-8">
         
         <div class="border-b border-slate-200 dark:border-white/10 pb-4">
             <h2 class="text-lg font-black text-slate-900 dark:text-white font-display flex items-center gap-2">
@@ -125,7 +125,7 @@
                 <a href="{{ route('dashboard') }}" class="px-6 py-3 rounded-full text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 transition-all">
                     Cancel
                 </a>
-                <button type="submit" class="btn-sweep px-8 py-3 rounded-full font-black text-xs text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-neon-purple hover:scale-105 transition-all">
+                <button type="submit" class="btn-sweep px-8 py-3 rounded-full font-black text-xs text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-md hover:scale-105 transition-all">
                     <span>Save Changes</span>
                 </button>
             </div>

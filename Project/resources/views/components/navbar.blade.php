@@ -16,7 +16,7 @@
             </div>
             <div class="hidden sm:flex items-center gap-1.5 flex-shrink-0">
                 <span class="text-base sm:text-lg lg:text-xl font-black tracking-tight text-slate-900 dark:text-white font-display">PathSeeker</span>
-                <span class="hidden xl:inline-block px-2 py-0.5 text-[9px] sm:text-[10px] font-black uppercase tracking-widest bg-purple-500/15 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 rounded-full border border-purple-500/25 dark:border-purple-500/30">Passport</span>
+                <span class="hidden xl:inline-block px-2 py-0.5 text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-purple-500/15 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 rounded-full border border-purple-500/25 dark:border-purple-500/30">Passport</span>
             </div>
         </a>
 

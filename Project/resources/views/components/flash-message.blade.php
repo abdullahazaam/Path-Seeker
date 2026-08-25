@@ -48,7 +48,7 @@
              x-transition:leave="transition ease-in duration-200 transform"
              x-transition:leave-start="opacity-100 translate-y-0 scale-100"
              x-transition:leave-end="opacity-0 -translate-y-2 scale-98"
-             class="bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-slate-100 border {{ $borderColor }} shadow-2xl backdrop-blur-md rounded-2xl p-4 flex items-center justify-between gap-4 transition-all">
+             class="bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-slate-100 border {{ $borderColor }} shadow-2xl  rounded-2xl p-4 flex items-center justify-between gap-4 transition-all">
             
             <div class="flex items-center gap-3.5 flex-grow">
                 <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 flex items-center justify-center shrink-0 shadow-sm">

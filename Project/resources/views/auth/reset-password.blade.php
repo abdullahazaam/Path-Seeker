@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="max-w-md mx-auto px-4 py-16">
-    <div class="p-8 sm:p-10 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl space-y-6">
+    <div class="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl space-y-6">
         
         <div class="text-center space-y-2">
             <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xl mx-auto shadow-sm">

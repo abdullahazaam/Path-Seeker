@@ -186,49 +186,47 @@
         .dark, html.dark {
             --color-primary: #a855f7;
             --color-primary-hover: #9333ea;
-            --color-primary-light: rgba(168, 85, 247, 0.10);
+            --color-primary-light: rgba(168, 85, 247, 0.08);
             --color-secondary: #38bdf8;
             --color-secondary-hover: #0ea5e9;
             --color-bg: #050507;
-            --color-surface: rgba(18, 22, 34, 0.60);
-            --color-surface-hover: rgba(26, 32, 48, 0.75);
+            --color-surface: #080b12;
+            --color-surface-hover: #0f1523;
             --color-text: #f8fafc;
             --color-text-muted: #94a3b8;
             --color-text-dim: #64748b;
-            --color-border: rgba(255, 255, 255, 0.06);
+            --color-border: rgba(255, 255, 255, 0.10);
             --color-border-hover: rgba(168, 85, 247, 0.30);
             --color-success: #34d399;
             --color-warning: #fbbf24;
             --color-danger: #f43f5e;
-            --shadow-glass: 0 10px 30px 0 rgba(0, 0, 0, 0.35);
-            --shadow-neon-primary: 0 4px 20px rgba(168, 85, 247, 0.20);
+            --shadow-glass: 0 8px 24px 0 rgba(0, 0, 0, 0.30);
+            --shadow-neon-primary: 0 4px 14px rgba(124, 58, 237, 0.15);
         }
 
         /* ══════════════════ UNIFIED COMPONENT STANDARDS ══════════════════ */
         .app-card {
-            background: rgba(18, 22, 34, 0.60);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+            background: #080b12;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
             border-radius: var(--radius-xl);
             position: relative;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
         html:not(.dark) .app-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: #ffffff;
             border: 1px solid rgba(226, 232, 240, 0.95);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.05);
         }
         .app-card:hover, .career-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 35px -5px rgba(168, 85, 247, 0.15), 0 15px 35px rgba(0, 0, 0, 0.4);
-            border-color: rgba(168, 85, 247, 0.30);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px -4px rgba(0, 0, 0, 0.45);
+            border-color: rgba(255, 255, 255, 0.18);
         }
         html:not(.dark) .app-card:hover, html:not(.dark) .career-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-color: rgba(99, 102, 241, 0.40);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.08);
+            border-color: rgba(99, 102, 241, 0.35);
         }
 
         /* Standardized Buttons */
@@ -243,14 +241,14 @@
             color: #ffffff !important;
             border-radius: var(--radius-full);
             background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
-            box-shadow: 0 0 35px rgba(168, 85, 247, 0.35);
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.25);
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
         }
         .btn-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 0 45px rgba(244, 114, 182, 0.45);
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 6px 22px rgba(124, 58, 237, 0.35);
             background: linear-gradient(135deg, #4338ca 0%, #6d28d9 50%, #be185d 100%);
         }
 
@@ -263,21 +261,20 @@
             font-size: 0.875rem;
             font-weight: 700;
             border-radius: var(--radius-full);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.10);
             color: #f1f5f9;
-            backdrop-filter: blur(12px);
             transition: all 0.25s ease;
         }
         html:not(.dark) .btn-secondary {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border: 1px solid rgba(226, 232, 240, 0.9);
             color: #0f172a;
         }
         .btn-secondary:hover {
-            border-color: rgba(168, 85, 247, 0.5);
+            border-color: rgba(255, 255, 255, 0.22);
             color: #c084fc;
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
         html:not(.dark) .btn-secondary:hover {
             border-color: rgba(99, 102, 241, 0.5);
@@ -294,13 +291,13 @@
             font-weight: 700;
             border-radius: var(--radius-full);
             background: transparent;
-            border: 1px solid rgba(168, 85, 247, 0.35);
+            border: 1px solid rgba(168, 85, 247, 0.30);
             color: #c084fc;
             transition: all 0.25s ease;
         }
         .btn-outline:hover {
-            background: rgba(168, 85, 247, 0.15);
-            border-color: rgba(168, 85, 247, 0.6);
+            background: rgba(168, 85, 247, 0.10);
+            border-color: rgba(168, 85, 247, 0.5);
             transform: translateY(-1px);
         }
 
@@ -315,63 +312,59 @@
             color: #ffffff !important;
             border-radius: var(--radius-full);
             background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
-            box-shadow: 0 4px 20px rgba(225, 29, 72, 0.3);
+            box-shadow: 0 4px 14px rgba(225, 29, 72, 0.25);
             transition: all 0.25s ease;
         }
         .btn-danger:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(225, 29, 72, 0.45);
+            box-shadow: 0 6px 20px rgba(225, 29, 72, 0.35);
         }
 
-        /* 2026 Premium Signature Glassmorphic Container & Card Architecture */
+        /* 2026 Premium Signature Glassmorphic Container & Card Architecture (Reserved for Hero & Primary Stage) */
         .glass-panel, .signature-container {
-            background: rgba(15, 23, 42, 0.60);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.10);
-            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+            box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
             position: relative;
         }
         html:not(.dark) .glass-panel, html:not(.dark) .signature-container {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(226, 232, 240, 0.90);
-            box-shadow: 0 16px 35px -10px rgba(0, 0, 0, 0.06), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+            box-shadow: 0 16px 35px -10px rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
             position: relative;
         }
         .signature-card {
-            background: rgba(2, 6, 23, 0.50);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: #080b12;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
         html:not(.dark) .signature-card {
-            background: rgba(241, 245, 249, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(226, 232, 240, 0.85);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.90);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .signature-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(168, 85, 247, 0.40);
-            box-shadow: 0 12px 30px -5px rgba(168, 85, 247, 0.15);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.35);
         }
 
         /* Floating Pill Navbar */
         .glass-pill-nav {
-            background: rgba(5, 5, 7, 0.85);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+            background: rgba(8, 11, 18, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
         }
         html:not(.dark) .glass-pill-nav {
             background: rgba(255, 255, 255, 0.94);
             border: 1px solid rgba(226, 232, 240, 0.95);
-            box-shadow: 0 16px 35px -10px rgba(0, 0, 0, 0.06), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 1);
         }
 
         /* Gradient Text Hooks */
@@ -403,36 +396,22 @@
             transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
         }
         .passport-card-3d:hover {
-            box-shadow: 0 20px 50px -10px rgba(168, 85, 247, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
         }
 
-        /* 2026 Magnetic Card Lift & Subtle Radial Glow on Hover */
+        /* 2026 Magnetic Card Lift with Crisp Restrained Border */
         .card-tilt {
             position: relative;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
-        }
-        .card-tilt::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 85, 247, 0.08), transparent 50%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-            border-radius: inherit;
-            z-index: 1;
-        }
-        .card-tilt:hover::before {
-            opacity: 1;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
         }
         .card-tilt:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 25px rgba(168, 85, 247, 0.12), 0 15px 35px rgba(0, 0, 0, 0.4);
-            border-color: rgba(168, 85, 247, 0.30);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.18);
         }
         html:not(.dark) .card-tilt:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.10), 0 12px 30px rgba(0, 0, 0, 0.06);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.06);
             border-color: rgba(99, 102, 241, 0.30);
         }
 
@@ -596,13 +575,13 @@
     <!-- ══════════════════ 6. FINAL POWER CTA & GLOBAL FOOTER ══════════════════ -->
     <section class="relative z-10 my-10 md:my-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <!-- The Bold Closing Statement Banner -->
-        <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 text-center space-y-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden reveal-element">
+        <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 text-center space-y-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden reveal-element">
             {{-- Ambient Corner Glows --}}
             <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 space-y-4 max-w-3xl mx-auto">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/20 text-xs font-black uppercase tracking-widest text-purple-700 dark:text-purple-300 shadow-sm">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/20 text-xs font-black uppercase tracking-wider text-purple-700 dark:text-purple-300 shadow-sm">
                     <i class="fa-solid fa-meteor text-purple-600 dark:text-purple-400"></i>
                     <span>Your Destiny Awaits</span>
                 </div>
@@ -613,7 +592,7 @@
                     Step into the global career intelligence passport. Explore role competencies, unlock verified toolkits, and build a world-class trajectory.
                 </p>
                 <div class="pt-4">
-                    <a href="{{ route('register') }}" class="btn-sweep group inline-flex items-center gap-3 px-10 py-4 rounded-full text-base font-black text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple hover:shadow-neon-pink transition-all duration-300 hover:scale-105">
+                    <a href="{{ route('register') }}" class="btn-sweep group inline-flex items-center gap-3 px-10 py-4 rounded-full text-base font-black text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md hover:shadow-md transition-all duration-300 hover:scale-105">
                         <i class="fa-solid fa-compass text-lg text-white"></i>
                         <span class="text-white font-black">Build My Career Path &rarr;</span>
                     </a>
@@ -644,7 +623,7 @@
             {{-- Top Header --}}
             <div class="px-5 py-4 bg-white/90 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between shrink-0">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center text-white shadow-neon-purple shrink-0">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center text-white shadow-md shrink-0">
                         <i class="fa-solid fa-wand-magic-sparkles text-xs text-white"></i>
                     </div>
                     <div>
@@ -747,7 +726,7 @@
                 onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
                 title="Scroll to Top"
                 aria-label="Scroll to top"
-                class="fixed bottom-24 right-7 z-[9999] w-11 h-11 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white shadow-xl flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer opacity-0 translate-y-4 duration-300">
+                class="fixed bottom-24 right-7 z-[9999] w-11 h-11 rounded-full bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white shadow-xl flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer opacity-0 translate-y-4 duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-700 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
             </svg>
@@ -759,7 +738,7 @@
 
     {{-- ══════════════════ GLOBAL COMMAND PALETTE (CTRL+K / CMD+K) ══════════════════ --}}
     <div id="commandPaletteModal"
-         class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-200"
+         class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80  opacity-0 pointer-events-none transition-opacity duration-200"
          onclick="handleCommandPaletteBackdrop(event)">
         
         <div id="commandPaletteCard"

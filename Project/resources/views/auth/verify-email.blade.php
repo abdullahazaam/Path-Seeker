@@ -4,14 +4,14 @@
 
 <section class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-16">
     <div class="max-w-lg mx-auto">
-        <div class="relative bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] rounded-3xl p-6 sm:p-8 overflow-hidden space-y-6">
+        <div class="relative bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] rounded-3xl p-6 sm:p-8 overflow-hidden space-y-6">
             
             {{-- Ambient Corner Glows --}}
             <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-purple-500/15 dark:bg-purple-500/20 blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 text-center space-y-3">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white text-2xl shadow-neon-purple mx-auto">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white text-2xl shadow-md mx-auto">
                     <i class="fa-solid fa-envelope-circle-check text-white"></i>
                 </div>
 
@@ -41,7 +41,7 @@
             <div class="relative z-10 space-y-4 pt-2">
                 <form action="{{ route('verification.send') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn-sweep group w-full py-3.5 rounded-full font-black text-xs sm:text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple hover:shadow-neon-pink transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer">
+                    <button type="submit" class="btn-sweep group w-full py-3.5 rounded-full font-black text-xs sm:text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md hover:shadow-md transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer">
                         <i class="fa-solid fa-paper-plane text-xs text-white"></i>
                         <span class="text-white font-black">Resend Verification Email</span>
                     </button>

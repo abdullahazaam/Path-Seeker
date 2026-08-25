@@ -2,7 +2,7 @@
 @section('title', '500 — Server Encountered Error | PathSeeker')
 @section('content')
 <div class="min-h-[70vh] flex items-center justify-center px-4 py-16">
-    <div class="max-w-md w-full text-center space-y-6 p-8 rounded-3xl bg-white/90 dark:bg-slate-900/70 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl">
+    <div class="max-w-md w-full text-center space-y-6 p-8 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200/80 dark:border-white/10 shadow-2xl">
         <div class="w-16 h-16 rounded-2xl bg-purple-500/15 border border-purple-500/25 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mx-auto font-mono font-black">
             500
         </div>

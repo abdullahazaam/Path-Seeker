@@ -9,14 +9,14 @@
         <span>Back to Multimedia Hub</span>
     </a>
 
-    <div class="relative rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+    <div class="relative rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
         
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-rose-500/10 dark:bg-rose-500/15 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
 
         <!-- Header -->
-        <div class="relative z-10 bg-slate-100/70 dark:bg-slate-950/60 p-7 sm:p-8 border-b border-slate-200/80 dark:border-white/10 backdrop-blur-md">
+        <div class="relative z-10 bg-slate-100/70 dark:bg-slate-950/60 p-7 sm:p-8 border-b border-slate-200/80 dark:border-white/10 ">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div class="space-y-2">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider {{ $item->type === 'video' ? 'bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/25' : 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25' }} font-mono shadow-sm">
@@ -51,7 +51,7 @@
                     </div>
                 @else
                     <div class="py-14 px-8 text-center space-y-6 bg-slate-100/80 dark:bg-slate-950/50">
-                        <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-3xl shadow-neon-purple text-white">
+                        <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-3xl shadow-md text-white">
                             <i class="fa-solid fa-podcast text-white"></i>
                         </div>
                         <div>
@@ -81,7 +81,7 @@
 
             <!-- Tags -->
             <div class="space-y-2">
-                <div class="text-xs font-black uppercase tracking-widest text-slate-700 dark:text-slate-400 flex items-center gap-1.5 font-mono">
+                <div class="text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-400 flex items-center gap-1.5 font-mono">
                     <i class="fa-solid fa-tags text-indigo-600 dark:text-indigo-400 text-xs"></i>
                     <span>Topic Tags</span>
                 </div>
@@ -100,7 +100,7 @@
                     <i class="fa-solid fa-arrow-left text-xs"></i>
                     <span>Browse All Media</span>
                 </a>
-                <a href="{{ route('careers.index') }}" class="btn-sweep px-5 py-2.5 rounded-xl font-black text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple hover:shadow-neon-pink transition-all flex items-center gap-2">
+                <a href="{{ route('careers.index') }}" class="btn-sweep px-5 py-2.5 rounded-xl font-black text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md hover:shadow-md transition-all flex items-center gap-2">
                     <i class="fa-solid fa-compass text-xs text-white"></i>
                     <span class="text-white">Explore Aligned Careers</span>
                 </a>

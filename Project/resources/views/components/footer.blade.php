@@ -5,7 +5,7 @@
         {{-- Newsletter Subscription Banner --}}
         <div class="mb-12 pb-10 border-b border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div class="space-y-1.5 max-w-lg">
-                <div class="inline-flex items-center gap-2 text-xs font-bold text-purple-400 uppercase tracking-widest font-mono">
+                <div class="inline-flex items-center gap-2 text-xs font-bold text-purple-400 uppercase tracking-wider font-mono">
                     <i class="fa-solid fa-envelope-open-text text-purple-400"></i>
                     <span>Career Intelligence Feed</span>
                 </div>
@@ -40,7 +40,7 @@
             <!-- Brand Description -->
             <div class="lg:col-span-2 space-y-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white font-black text-sm shadow-neon-purple">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white font-black text-sm shadow-md">
                         <i class="fa-solid fa-compass text-white"></i>
                     </div>
                     <span class="text-xl font-black text-white tracking-tight font-display">PathSeeker</span>
@@ -58,7 +58,7 @@
 
             <!-- Column: Platform Navigation -->
             <div class="space-y-3">
-                <h4 class="text-xs font-black uppercase tracking-widest text-slate-200">Platform</h4>
+                <h4 class="text-xs font-black uppercase tracking-wider text-slate-200">Platform</h4>
                 <ul class="space-y-2 text-sm">
                     <li><a href="{{ route('home') }}" class="hover:text-indigo-400 transition-colors">Home Portal</a></li>
                     <li><a href="{{ route('careers.index') }}" class="hover:text-indigo-400 transition-colors">Career Bank</a></li>
@@ -72,7 +72,7 @@
 
             <!-- Column: Toolkits -->
             <div class="space-y-3">
-                <h4 class="text-xs font-black uppercase tracking-widest text-slate-200">Toolkits</h4>
+                <h4 class="text-xs font-black uppercase tracking-wider text-slate-200">Toolkits</h4>
                 <ul class="space-y-2 text-sm">
                     <li><a href="{{ route('resources.index') }}" class="hover:text-indigo-400 transition-colors">Resume Blueprints</a></li>
                     <li><a href="{{ route('resources.index') }}" class="hover:text-indigo-400 transition-colors">System Design Sheets</a></li>
@@ -83,7 +83,7 @@
 
             <!-- Column: Standards -->
             <div class="space-y-3">
-                <h4 class="text-xs font-black uppercase tracking-widest text-slate-200">Standards</h4>
+                <h4 class="text-xs font-black uppercase tracking-wider text-slate-200">Standards</h4>
                 <ul class="space-y-2 text-sm">
                     <li><span class="text-xs text-slate-400">Tech: Laravel 12 + Tailwind</span></li>
                     <li><span class="text-xs text-slate-400">Database: MySQL InnoDB</span></li>
