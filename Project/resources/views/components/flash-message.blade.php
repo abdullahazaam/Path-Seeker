@@ -39,7 +39,7 @@
 @endphp
 
 @if ($message)
-    <div class="relative z-40 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 mb-3">
+    <div class="relative z-40 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-1 mb-2">
         <div x-data="{ show: true }"
              x-show="show"
              x-transition:enter="transition ease-out duration-300 transform"

@@ -2,7 +2,7 @@
 @section('title', 'Career Passport Dashboard — PathSeeker')
 @section('content')
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 space-y-8 md:space-y-10 my-6 md:my-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-3 space-y-6 md:space-y-8 mb-8">
 
 
 @if(auth()->user()->role !== 'admin' && auth()->user()->email !== 'admin@pathseeker.com')
