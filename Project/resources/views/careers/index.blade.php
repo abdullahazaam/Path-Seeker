@@ -92,7 +92,7 @@
                     {{-- Student --}}
                     <a href="{{ route('careers.index', array_merge(request()->query(), ['role' => 'student'])) }}"
                        class="px-3 py-1.5 text-xs font-bold rounded-xl border transition-all shrink-0 flex items-center gap-1.5 {{ request('role') === 'student' ? 'border-sky-500 text-white bg-gradient-to-r from-sky-600 to-indigo-600 shadow-md shadow-sky-500/20' : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-sky-500/30 bg-slate-100/80 dark:bg-white/[0.03]' }}">
-                        <i class="fa-solid fa-graduation-cap text-[10px]"></i>
+                        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
                         <span>Student &bull; Foundational</span>
                         <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-sky-500/20 text-sky-700 dark:text-sky-300">{{ $roleCounts['student'] ?? 6 }}</span>
                     </a>
@@ -100,7 +100,7 @@
                     {{-- Graduate --}}
                     <a href="{{ route('careers.index', array_merge(request()->query(), ['role' => 'graduate'])) }}"
                        class="px-3 py-1.5 text-xs font-bold rounded-xl border transition-all shrink-0 flex items-center gap-1.5 {{ request('role') === 'graduate' ? 'border-purple-500 text-white bg-gradient-to-r from-purple-600 to-pink-600 shadow-md shadow-purple-500/20' : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/30 bg-slate-100/80 dark:bg-white/[0.03]' }}">
-                        <i class="fa-solid fa-briefcase text-[10px]"></i>
+                        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         <span>Graduate &bull; Entry &amp; Portfolio</span>
                         <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-purple-500/20 text-purple-700 dark:text-purple-300">{{ $roleCounts['graduate'] ?? 8 }}</span>
                     </a>
@@ -108,7 +108,7 @@
                     {{-- Professional --}}
                     <a href="{{ route('careers.index', array_merge(request()->query(), ['role' => 'professional'])) }}"
                        class="px-3 py-1.5 text-xs font-bold rounded-xl border transition-all shrink-0 flex items-center gap-1.5 {{ request('role') === 'professional' ? 'border-amber-500 text-white bg-gradient-to-r from-amber-600 to-rose-600 shadow-md shadow-amber-500/20' : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-amber-500/30 bg-slate-100/80 dark:bg-white/[0.03]' }}">
-                        <i class="fa-solid fa-crown text-[10px]"></i>
+                        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                         <span>Professional &bull; Architecture</span>
                         <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-amber-500/20 text-amber-700 dark:text-amber-300">{{ $roleCounts['professional'] ?? 6 }}</span>
                     </a>
@@ -162,16 +162,20 @@
 
                 $cRole = $career->target_role ?? 'all';
                 if ($cRole === 'student') {
-                    $roleLabel = '🎓 Student Foundational';
+                    $roleLabel = 'Student Foundational';
+                    $roleIconSvg = '<svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>';
                     $roleBadge = 'bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-500/20';
                 } elseif ($cRole === 'graduate') {
-                    $roleLabel = '💼 Graduate Track';
+                    $roleLabel = 'Graduate Track';
+                    $roleIconSvg = '<svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>';
                     $roleBadge = 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/20';
                 } elseif ($cRole === 'professional') {
-                    $roleLabel = '⚡ Professional Architecture';
+                    $roleLabel = 'Professional Architecture';
+                    $roleIconSvg = '<svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>';
                     $roleBadge = 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/20';
                 } else {
-                    $roleLabel = '🌐 Universal Track';
+                    $roleLabel = 'Universal Track';
+                    $roleIconSvg = '<svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>';
                     $roleBadge = 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-500/20';
                 }
             @endphp
@@ -194,8 +198,9 @@
                             </span>
 
                             {{-- Role Badge --}}
-                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border {{ $roleBadge }}">
-                                {{ $roleLabel }}
+                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border {{ $roleBadge }} inline-flex items-center gap-1.5 shadow-sm">
+                                {!! $roleIconSvg !!}
+                                <span>{{ $roleLabel }}</span>
                             </span>
                             
                             {{-- Salary Badge --}}

@@ -1079,7 +1079,7 @@
                 </div>
                 <button @click="showAddMedia = true" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-pink-600 hover:bg-pink-500 text-white text-xs font-bold shadow-md transition-all cursor-pointer">
                     <i class="fa-solid fa-film text-xs"></i>
-                    <span>🎬 Publish Multimedia</span>
+                    <span>Publish Multimedia</span>
                 </button>
             </div>
 
@@ -1124,7 +1124,7 @@
                 </div>
                 <button @click="showAddResource = true" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md transition-all cursor-pointer">
                     <i class="fa-solid fa-file-arrow-up text-xs"></i>
-                    <span>📂 Upload Resource</span>
+                    <span>Upload Resource</span>
                 </button>
             </div>
 
