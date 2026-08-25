@@ -57,7 +57,7 @@
 
     {{-- Back Link --}}
     <div class="flex items-center justify-between">
-        <a href="{{ route('multimedia.index') }}" class="inline-flex items-center gap-2 text-sm font-bold text-slate-700 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-purple-300 transition-colors group">
+        <a href="{{ route('multimedia.index') }}" class="inline-flex items-center gap-2 text-sm font-bold text-slate-700 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors group">
             <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1 transition-transform"></i>
             <span>Back to Multimedia Hub</span>
         </a>
@@ -76,20 +76,20 @@
     <div class="relative rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
         
         {{-- Ambient Corner Glows --}}
-        <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-rose-500/10 dark:bg-rose-500/15 blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-blue-500/10 dark:bg-blue-500/15 blur-3xl pointer-events-none"></div>
 
         <!-- Header -->
         <div class="relative z-10 bg-slate-50 dark:bg-slate-950/60 p-6 sm:p-8 border-b border-slate-200/80 dark:border-white/10">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div class="space-y-2">
                     <div class="flex flex-wrap items-center gap-2">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider {{ $item->type === 'video' ? 'bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/25' : 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25' }} font-mono shadow-sm">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/25 font-mono shadow-sm">
                             <i class="fa-solid {{ $item->type === 'video' ? 'fa-video' : 'fa-headphones' }} text-[10px]"></i>
                             <span>{{ $item->type === 'video' ? 'Video Masterclass' : 'Audio Podcast' }}</span>
                         </span>
                         @if($item->domain)
-                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-sky-500/15 text-sky-700 dark:text-sky-300 border border-sky-500/25">
                                 {{ $item->domain }}
                             </span>
                         @endif
@@ -97,7 +97,7 @@
                     <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white leading-snug font-display">{{ $item->title }}</h1>
                 </div>
                 <div class="text-xs text-slate-600 dark:text-slate-400 font-mono shrink-0 flex sm:flex-col items-end gap-1">
-                    <span><i class="fa-regular fa-clock mr-1 text-indigo-500"></i>{{ $item->duration ?? '25:00' }}</span>
+                    <span><i class="fa-regular fa-clock mr-1 text-cyan-500"></i>{{ $item->duration ?? '25:00' }}</span>
                     <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">HD Masterclass</span>
                 </div>
             </div>
@@ -125,21 +125,21 @@
                             </span>
 
                             {{-- 1. VIDEO PLAYER TRANSCRIPT TOGGLE BUTTON --}}
-                            <button type="button" @click="showTranscript = !showTranscript" :class="showTranscript ? 'bg-indigo-600 text-white shadow-md' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-white/10 font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer">
+                            <button type="button" @click="showTranscript = !showTranscript" :class="showTranscript ? 'bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600 text-slate-950 font-black shadow-md' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-white/10 font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer">
                                 <i class="fa-solid fa-file-lines text-xs"></i>
                                 <span x-text="showTranscript ? 'Hide Transcript' : 'Show Transcript'"></span>
                             </button>
                         </div>
 
-                        <a href="{{ $item->url }}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:text-purple-600 dark:hover:text-purple-300 font-bold flex items-center gap-1 transition-colors">
+                        <a href="{{ $item->url }}" target="_blank" rel="noopener noreferrer" class="text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300 font-bold flex items-center gap-1 transition-colors">
                             <span>Watch on YouTube</span>
                             <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                         </a>
                     </div>
                 @else
                     <div class="py-14 px-8 text-center space-y-6 bg-slate-100/80 dark:bg-slate-950/50">
-                        <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-3xl shadow-md text-white">
-                            <i class="fa-solid fa-podcast text-white"></i>
+                        <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-cyan-400 via-sky-500 to-blue-600 flex items-center justify-center text-3xl shadow-md text-slate-950 font-black">
+                            <i class="fa-solid fa-podcast text-slate-950"></i>
                         </div>
                         <div>
                             <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">Audio Stream / Podcast</h3>
@@ -151,7 +151,7 @@
                         </audio>
                         
                         <div class="pt-4 flex justify-center">
-                            <button type="button" @click="showTranscript = !showTranscript" :class="showTranscript ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300'" class="px-4 py-2 rounded-xl border border-slate-300 dark:border-white/10 font-bold text-xs transition-all flex items-center gap-2 cursor-pointer shadow-sm">
+                            <button type="button" @click="showTranscript = !showTranscript" :class="showTranscript ? 'bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600 text-slate-950 font-black shadow-md' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300'" class="px-4 py-2 rounded-xl border border-slate-300 dark:border-white/10 font-bold text-xs transition-all flex items-center gap-2 cursor-pointer shadow-sm">
                                 <i class="fa-solid fa-file-lines text-xs"></i>
                                 <span x-text="showTranscript ? 'Hide Audio Transcript' : 'Show Audio Transcript'"></span>
                             </button>
@@ -164,7 +164,7 @@
             <div x-show="showTranscript" x-cloak style="display: none;" class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-white/10 space-y-4 shadow-inner transition-all">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-white/10">
                     <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs">
+                        <div class="w-8 h-8 rounded-xl bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-xs">
                             <i class="fa-solid fa-closed-captioning"></i>
                         </div>
                         <div>
@@ -174,7 +174,7 @@
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <button type="button" @click="copyTranscriptText()" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center gap-1.5 shadow-xs">
+                        <button type="button" @click="copyTranscriptText()" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer">
                             <i class="fa-solid fa-copy text-[10px]"></i>
                             <span x-text="copiedTranscript ? 'Transcript Copied!' : 'Copy Transcript'"></span>
                         </button>
@@ -182,16 +182,16 @@
                 </div>
 
                 {{-- Scrollable Transcript Body --}}
-                <div id="transcriptTextArea" class="max-h-72 overflow-y-auto pr-2 space-y-2.5 font-mono text-xs text-slate-700 dark:text-slate-300 leading-relaxed bg-white/80 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-200/80 dark:border-white/5 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-indigo-500/50 [&::-webkit-scrollbar-thumb]:rounded-full">
+                <div id="transcriptTextArea" class="max-h-72 overflow-y-auto pr-2 space-y-2.5 font-mono text-xs text-slate-700 dark:text-slate-300 leading-relaxed bg-white/80 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-200/80 dark:border-white/5 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-cyan-500/50 [&::-webkit-scrollbar-thumb]:rounded-full">
                     @php
                         $transcriptText = $item->formatted_transcript;
                         $lines = explode("\n", $transcriptText);
                     @endphp
                     @foreach($lines as $line)
                         @if(trim($line))
-                            <div class="flex items-start gap-2.5 hover:bg-indigo-500/5 p-1 rounded transition-colors">
+                            <div class="flex items-start gap-2.5 hover:bg-cyan-500/5 p-1 rounded transition-colors">
                                 @if(preg_match('/^\[([0-9:]+)\]\s*(.*)$/', $line, $matches))
-                                    <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shrink-0">
+                                    <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 shrink-0">
                                         {{ $matches[1] }}
                                     </span>
                                     <span class="text-slate-800 dark:text-slate-200">{{ $matches[2] }}</span>
@@ -205,7 +205,7 @@
             </div>
 
             {{-- ═══════════════ 2 & 3. INTERACTIVE 5-STAR RATING SYSTEM (AJAX) ═══════════════ --}}
-            <div class="p-6 rounded-2xl bg-gradient-to-r from-amber-500/5 via-purple-500/5 to-indigo-500/5 border border-slate-200/80 dark:border-white/10 space-y-4">
+            <div class="p-6 rounded-2xl bg-gradient-to-r from-amber-500/5 via-cyan-500/5 to-blue-500/5 border border-slate-200/80 dark:border-white/10 space-y-4">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div class="space-y-1">
                         <div class="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
@@ -250,7 +250,7 @@
 
                 @if(!auth()->check())
                     <div class="pt-2 text-[11px] text-slate-500 dark:text-slate-400">
-                        <a href="{{ route('login') }}" class="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">Log in</a> to record your verified rating and track curriculum progress.
+                        <a href="{{ route('login') }}" class="text-cyan-600 dark:text-cyan-400 font-bold hover:underline">Log in</a> to record your verified rating and track curriculum progress.
                     </div>
                 @endif
             </div>
@@ -259,7 +259,7 @@
             @if($item->description)
                 <div class="p-6 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/10 space-y-2">
                     <h3 class="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2 font-display">
-                        <i class="fa-solid fa-circle-info text-indigo-600 dark:text-indigo-400"></i>
+                        <i class="fa-solid fa-circle-info text-cyan-600 dark:text-cyan-400"></i>
                         <span>Overview &amp; Core Learning Objectives</span>
                     </h3>
                     <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -272,13 +272,13 @@
             @if($item->tags)
                 <div class="space-y-2">
                     <div class="text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-400 flex items-center gap-1.5 font-mono">
-                        <i class="fa-solid fa-tags text-indigo-600 dark:text-indigo-400 text-xs"></i>
+                        <i class="fa-solid fa-tags text-cyan-600 dark:text-cyan-400 text-xs"></i>
                         <span>Topic Tags</span>
                     </div>
                     <div class="flex flex-wrap gap-2">
                         @foreach(explode(',', $item->tags) as $tag)
-                            <span class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/10 text-slate-800 dark:text-slate-300 flex items-center gap-1.5 shadow-sm">
-                                <i class="fa-solid fa-tag text-[9px] text-purple-600 dark:text-purple-400"></i>
+                            <span class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/10 text-slate-800 dark:text-slate-300 flex items-center gap-1.5 shadow-sm font-mono">
+                                <i class="fa-solid fa-tag text-[9px] text-cyan-500 dark:text-cyan-400"></i>
                                 <span>{{ trim($tag) }}</span>
                             </span>
                         @endforeach
