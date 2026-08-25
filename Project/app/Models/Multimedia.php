@@ -14,7 +14,19 @@ class Multimedia extends Model
         'thumbnail_url',
         'duration',
         'tags',
+        'domain',
+        'transcript',
     ];
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'rateable_id')->where('rateable_type', 'multimedia');
+    }
+
+    public function getAverageRatingAttribute(): float
+    {
+        return round($this->ratings()->avg('rating') ?: 4.8, 1);
+    }
 
     /**
      * Helper to get clean, embeddable YouTube URL with fallback

@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Career;
+use App\Models\ContentProgress;
 use App\Models\Multimedia;
+use App\Models\Rating;
+use App\Models\RecentlyViewed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MultimediaController extends Controller
 {
@@ -69,6 +74,8 @@ class MultimediaController extends Controller
             'thumbnail_url' => 'nullable|url',
             'duration' => 'nullable|string|max:50',
             'tags' => 'nullable|string',
+            'domain' => 'nullable|string|max:255',
+            'transcript' => 'nullable|string',
         ]);
 
         Multimedia::create($validated);
@@ -77,12 +84,109 @@ class MultimediaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource with transcripts, related media & careers, and history logging.
      */
     public function show(string $id)
     {
-        $item = Multimedia::findOrFail($id);
-        return view('multimedia.show', compact('item'));
+        $item = Multimedia::with('ratings')->findOrFail($id);
+
+        if (Auth::check()) {
+            RecentlyViewed::updateOrCreate(
+                [
+                    'user_id' => Auth::id(),
+                    'viewable_type' => 'multimedia',
+                    'viewable_id' => $item->id,
+                ],
+                ['viewed_at' => now()]
+            );
+        }
+
+        // Related content engines
+        $relatedMedia = Multimedia::where('id', '!=', $item->id)
+            ->where(function ($q) use ($item) {
+                if ($item->domain) {
+                    $q->where('domain', $item->domain);
+                }
+                if ($item->tags) {
+                    $q->orWhere('tags', 'like', "%{$item->tags}%");
+                }
+            })
+            ->take(3)
+            ->get();
+
+        if ($relatedMedia->isEmpty()) {
+            $relatedMedia = Multimedia::where('id', '!=', $item->id)->take(3)->get();
+        }
+
+        $relatedCareers = Career::where('domain', $item->domain)->take(2)->get();
+        if ($relatedCareers->isEmpty()) {
+            $relatedCareers = Career::take(2)->get();
+        }
+
+        $userRating = Auth::check() 
+            ? Rating::where('user_id', Auth::id())->where('rateable_type', 'multimedia')->where('rateable_id', $item->id)->first() 
+            : null;
+
+        $userProgress = Auth::check()
+            ? ContentProgress::where('user_id', Auth::id())->where('content_type', 'multimedia')->where('content_id', $item->id)->first()
+            : null;
+
+        return view('multimedia.show', compact('item', 'relatedMedia', 'relatedCareers', 'userRating', 'userProgress'));
+    }
+
+    /**
+     * 5-Star Rating handler with strict unique constraint.
+     */
+    public function rate(Request $request, string $id)
+    {
+        $validated = $request->validate([
+            'rating' => 'required|integer|between:1,5',
+            'review' => 'nullable|string|max:500',
+        ]);
+
+        Rating::updateOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'rateable_type' => 'multimedia',
+                'rateable_id' => $id,
+            ],
+            [
+                'rating' => $validated['rating'],
+                'review' => $validated['review'] ?? null,
+            ]
+        );
+
+        if ($request->wantsJson()) {
+            return response()->json(['success' => true, 'message' => 'Rating recorded successfully.']);
+        }
+
+        return redirect()->back()->with('success', 'Thank you! Your 5-star review has been recorded.');
+    }
+
+    /**
+     * Track user content completion progress.
+     */
+    public function saveProgress(Request $request, string $id)
+    {
+        $validated = $request->validate([
+            'progress_percent' => 'required|integer|between:0,100',
+            'completed' => 'nullable|boolean',
+        ]);
+
+        ContentProgress::updateOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'content_type' => 'multimedia',
+                'content_id' => $id,
+            ],
+            [
+                'progress_percent' => $validated['progress_percent'],
+                'completed' => $validated['completed'] ?? ($validated['progress_percent'] >= 90),
+                'last_accessed_at' => now(),
+            ]
+        );
+
+        return response()->json(['success' => true, 'message' => 'Progress saved.']);
     }
 
     /**
@@ -109,11 +213,13 @@ class MultimediaController extends Controller
             'thumbnail_url' => 'nullable|url',
             'duration' => 'nullable|string|max:50',
             'tags' => 'nullable|string',
+            'domain' => 'nullable|string|max:255',
+            'transcript' => 'nullable|string',
         ]);
 
         $item->update($validated);
 
-        return redirect()->route('multimedia.show', $item->id)->with('success', 'Multimedia item updated successfully!');
+        return redirect()->route('multimedia.index')->with('success', 'Multimedia item updated successfully!');
     }
 
     /**

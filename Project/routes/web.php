@@ -61,6 +61,16 @@ Route::post('/chat/message', [ChatController::class, 'sendMessage'])->name('chat
 
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\PassportShareController;
+use App\Http\Controllers\PassportExportController;
+
+// Public Resource Previews & Safe Rate-Limited Downloads
+Route::get('/resources/{id}/preview', [ResourceController::class, 'preview'])->name('resources.preview');
+Route::get('/resources/{id}/download', [ResourceController::class, 'download'])->name('resources.download')->middleware('throttle:15,1');
+
+// Public Privacy-Safe Shared Passport (Opaque Token)
+Route::get('/passport/share/{token}', [PassportShareController::class, 'showSharedPassport'])->name('passport.shared');
 
 // Newsletter Subscription & Unsubscribe
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe')->middleware('throttle:10,1');
@@ -69,6 +79,21 @@ Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'uns
 // Protected User Features
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Passport Sharing & Rate-Limited PDF Export
+    Route::get('/passport/share-link', [PassportShareController::class, 'getShareLink'])->name('passport.share-link');
+    Route::get('/passport/export-pdf', [PassportExportController::class, 'exportPdf'])->name('passport.export-pdf')->middleware('throttle:5,1');
+
+    // Bookmarks CRUD & Private Notes
+    Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
+    Route::post('/bookmarks', [BookmarkController::class, 'store'])->name('bookmarks.store');
+    Route::put('/bookmarks/{id}', [BookmarkController::class, 'update'])->name('bookmarks.update');
+    Route::delete('/bookmarks/{id}', [BookmarkController::class, 'destroy'])->name('bookmarks.destroy');
+
+    // 5-Star Ratings & Content Progress
+    Route::post('/multimedia/{id}/rate', [MultimediaController::class, 'rate'])->name('multimedia.rate');
+    Route::post('/multimedia/{id}/progress', [MultimediaController::class, 'saveProgress'])->name('multimedia.progress');
+    Route::post('/resources/{id}/rate', [ResourceController::class, 'rate'])->name('resources.rate');
 
     // Feedback Submission & History
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
