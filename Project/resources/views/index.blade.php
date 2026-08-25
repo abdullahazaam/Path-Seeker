@@ -405,171 +405,132 @@
     </div>
 </section>
 
-{{-- SECTION 3: AI CAREER MATCH ADVISOR --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
-    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
-        {{-- Ambient Corner Glows --}}
-        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-pink-500/10 dark:bg-pink-500/15 blur-3xl pointer-events-none"></div>
+{{-- SECTION 3: AI CAREER MATCH CONSTELLATION --}}
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-16 reveal-element">
+    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#070b14] border border-slate-200 dark:border-cyan-500/20 shadow-2xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden">
+        {{-- Ambient Corner & Orbit Glows --}}
+        <div class="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-cyan-500/15 dark:bg-cyan-500/20 blur-[130px] pointer-events-none"></div>
+        <div class="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-purple-500/15 dark:bg-purple-600/20 blur-[130px] pointer-events-none"></div>
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-            <div class="lg:col-span-6 space-y-6">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 border border-indigo-500/20 text-xs font-semibold text-indigo-700 dark:text-indigo-300 shadow-sm">
-                    <i class="fa-solid fa-wand-magic-sparkles text-indigo-600 dark:text-indigo-400"></i>
-                    <span>AI Career Match Advisor</span>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
+            
+            {{-- Left Column: System Selector Tabs & Intelligence Readout --}}
+            <div class="lg:col-span-5 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 dark:bg-[#0b1220] border border-cyan-500/30 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 shadow-sm backdrop-blur-md">
+                    <i class="fa-solid fa-satellite-dish text-cyan-500 animate-pulse"></i>
+                    <span class="tracking-wider">03 / AI CAREER MATCH CONSTELLATION</span>
                 </div>
-                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white font-display leading-tight">
-                    Know your market<br>value <span class="grad-text">before you apply.</span>
+                
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white font-display tracking-tight leading-tight">
+                    Algorithmically mapped<br>
+                    <span class="bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(0,242,254,0.3)]">Skill Constellations.</span>
                 </h2>
+                
                 <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
-                    Select a tech track and instantly see your role alignment, compensation bracket, and the exact toolchain you need to master.
+                    Explore dynamic skill orbits and probabilistic role alignment. Select a discipline to watch required competencies reorganize in real-time.
                 </p>
-                <div class="flex flex-wrap gap-2.5" id="aiAdvisorPills">
-                    <button type="button" onclick="selectAiTrack('fullstack', this)" class="ai-pill active px-4 py-2 text-xs font-semibold rounded-xl border border-purple-500/50 text-purple-700 dark:text-purple-300 bg-purple-500/15 transition-all shadow-sm"><i class="fa-solid fa-code mr-1.5 text-purple-500"></i>Full-Stack</button>
-                    <button type="button" onclick="selectAiTrack('cloud', this)" class="ai-pill px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/30 transition-all"><i class="fa-solid fa-cloud mr-1.5 text-cyan-500"></i>Cloud &amp; DevOps</button>
-                    <button type="button" onclick="selectAiTrack('ai', this)" class="ai-pill px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/30 transition-all"><i class="fa-solid fa-brain mr-1.5 text-pink-500"></i>AI &amp; Data</button>
-                    <button type="button" onclick="selectAiTrack('security', this)" class="ai-pill px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/30 transition-all"><i class="fa-solid fa-shield-halved mr-1.5 text-emerald-500"></i>Cybersecurity</button>
-                    <button type="button" onclick="selectAiTrack('design', this)" class="ai-pill px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/30 transition-all"><i class="fa-solid fa-palette mr-1.5 text-indigo-500"></i>UI/UX Design</button>
+
+                {{-- Interactive Constellation Track Selectors --}}
+                <div class="flex flex-wrap gap-2 pt-1" id="aiAdvisorPills">
+                    <button type="button" onclick="selectAiTrack('fullstack', this)" class="ai-pill active px-3.5 py-2 text-xs font-mono font-bold rounded-xl border border-cyan-500/50 text-cyan-600 dark:text-cyan-300 bg-cyan-500/15 transition-all shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-code text-cyan-500"></i><span>Full-Stack</span></button>
+                    <button type="button" onclick="selectAiTrack('cloud', this)" class="ai-pill px-3.5 py-2 text-xs font-mono font-bold rounded-xl border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-cyan-500/30 transition-all flex items-center gap-1.5"><i class="fa-solid fa-cloud text-sky-500"></i><span>Cloud &amp; DevOps</span></button>
+                    <button type="button" onclick="selectAiTrack('ai', this)" class="ai-pill px-3.5 py-2 text-xs font-mono font-bold rounded-xl border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/30 transition-all flex items-center gap-1.5"><i class="fa-solid fa-brain text-purple-500"></i><span>AI &amp; Data</span></button>
+                    <button type="button" onclick="selectAiTrack('security', this)" class="ai-pill px-3.5 py-2 text-xs font-mono font-bold rounded-xl border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-emerald-500/30 transition-all flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-emerald-500"></i><span>Cybersecurity</span></button>
+                    <button type="button" onclick="selectAiTrack('design', this)" class="ai-pill px-3.5 py-2 text-xs font-mono font-bold rounded-xl border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-pink-500/30 transition-all flex items-center gap-1.5"><i class="fa-solid fa-palette text-pink-500"></i><span>UI/UX Design</span></button>
                 </div>
-                <div class="pt-2">
-                    <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors">
-                        <span>Explore all career tracks</span>
-                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+
+                {{-- Track Summary Specs --}}
+                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/10 space-y-3 font-mono">
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Target Role:</span>
+                        <span id="advisorRoleTitle" class="font-bold text-slate-900 dark:text-white text-right">Full-Stack Web Architect</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Median Bracket:</span>
+                        <span id="advisorSalary" class="font-bold text-emerald-600 dark:text-emerald-400">$115k – $155k / yr</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Academic Trajectory:</span>
+                        <span id="advisorMajor" class="font-bold text-pink-600 dark:text-pink-400">CS / Software Eng.</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Market Telemetry:</span>
+                        <span id="advisorDemand" class="font-bold text-cyan-600 dark:text-cyan-400">High (96%)</span>
+                    </div>
+                </div>
+
+                <div class="pt-1">
+                    <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-2 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 hover:text-cyan-300 transition-colors group">
+                        <span>[EXPLORE ALL VERIFIED TRACKS]</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
 
-            {{-- Rich Intelligence Preview Card (right panel) --}}
-            <div class="lg:col-span-6">
-                <div class="rounded-3xl p-6 sm:p-8 bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/5 shadow-sm dark:shadow-inner">
-                    <div id="aiAdvisorOutput" style="transition: opacity 0.18s ease;" class="space-y-6">
+            {{-- Right Column: Interactive Constellation Visualizer --}}
+            <div class="lg:col-span-7">
+                <div class="relative rounded-3xl p-6 sm:p-8 bg-slate-900/90 dark:bg-gradient-to-b dark:from-[#090d18] dark:to-[#04060c] border border-slate-700/80 dark:border-cyan-500/30 shadow-2xl overflow-hidden min-h-[420px] flex flex-col justify-between" id="aiAdvisorOutput">
+                    
+                    {{-- Top Status Bar --}}
+                    <div class="flex items-center justify-between gap-3 pb-3 border-b border-white/10 relative z-20">
+                        <div class="flex items-center gap-2 text-xs font-mono text-cyan-400">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                            <span class="font-bold">CONSTELLATION ENGINE v2.6</span>
+                        </div>
+                        <span id="advisorMatchScore" class="px-3 py-1 text-xs font-black font-mono rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.3)]">98% Match</span>
+                    </div>
 
-                        {{-- Header row --}}
-                        <div class="flex items-start justify-between gap-3">
-                            <div>
-                                <p class="text-[10px] font-semibold text-purple-600 dark:text-purple-400 mb-1 tracking-wider uppercase font-mono">Intelligence Preview</p>
-                                <h4 id="advisorRoleTitle" class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display leading-tight">Full-Stack Web Architect</h4>
-                                <p id="advisorSalary" class="text-xs text-emerald-600 dark:text-emerald-400 font-bold font-mono mt-1">$115k – $155k / yr</p>
-                            </div>
-                            <span id="advisorMatchScore" class="shrink-0 px-3.5 py-1.5 text-xs font-bold rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 mt-1 whitespace-nowrap shadow-sm">98% Match</span>
+                    {{-- Central System Constellation Stage --}}
+                    <div class="relative my-6 py-10 flex items-center justify-center min-h-[260px] z-10" id="constellationStage">
+                        
+                        {{-- Concentric Orbital Rings --}}
+                        <div class="absolute w-64 h-64 sm:w-80 sm:h-80 rounded-full border border-cyan-500/20 dark:border-cyan-400/20 animate-pulse pointer-events-none"></div>
+                        <div class="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full border border-dashed border-purple-500/30 pointer-events-none animate-[spin_40s_linear_infinite]"></div>
+                        <div class="absolute w-28 h-28 rounded-full border border-white/15 pointer-events-none"></div>
+
+                        {{-- Central Core Holographic Node --}}
+                        <div class="relative z-20 flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-cyan-600 via-indigo-600 to-purple-600 border-2 border-white/40 shadow-[0_0_35px_rgba(0,242,254,0.5)] cursor-pointer group">
+                            <div class="text-[9px] font-mono font-bold text-cyan-200 tracking-wider uppercase">MATCH CORE</div>
+                            <div id="arc-fit-label" class="text-xl sm:text-2xl font-black text-white font-display tracking-tight leading-none">94%</div>
+                            <div class="text-[8px] font-mono text-cyan-200/90 mt-0.5">FIT INDEX</div>
                         </div>
 
-                        {{-- Animated Arc Metric Rings --}}
-                        <div class="grid grid-cols-3 gap-4">
-
-                            {{-- Career Fit Arc --}}
-                            <div class="flex flex-col items-center gap-2">
-                                <div class="relative w-20 h-20">
-                                    <svg class="w-20 h-20 -rotate-90" viewBox="0 0 80 80">
-                                        <circle cx="40" cy="40" r="32" fill="none" stroke="currentColor" class="text-slate-200 dark:text-white/[0.06]" stroke-width="6"/>
-                                        <circle id="arc-fit" cx="40" cy="40" r="32" fill="none"
-                                            stroke="url(#grad-fit)" stroke-width="6"
-                                            stroke-linecap="round"
-                                            stroke-dasharray="201"
-                                            stroke-dashoffset="201"
-                                            style="transition: stroke-dashoffset 1s cubic-bezier(0.4,0,0.2,1)"/>
-                                        <defs>
-                                            <linearGradient id="grad-fit" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                <stop offset="0%" stop-color="#818cf8"/>
-                                                <stop offset="50%" stop-color="#a855f7"/>
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                        <span id="arc-fit-label" class="text-base font-black text-slate-900 dark:text-white leading-none">94%</span>
-                                    </div>
-                                </div>
-                                <span class="text-[10px] text-slate-600 dark:text-slate-400 font-medium text-center">Career Fit</span>
-                            </div>
-
-                            {{-- Interest Alignment Arc --}}
-                            <div class="flex flex-col items-center gap-2">
-                                <div class="relative w-20 h-20">
-                                    <svg class="w-20 h-20 -rotate-90" viewBox="0 0 80 80">
-                                        <circle cx="40" cy="40" r="32" fill="none" stroke="currentColor" class="text-slate-200 dark:text-white/[0.06]" stroke-width="6"/>
-                                        <circle id="arc-align" cx="40" cy="40" r="32" fill="none"
-                                            stroke="url(#grad-align)" stroke-width="6"
-                                            stroke-linecap="round"
-                                            stroke-dasharray="201"
-                                            stroke-dashoffset="201"
-                                            style="transition: stroke-dashoffset 1s cubic-bezier(0.4,0,0.2,1) 0.15s"/>
-                                        <defs>
-                                            <linearGradient id="grad-align" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                <stop offset="0%" stop-color="#ec4899"/>
-                                                <stop offset="100%" stop-color="#f97316"/>
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                        <span id="arc-align-label" class="text-base font-black text-slate-900 dark:text-white leading-none">91%</span>
-                                    </div>
-                                </div>
-                                <span class="text-[10px] text-slate-600 dark:text-slate-400 font-medium text-center">Interest Align</span>
-                            </div>
-
-                            {{-- Market Demand Arc --}}
-                            <div class="flex flex-col items-center gap-2">
-                                <div class="relative w-20 h-20">
-                                    <svg class="w-20 h-20 -rotate-90" viewBox="0 0 80 80">
-                                        <circle cx="40" cy="40" r="32" fill="none" stroke="currentColor" class="text-slate-200 dark:text-white/[0.06]" stroke-width="6"/>
-                                        <circle id="arc-demand" cx="40" cy="40" r="32" fill="none"
-                                            stroke="url(#grad-demand)" stroke-width="6"
-                                            stroke-linecap="round"
-                                            stroke-dasharray="201"
-                                            stroke-dashoffset="201"
-                                            style="transition: stroke-dashoffset 1s cubic-bezier(0.4,0,0.2,1) 0.3s"/>
-                                        <defs>
-                                            <linearGradient id="grad-demand" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                <stop offset="0%" stop-color="#10b981"/>
-                                                <stop offset="100%" stop-color="#06b6d4"/>
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                        <span id="arc-demand-label" class="text-base font-black text-slate-900 dark:text-white leading-none">96%</span>
-                                    </div>
-                                </div>
-                                <span class="text-[10px] text-slate-600 dark:text-slate-400 font-medium text-center">Market Demand</span>
-                            </div>
-
-                        </div>
-
-                        {{-- Animated metric bars --}}
-                        <div class="space-y-3">
-                            <div class="space-y-1.5">
-                                <div class="flex justify-between text-[11px] text-slate-600 dark:text-slate-400 font-medium">
-                                    <span>Recommended Major</span>
-                                    <span id="advisorMajor" class="text-pink-600 dark:text-pink-400 font-bold">CS / Software Eng.</span>
-                                </div>
-                            </div>
-                            <div class="space-y-1.5">
-                                <div class="flex justify-between text-[11px] text-slate-600 dark:text-slate-400 font-medium">
-                                    <span>Market Position</span>
-                                    <span id="advisorDemand" class="text-indigo-600 dark:text-indigo-400 font-bold font-mono">High (96%)</span>
-                                </div>
-                                <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
-                                    <div id="bar-demand" class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style="width:0%;transition:width 1s cubic-bezier(0.4,0,0.2,1) 0.2s"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- Core Required Skills pills --}}
-                        <div class="space-y-2.5">
-                            <p class="text-[10px] text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider font-mono">Core Required Skills</p>
-                            <div id="advisorSkills" class="flex flex-wrap gap-1.5">
-                                {{-- Populated by JS --}}
-                            </div>
-                        </div>
-
-                        {{-- Toolchain footer --}}
-                        <div class="pt-3 border-t border-slate-200/80 dark:border-white/10 flex items-center justify-between gap-3">
-                            <p id="advisorToolchain" class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-mono">Laravel, Vue/React, Tailwind, Docker, MySQL</p>
-                            <i class="fa-solid fa-code-branch text-slate-400 dark:text-slate-500 shrink-0"></i>
+                        {{-- Interactive Orbit Constellation Satellite Nodes (Injected by JS) --}}
+                        <div id="constellationOrbitNodes" class="absolute inset-0 pointer-events-none flex items-center justify-center">
+                            {{-- Dynamic nodes with CSS transforms --}}
                         </div>
 
                     </div>
+
+                    {{-- Hidden compatibility elements for existing telemetry bindings --}}
+                    <div class="hidden">
+                        <span id="arc-align-label">91%</span>
+                        <span id="arc-demand-label">96%</span>
+                        <svg><circle id="arc-fit"></circle><circle id="arc-align"></circle><circle id="arc-demand"></circle></svg>
+                        <div id="bar-demand"></div>
+                    </div>
+
+                    {{-- Core Required Skills Pills --}}
+                    <div class="space-y-2 pt-2 border-t border-white/10 relative z-20">
+                        <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                            <span>Orbiting Node Competencies</span>
+                            <span class="text-cyan-400">8 Synchronized</span>
+                        </div>
+                        <div id="advisorSkills" class="flex flex-wrap gap-1.5">
+                            {{-- Populated dynamically by JS --}}
+                        </div>
+                    </div>
+
+                    {{-- Bottom Toolchain Strip --}}
+                    <div class="pt-2.5 flex items-center justify-between gap-3 text-xs font-mono text-slate-400 border-t border-white/5 relative z-20">
+                        <p id="advisorToolchain" class="truncate text-[11px] text-slate-300">Laravel, Vue/React, Tailwind, Docker, MySQL</p>
+                        <i class="fa-solid fa-code-branch text-cyan-400 shrink-0"></i>
+                    </div>
+
                 </div>
             </div>
+
         </div>
     </div>
 </section>
@@ -943,6 +904,88 @@
     </div>
 </section>
 
+{{-- ══════════════════ SECTION 7: CINEMATIC FULL-SCREEN FINAL CTA (BUILD YOUR PATH) ══════════════════ --}}
+<section class="relative min-h-[75vh] flex items-center justify-center my-14 py-20 px-4 sm:px-6 lg:px-8 rounded-3xl bg-[#04060a] border border-cyan-500/30 overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.9)] max-w-7xl mx-auto reveal-element">
+    {{-- Converging Laser Warp Rays & Grid Mesh --}}
+    <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-cyan-500/15 blur-[160px] pointer-events-none"></div>
+    <div class="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-purple-600/15 blur-[160px] pointer-events-none"></div>
+
+    {{-- Converging Trajectory SVG Perspective Lines --}}
+    <svg class="absolute inset-0 w-full h-full opacity-20 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
+        <line x1="100%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
+        <line x1="0%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
+        <line x1="100%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
+        <line x1="50%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1.5"/>
+        <line x1="50%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1.5"/>
+        <defs>
+            <linearGradient id="cyanGradLine" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.1"/>
+                <stop offset="50%" stop-color="#00f2fe" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#a855f7" stop-opacity="0.9"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <div class="relative z-10 max-w-4xl mx-auto text-center space-y-8">
+        {{-- Telemetry Badge --}}
+        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-cyan-500/40 text-xs font-mono font-bold text-cyan-400 shadow-[0_0_20px_rgba(0,242,254,0.25)] backdrop-blur-xl">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+            <span class="tracking-widest uppercase">04 / GLOBAL TRAJECTORY CONVERGENCE</span>
+        </div>
+
+        {{-- Glowing Passport Emblem Centerpiece --}}
+        <div class="flex items-center justify-center my-2">
+            <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-cyan-500 via-sky-600 to-indigo-600 border-2 border-white/40 flex items-center justify-center text-white text-3xl sm:text-4xl shadow-[0_0_50px_rgba(0,242,254,0.6)] animate-bounce duration-1000">
+                <i class="fa-solid fa-compass text-white"></i>
+                <div class="absolute inset-0 rounded-3xl border border-cyan-300 animate-ping opacity-30 pointer-events-none"></div>
+            </div>
+        </div>
+
+        {{-- Giant Cinematic Heading --}}
+        <div class="space-y-2">
+            <h2 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-cyan-400 drop-shadow-[0_0_40px_rgba(0,242,254,0.35)] leading-none">
+                BUILD YOUR PATH
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-normal pt-2">
+                Connect your ambition to verified 2026 tech economy trajectories. Claim your cryptographic Career Passport, master verified toolchains, and accelerate your professional destiny.
+            </p>
+        </div>
+
+        {{-- Cinematic Action CTAs --}}
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+            <a href="{{ route('careers.index') }}" class="group relative inline-flex items-center gap-3 px-8 sm:px-10 py-4 text-sm sm:text-base font-black rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-500 text-slate-950 shadow-[0_0_35px_rgba(0,242,254,0.5)] hover:shadow-[0_0_50px_rgba(0,242,254,0.7)] hover:scale-105 transition-all duration-300">
+                <i class="fa-solid fa-compass text-slate-950"></i>
+                <span class="text-slate-950">Explore All Pathways</span>
+                <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1.5 transition-transform"></i>
+            </a>
+
+            <a href="{{ route('quiz.index') }}" class="group inline-flex items-center gap-3 px-8 sm:px-10 py-4 text-sm sm:text-base font-bold rounded-full bg-white/[0.05] text-white border border-white/20 hover:border-cyan-400 hover:bg-white/[0.1] hover:scale-105 transition-all duration-300 backdrop-blur-xl">
+                <i class="fa-solid fa-brain text-purple-400"></i>
+                <span>Launch Assessment</span>
+                <i class="fa-solid fa-sparkles text-xs text-cyan-400"></i>
+            </a>
+        </div>
+
+        {{-- Verification Micro-Telemetry Footer --}}
+        <div class="flex flex-wrap items-center justify-center gap-6 pt-6 text-xs font-mono text-slate-500 border-t border-white/10">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-shield-check text-cyan-400"></i>
+                <span>256-BIT CRYPTOGRAPHIC PASSPORT</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-satellite text-purple-400"></i>
+                <span>15+ VERIFIED 2026 BLUEPRINTS</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-bolt text-emerald-400"></i>
+                <span>ALGORITHMIC RIASEC MATCH</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 {{-- ══════════════════ FLOATING COMPARISON BOTTOM DOCK ══════════════════ --}}
 <div id="compareDock"
      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 transform translate-y-32 opacity-0 pointer-events-none max-w-2xl w-[92%] sm:w-auto">
@@ -1119,6 +1162,43 @@ function animateArc(id, pct) {
     el.style.strokeDashoffset = offset;
 }
 
+// ── Render constellation orbit nodes around central core
+function renderConstellation(skills) {
+    const orbitContainer = document.getElementById('constellationOrbitNodes');
+    if (!orbitContainer) return;
+    orbitContainer.innerHTML = '';
+    
+    const total = Math.min(skills.length, 8);
+    const radius = window.innerWidth < 640 ? 95 : 125;
+    
+    for (let i = 0; i < total; i++) {
+        const angle = (i / total) * 2 * Math.PI - Math.PI / 2;
+        const x = Math.round(Math.cos(angle) * radius);
+        const y = Math.round(Math.sin(angle) * radius);
+        
+        const node = document.createElement('div');
+        node.className = 'absolute pointer-events-auto transition-all duration-500 ease-out transform -translate-x-1/2 -translate-y-1/2 cursor-default group';
+        node.style.left = `calc(50% + ${x}px)`;
+        node.style.top = `calc(50% + ${y}px)`;
+        node.style.opacity = '0';
+        node.style.transform = `translate(-50%, -50%) scale(0.6)`;
+        
+        node.innerHTML = `
+            <div class="px-2.5 py-1 rounded-xl bg-slate-950/90 dark:bg-[#0c1222] border border-cyan-500/40 text-[10px] font-mono font-bold text-cyan-300 shadow-[0_0_15px_rgba(0,242,254,0.25)] flex items-center gap-1.5 backdrop-blur-md group-hover:scale-110 group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(0,242,254,0.5)] transition-all">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span>${skills[i]}</span>
+            </div>
+        `;
+        orbitContainer.appendChild(node);
+        
+        const delay = i * 40;
+        setTimeout(() => {
+            node.style.opacity = '1';
+            node.style.transform = `translate(-50%, -50%) scale(1)`;
+        }, delay);
+    }
+}
+
 // ── Render skill pills with staggered fade-in
 function renderSkills(skills) {
     const container = document.getElementById('advisorSkills');
@@ -1126,7 +1206,7 @@ function renderSkills(skills) {
     container.innerHTML = '';
     skills.forEach((skill, i) => {
         const pill = document.createElement('span');
-        pill.className = 'px-2.5 py-1 text-[10px] font-medium rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 opacity-0';
+        pill.className = 'px-2.5 py-1 text-[10px] font-mono font-medium rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 opacity-0';
         pill.style.transition = `opacity 0.3s ease ${i * 0.06}s, transform 0.3s ease ${i * 0.06}s`;
         pill.style.transform = 'translateY(4px)';
         pill.textContent = skill;
@@ -1141,17 +1221,24 @@ function renderSkills(skills) {
 
 // ── Master update function
 function applyTrackData(data) {
-    document.getElementById('advisorRoleTitle').innerText = data.title;
-    document.getElementById('advisorMatchScore').innerText = data.score;
-    document.getElementById('advisorSalary').innerText    = data.salary;
-    document.getElementById('advisorDemand').innerText    = data.demand;
-    document.getElementById('advisorMajor').innerText     = data.major;
-    document.getElementById('advisorToolchain').innerText = data.stack;
+    const roleEl = document.getElementById('advisorRoleTitle');
+    const scoreEl = document.getElementById('advisorMatchScore');
+    const salaryEl = document.getElementById('advisorSalary');
+    const demandEl = document.getElementById('advisorDemand');
+    const majorEl = document.getElementById('advisorMajor');
+    const stackEl = document.getElementById('advisorToolchain');
+
+    if (roleEl) roleEl.innerText = data.title;
+    if (scoreEl) scoreEl.innerText = data.score;
+    if (salaryEl) salaryEl.innerText = data.salary;
+    if (demandEl) demandEl.innerText = data.demand;
+    if (majorEl) majorEl.innerText = data.major;
+    if (stackEl) stackEl.innerText = data.stack;
 
     // Reset arcs to 0 first (so transition plays)
     ['arc-fit','arc-align','arc-demand'].forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.style.strokeDashoffset = ARC_CIRC;
+        if (el && typeof ARC_CIRC !== 'undefined') el.style.strokeDashoffset = ARC_CIRC;
     });
     const bar = document.getElementById('bar-demand');
     if (bar) bar.style.width = '0%';
@@ -1166,13 +1253,16 @@ function applyTrackData(data) {
 
     // Animate after reset frame
     requestAnimationFrame(() => requestAnimationFrame(() => {
-        animateArc('arc-fit',    data.fit);
-        animateArc('arc-align',  data.align);
-        animateArc('arc-demand', data.demandPct);
+        if (typeof animateArc === 'function') {
+            animateArc('arc-fit',    data.fit);
+            animateArc('arc-align',  data.align);
+            animateArc('arc-demand', data.demandPct);
+        }
         if (bar) bar.style.width = data.demandPct + '%';
     }));
 
     renderSkills(data.skills);
+    renderConstellation(data.skills);
 }
 
 // ── Public pill-click handler
@@ -1181,17 +1271,17 @@ function selectAiTrack(key, btn) {
     if (!data) return;
 
     document.querySelectorAll('.ai-pill').forEach(p => {
-        p.classList.remove('active', 'border-purple-500/50', 'text-purple-700', 'dark:text-purple-300', 'bg-purple-500/15', 'bg-purple-500/20');
-        p.classList.add('border-slate-200', 'dark:border-white/10', 'text-slate-600', 'dark:text-slate-400');
+        p.classList.remove('active', 'border-cyan-500/50', 'text-cyan-600', 'dark:text-cyan-300', 'bg-cyan-500/15', 'bg-purple-500/15');
+        p.classList.add('border-slate-200/80', 'dark:border-white/10', 'text-slate-600', 'dark:text-slate-400');
     });
-    btn.classList.add('active', 'border-purple-500/50', 'text-purple-700', 'dark:text-purple-300', 'bg-purple-500/15');
-    btn.classList.remove('border-slate-200', 'dark:border-white/10', 'text-slate-600', 'dark:text-slate-400');
+    btn.classList.add('active', 'border-cyan-500/50', 'text-cyan-600', 'dark:text-cyan-300', 'bg-cyan-500/15');
+    btn.classList.remove('border-slate-200/80', 'dark:border-white/10', 'text-slate-600', 'dark:text-slate-400');
 
     const out = document.getElementById('aiAdvisorOutput');
-    out.style.opacity = '0.3';
+    if (out) out.style.opacity = '0.3';
     setTimeout(() => {
         applyTrackData(data);
-        out.style.opacity = '1';
+        if (out) out.style.opacity = '1';
     }, 180);
 }
 
