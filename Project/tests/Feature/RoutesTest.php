@@ -54,7 +54,7 @@ class RoutesTest extends TestCase
     public function test_user_can_login_and_access_personalized_dashboard(): void
     {
         $student = User::where('email', 'student@pathseeker.com')->first();
-        $r = $this->post('/login', ['email' => 'student@pathseeker.com', 'password' => 'password123']);
+        $r = $this->post('/login', ['email' => 'student@pathseeker.com', 'password' => 'student123']);
         $r->assertRedirect('/dashboard');
         $this->assertAuthenticatedAs($student);
         $dash = $this->actingAs($student)->get('/dashboard');

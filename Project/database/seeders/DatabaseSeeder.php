@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Admin User',
                 'email' => 'admin@pathseeker.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'education_level' => 'Master of Science in Computer Science',
                 'interests' => 'Cloud Architecture, System Design, AI Research',
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Alex Rivera',
                 'email' => 'student@pathseeker.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('student123'),
                 'role' => 'student',
                 'education_level' => 'Undergraduate (Year 3)',
                 'interests' => 'Full-Stack Development, Cyber Security, UI/UX',
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Sarah Connor',
                 'email' => 'graduate@pathseeker.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('graduate123'),
                 'role' => 'graduate',
                 'education_level' => 'Bachelor of Engineering',
                 'interests' => 'DevOps, Machine Learning, Mobile Apps',
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'David Miller',
                 'email' => 'pro@pathseeker.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('pro123'),
                 'role' => 'professional',
                 'education_level' => 'B.S. Software Engineering',
                 'interests' => 'Tech Leadership, Enterprise Architecture',
@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Abdullah Azaam',
                 'email' => 'abdullahazaam1505@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('student123'),
                 'role' => 'student',
                 'education_level' => 'Bachelor of Science in Computer Science',
                 'interests' => 'Full-Stack Development, Cloud Architecture, AI Systems',

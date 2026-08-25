@@ -39,3 +39,12 @@ Tech Stack:
 - Blade Templating Engine
 ========================================================================
 
+Demo Accounts / Test Credentials:
+------------------------------------------------------------------------
+Role         | Email                     | Password
+------------------------------------------------------------------------
+Admin        | admin@pathseeker.com      | admin123
+Student      | student@pathseeker.com    | student123
+Graduate     | graduate@pathseeker.com   | graduate123
+Professional | pro@pathseeker.com        | pro123
+========================================================================
