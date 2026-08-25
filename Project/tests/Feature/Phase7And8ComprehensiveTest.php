@@ -174,4 +174,49 @@ class Phase7And8ComprehensiveTest extends TestCase
         $res->assertSee($student->name, false);
         $res->assertDontSee($student->email, false);
     }
+
+    public function test_ajax_bookmark_toggle_and_career_card_rendering(): void
+    {
+        $student = User::where('email', 'student@pathseeker.com')->first();
+        $career = Career::first();
+
+        // 1. Unauthenticated request to toggle must return 401 JSON
+        $guestRes = $this->postJson(route('bookmarks.toggle'), [
+            'item_type' => 'career',
+            'item_id' => $career->id,
+        ]);
+        $guestRes->assertStatus(401);
+
+        // 2. Authenticated user toggles bookmark ON
+        $toggleOnRes = $this->actingAs($student)->postJson(route('bookmarks.toggle'), [
+            'item_type' => 'career',
+            'item_id' => $career->id,
+        ]);
+        $toggleOnRes->assertStatus(200);
+        $toggleOnRes->assertJsonFragment(['success' => true, 'bookmarked' => true]);
+        $this->assertDatabaseHas('bookmarks', [
+            'user_id' => $student->id,
+            'item_type' => 'career',
+            'item_id' => $career->id,
+        ]);
+
+        // 3. Career Bank index page renders active bookmark state for user
+        $careerRes = $this->actingAs($student)->get(route('careers.index'));
+        $careerRes->assertStatus(200);
+        $careerRes->assertSee('btn-bookmark-' . $career->id);
+        $careerRes->assertSee('data-bookmarked="true"', false);
+
+        // 4. Authenticated user toggles bookmark OFF
+        $toggleOffRes = $this->actingAs($student)->postJson(route('bookmarks.toggle'), [
+            'item_type' => 'career',
+            'item_id' => $career->id,
+        ]);
+        $toggleOffRes->assertStatus(200);
+        $toggleOffRes->assertJsonFragment(['success' => true, 'bookmarked' => false]);
+        $this->assertDatabaseMissing('bookmarks', [
+            'user_id' => $student->id,
+            'item_type' => 'career',
+            'item_id' => $career->id,
+        ]);
+    }
 }

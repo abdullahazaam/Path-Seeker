@@ -40,10 +40,58 @@ class BookmarkController extends Controller
         );
 
         if ($request->wantsJson()) {
-            return response()->json(['success' => true, 'bookmark' => $bookmark]);
+            return response()->json(['success' => true, 'bookmarked' => true, 'bookmark' => $bookmark]);
         }
 
         return redirect()->back()->with('success', 'Saved to your Career Passport bookmarks!');
+    }
+
+    /**
+     * Toggle bookmark state (save or remove) via AJAX.
+     */
+    public function toggle(Request $request)
+    {
+        if (!Auth::check()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Please sign in to save bookmarks to your Career Passport.',
+                'redirect' => route('login'),
+            ], 401);
+        }
+
+        $validated = $request->validate([
+            'item_type' => 'required|in:career,multimedia,resource',
+            'item_id' => 'required|integer',
+        ]);
+
+        $bookmark = Bookmark::where('user_id', Auth::id())
+            ->where('item_type', $validated['item_type'])
+            ->where('item_id', $validated['item_id'])
+            ->first();
+
+        if ($bookmark) {
+            $bookmark->delete();
+            $isBookmarked = false;
+            $message = 'Removed from bookmarks.';
+        } else {
+            Bookmark::create([
+                'user_id' => Auth::id(),
+                'item_type' => $validated['item_type'],
+                'item_id' => $validated['item_id'],
+            ]);
+            $isBookmarked = true;
+            $message = 'Saved to your Career Passport bookmarks!';
+        }
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'bookmarked' => $isBookmarked,
+                'message' => $message,
+            ]);
+        }
+
+        return redirect()->back()->with('success', $message);
     }
 
     /**

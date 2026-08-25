@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Career;
+use App\Models\Bookmark;
 use App\Models\RecentlyViewed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,7 +77,11 @@ class CareerController extends Controller
             'professional' => Career::where(function($q){ $q->where('target_role', 'professional')->orWhere('target_role', 'all'); })->count(),
         ];
 
-        return view('careers.index', compact('careers', 'domains', 'roleCounts', 'savedPreferences'));
+        $userBookmarkedCareerIds = Auth::check() 
+            ? Bookmark::where('user_id', Auth::id())->where('item_type', 'career')->pluck('item_id')->toArray() 
+            : [];
+
+        return view('careers.index', compact('careers', 'domains', 'roleCounts', 'savedPreferences', 'userBookmarkedCareerIds'));
     }
 
     /**

@@ -185,6 +185,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/bookmarks/export-all-pdf', [BookmarkController::class, 'exportAllPdf'])->name('bookmarks.export-all-pdf')->middleware('throttle:10,1');
     Route::get('/bookmarks/{id}/export-pdf', [BookmarkController::class, 'exportPdf'])->name('bookmarks.export-pdf')->middleware('throttle:10,1');
     Route::post('/bookmarks', [BookmarkController::class, 'store'])->name('bookmarks.store');
+    Route::post('/bookmarks/toggle', [BookmarkController::class, 'toggle'])->name('bookmarks.toggle');
     Route::put('/bookmarks/{id}', [BookmarkController::class, 'update'])->name('bookmarks.update');
     Route::delete('/bookmarks/{id}', [BookmarkController::class, 'destroy'])->name('bookmarks.destroy');
 

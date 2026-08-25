@@ -61,16 +61,30 @@
 
 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16 space-y-8">
 
-    {{-- ── Breadcrumb ──────────────────────────────── --}}
-    <div class="flex items-center justify-between">
+    {{-- ── Breadcrumb & Actions ──────────────────────────────── --}}
+    <div class="flex items-center justify-between gap-3">
         <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-2 text-sm font-bold text-slate-700 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-purple-300 transition-colors group">
             <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1.5 transition-transform"></i>
             <span>Back to Career Bank</span>
         </a>
-        <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/80 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/[0.08] text-xs font-mono text-slate-600 dark:text-slate-400 shadow-sm">
-            <span class="text-purple-600 dark:text-purple-400 font-bold">LIVE TRACK</span>
-            <span>&bull;</span>
-            <span class="text-emerald-500 font-semibold">Verified 2026</span>
+        <div class="flex items-center gap-2.5">
+            @auth
+                @php
+                    $isBookmarked = \App\Models\Bookmark::where('user_id', Auth::id())->where('item_type', 'career')->where('item_id', $career->id)->exists();
+                @endphp
+                <button type="button"
+                        onclick="toggleBookmarkShow(event, {{ $career->id }})"
+                        id="btn-show-bookmark-{{ $career->id }}"
+                        class="px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all inline-flex items-center gap-1.5 shadow-sm cursor-pointer {{ $isBookmarked ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400 border-purple-500/40' : 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/40' }}">
+                    <i class="{{ $isBookmarked ? 'fa-solid' : 'fa-regular' }} fa-bookmark text-xs text-purple-500"></i>
+                    <span>{{ $isBookmarked ? 'Bookmarked' : 'Save Career' }}</span>
+                </button>
+            @endauth
+            <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/80 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/[0.08] text-xs font-mono text-slate-600 dark:text-slate-400 shadow-sm">
+                <span class="text-purple-600 dark:text-purple-400 font-bold">LIVE TRACK</span>
+                <span>&bull;</span>
+                <span class="text-emerald-500 font-semibold">Verified 2026</span>
+            </div>
         </div>
     </div>
 
@@ -831,5 +845,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+function toggleBookmarkShow(event, itemId) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    const btn = document.getElementById(`btn-show-bookmark-${itemId}`);
+    if (!btn) return;
+
+    const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+    const token = csrfMeta ? csrfMeta.getAttribute('content') : '';
+
+    btn.disabled = true;
+
+    fetch('{{ route("bookmarks.toggle") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': token,
+        },
+        body: JSON.stringify({
+            item_type: 'career',
+            item_id: itemId,
+        })
+    })
+    .then(async response => {
+        if (response.status === 401) {
+            window.location.href = '{{ route("login") }}';
+            return;
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (!data || !data.success) return;
+
+        const icon = btn.querySelector('i');
+        const span = btn.querySelector('span');
+        if (data.bookmarked) {
+            btn.className = 'px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all inline-flex items-center gap-1.5 shadow-sm cursor-pointer bg-purple-500/20 text-purple-600 dark:text-purple-400 border-purple-500/40';
+            if (icon) icon.className = 'fa-solid fa-bookmark text-xs text-purple-500';
+            if (span) span.textContent = 'Bookmarked';
+        } else {
+            btn.className = 'px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all inline-flex items-center gap-1.5 shadow-sm cursor-pointer bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/40';
+            if (icon) icon.className = 'fa-regular fa-bookmark text-xs text-purple-500';
+            if (span) span.textContent = 'Save Career';
+        }
+    })
+    .catch(err => {
+        console.error('Bookmark toggle error:', err);
+    })
+    .finally(() => {
+        btn.disabled = false;
+    });
+}
 </script>
 @endsection

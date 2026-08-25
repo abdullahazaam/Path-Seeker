@@ -312,8 +312,7 @@
                                     <span>{{ $roleLabel }}</span>
                                 </span>
                             </div>
-                            
-                            @php
+                                                       @php
                                 $cId = $career->id;
                                 $tEsc = addslashes($career->title);
                                 $dEsc = addslashes($career->domain);
@@ -322,15 +321,28 @@
                                 $urlEsc = route('careers.show', $career->id);
                                 $diffLevel = ($cId % 3 === 0) ? 'Advanced' : (($cId % 3 === 2) ? 'Intermediate' : 'Beginner / Intermediate');
                                 $demandVal = $career->market_metrics['demand_score'] ?? 94;
+                                $isBookmarked = in_array($career->id, $userBookmarkedCareerIds ?? []);
                             @endphp
-                            <button type="button"
-                                    onclick="toggleCompare({{ $cId }}, '{{ $tEsc }}', '{{ $dEsc }}', '{{ $sEsc }}', '{{ $demandVal }}%', '{{ $diffLevel }}', '{{ $skEsc }}', '{{ $urlEsc }}', '{{ $badgeClass }}', '{{ $domIcon }}')"
-                                    id="btn-compare-{{ $cId }}"
-                                    class="compare-toggle-btn px-2.5 py-1 text-[10px] font-bold rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:border-purple-500/30 transition-all flex items-center gap-1.5 bg-slate-50 dark:bg-white/[0.04] shrink-0 shadow-sm"
-                                    title="Add to career comparison matrix">
-                                <i class="fa-solid fa-plus text-[9px] icon-state"></i>
-                                <span class="label-state">Compare</span>
-                            </button>
+                            <div class="flex items-center gap-1.5 shrink-0">
+                                <button type="button"
+                                        onclick="toggleCompare({{ $cId }}, '{{ $tEsc }}', '{{ $dEsc }}', '{{ $sEsc }}', '{{ $demandVal }}%', '{{ $diffLevel }}', '{{ $skEsc }}', '{{ $urlEsc }}', '{{ $badgeClass }}', '{{ $domIcon }}')"
+                                        id="btn-compare-{{ $cId }}"
+                                        class="compare-toggle-btn px-2.5 py-1 text-[10px] font-bold rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:border-purple-500/30 transition-all flex items-center gap-1.5 bg-slate-50 dark:bg-white/[0.04] shrink-0 shadow-sm"
+                                        title="Add to career comparison matrix">
+                                    <i class="fa-solid fa-plus text-[9px] icon-state"></i>
+                                    <span class="label-state">Compare</span>
+                                </button>
+
+                                {{-- Bookmark / Save Button (AJAX Functional Button) --}}
+                                <button type="button"
+                                        onclick="toggleBookmark(event, {{ $career->id }}, 'career')"
+                                        id="btn-bookmark-{{ $career->id }}"
+                                        data-bookmarked="{{ $isBookmarked ? 'true' : 'false' }}"
+                                        class="w-7 h-7 rounded-full border transition-all flex items-center justify-center text-xs shrink-0 shadow-sm cursor-pointer {{ $isBookmarked ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400 border-purple-500/40 shadow-sm' : 'border-slate-200 dark:border-white/10 text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:border-purple-500/30 bg-slate-50 dark:bg-white/[0.04]' }}"
+                                        title="{{ $isBookmarked ? 'Saved in Passport Bookmarks' : 'Bookmark this career' }}">
+                                    <i class="{{ $isBookmarked ? 'fa-solid text-purple-600 dark:text-purple-400' : 'fa-regular' }} fa-bookmark text-[11px] transition-transform"></i>
+                                </button>
+                            </div>
                         </div>
 
                         {{-- Title & Description --}}
@@ -862,5 +874,91 @@ document.addEventListener('DOMContentLoaded', () => {
         bars.forEach(b => { b.style.width = b.getAttribute('data-width') + '%'; });
     }
 });
+
+// ══════════════════ AJAX BOOKMARKING LOGIC ══════════════════
+function toggleBookmark(event, itemId, itemType = 'career') {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    const btn = document.getElementById(`btn-bookmark-${itemId}`);
+    if (!btn) return;
+
+    const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+    const token = csrfMeta ? csrfMeta.getAttribute('content') : '';
+
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+
+    fetch('{{ route("bookmarks.toggle") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': token,
+        },
+        body: JSON.stringify({
+            item_type: itemType,
+            item_id: itemId,
+        })
+    })
+    .then(async response => {
+        if (response.status === 401) {
+            window.location.href = '{{ route("login") }}';
+            return;
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (!data || !data.success) return;
+
+        const icon = btn.querySelector('i');
+        if (data.bookmarked) {
+            btn.setAttribute('data-bookmarked', 'true');
+            btn.classList.remove('border-slate-200', 'dark:border-white/10', 'text-slate-400', 'bg-slate-50', 'dark:bg-white/[0.04]');
+            btn.classList.add('bg-purple-500/20', 'text-purple-600', 'dark:text-purple-400', 'border-purple-500/40', 'shadow-sm');
+            if (icon) {
+                icon.className = 'fa-solid fa-bookmark text-[11px] text-purple-600 dark:text-purple-400 transition-transform scale-110';
+            }
+            btn.setAttribute('title', 'Saved in Passport Bookmarks');
+            showBookmarkNotification('Saved to your Career Passport bookmarks!');
+        } else {
+            btn.setAttribute('data-bookmarked', 'false');
+            btn.classList.remove('bg-purple-500/20', 'text-purple-600', 'dark:text-purple-400', 'border-purple-500/40', 'shadow-sm');
+            btn.classList.add('border-slate-200', 'dark:border-white/10', 'text-slate-400', 'bg-slate-50', 'dark:bg-white/[0.04]');
+            if (icon) {
+                icon.className = 'fa-regular fa-bookmark text-[11px] transition-transform';
+            }
+            btn.setAttribute('title', 'Bookmark this career');
+            showBookmarkNotification('Removed from bookmarks.');
+        }
+    })
+    .catch(err => {
+        console.error('Bookmark toggle error:', err);
+    })
+    .finally(() => {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+    });
+}
+
+function showBookmarkNotification(message) {
+    let toast = document.getElementById('floatingBookmarkToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'floatingBookmarkToast';
+        toast.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-2xl bg-slate-900/95 text-white text-xs font-bold shadow-2xl border border-purple-500/30 flex items-center gap-2.5 transition-all duration-300 transform translate-y-4 opacity-0 pointer-events-none';
+        document.body.appendChild(toast);
+    }
+    toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> <span>${message}</span>`;
+    toast.classList.remove('translate-y-4', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-4', 'opacity-0', 'pointer-events-none');
+    }, 2500);
+}
 </script>
 @endsection
