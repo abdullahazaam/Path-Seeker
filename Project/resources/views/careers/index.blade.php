@@ -31,49 +31,166 @@
     </div>
 
     {{-- Search & Filter Console --}}
-    <div class="relative rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-4 overflow-hidden">
-        <form action="{{ url('/careers') }}" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end relative z-10">
+    {{-- Search & Filter Console with Smart Autocomplete & Save Preferences --}}
+    <div class="relative rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-4 overflow-visible"
+         x-data="{
+             searchQuery: '{{ request('search') }}',
+             suggestions: [],
+             loading: false,
+             isOpen: false,
+             selectedIndex: -1,
+             saveMessage: '',
+             saveLoading: false,
+
+             fetchAutocomplete() {
+                 if (this.searchQuery.trim().length < 2) {
+                     this.suggestions = [];
+                     this.isOpen = false;
+                     return;
+                 }
+                 this.loading = true;
+                 fetch('{{ route('api.careers.autocomplete') }}?q=' + encodeURIComponent(this.searchQuery))
+                     .then(r => r.json())
+                     .then(data => {
+                         this.suggestions = data;
+                         this.isOpen = data.length > 0;
+                         this.loading = false;
+                     })
+                     .catch(() => {
+                         this.loading = false;
+                     });
+             },
+
+             selectSuggestion(title) {
+                 this.searchQuery = title;
+                 this.isOpen = false;
+                 document.getElementById('careerSearchForm').submit();
+             },
+
+             savePreferences() {
+                 this.saveLoading = true;
+                 const domainVal = document.getElementById('domainSelect')?.value || '';
+                 const roleVal = '{{ request('role') }}';
+                 
+                 fetch('{{ route('careers.save-preferences') }}', {
+                     method: 'POST',
+                     headers: {
+                         'Content-Type': 'application/json',
+                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                         'Accept': 'application/json'
+                     },
+                     body: JSON.stringify({
+                         search: this.searchQuery,
+                         domain: domainVal,
+                         role: roleVal
+                     })
+                 })
+                 .then(r => r.json())
+                 .then(data => {
+                     this.saveLoading = false;
+                     this.saveMessage = data.message || 'Preferences saved!';
+                     setTimeout(() => { this.saveMessage = ''; }, 3500);
+                 })
+                 .catch(() => {
+                     this.saveLoading = false;
+                 });
+             }
+         }">
+        
+        <form id="careerSearchForm" action="{{ url('/careers') }}" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end relative z-20">
             @if(request('role'))
                 <input type="hidden" name="role" value="{{ request('role') }}">
             @endif
-            <div class="md:col-span-6">
+            
+            {{-- Smart Autocomplete Input Column --}}
+            <div class="md:col-span-5 relative">
                 <div class="flex items-center justify-between mb-2">
                     <label for="search" class="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
                         <i class="fa-solid fa-magnifying-glass text-indigo-600 dark:text-indigo-400 text-xs"></i>
                         <span>Search Job Role or Skills</span>
                     </label>
+                    <span x-show="loading" class="text-[10px] text-purple-600 font-mono flex items-center gap-1">
+                        <i class="fa-solid fa-spinner fa-spin text-[9px]"></i> Searching...
+                    </span>
                 </div>
+                
                 <div class="relative">
-                    <input type="text" name="search" id="search" value="{{ request('search') }}"
-                           placeholder="Search careers, skills (e.g. Full-Stack, Cloud, AI, Security)..."
+                    <input type="text" name="search" id="search" 
+                           x-model="searchQuery"
+                           @input.debounce.250ms="fetchAutocomplete()"
+                           @focus="if(suggestions.length) isOpen = true"
+                           @click.outside="isOpen = false"
+                           @keydown.escape="isOpen = false"
+                           placeholder="Type role or skill (e.g. Full-Stack, AI, Cloud, Rust)..."
+                           autocomplete="off"
                            class="app-input w-full px-4 py-3 rounded-xl text-sm pl-10 focus:ring-2 focus:ring-purple-500/30">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                 </div>
+
+                {{-- Autocomplete Dropdown List --}}
+                <div x-show="isOpen && suggestions.length > 0" 
+                     x-cloak 
+                     style="display: none;" 
+                     class="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl z-50 max-h-72 overflow-y-auto divide-y divide-slate-100 dark:divide-white/5">
+                    <template x-for="item in suggestions" :key="item.id">
+                        <div @click="selectSuggestion(item.title)" 
+                             class="p-3 hover:bg-purple-500/10 cursor-pointer transition-colors flex items-center justify-between gap-3">
+                            <div>
+                                <div class="font-bold text-xs text-slate-900 dark:text-white" x-text="item.title"></div>
+                                <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono" x-text="item.domain"></div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" x-text="item.expected_salary"></span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
             </div>
-            <div class="md:col-span-4">
-                <label for="domain" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
+
+            {{-- Domain Filter Select --}}
+            <div class="md:col-span-3">
+                <label for="domainSelect" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
                     <i class="fa-solid fa-filter text-purple-600 dark:text-purple-400 text-xs"></i>
                     <span>Industry Domain</span>
                 </label>
-                <select name="domain" id="domain" class="app-input w-full px-4 py-3 rounded-xl text-sm">
+                <select name="domain" id="domainSelect" class="app-input w-full px-4 py-3 rounded-xl text-sm">
                     <option value="">All Industry Domains ({{ count($domains) }})</option>
                     @foreach($domains as $dom)
                         <option value="{{ $dom }}" {{ request('domain') === $dom ? 'selected' : '' }}>{{ $dom }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="md:col-span-2 flex gap-2">
-                <button type="submit" class="btn-sweep flex-1 py-3 font-bold text-sm rounded-xl text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-lg shadow-purple-500/20 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105">
+
+            {{-- Action Buttons (Filter + Save Preferences + Reset) --}}
+            <div class="md:col-span-4 flex items-center gap-2">
+                <button type="submit" class="btn-sweep flex-1 py-3 font-bold text-xs rounded-xl text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-sliders text-xs text-white"></i>
                     <span class="text-white">Filter</span>
                 </button>
+
+                {{-- SAVE PREFERENCES BUTTON --}}
+                <button type="button" 
+                        @click="savePreferences()" 
+                        :disabled="saveLoading"
+                        class="px-3.5 py-3 rounded-xl text-xs font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 hover:bg-amber-500/25 border border-amber-500/30 transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap" 
+                        title="Save these search filters as your default preference">
+                    <i class="fa-solid fa-bookmark text-amber-500 text-xs" :class="saveLoading ? 'animate-spin' : ''"></i>
+                    <span>Save Prefs</span>
+                </button>
+
                 @if(request('search') || request('domain') || request('role'))
-                    <a href="{{ route('careers.index') }}" class="px-3 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 transition-all flex items-center justify-center" title="Reset Filters">
+                    <a href="{{ route('careers.index') }}" class="px-3 py-3 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 transition-all flex items-center justify-center" title="Reset Filters">
                         <i class="fa-solid fa-rotate-left"></i>
                     </a>
                 @endif
             </div>
         </form>
+
+        {{-- Toast / Save Message Notification --}}
+        <div x-show="saveMessage" x-cloak style="display: none;" class="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-2 transition-all">
+            <i class="fa-solid fa-circle-check"></i>
+            <span x-text="saveMessage"></span>
+        </div>
 
         {{-- Role-Based Dynamic Filters --}}
         <div class="mt-4 pt-3.5 border-t border-slate-200/60 dark:border-white/[0.06] space-y-3 relative z-10">

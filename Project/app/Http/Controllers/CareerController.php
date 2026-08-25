@@ -53,6 +53,17 @@ class CareerController extends Controller
                 break;
         }
 
+        // Apply saved preferences if no explicit query parameters are present
+        $savedPreferences = session('career_preferences', []);
+        if (empty($request->all()) && !empty($savedPreferences)) {
+            if (!empty($savedPreferences['domain'])) {
+                $query->where('domain', $savedPreferences['domain']);
+            }
+            if (!empty($savedPreferences['role'])) {
+                $query->forRole($savedPreferences['role']);
+            }
+        }
+
         $careers = $query->paginate(6)->withQueryString();
         $domains = Career::select('domain')->distinct()->pluck('domain');
 
@@ -63,7 +74,31 @@ class CareerController extends Controller
             'professional' => Career::where(function($q){ $q->where('target_role', 'professional')->orWhere('target_role', 'all'); })->count(),
         ];
 
-        return view('careers.index', compact('careers', 'domains', 'roleCounts'));
+        return view('careers.index', compact('careers', 'domains', 'roleCounts', 'savedPreferences'));
+    }
+
+    /**
+     * Save user filter preferences to session / profile.
+     */
+    public function savePreferences(Request $request)
+    {
+        $validated = $request->validate([
+            'domain' => 'nullable|string|max:255',
+            'role' => 'nullable|string|max:50',
+            'search' => 'nullable|string|max:255',
+        ]);
+
+        session(['career_preferences' => $validated]);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Filter preferences saved successfully! They will apply to future sessions.',
+                'preferences' => $validated,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Filter preferences saved!');
     }
 
     /**

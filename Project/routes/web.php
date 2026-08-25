@@ -116,6 +116,7 @@ Route::middleware('auth')->group(function () {
 
 // Public Features (Read-Only) & Indexed Career Intelligence Autocomplete
 Route::get('/api/careers/autocomplete', [CareerController::class, 'autocomplete'])->name('api.careers.autocomplete');
+Route::post('/careers/save-preferences', [CareerController::class, 'savePreferences'])->name('careers.save-preferences');
 Route::resource('careers', CareerController::class)->only(['index', 'show']);
 Route::resource('multimedia', MultimediaController::class)->only(['index', 'show']);
 Route::resource('resources', ResourceController::class)->only(['index', 'show']);
