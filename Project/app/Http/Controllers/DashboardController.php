@@ -76,6 +76,7 @@ class DashboardController extends Controller
         $allCareers = Career::latest()->get();
         $allMultimedia = Multimedia::latest()->get();
         $allResources = Resource::latest()->get();
+        $allFeedbacks = Feedback::with(['user', 'responder'])->latest()->get();
 
         return view('dashboard', compact(
             'user',
@@ -94,7 +95,8 @@ class DashboardController extends Controller
             'allUsers',
             'allCareers',
             'allMultimedia',
-            'allResources'
+            'allResources',
+            'allFeedbacks'
         ));
     }
 }

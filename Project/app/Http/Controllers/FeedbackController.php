@@ -28,14 +28,35 @@ class FeedbackController extends Controller
         $validated = $request->validate([
             'category' => 'required|in:bug,suggestion,query,general',
             'message' => 'required|string|min:5|max:2000',
+            'name' => 'nullable|string|max:100',
+            'email' => 'nullable|email|max:150',
         ]);
 
-        $validated['user_id'] = Auth::id();
+        $user = Auth::user();
+        $validated['user_id'] = $user?->id;
+        $validated['name'] = $validated['name'] ?? ($user ? $user->name : 'Community Member');
+        $validated['email'] = $validated['email'] ?? ($user ? $user->email : null);
         $validated['status'] = Feedback::STATUS_OPEN;
 
         Feedback::create($validated);
 
         return redirect()->back()->with('success', 'Thank you! Your feedback has been received and logged for engineering review.');
+    }
+
+    /**
+     * Admin delete feedback endpoint.
+     */
+    public function destroy(string $id)
+    {
+        $admin = Auth::user();
+        if (!$admin || $admin->role !== 'admin') {
+            abort(403, 'Unauthorized. Admin role required.');
+        }
+
+        $feedback = Feedback::findOrFail($id);
+        $feedback->delete();
+
+        return redirect()->back()->with('success', 'Feedback ticket removed from system.');
     }
 
     /**

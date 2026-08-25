@@ -142,9 +142,10 @@ Route::middleware('auth')->group(function () {
             Route::post('/resources', [AdminController::class, 'storeResource'])->name('resources.store');
             Route::delete('/resources/{id}', [AdminController::class, 'deleteResource'])->name('resources.destroy');
 
-            // Success Story Moderation & Feedback Response
+            // Success Story Moderation & Feedback Response & Deletion
             Route::post('/stories/{id}/moderate', [SuccessStoryController::class, 'moderate'])->name('stories.moderate');
             Route::post('/feedback/{id}/respond', [FeedbackController::class, 'respond'])->name('feedback.respond');
+            Route::delete('/feedback/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
         });
     });
 });

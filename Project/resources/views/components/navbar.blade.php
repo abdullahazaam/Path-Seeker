@@ -1,6 +1,6 @@
 <!-- ══════════════════ FLOATING GLASS PILL NAVBAR COMPONENT ══════════════════ -->
 <header x-data="{ mobileMenuOpen: false }" class="fixed top-5 left-1/2 -translate-x-1/2 w-[96%] max-w-[85rem] z-50">
-    <nav class="max-w-[85rem] mx-auto py-3.5 md:py-4 px-4 sm:px-6 md:px-8 bg-white/30 dark:bg-slate-950/80 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-full flex items-center justify-between gap-3 md:gap-4 shadow-lg dark:shadow-2xl relative overflow-hidden transition-all duration-300">
+    <nav class="max-w-[85rem] mx-auto py-3.5 md:py-4 px-4 sm:px-6 md:px-8 bg-white/30 dark:bg-slate-950/80 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-full flex items-center justify-between gap-3 md:gap-4 shadow-lg dark:shadow-2xl relative transition-all duration-300">
         
         <!-- Ambient Internal Glows -->
         <div class="absolute -top-12 -left-12 w-36 h-36 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-2xl pointer-events-none"></div>

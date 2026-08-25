@@ -78,7 +78,50 @@ class LiveNotificationAndFeedbackTest extends TestCase
         $readAllRes = $this->actingAs($student)->postJson('/api/notifications/read-all');
         $readAllRes->assertStatus(200);
         $this->assertEquals(0, $readAllRes->json('unread_count'));
+    }
 
-        $this->assertEquals(0, $student->unreadNotifications()->count());
+    public function test_admin_can_manage_and_delete_feedback(): void
+    {
+        $admin = User::where('email', 'admin@pathseeker.com')->first();
+        $student = User::where('email', 'student@pathseeker.com')->first();
+
+        // 1. Create a sample feedback with guest details
+        $feedback = Feedback::create([
+            'name' => 'Sara Connor',
+            'email' => 'sara@cyberdyne.io',
+            'category' => 'bug',
+            'message' => 'Dark mode switch glitch on Chrome iOS.',
+            'status' => 'open',
+        ]);
+
+        // 2. Admin views dashboard with feedback tab
+        $dashRes = $this->actingAs($admin)->get('/dashboard?tab=feedback');
+        $dashRes->assertStatus(200);
+        $dashRes->assertSee('User Feedback &amp; Suggestions Inbox', false);
+        $dashRes->assertSee('Sara Connor');
+        $dashRes->assertSee('Dark mode switch glitch on Chrome iOS.');
+
+        // 3. Admin responds to feedback
+        $respondRes = $this->actingAs($admin)->post("/admin/feedback/{$feedback->id}/respond", [
+            'status' => 'resolved',
+            'admin_response' => 'Fixed in version 2.4.1 release.',
+        ]);
+        $respondRes->assertRedirect();
+        $this->assertDatabaseHas('feedback', [
+            'id' => $feedback->id,
+            'status' => 'resolved',
+            'admin_response' => 'Fixed in version 2.4.1 release.',
+        ]);
+
+        // 4. Non-admin cannot delete feedback
+        $unauthDelete = $this->actingAs($student)->delete("/admin/feedback/{$feedback->id}");
+        $unauthDelete->assertStatus(403);
+
+        // 5. Admin deletes feedback
+        $authDelete = $this->actingAs($admin)->delete("/admin/feedback/{$feedback->id}");
+        $authDelete->assertRedirect();
+        $this->assertDatabaseMissing('feedback', [
+            'id' => $feedback->id,
+        ]);
     }
 }

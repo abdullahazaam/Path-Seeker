@@ -960,8 +960,8 @@
             </div>
         </div>
 
-        {{-- 1. Top Metrics Row (4 Stat Cards) --}}
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {{-- 1. Top Metrics Row (5 Stat Cards) --}}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
             {{-- Metric 1: Total Active Users --}}
             <div @click="currentTab = 'users'" class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-indigo-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'users' ? 'ring-2 ring-indigo-500/50' : ''">
                 <div class="flex items-center justify-between">
@@ -1029,6 +1029,23 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Metric 5: Feedback Inbox --}}
+            <div @click="currentTab = 'feedback'" class="p-6 rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-amber-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'feedback' ? 'ring-2 ring-amber-500/50' : ''">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest font-mono">Feedback Inbox</span>
+                    <div class="w-10 h-10 rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-3xl font-black text-slate-900 dark:text-white font-display">{{ count($allFeedbacks ?? []) }}</div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1">
+                        <span class="text-amber-600 dark:text-amber-400 font-bold font-mono">{{ isset($allFeedbacks) ? $allFeedbacks->where('status', 'open')->count() : 0 }} Open</span>
+                        <span>user tickets</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         {{-- 2. Interactive Navigation Tabs Bar --}}
@@ -1056,6 +1073,12 @@
                     class="px-5 py-2.5 rounded-xl font-bold text-xs transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer">
                 <i class="fa-solid fa-folder-open text-xs"></i>
                 <span>Resource Toolkits ({{ count($allResources ?? []) }})</span>
+            </button>
+            <button @click="currentTab = 'feedback'"
+                    :class="currentTab === 'feedback' ? 'bg-amber-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5'"
+                    class="px-5 py-2.5 rounded-xl font-bold text-xs transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer">
+                <i class="fa-solid fa-comments text-xs"></i>
+                <span>Feedback Inbox ({{ count($allFeedbacks ?? []) }})</span>
             </button>
         </div>
 
@@ -1290,6 +1313,117 @@
                 @empty
                     <div class="col-span-3 text-center py-10 text-slate-400 text-xs">No resource toolkits added yet.</div>
                 @endforelse
+            </div>
+        </div>
+
+        {{-- ══════════════════ TAB 5: FEEDBACK INBOX MANAGEMENT ══════════════════ --}}
+        <div x-show="currentTab === 'feedback'" class="rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">User Feedback &amp; Suggestions Inbox</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Review bug reports, platform inquiries, feature requests, and dispatch admin responses</p>
+                </div>
+                <div class="text-xs font-mono text-slate-400">
+                    Total: <strong class="text-slate-900 dark:text-white">{{ count($allFeedbacks ?? []) }}</strong> entries
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-slate-600 dark:text-slate-300">
+                    <thead>
+                        <tr class="border-b border-slate-200 dark:border-white/10 text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                            <th class="pb-3 font-semibold">Category</th>
+                            <th class="pb-3 font-semibold">Sender</th>
+                            <th class="pb-3 font-semibold">Feedback Message</th>
+                            <th class="pb-3 font-semibold">Status</th>
+                            <th class="pb-3 font-semibold">Admin Resolution</th>
+                            <th class="pb-3 font-semibold text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+                        @forelse($allFeedbacks ?? [] as $fb)
+                            <tr class="hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors">
+                                <td class="py-4 pr-3 align-top">
+                                    @php
+                                        $catColor = match($fb->category) {
+                                            'bug' => 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border-rose-500/25',
+                                            'suggestion' => 'bg-purple-500/15 text-purple-700 dark:text-purple-400 border-purple-500/25',
+                                            'query' => 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border-indigo-500/25',
+                                            default => 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/25'
+                                        };
+                                    @endphp
+                                    <span class="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider font-mono border {{ $catColor }}">
+                                        {{ $fb->category }}
+                                    </span>
+                                </td>
+                                <td class="py-4 pr-3 align-top">
+                                    <div class="font-bold text-slate-900 dark:text-white">
+                                        {{ $fb->name ?? ($fb->user ? $fb->user->name : 'Community Member') }}
+                                    </div>
+                                    <div class="text-[10px] text-slate-400 font-mono">
+                                        {{ $fb->email ?? ($fb->user ? $fb->user->email : 'No email') }}
+                                    </div>
+                                    <div class="text-[9px] text-slate-500 font-mono mt-0.5">
+                                        {{ $fb->created_at ? $fb->created_at->format('M d, Y H:i') : '' }}
+                                    </div>
+                                </td>
+                                <td class="py-4 pr-3 align-top max-w-xs sm:max-w-md">
+                                    <p class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed break-words">
+                                        {{ $fb->message }}
+                                    </p>
+                                </td>
+                                <td class="py-4 pr-3 align-top">
+                                    @php
+                                        $statusClass = match($fb->status) {
+                                            'resolved' => 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/25',
+                                            'in_review' => 'bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/25',
+                                            'closed' => 'bg-slate-500/15 text-slate-700 dark:text-slate-400 border-slate-500/25',
+                                            default => 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border-rose-500/25'
+                                        };
+                                    @endphp
+                                    <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider font-mono border {{ $statusClass }}">
+                                        {{ $fb->status }}
+                                    </span>
+                                </td>
+                                <td class="py-4 pr-3 align-top">
+                                    @if($fb->admin_response)
+                                        <div class="text-[11px] text-slate-700 dark:text-slate-300 italic bg-slate-100 dark:bg-white/5 p-2 rounded-xl border border-slate-200/80 dark:border-white/10">
+                                            &ldquo;{{ $fb->admin_response }}&rdquo;
+                                        </div>
+                                    @else
+                                        <form action="{{ route('admin.feedback.respond', $fb->id) }}" method="POST" class="space-y-2">
+                                            @csrf
+                                            <input type="text" name="admin_response" required placeholder="Type admin resolution..." class="w-full px-2.5 py-1 text-[11px] rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white">
+                                            <div class="flex items-center gap-2">
+                                                <select name="status" class="px-2 py-1 text-[10px] rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white">
+                                                    <option value="resolved">Resolved</option>
+                                                    <option value="in_review">In Review</option>
+                                                    <option value="closed">Closed</option>
+                                                </select>
+                                                <button type="submit" class="px-3 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-[10px] transition-all">
+                                                    Reply
+                                                </button>
+                                            </div>
+                                        </form>
+                                    @endif
+                                </td>
+                                <td class="py-4 text-right align-top">
+                                    <form action="{{ route('admin.feedback.destroy', $fb->id) }}" method="POST" onsubmit="return confirm('Delete this feedback message?');" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-600 hover:text-white border border-rose-500/20 text-[11px] font-bold transition-all cursor-pointer" title="Delete Feedback">
+                                            <i class="fa-solid fa-trash-can mr-1"></i> Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="py-8 text-center text-slate-400">No feedback submissions in database yet.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
 
