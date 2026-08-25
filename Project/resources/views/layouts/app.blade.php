@@ -524,6 +524,23 @@
             }
         }
 
+        /* Accessibility: Prefers Reduced Motion Respect */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .animate-aurora-drift-1, .animate-aurora-drift-2, .animate-aurora-drift-3, .animate-scanline, .animate-pulse-glow {
+                animation: none !important;
+            }
+            .reveal-element {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
         /* Strict Light Mode Text Rules */
         html:not(.dark) .text-slate-400 { color: #475569 !important; }
         html:not(.dark) .text-slate-300 { color: #334155 !important; }
@@ -581,8 +598,8 @@
         @yield('content')
     </main>
 
-    @if(!request()->routeIs('login') && !request()->routeIs('register'))
-    <!-- ══════════════════ 6. FINAL POWER CTA & GLOBAL FOOTER ══════════════════ -->
+    @if(!request()->routeIs('home') && !request()->routeIs('login') && !request()->routeIs('register'))
+    <!-- ══════════════════ 6. INNER PAGE CLOSING STATEMENT & GLOBAL FOOTER ══════════════════ -->
     <section class="relative z-10 my-10 md:my-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <!-- The Bold Closing Statement Banner -->
         <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 text-center space-y-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden reveal-element">
@@ -704,7 +721,7 @@
             </form>
         </div>
 
-        <!-- Floating AI Guide Circular Bot Button with Morphing Animation & Shared bottom-6 right-6 Positioning -->
+        <!-- Floating AI Guide Button with Morphing Animation & Shared bottom-6 right-6 Positioning -->
         <button @click="openAI = !openAI"
                 x-show="!openAI"
                 x-transition:enter="transition ease-out duration-300 transform"
@@ -716,19 +733,10 @@
                 id="floatingAiGuideBtn"
                 title="Toggle AI Career Guide"
                 style="transform-origin: bottom right;"
-                class="fixed bottom-6 right-6 z-[99999] w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center shadow-[0_0_25px_rgba(147,51,234,0.55)] hover:shadow-[0_0_35px_rgba(236,72,153,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer origin-bottom-right border border-white/20 overflow-hidden">
+                class="fixed bottom-6 right-6 z-[99999] h-12 sm:h-14 px-4 sm:px-5 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center gap-2.5 shadow-[0_0_25px_rgba(147,51,234,0.55)] hover:shadow-[0_0_35px_rgba(236,72,153,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer origin-bottom-right border border-white/20 overflow-hidden text-white group">
             
-            {{-- Chat Sparkles Icon --}}
-            <span class="absolute inset-0 flex items-center justify-center transition-all duration-300 transform"
-                  :class="openAI ? 'opacity-0 scale-50 rotate-90 pointer-events-none' : 'opacity-100 scale-100 rotate-0'">
-                <i class="fa-solid fa-wand-magic-sparkles text-lg text-white"></i>
-            </span>
-
-            {{-- Close 'X' Icon --}}
-            <span class="absolute inset-0 flex items-center justify-center transition-all duration-300 transform"
-                  :class="openAI ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 -rotate-90 pointer-events-none'">
-                <i class="fa-solid fa-xmark text-xl text-white"></i>
-            </span>
+            <i class="fa-solid fa-wand-magic-sparkles text-sm sm:text-base text-white group-hover:rotate-12 transition-transform"></i>
+            <span class="text-xs sm:text-sm font-black font-display tracking-tight text-white hidden sm:inline">✦ Ask PathSeeker</span>
         </button>
 
         <!-- Scroll to Top Button -->

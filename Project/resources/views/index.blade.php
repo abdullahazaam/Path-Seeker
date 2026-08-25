@@ -43,23 +43,23 @@
                 </a>
             </div>
 
-            {{-- Editorial Metric Counter Matrix --}}
+            {{-- Editorial Metric Counter Matrix (With Fallback Server Values to prevent 0+ flash) --}}
             <div class="flex items-center justify-center lg:justify-start gap-6 sm:gap-7 pt-4 border-t border-slate-200/80 dark:border-white/10 font-mono">
                 <div class="text-center lg:text-left">
                     <div class="text-[10px] text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-wider mb-0.5">[01] DOMAINS</div>
-                    <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white font-display leading-none"><span class="counter-number" data-target="15">0</span><span class="text-cyan-400">+</span></div>
+                    <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white font-display leading-none"><span class="counter-number" data-target="15">15</span><span class="text-cyan-400">+</span></div>
                     <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-sans font-medium">Tech Disciplines</div>
                 </div>
                 <div class="w-px h-8 bg-slate-200 dark:bg-white/10"></div>
                 <div class="text-center lg:text-left">
                     <div class="text-[10px] text-purple-600 dark:text-purple-400 font-bold uppercase tracking-wider mb-0.5">[02] SKILLS</div>
-                    <div class="text-2xl sm:text-3xl font-black text-purple-600 dark:text-purple-400 font-display leading-none"><span class="counter-number" data-target="100">0</span><span>+</span></div>
+                    <div class="text-2xl sm:text-3xl font-black text-purple-600 dark:text-purple-400 font-display leading-none"><span class="counter-number" data-target="100">100</span><span>+</span></div>
                     <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-sans font-medium">Verified Roadmaps</div>
                 </div>
                 <div class="w-px h-8 bg-slate-200 dark:bg-white/10"></div>
                 <div class="text-center lg:text-left">
                     <div class="text-[10px] text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-wider mb-0.5">[03] ACCURACY</div>
-                    <div class="text-2xl sm:text-3xl font-black text-pink-600 dark:text-pink-400 font-display leading-none"><span class="counter-number" data-target="98">0</span><span class="text-cyan-400">%</span></div>
+                    <div class="text-2xl sm:text-3xl font-black text-pink-600 dark:text-pink-400 font-display leading-none"><span class="counter-number" data-target="98">98</span><span class="text-cyan-400">%</span></div>
                     <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-sans font-medium">Match Precision</div>
                 </div>
             </div>
