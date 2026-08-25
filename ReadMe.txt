@@ -4,6 +4,11 @@ Role-based Career Exploration Platform
 Competition Project Submission
 ========================================================================
 
+Live Production URL:
+------------------------------------------------------------------------
+Live App URL: https://path-seeker-production.up.railway.app
+========================================================================
+
 Project Overview:
 PathSeeker is a role-based career exploration platform for Students, 
 Graduates, and Professionals featuring a Career Bank, Interest Quiz, 
