@@ -394,22 +394,26 @@
     </div>
 
     {{-- ══════════════════ PAGINATION ══════════════════ --}}
+    {{-- ══════════════════ PAGINATION ══════════════════ --}}
     @if ($careers->hasPages())
-        <div class="glass-panel rounded-2xl p-4 border border-slate-200/80 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 backdrop-blur-md shadow-xl">
-            <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">
-                Showing <strong class="text-slate-900 dark:text-white">{{ $careers->firstItem() }}</strong> to <strong class="text-slate-900 dark:text-white">{{ $careers->lastItem() }}</strong> of <strong class="text-slate-900 dark:text-white">{{ $careers->total() }}</strong> Career Tracks
+        <div class="rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden">
+            {{-- Ambient decorative glow --}}
+            <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-2xl pointer-events-none"></div>
+
+            <p class="relative z-10 text-xs text-slate-600 dark:text-slate-400 font-medium">
+                Showing <strong class="text-slate-900 dark:text-white font-bold">{{ $careers->firstItem() }}</strong> to <strong class="text-slate-900 dark:text-white font-bold">{{ $careers->lastItem() }}</strong> of <strong class="text-slate-900 dark:text-white font-bold">{{ $careers->total() }}</strong> Career Tracks
             </p>
 
-            <div class="flex items-center gap-2">
+            <div class="relative z-10 flex items-center gap-2">
                 {{-- Previous Button --}}
                 @if ($careers->onFirstPage())
-                    <span class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/40 dark:bg-slate-800/40 text-slate-400 dark:text-slate-600 border border-slate-200/40 dark:border-slate-700/30 cursor-not-allowed select-none flex items-center gap-1.5">
-                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    <span class="px-4 py-2.5 text-xs font-bold rounded-2xl bg-slate-100/50 dark:bg-white/[0.02] text-slate-400 dark:text-slate-600 border border-slate-200/50 dark:border-white/5 cursor-not-allowed select-none flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-left text-[10px]"></i>
                         <span>Previous</span>
                     </span>
                 @else
-                    <a href="{{ $careers->appends(request()->query())->previousPageUrl() }}" class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md transition-all flex items-center gap-1.5 hover:scale-105">
-                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    <a href="{{ $careers->appends(request()->query())->previousPageUrl() }}" class="px-4 py-2.5 text-xs font-bold rounded-2xl bg-slate-100 dark:bg-white/[0.04] hover:bg-slate-200 dark:hover:bg-white/[0.08] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 transition-all flex items-center gap-1.5 hover:scale-105 shadow-xs">
+                        <i class="fa-solid fa-chevron-left text-[10px]"></i>
                         <span>Previous</span>
                     </a>
                 @endif
@@ -418,11 +422,11 @@
                 <div class="hidden sm:flex items-center gap-1.5">
                     @foreach ($careers->appends(request()->query())->getUrlRange(1, $careers->lastPage()) as $page => $url)
                         @if ($page == $careers->currentPage())
-                            <span class="px-3.5 py-2 text-sm font-bold rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25 border border-purple-400/30 flex items-center justify-center min-w-[38px]">
+                            <span class="px-4 py-2.5 text-xs font-black rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/25 border border-purple-400/30 flex items-center justify-center min-w-[40px]">
                                 {{ $page }}
                             </span>
                         @else
-                            <a href="{{ $url }}" class="px-3.5 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md transition-all flex items-center justify-center min-w-[38px] hover:scale-105">
+                            <a href="{{ $url }}" class="px-4 py-2.5 text-xs font-bold rounded-2xl bg-slate-100 dark:bg-white/[0.04] hover:bg-slate-200 dark:hover:bg-white/[0.08] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 transition-all flex items-center justify-center min-w-[40px] hover:scale-105 shadow-xs">
                                 {{ $page }}
                             </a>
                         @endif
@@ -431,14 +435,14 @@
 
                 {{-- Next Button --}}
                 @if ($careers->hasMorePages())
-                    <a href="{{ $careers->appends(request()->query())->nextPageUrl() }}" class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md transition-all flex items-center gap-1.5 hover:scale-105">
+                    <a href="{{ $careers->appends(request()->query())->nextPageUrl() }}" class="px-4 py-2.5 text-xs font-bold rounded-2xl bg-slate-100 dark:bg-white/[0.04] hover:bg-slate-200 dark:hover:bg-white/[0.08] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 transition-all flex items-center gap-1.5 hover:scale-105 shadow-xs">
                         <span>Next</span>
-                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
                     </a>
                 @else
-                    <span class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/40 dark:bg-slate-800/40 text-slate-400 dark:text-slate-600 border border-slate-200/40 dark:border-slate-700/30 cursor-not-allowed select-none flex items-center gap-1.5">
+                    <span class="px-4 py-2.5 text-xs font-bold rounded-2xl bg-slate-100/50 dark:bg-white/[0.02] text-slate-400 dark:text-slate-600 border border-slate-200/50 dark:border-white/5 cursor-not-allowed select-none flex items-center gap-1.5">
                         <span>Next</span>
-                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
                     </span>
                 @endif
             </div>
