@@ -3,64 +3,64 @@
 @section('content')
 
 {{-- SECTION 1: HERO (GAPSY-INSPIRED CAREER UNIVERSE) --}}
-<section class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-8 pb-12 md:pb-20 overflow-hidden">
+<section class="relative min-h-[85vh] flex items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12 overflow-hidden">
     {{-- Background Ambient Atmospheric Glows --}}
     <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-[120px] pointer-events-none"></div>
     <div class="absolute top-1/2 -right-32 w-96 h-96 rounded-full bg-purple-500/10 dark:bg-purple-600/15 blur-[140px] pointer-events-none"></div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
-        {{-- Left Column: Giant Editorial Typography & Actions --}}
-        <div class="lg:col-span-6 space-y-6 sm:space-y-8 text-center lg:text-left">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10 w-full">
+        {{-- Left Column: Editorial Typography & Actions --}}
+        <div class="lg:col-span-6 space-y-4 sm:space-y-5 text-center lg:text-left">
             {{-- Category / Sub-label Tag --}}
-            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/80 dark:bg-[#0c101d] border border-cyan-500/30 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 shadow-sm backdrop-blur-md">
-                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping shrink-0"></span>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 dark:bg-[#0c101d] border border-cyan-500/30 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 shadow-sm backdrop-blur-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping shrink-0"></span>
                 <span class="tracking-widest">01 / CAREER INTELLIGENCE UNIVERSE</span>
             </div>
 
-            {{-- Giant Heading (Bold, Oversized Editorial Typography) --}}
-            <div class="space-y-1">
-                <h1 class="text-5xl sm:text-7xl lg:text-8xl xl:text-[5.5rem] font-black tracking-tighter leading-[0.92] text-slate-900 dark:text-white font-display uppercase">
+            {{-- Giant Heading (Scaled & Proportionally Balanced) --}}
+            <div class="space-y-0.5">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.25rem] font-black tracking-tight leading-[1.0] text-slate-900 dark:text-white font-display uppercase">
                     YOUR CAREER<br>
-                    <span class="bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(0,242,254,0.3)]">STARTS HERE</span>
+                    <span class="bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,242,254,0.3)]">STARTS HERE</span>
                 </h1>
             </div>
 
             {{-- Editorial Descriptive Narrative --}}
-            <p class="max-w-xl mx-auto lg:mx-0 text-slate-600 dark:text-slate-400 text-base sm:text-lg leading-relaxed font-normal">
+            <p class="max-w-lg mx-auto lg:mx-0 text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed font-normal">
                 PathSeeker maps the global technology landscape into executable trajectories. Explore 15+ verified tracks, algorithmic fit ratings, and high-yield toolkits engineered for the 2026 tech economy.
             </p>
 
             {{-- Action CTAs (Monochrome & Electric Cyan) --}}
-            <div class="flex flex-wrap justify-center lg:justify-start items-center gap-4 pt-2">
-                <a href="{{ route('careers.index') }}" class="group relative inline-flex items-center gap-3 px-8 py-4 text-sm font-black rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-500 text-slate-950 shadow-[0_0_25px_rgba(0,242,254,0.35)] hover:shadow-[0_0_35px_rgba(0,242,254,0.5)] hover:scale-105 transition-all duration-300">
+            <div class="flex flex-wrap justify-center lg:justify-start items-center gap-3.5 pt-1">
+                <a href="{{ route('careers.index') }}" class="group relative inline-flex items-center gap-2.5 px-7 py-3.5 text-xs sm:text-sm font-black rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-500 text-slate-950 shadow-[0_0_20px_rgba(0,242,254,0.3)] hover:shadow-[0_0_30px_rgba(0,242,254,0.45)] hover:scale-105 transition-all duration-300">
                     <i class="fa-solid fa-compass text-slate-950"></i>
                     <span class="text-slate-950">Explore Career Bank</span>
-                    <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1 transition-transform"></i>
+                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-950 group-hover:translate-x-1 transition-transform"></i>
                 </a>
-                <a href="{{ route('quiz.index') }}" class="group inline-flex items-center gap-3 px-8 py-4 text-sm font-bold rounded-full bg-slate-100/90 dark:bg-white/[0.04] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/10 hover:border-cyan-500/40 hover:bg-slate-200 dark:hover:bg-white/[0.08] hover:scale-105 transition-all duration-300 backdrop-blur-md">
+                <a href="{{ route('quiz.index') }}" class="group inline-flex items-center gap-2.5 px-7 py-3.5 text-xs sm:text-sm font-bold rounded-full bg-slate-100/90 dark:bg-white/[0.04] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/10 hover:border-cyan-500/40 hover:bg-slate-200 dark:hover:bg-white/[0.08] hover:scale-105 transition-all duration-300 backdrop-blur-md">
                     <i class="fa-solid fa-brain text-purple-500 dark:text-purple-400"></i>
                     <span>Take Interest Quiz</span>
                 </a>
             </div>
 
             {{-- Editorial Metric Counter Matrix --}}
-            <div class="flex items-center justify-center lg:justify-start gap-6 sm:gap-8 pt-6 border-t border-slate-200/80 dark:border-white/10 font-mono">
+            <div class="flex items-center justify-center lg:justify-start gap-6 sm:gap-7 pt-4 border-t border-slate-200/80 dark:border-white/10 font-mono">
                 <div class="text-center lg:text-left">
-                    <div class="text-[11px] text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-wider mb-1">[01] DOMAINS</div>
-                    <div class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white font-display leading-none"><span class="counter-number" data-target="15">0</span><span class="text-cyan-400">+</span></div>
-                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-sans font-medium">Tech Disciplines</div>
+                    <div class="text-[10px] text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-wider mb-0.5">[01] DOMAINS</div>
+                    <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white font-display leading-none"><span class="counter-number" data-target="15">0</span><span class="text-cyan-400">+</span></div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-sans font-medium">Tech Disciplines</div>
                 </div>
-                <div class="w-px h-10 bg-slate-200 dark:bg-white/10"></div>
+                <div class="w-px h-8 bg-slate-200 dark:bg-white/10"></div>
                 <div class="text-center lg:text-left">
-                    <div class="text-[11px] text-purple-600 dark:text-purple-400 font-bold uppercase tracking-wider mb-1">[02] SKILLS</div>
-                    <div class="text-3xl sm:text-4xl font-black text-purple-600 dark:text-purple-400 font-display leading-none"><span class="counter-number" data-target="100">0</span><span>+</span></div>
-                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-sans font-medium">Verified Roadmaps</div>
+                    <div class="text-[10px] text-purple-600 dark:text-purple-400 font-bold uppercase tracking-wider mb-0.5">[02] SKILLS</div>
+                    <div class="text-2xl sm:text-3xl font-black text-purple-600 dark:text-purple-400 font-display leading-none"><span class="counter-number" data-target="100">0</span><span>+</span></div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-sans font-medium">Verified Roadmaps</div>
                 </div>
-                <div class="w-px h-10 bg-slate-200 dark:bg-white/10"></div>
+                <div class="w-px h-8 bg-slate-200 dark:bg-white/10"></div>
                 <div class="text-center lg:text-left">
-                    <div class="text-[11px] text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-wider mb-1">[03] ACCURACY</div>
-                    <div class="text-3xl sm:text-4xl font-black text-pink-600 dark:text-pink-400 font-display leading-none"><span class="counter-number" data-target="98">0</span><span class="text-cyan-400">%</span></div>
-                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-sans font-medium">Match Precision</div>
+                    <div class="text-[10px] text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-wider mb-0.5">[03] ACCURACY</div>
+                    <div class="text-2xl sm:text-3xl font-black text-pink-600 dark:text-pink-400 font-display leading-none"><span class="counter-number" data-target="98">0</span><span class="text-cyan-400">%</span></div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-sans font-medium">Match Precision</div>
                 </div>
             </div>
         </div>
@@ -99,12 +99,12 @@
                      const centerX = rect.width / 2;
                      const centerY = rect.height / 2;
                      
-                     this.rotateX = ((y - centerY) / centerY) * -12;
-                     this.rotateY = ((x - centerX) / centerX) * 14;
+                     this.rotateX = ((y - centerY) / centerY) * -10;
+                     this.rotateY = ((x - centerX) / centerX) * 12;
                      
                      this.glareX = (x / rect.width) * 100;
                      this.glareY = (y / rect.height) * 100;
-                     this.glareOpacity = 0.45;
+                     this.glareOpacity = 0.4;
                      this.isHovered = true;
                  },
                  handleMouseLeave() {
@@ -118,14 +118,14 @@
                  }
              }">
             
-            {{-- Physical Digital 3D Card Container --}}
+            {{-- Physical Digital 3D Card Container (Proportionally Balanced) --}}
             <div id="passportCard"
                  x-ref="passportCard"
                  @mousemove="handleMouseMove($event)"
                  @mouseleave="handleMouseLeave()"
                  @click="toggleExpanded()"
-                 :style="`transform: perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${isHovered ? 1.02 : 1}, ${isHovered ? 1.02 : 1}, ${isHovered ? 1.02 : 1});`"
-                 class="passport-card-3d relative w-full max-w-lg bg-white/95 dark:bg-gradient-to-b dark:from-[#0d121f] dark:via-[#080c16] dark:to-[#05070e] border border-slate-200/90 dark:border-white/15 hover:border-cyan-500/50 shadow-2xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-2xl rounded-3xl p-6 sm:p-7 overflow-hidden cursor-pointer select-none transition-transform duration-150 ease-out">
+                 :style="`transform: perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${isHovered ? 1.015 : 1}, ${isHovered ? 1.015 : 1}, ${isHovered ? 1.015 : 1});`"
+                 class="passport-card-3d relative w-full max-w-md lg:max-w-[480px] bg-white/95 dark:bg-gradient-to-b dark:from-[#0d121f] dark:via-[#080c16] dark:to-[#05070e] border border-slate-200/90 dark:border-white/15 hover:border-cyan-500/50 shadow-2xl dark:shadow-[0_16px_40px_rgba(0,0,0,0.6)] backdrop-blur-2xl rounded-3xl p-5 sm:p-6 overflow-hidden cursor-pointer select-none transition-transform duration-150 ease-out">
                 
                 {{-- Dynamic Specular Glare Sheen Overlay --}}
                 <div class="absolute inset-0 pointer-events-none transition-opacity duration-300 z-30"
@@ -133,68 +133,68 @@
 
                 {{-- Physical Metallic Circuit & Security Pattern --}}
                 <div class="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                <div class="absolute -top-24 -right-24 w-60 h-60 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-24 -left-24 w-60 h-60 rounded-full bg-purple-500/15 blur-3xl pointer-events-none"></div>
+                <div class="absolute -top-20 -right-20 w-52 h-52 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-20 -left-20 w-52 h-52 rounded-full bg-purple-500/15 blur-3xl pointer-events-none"></div>
 
-                <div class="relative z-10 space-y-5">
+                <div class="relative z-10 space-y-4">
                     
                     {{-- Top Header Row: Emblem Left | Title Center | Readiness Score Right --}}
-                    <div class="flex items-center justify-between gap-3 pb-4 border-b border-slate-200/80 dark:border-white/10">
+                    <div class="flex items-center justify-between gap-3 pb-3.5 border-b border-slate-200/80 dark:border-white/10">
                         {{-- Logo / Emblem Left --}}
-                        <div class="flex items-center gap-3 shrink-0">
-                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500/20 via-sky-500/25 to-indigo-500/20 dark:from-cyan-400/20 dark:via-sky-500/30 dark:to-indigo-600/30 border border-cyan-500/30 dark:border-cyan-400/40 flex items-center justify-center shadow-lg shadow-cyan-500/10">
-                                <i class="fa-solid fa-compass text-lg text-cyan-600 dark:text-cyan-300"></i>
+                        <div class="flex items-center gap-2.5 shrink-0">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-cyan-500/20 via-sky-500/25 to-indigo-500/20 dark:from-cyan-400/20 dark:via-sky-500/30 dark:to-indigo-600/30 border border-cyan-500/30 dark:border-cyan-400/40 flex items-center justify-center shadow-md shadow-cyan-500/10">
+                                <i class="fa-solid fa-compass text-base text-cyan-600 dark:text-cyan-300"></i>
                             </div>
                         </div>
 
                         {{-- Title Center --}}
                         <div class="text-center flex-1 min-w-0">
-                            <div class="text-[9px] font-mono font-black text-cyan-600 dark:text-cyan-400 uppercase tracking-widest">PATHSEEKER CAREER PASSPORT</div>
-                            <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white font-display tracking-tight truncate">PathSeeker Digital ID</h3>
-                            <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400 font-semibold">ID: {{ $dp['id_code'] }}</div>
+                            <div class="text-[8px] sm:text-[9px] font-mono font-black text-cyan-600 dark:text-cyan-400 uppercase tracking-widest">PATHSEEKER CAREER PASSPORT</div>
+                            <h3 class="text-sm sm:text-base font-black text-slate-900 dark:text-white font-display tracking-tight truncate">PathSeeker Digital ID</h3>
+                            <div class="text-[9px] sm:text-[10px] font-mono text-slate-500 dark:text-slate-400 font-semibold">ID: {{ $dp['id_code'] }}</div>
                         </div>
 
                         {{-- Readiness Score Right --}}
                         <div class="text-right shrink-0">
-                            <div class="inline-flex flex-col items-end px-3 py-1.5 rounded-2xl bg-slate-100/90 dark:bg-[#0c111e] border border-slate-200/90 dark:border-cyan-500/30 shadow-inner">
-                                <span class="text-base sm:text-lg font-black text-cyan-600 dark:text-cyan-400 font-mono leading-none">{{ $dp['strength'] }}%</span>
-                                <span class="text-[8px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-0.5">Readiness</span>
+                            <div class="inline-flex flex-col items-end px-2.5 py-1 rounded-2xl bg-slate-100/90 dark:bg-[#0c111e] border border-slate-200/90 dark:border-cyan-500/30 shadow-inner">
+                                <span class="text-sm sm:text-base font-black text-cyan-600 dark:text-cyan-400 font-mono leading-none">{{ $dp['strength'] }}%</span>
+                                <span class="text-[7px] sm:text-[8px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-0.5">Readiness</span>
                             </div>
                         </div>
                     </div>
 
                     {{-- Candidate Holographic Credential Block --}}
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50/90 dark:bg-[#090d18] border border-slate-200/80 dark:border-white/10 flex items-center gap-4 sm:gap-5 shadow-sm">
+                    <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-50/90 dark:bg-[#090d18] border border-slate-200/80 dark:border-white/10 flex items-center gap-3.5 sm:gap-4 shadow-sm">
                         {{-- Photo / Holographic Smart Seal --}}
                         <div class="relative shrink-0">
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-cyan-500 via-sky-600 to-indigo-600 flex items-center justify-center text-white text-2xl shadow-lg shadow-cyan-500/20 border border-white/20">
-                                <i class="fa-solid {{ $dp['is_auth'] ? 'fa-user-graduate' : 'fa-user' }} text-xl sm:text-2xl text-white"></i>
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-cyan-500 via-sky-600 to-indigo-600 flex items-center justify-center text-white text-xl shadow-md shadow-cyan-500/20 border border-white/20">
+                                <i class="fa-solid {{ $dp['is_auth'] ? 'fa-user-graduate' : 'fa-user' }} text-lg sm:text-xl text-white"></i>
                             </div>
-                            <div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/20 flex items-center justify-center shadow-sm">
-                                <span class="w-2.5 h-2.5 rounded-full {{ $dp['is_auth'] ? 'bg-cyan-400 animate-pulse' : 'bg-purple-500' }}"></span>
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/20 flex items-center justify-center shadow-sm">
+                                <span class="w-2 h-2 rounded-full {{ $dp['is_auth'] ? 'bg-cyan-400 animate-pulse' : 'bg-purple-500' }}"></span>
                             </div>
                         </div>
 
                         {{-- Core Holder Metadata --}}
-                        <div class="space-y-1 min-w-0 flex-1">
+                        <div class="space-y-0.5 min-w-0 flex-1">
                             <div class="flex items-center justify-between gap-2">
-                                <span class="text-[9px] font-mono font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider">
+                                <span class="text-[8px] sm:text-[9px] font-mono font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider">
                                     {{ $dp['is_auth'] ? 'Certified Candidate' : 'Guest Document' }}
                                 </span>
                                 @if($dp['is_auth'])
-                                    <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[9px] font-bold text-emerald-700 dark:text-emerald-400 font-mono">
+                                    <span class="px-2 py-0.2 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[8px] sm:text-[9px] font-bold text-emerald-700 dark:text-emerald-400 font-mono">
                                         Verified ID
                                     </span>
                                 @else
-                                    <span class="px-2 py-0.5 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-[9px] font-bold text-cyan-700 dark:text-cyan-300 font-mono">
+                                    <span class="px-2 py-0.2 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-[8px] sm:text-[9px] font-bold text-cyan-700 dark:text-cyan-300 font-mono">
                                         Guest Mode
                                     </span>
                                 @endif
                             </div>
-                            <div class="text-base sm:text-lg font-black text-slate-900 dark:text-white font-display truncate">
+                            <div class="text-sm sm:text-base font-black text-slate-900 dark:text-white font-display truncate">
                                 {{ $dp['name'] }}
                             </div>
-                            <div class="text-xs text-slate-600 dark:text-slate-300 font-medium truncate">
+                            <div class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 font-medium truncate">
                                 {{ $dp['active_track'] }}
                                 @if($dp['education'])
                                     &bull; {{ ucfirst(str_replace('_', ' ', $dp['education'])) }}
@@ -206,37 +206,37 @@
                     {{-- Interactive Expansion Matrix Drawer (When clicked / inspected) --}}
                     <div x-show="expanded"
                          x-collapse
-                         class="p-4 rounded-2xl bg-slate-100/90 dark:bg-[#070a13] border border-slate-200/80 dark:border-cyan-500/20 space-y-3">
-                        <div class="text-[10px] font-mono font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center justify-between">
+                         class="p-3 sm:p-3.5 rounded-2xl bg-slate-100/90 dark:bg-[#070a13] border border-slate-200/80 dark:border-cyan-500/20 space-y-2.5">
+                        <div class="text-[9px] font-mono font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center justify-between">
                             <span><i class="fa-solid fa-microchip mr-1"></i> Core Matrix Telemetry</span>
                             <span class="text-emerald-500">Live Synchronized</span>
                         </div>
                         <div class="grid grid-cols-3 gap-2 text-center font-mono">
-                            <div class="p-2 rounded-xl bg-white/80 dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/5">
-                                <div class="text-[9px] text-slate-500">Core Fit</div>
+                            <div class="p-1.5 rounded-xl bg-white/80 dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/5">
+                                <div class="text-[8px] text-slate-500">Core Fit</div>
                                 <div class="text-xs font-black text-cyan-600 dark:text-cyan-400">{{ $dp['core_proficiency'] }}%</div>
                             </div>
-                            <div class="p-2 rounded-xl bg-white/80 dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/5">
-                                <div class="text-[9px] text-slate-500">Cloud Sync</div>
+                            <div class="p-1.5 rounded-xl bg-white/80 dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/5">
+                                <div class="text-[8px] text-slate-500">Cloud Sync</div>
                                 <div class="text-xs font-black text-sky-600 dark:text-sky-400">{{ $dp['cloud_readiness'] }}%</div>
                             </div>
-                            <div class="p-2 rounded-xl bg-white/80 dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/5">
-                                <div class="text-[9px] text-slate-500">Security</div>
+                            <div class="p-1.5 rounded-xl bg-white/80 dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/5">
+                                <div class="text-[8px] text-slate-500">Security</div>
                                 <div class="text-xs font-black text-emerald-600 dark:text-emerald-400">256-BIT</div>
                             </div>
                         </div>
                     </div>
 
                     {{-- Bottom Security MRZ Strip & Clean Action --}}
-                    <div class="pt-1 space-y-2.5">
-                        <div class="p-2.5 rounded-xl bg-slate-100/90 dark:bg-black/50 border border-slate-200/80 dark:border-white/5 font-mono text-[9px] tracking-widest text-slate-500 dark:text-slate-400 uppercase truncate select-none">
+                    <div class="pt-0.5 space-y-2">
+                        <div class="p-2 rounded-xl bg-slate-100/90 dark:bg-black/50 border border-slate-200/80 dark:border-white/5 font-mono text-[8px] sm:text-[9px] tracking-widest text-slate-500 dark:text-slate-400 uppercase truncate select-none">
                             P&lt;PSK{{ substr(md5($dp['id_code']), 0, 6) }}&lt;&lt;{{ strtoupper(preg_replace('/[^A-Za-z0-9]/', '', $dp['name'])) }}&lt;&lt;&lt;&lt;&lt;&lt;2026&lt;&lt;
                         </div>
 
                         <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-0.5">
-                            <div class="flex items-center gap-1.5 text-[11px]">
+                            <div class="flex items-center gap-1.5 text-[10px] sm:text-[11px]">
                                 <i class="fa-solid fa-cube text-cyan-600 dark:text-cyan-400"></i>
-                                <span x-text="expanded ? 'Click to collapse layers' : 'Click to inspect 3D layers'"></span>
+                                <span x-text="expanded ? 'Click to collapse' : 'Click to inspect 3D layers'"></span>
                             </div>
                             <a href="{{ $dp['is_auth'] ? route('dashboard') : route('register') }}" 
                                @click.stop
