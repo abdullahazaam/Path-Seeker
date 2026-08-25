@@ -577,23 +577,8 @@
     <!-- Top Spacing -->
     <div class="h-20 sm:h-24"></div>
 
-    <!-- Flash Notifications -->
-    @if(session('success'))
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-            <div class="glass-panel border-l-4 border-emerald-500 text-emerald-800 dark:text-emerald-300 px-5 py-3.5 rounded-2xl text-sm flex items-center gap-3 shadow-lg">
-                <i class="fa-solid fa-circle-check text-emerald-500 dark:text-emerald-400 text-base"></i>
-                <span class="font-medium">{{ session('success') }}</span>
-            </div>
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-            <div class="glass-panel border-l-4 border-rose-500 text-rose-800 dark:text-rose-300 px-5 py-3.5 rounded-2xl text-sm flex items-center gap-3 shadow-lg">
-                <i class="fa-solid fa-circle-exclamation text-rose-500 dark:text-rose-400 text-base"></i>
-                <span class="font-medium">{{ session('error') }}</span>
-            </div>
-        </div>
-    @endif
+    <!-- Global Flash Notifications -->
+    @include('components.flash-message')
 
     <!-- Main Dynamic Content -->
     <main class="relative z-10 flex-grow">
