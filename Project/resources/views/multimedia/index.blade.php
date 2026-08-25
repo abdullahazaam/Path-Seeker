@@ -78,6 +78,59 @@
         </div>
     @endif
 
+    {{-- ══════════════════ SEARCH & FILTER CONSOLE ══════════════════ --}}
+    <div class="relative rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-4 overflow-hidden">
+        <form action="{{ url('/multimedia') }}" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end relative z-10">
+            <div class="md:col-span-6">
+                <label for="search" class="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-magnifying-glass text-rose-500 dark:text-rose-400 text-xs"></i>
+                    <span>Search Masterclasses &amp; Tech Tracks</span>
+                </label>
+                <div class="relative">
+                    <input type="text" name="search" id="search" value="{{ request('search') }}"
+                           placeholder="Search by topic, keyword, or framework (e.g. AI, React, Cloud)..."
+                           class="app-input w-full px-4 py-3 rounded-xl text-sm pl-10 focus:ring-2 focus:ring-rose-500/30">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                </div>
+            </div>
+            <div class="md:col-span-4">
+                <label for="type" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-filter text-purple-600 dark:text-purple-400 text-xs"></i>
+                    <span>Media Format</span>
+                </label>
+                <select name="type" id="type" class="app-input w-full px-4 py-3 rounded-xl text-sm">
+                    <option value="">All Formats (Video &amp; Audio)</option>
+                    <option value="video" {{ request('type') === 'video' ? 'selected' : '' }}>Video Masterclasses</option>
+                    <option value="audio" {{ request('type') === 'audio' ? 'selected' : '' }}>Audio Podcasts</option>
+                </select>
+            </div>
+            <div class="md:col-span-2 flex gap-2">
+                <button type="submit" class="btn-sweep flex-1 py-3 font-bold text-sm rounded-xl text-white bg-gradient-to-r from-rose-600 via-purple-600 to-indigo-600 hover:from-rose-500 hover:via-purple-500 hover:to-indigo-500 shadow-lg shadow-purple-500/20 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105">
+                    <i class="fa-solid fa-sliders text-xs text-white"></i>
+                    <span class="text-white">Filter</span>
+                </button>
+                @if(request('search') || request('type') || request('tag'))
+                    <a href="{{ route('multimedia.index') }}" class="px-3 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-400 hover:text-rose-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 transition-all flex items-center justify-center" title="Reset Filters">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </a>
+                @endif
+            </div>
+        </form>
+        @if(isset($allTags) && count($allTags) > 0)
+            <div class="mt-4 pt-3.5 border-t border-slate-200/60 dark:border-white/[0.06] flex items-center gap-2 overflow-x-auto pb-2.5 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-900/40 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-purple-600/40 hover:[&::-webkit-scrollbar-thumb]:bg-purple-500/70 [&::-webkit-scrollbar-thumb]:rounded-full relative z-10">
+                <span class="text-[10px] font-bold text-slate-500 shrink-0 uppercase tracking-wider">Quick Topics:</span>
+                <a href="{{ route('multimedia.index') }}" class="px-3 py-1 text-xs font-semibold rounded-full border transition-all shrink-0 {{ !request('tag') ? 'border-rose-500/50 text-rose-700 dark:text-rose-300 bg-rose-500/15 dark:bg-rose-500/20' : 'border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white' }}">
+                    All Topics
+                </a>
+                @foreach($allTags as $tag)
+                    <a href="{{ route('multimedia.index', ['tag' => $tag]) }}" class="px-3 py-1 text-xs font-semibold rounded-full border transition-all shrink-0 {{ request('tag') === $tag ? 'border-rose-500/50 text-rose-700 dark:text-rose-300 bg-rose-500/15 dark:bg-rose-500/20' : 'border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white' }}">
+                        {{ $tag }}
+                    </a>
+                @endforeach
+            </div>
+        @endif
+    </div>
+
     {{-- ══════════════════ MEDIA ARCHIVE HEADER ══════════════════ --}}
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2 border-b border-slate-200/80 dark:border-white/[0.07] pb-4">
         <div>
@@ -172,7 +225,9 @@
                         <span>Stream Video</span>
                         <i class="fa-solid fa-arrow-right text-xs group-hover/link:translate-x-1.5 transition-transform"></i>
                     </a>
-                    <span class="text-xs text-slate-400 dark:text-slate-600 font-mono">#{{ str_pad($item->id, 3, '0', STR_PAD_LEFT) }}</span>
+                    <span class="inline-flex items-center gap-1 text-[10px] text-purple-600 dark:text-purple-400 font-semibold px-2 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20">
+                        <i class="fa-solid fa-play text-[8px]"></i> 1080p Stream
+                    </span>
                 </div>
 
             </div>
@@ -181,7 +236,10 @@
                 <div class="w-16 h-16 rounded-2xl bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center text-2xl mx-auto mb-2 shadow-sm">
                     <i class="fa-solid fa-film"></i>
                 </div>
-                <p class="text-base font-bold text-slate-900 dark:text-slate-300">No multimedia assets uploaded yet.</p>
+                <p class="text-base font-bold text-slate-900 dark:text-slate-300">No multimedia assets matched your filter.</p>
+                <a href="{{ route('multimedia.index') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-300 border border-purple-500/20 text-xs font-bold hover:bg-purple-500/20 transition-all">
+                    <i class="fa-solid fa-rotate-left"></i> Reset Filter
+                </a>
             </div>
         @endforelse
     </div>

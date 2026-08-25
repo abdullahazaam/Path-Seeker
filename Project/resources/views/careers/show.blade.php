@@ -68,9 +68,9 @@
             <span>Back to Career Bank</span>
         </a>
         <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/80 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/[0.08] text-xs font-mono text-slate-600 dark:text-slate-400 shadow-sm">
-            <span class="text-purple-600 dark:text-purple-400 font-bold">TRACK</span>
+            <span class="text-purple-600 dark:text-purple-400 font-bold">LIVE TRACK</span>
             <span>&bull;</span>
-            <span>#{{ str_pad($career->id, 3, '0', STR_PAD_LEFT) }}</span>
+            <span class="text-emerald-500 font-semibold">Verified 2026</span>
         </div>
     </div>
 

@@ -8,13 +8,44 @@ use Illuminate\Http\Request;
 class MultimediaController extends Controller
 {
     /**
-     * Display a listing of the resource with pagination.
+     * Display a listing of the resource with search, tag, and type filtering.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Order by id ASC so items appear in seeded sequence (Page 1: 1-6, Page 2: 7-12, Page 3: 13-16)
-        $multimedia = Multimedia::orderBy('id')->paginate(6);
-        return view('multimedia.index', compact('multimedia'));
+        $query = Multimedia::query();
+
+        if ($request->filled('search')) {
+            $search = trim($request->input('search'));
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('tags', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('tag')) {
+            $tag = trim($request->input('tag'));
+            $query->where('tags', 'like', "%{$tag}%");
+        }
+
+        if ($request->filled('type')) {
+            $query->where('type', $request->input('type'));
+        }
+
+        $allTags = Multimedia::pluck('tags')
+            ->filter()
+            ->flatMap(function ($t) {
+                return array_map('trim', explode(',', $t));
+            })
+            ->filter()
+            ->unique()
+            ->values()
+            ->take(12)
+            ->all();
+
+        $multimedia = $query->orderBy('id')->paginate(6)->withQueryString();
+
+        return view('multimedia.index', compact('multimedia', 'allTags'));
     }
 
     /**

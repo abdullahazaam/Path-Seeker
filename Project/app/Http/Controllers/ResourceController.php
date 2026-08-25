@@ -8,12 +8,29 @@ use Illuminate\Http\Request;
 class ResourceController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource with search and category filtering.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $resources = Resource::orderBy('id', 'asc')->paginate(6);
-        return view('resources.index', compact('resources'));
+        $query = Resource::query();
+
+        if ($request->filled('search')) {
+            $search = trim($request->input('search'));
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('category', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('category')) {
+            $category = trim($request->input('category'));
+            $query->where('category', $category);
+        }
+
+        $categories = Resource::distinct()->pluck('category')->filter()->values()->all();
+        $resources = $query->orderBy('id', 'asc')->paginate(6)->withQueryString();
+
+        return view('resources.index', compact('resources', 'categories'));
     }
 
     /**

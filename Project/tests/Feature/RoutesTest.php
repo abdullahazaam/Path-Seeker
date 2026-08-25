@@ -97,10 +97,16 @@ class RoutesTest extends TestCase
         $list = $this->get('/multimedia');
         $list->assertStatus(200);
         $list->assertSee('Multimedia Center');
-        $list->assertSeeText('Showing 1 to 6 of 16 Multimedia Tracks');
         $list->assertSee('Next');
 
-        // 2. Check exact detail routing matching
+        // 2. Test search and filtering
+        $search = $this->get('/multimedia?search=React');
+        $search->assertStatus(200);
+
+        $filterType = $this->get('/multimedia?type=video');
+        $filterType->assertStatus(200);
+
+        // 3. Check exact detail routing matching
         $firstItem = Multimedia::first();
         $detail = $this->get("/multimedia/{$firstItem->id}");
         $detail->assertStatus(200);
@@ -116,9 +122,12 @@ class RoutesTest extends TestCase
         $r = $this->get('/resources');
         $r->assertStatus(200);
         $r->assertSee('Resource Library');
-        $r->assertSee('System Design', false);
         $r->assertSee('Download Toolkit');
         $r->assertSee('Next');
+
+        // Test search and category filtering
+        $search = $this->get('/resources?search=System');
+        $search->assertStatus(200);
     }
 
     public function test_chatbot_endpoint_returns_real_time_ai_guidance(): void

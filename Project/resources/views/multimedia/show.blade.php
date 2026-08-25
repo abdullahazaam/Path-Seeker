@@ -21,7 +21,7 @@
                 <div class="space-y-2">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider {{ $item->type === 'video' ? 'bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/25' : 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25' }} font-mono shadow-sm">
                         <i class="fa-solid {{ $item->type === 'video' ? 'fa-video' : 'fa-headphones' }} text-[10px]"></i>
-                        <span>{{ $item->type }} Track #{{ str_pad($item->id, 3, '0', STR_PAD_LEFT) }}</span>
+                        <span>{{ $item->type === 'video' ? 'Video Masterclass' : 'Audio Podcast' }}</span>
                     </span>
                     <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white leading-snug font-display">{{ $item->title }}</h1>
                 </div>

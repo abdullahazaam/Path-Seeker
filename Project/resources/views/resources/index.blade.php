@@ -31,6 +31,62 @@
         </div>
     </div>
 
+    {{-- ══════════════════ SEARCH & FILTER CONSOLE ══════════════════ --}}
+    <div class="relative rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-4 overflow-hidden">
+        <form action="{{ url('/resources') }}" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end relative z-10">
+            <div class="md:col-span-6">
+                <label for="search" class="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-magnifying-glass text-sky-500 dark:text-sky-400 text-xs"></i>
+                    <span>Search Toolkits &amp; Engineering Documents</span>
+                </label>
+                <div class="relative">
+                    <input type="text" name="search" id="search" value="{{ request('search') }}"
+                           placeholder="Search by title or topic (e.g. System Design, Resume, Cheat Sheet)..."
+                           class="app-input w-full px-4 py-3 rounded-xl text-sm pl-10 focus:ring-2 focus:ring-sky-500/30">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                </div>
+            </div>
+            <div class="md:col-span-4">
+                <label for="category" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-filter text-sky-600 dark:text-sky-400 text-xs"></i>
+                    <span>Asset Category</span>
+                </label>
+                <select name="category" id="category" class="app-input w-full px-4 py-3 rounded-xl text-sm">
+                    <option value="">All Categories ({{ isset($categories) ? count($categories) : 0 }})</option>
+                    @if(isset($categories))
+                        @foreach($categories as $cat)
+                            <option value="{{ $cat }}" {{ request('category') === $cat ? 'selected' : '' }}>{{ $cat }}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+            <div class="md:col-span-2 flex gap-2">
+                <button type="submit" class="btn-sweep flex-1 py-3 font-bold text-sm rounded-xl text-white bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 hover:from-sky-500 hover:via-indigo-500 hover:to-purple-500 shadow-lg shadow-sky-500/20 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105">
+                    <i class="fa-solid fa-sliders text-xs text-white"></i>
+                    <span class="text-white">Filter</span>
+                </button>
+                @if(request('search') || request('category'))
+                    <a href="{{ route('resources.index') }}" class="px-3 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-400 hover:text-sky-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 transition-all flex items-center justify-center" title="Reset Filters">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </a>
+                @endif
+            </div>
+        </form>
+        @if(isset($categories) && count($categories) > 0)
+            <div class="mt-4 pt-3.5 border-t border-slate-200/60 dark:border-white/[0.06] flex items-center gap-2 overflow-x-auto pb-2.5 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-900/40 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-sky-600/40 hover:[&::-webkit-scrollbar-thumb]:bg-sky-500/70 [&::-webkit-scrollbar-thumb]:rounded-full relative z-10">
+                <span class="text-[10px] font-bold text-slate-500 shrink-0 uppercase tracking-wider">Quick Filter:</span>
+                <a href="{{ route('resources.index') }}" class="px-3 py-1 text-xs font-semibold rounded-full border transition-all shrink-0 {{ !request('category') ? 'border-sky-500/50 text-sky-700 dark:text-sky-300 bg-sky-500/15 dark:bg-sky-500/20' : 'border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white' }}">
+                    All Categories
+                </a>
+                @foreach($categories as $c)
+                    <a href="{{ route('resources.index', ['category' => $c]) }}" class="px-3 py-1 text-xs font-semibold rounded-full border transition-all shrink-0 {{ request('category') === $c ? 'border-sky-500/50 text-sky-700 dark:text-sky-300 bg-sky-500/15 dark:bg-sky-500/20' : 'border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white' }}">
+                        {{ $c }}
+                    </a>
+                @endforeach
+            </div>
+        @endif
+    </div>
+
     {{-- ══════════════════ ROW HEADER ══════════════════ --}}
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2 border-b border-slate-200/80 dark:border-white/[0.07] pb-4">
         <div>
@@ -153,7 +209,9 @@
                         <span>Download Toolkit</span>
                         <i class="fa-solid fa-arrow-right text-xs group-hover/link:translate-x-1.5 transition-transform"></i>
                     </a>
-                    <span class="text-xs text-slate-400 dark:text-slate-600 font-mono font-bold">#{{ str_pad($res->id, 3, '0', STR_PAD_LEFT) }}</span>
+                    <span class="inline-flex items-center gap-1 text-[10px] text-sky-600 dark:text-sky-400 font-semibold px-2 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/20">
+                        <i class="fa-solid fa-circle-check text-[9px]"></i> Free Access
+                    </span>
                 </div>
 
             </div>
@@ -162,14 +220,17 @@
                 <div class="w-16 h-16 rounded-2xl bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center text-2xl mx-auto mb-2 shadow-sm">
                     <i class="fa-solid fa-folder-open"></i>
                 </div>
-                <p class="text-base font-bold text-slate-900 dark:text-slate-300">No resources uploaded yet.</p>
+                <p class="text-base font-bold text-slate-900 dark:text-slate-300">No resources matched your filter.</p>
+                <a href="{{ route('resources.index') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-300 border border-sky-500/20 text-xs font-bold hover:bg-sky-500/20 transition-all">
+                    <i class="fa-solid fa-rotate-left"></i> Reset Filter
+                </a>
             </div>
         @endforelse
     </div>
 
     {{-- ══════════════════ UNIFIED PAGINATION CONTROLS ══════════════════ --}}
     @if ($resources->hasPages())
-        <div class="glass-panel rounded-2xl p-4 border border-slate-200/80 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="glass-panel rounded-2xl p-4 border border-slate-200/80 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 backdrop-blur-md shadow-xl">
             <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">
                 Showing <strong class="text-slate-900 dark:text-white">{{ $resources->firstItem() }}</strong> to <strong class="text-slate-900 dark:text-white">{{ $resources->lastItem() }}</strong> of <strong class="text-slate-900 dark:text-white">{{ $resources->total() }}</strong> Toolkits
             </p>
@@ -177,24 +238,26 @@
             <div class="flex items-center gap-2">
                 {{-- Previous Button --}}
                 @if ($resources->onFirstPage())
-                    <span class="px-4 py-2 text-xs font-bold rounded-full glass-panel text-slate-400 dark:text-slate-600 border border-slate-200 dark:border-white/5 cursor-not-allowed select-none">
-                        <i class="fa-solid fa-chevron-left mr-1"></i> Prev
+                    <span class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/40 dark:bg-slate-800/40 text-slate-400 dark:text-slate-600 border border-slate-200/40 dark:border-slate-700/30 cursor-not-allowed select-none flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                        <span>Previous</span>
                     </span>
                 @else
-                    <a href="{{ $resources->previousPageUrl() }}" class="px-4 py-2 text-xs font-bold rounded-full glass-panel text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-white border border-slate-200/80 dark:border-white/10 hover:border-sky-500/40 transition-all">
-                        <i class="fa-solid fa-chevron-left mr-1"></i> Prev
+                    <a href="{{ $resources->appends(request()->query())->previousPageUrl() }}" class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md transition-all flex items-center gap-1.5 hover:scale-105">
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                        <span>Previous</span>
                     </a>
                 @endif
 
                 {{-- Numeric Page Buttons --}}
                 <div class="hidden sm:flex items-center gap-1.5">
-                    @foreach ($resources->getUrlRange(1, $resources->lastPage()) as $page => $url)
+                    @foreach ($resources->appends(request()->query())->getUrlRange(1, $resources->lastPage()) as $page => $url)
                         @if ($page == $resources->currentPage())
-                            <span class="w-8 h-8 rounded-full bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 text-white font-bold text-xs flex items-center justify-center shadow-lg shadow-sky-500/25">
+                            <span class="px-3.5 py-2 text-sm font-bold rounded-xl bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 text-white shadow-lg shadow-sky-500/25 border border-sky-400/30 flex items-center justify-center min-w-[38px]">
                                 {{ $page }}
                             </span>
                         @else
-                            <a href="{{ $url }}" class="w-8 h-8 rounded-full glass-panel text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-white border border-slate-200/80 dark:border-white/10 hover:border-sky-500/40 font-bold text-xs flex items-center justify-center transition-all">
+                            <a href="{{ $url }}" class="px-3.5 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md transition-all flex items-center justify-center min-w-[38px] hover:scale-105">
                                 {{ $page }}
                             </a>
                         @endif
@@ -203,12 +266,14 @@
 
                 {{-- Next Button --}}
                 @if ($resources->hasMorePages())
-                    <a href="{{ $resources->nextPageUrl() }}" class="px-4 py-2 text-xs font-bold rounded-full glass-panel text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-white border border-slate-200/80 dark:border-white/10 hover:border-sky-500/40 transition-all">
-                        Next <i class="fa-solid fa-chevron-right ml-1"></i>
+                    <a href="{{ $resources->appends(request()->query())->nextPageUrl() }}" class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md transition-all flex items-center gap-1.5 hover:scale-105">
+                        <span>Next</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
                     </a>
                 @else
-                    <span class="px-4 py-2 text-xs font-bold rounded-full glass-panel text-slate-400 dark:text-slate-600 border border-slate-200 dark:border-white/5 cursor-not-allowed select-none">
-                        Next <i class="fa-solid fa-chevron-right ml-1"></i>
+                    <span class="px-4 py-2 text-sm font-semibold rounded-xl bg-slate-100/40 dark:bg-slate-800/40 text-slate-400 dark:text-slate-600 border border-slate-200/40 dark:border-slate-700/30 cursor-not-allowed select-none flex items-center gap-1.5">
+                        <span>Next</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
                     </span>
                 @endif
             </div>

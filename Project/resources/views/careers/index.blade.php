@@ -223,13 +223,10 @@
                         <span>View Full Roadmap</span>
                         <i class="fa-solid fa-arrow-right text-xs group-hover/link:translate-x-1.5 transition-transform"></i>
                     </a>
-                    <div class="flex items-center gap-2 shrink-0">
-                        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold shadow-sm">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            <span>Live &bull; {{ now()->subMinutes(($career->id * 7 + 3) % 43 + 2)->diffForHumans() }}</span>
-                        </span>
-                        <span class="text-[10px] text-slate-400 dark:text-slate-600 font-mono">#{{ str_pad($career->id, 3, '0', STR_PAD_LEFT) }}</span>
-                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold shadow-sm shrink-0">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>Live &bull; {{ now()->subMinutes(($career->id * 7 + 3) % 43 + 2)->diffForHumans() }}</span>
+                    </span>
                 </div>
 
             </div>
