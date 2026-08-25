@@ -944,19 +944,19 @@
                 </div>
             </div>
 
-            {{-- Giant Cinematic Heading --}}
-            <div class="space-y-2">
-                <h2 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-cyan-400 drop-shadow-[0_0_40px_rgba(0,242,254,0.35)] leading-none">
+            {{-- Standardized Cinematic Editorial Heading --}}
+            <div class="space-y-3">
+                <h2 class="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-black font-display tracking-tight uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-cyan-400 drop-shadow-[0_0_30px_rgba(0,242,254,0.3)] leading-tight">
                     BUILD YOUR PATH
                 </h2>
-                <p class="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-normal pt-2">
+                <p class="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-normal pt-1">
                     Connect your ambition to verified 2026 tech economy trajectories. Claim your cryptographic Career Passport, master verified toolchains, and accelerate your professional destiny.
                 </p>
             </div>
 
             {{-- Cinematic Action CTAs --}}
-            <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
-                <a href="{{ route('careers.index') }}" class="group relative inline-flex items-center gap-3 px-8 sm:px-10 py-4 text-sm sm:text-base font-black rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-500 text-slate-950 shadow-[0_0_35px_rgba(0,242,254,0.5)] hover:shadow-[0_0_50px_rgba(0,242,254,0.7)] hover:scale-105 transition-all duration-300">
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                <a href="{{ route('careers.index') }}" class="group relative inline-flex items-center gap-3 px-8 sm:px-10 py-4 text-sm sm:text-base font-black rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-500 text-slate-950 shadow-[0_0_35px_rgba(0,242,254,0.4)] hover:shadow-[0_0_45px_rgba(0,242,254,0.6)] hover:scale-105 transition-all duration-300">
                     <i class="fa-solid fa-compass text-slate-950"></i>
                     <span class="text-slate-950">Explore All Pathways</span>
                     <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1.5 transition-transform"></i>

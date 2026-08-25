@@ -145,7 +145,7 @@
             <p class="text-base font-bold text-slate-900 dark:text-slate-300">No assessment questions found in database.</p>
         </div>
     @else
-        <form action="{{ route('quiz.submit') }}" method="POST" class="space-y-6 max-w-5xl mx-auto w-full" @submit="submitting = true">
+        <form action="{{ route('quiz.submit') }}" method="POST" class="space-y-6 w-full" @submit="submitting = true">
             @csrf
             <input type="hidden" name="idempotency_token" value="{{ $idempotencyToken }}">
             

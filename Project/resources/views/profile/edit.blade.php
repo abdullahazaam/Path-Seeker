@@ -2,7 +2,7 @@
 @section('title', 'Edit Profile & Account Settings — PathSeeker')
 @section('content')
 
-<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
     {{-- Breadcrumbs & Back Navigation --}}
     <div class="flex items-center justify-between gap-4">

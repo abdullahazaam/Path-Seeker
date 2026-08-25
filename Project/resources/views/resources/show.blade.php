@@ -2,7 +2,7 @@
 @section('title', $resource->title . ' — Technical Resource Preview')
 @section('content')
 
-<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-6">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-6">
 
     {{-- Back Link --}}
     <div class="flex items-center justify-between">
