@@ -163,9 +163,9 @@
 
             {{-- Action Buttons (Filter + Save Preferences + Reset) --}}
             <div class="md:col-span-4 flex items-center gap-2">
-                <button type="submit" class="btn-sweep flex-1 py-3 font-bold text-xs rounded-xl text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer">
-                    <i class="fa-solid fa-sliders text-xs text-white"></i>
-                    <span class="text-white">Filter</span>
+                <button type="submit" class="btn-sweep flex-1 py-3 font-bold text-xs rounded-xl text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer font-black">
+                    <i class="fa-solid fa-sliders text-xs text-slate-950"></i>
+                    <span class="text-slate-950 font-black">Filter</span>
                 </button>
 
                 {{-- SAVE PREFERENCES BUTTON --}}
@@ -200,10 +200,10 @@
                     
                     {{-- All Roles --}}
                     <a href="{{ route('careers.index', array_merge(request()->query(), ['role' => null])) }}"
-                       class="px-3 py-1.5 text-xs font-bold rounded-xl border transition-all shrink-0 flex items-center gap-1.5 {{ !request('role') ? 'border-purple-500 text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-md shadow-purple-500/20' : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/30 bg-slate-100/80 dark:bg-white/[0.03]' }}">
+                       class="px-3 py-1.5 text-xs font-bold rounded-xl border transition-all shrink-0 flex items-center gap-1.5 {{ !request('role') ? 'border-cyan-500 text-slate-950 font-black bg-gradient-to-r from-cyan-400 to-blue-500 shadow-md shadow-cyan-500/20' : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-cyan-500/30 bg-slate-100/80 dark:bg-white/[0.03]' }}">
                         <i class="fa-solid fa-layer-group text-[10px]"></i>
                         <span>All Tracks</span>
-                        <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-black/20 text-white">{{ $roleCounts['all'] ?? $careers->total() }}</span>
+                        <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-black/20 text-slate-950 font-black">{{ $roleCounts['all'] ?? $careers->total() }}</span>
                     </a>
 
                     {{-- Student --}}
@@ -216,10 +216,10 @@
 
                     {{-- Graduate --}}
                     <a href="{{ route('careers.index', array_merge(request()->query(), ['role' => 'graduate'])) }}"
-                       class="px-3 py-1.5 text-xs font-bold rounded-xl border transition-all shrink-0 flex items-center gap-1.5 {{ request('role') === 'graduate' ? 'border-purple-500 text-white bg-gradient-to-r from-purple-600 to-pink-600 shadow-md shadow-purple-500/20' : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-purple-500/30 bg-slate-100/80 dark:bg-white/[0.03]' }}">
+                       class="px-3 py-1.5 text-xs font-bold rounded-xl border transition-all shrink-0 flex items-center gap-1.5 {{ request('role') === 'graduate' ? 'border-cyan-500 text-slate-950 font-black bg-gradient-to-r from-cyan-400 to-sky-500 shadow-md shadow-cyan-500/20' : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-cyan-500/30 bg-slate-100/80 dark:bg-white/[0.03]' }}">
                         <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         <span>Graduate &bull; Entry &amp; Portfolio</span>
-                        <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-purple-500/20 text-purple-700 dark:text-purple-300">{{ $roleCounts['graduate'] ?? 8 }}</span>
+                        <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-cyan-500/20 text-cyan-700 dark:text-cyan-300">{{ $roleCounts['graduate'] ?? 8 }}</span>
                     </a>
 
                     {{-- Professional --}}
@@ -447,7 +447,7 @@
                 <div class="hidden sm:flex items-center gap-1.5">
                     @foreach ($careers->appends(request()->query())->getUrlRange(1, $careers->lastPage()) as $page => $url)
                         @if ($page == $careers->currentPage())
-                            <span class="px-4 py-2.5 text-xs font-black rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/25 border border-purple-400/30 flex items-center justify-center min-w-[40px]">
+                            <span class="px-4 py-2.5 text-xs font-black rounded-2xl bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 text-slate-950 font-black shadow-lg shadow-cyan-500/25 border border-cyan-400/30 flex items-center justify-center min-w-[40px]">
                                 {{ $page }}
                             </span>
                         @else
@@ -482,14 +482,14 @@
     <div class="px-5 py-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200 dark:border-slate-800 shadow-[0_10px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.6)] flex items-center justify-between gap-4 sm:gap-6">
         
         <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white text-xs shrink-0 shadow-lg shadow-purple-500/30">
-                <i class="fa-solid fa-code-compare"></i>
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-400 via-sky-500 to-blue-600 flex items-center justify-center text-slate-950 text-xs shrink-0 shadow-lg shadow-cyan-500/30">
+                <i class="fa-solid fa-code-compare text-slate-950"></i>
             </div>
             
             <div class="space-y-0.5">
                 <div class="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <span>Career Comparison</span>
-                    <span id="compareCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-purple-500/15 dark:bg-purple-500/25 text-purple-700 dark:text-purple-300 border border-purple-500/30">
+                    <span id="compareCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-cyan-500/15 dark:bg-cyan-500/25 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 font-mono">
                         0 / 3 Selected
                     </span>
                 </div>
@@ -504,14 +504,14 @@
                     id="btnOpenModal"
                     onclick="openCompareModal()"
                     disabled
-                    class="px-5 py-2.5 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-lg shadow-purple-500/25 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition-all flex items-center gap-2">
+                    class="px-5 py-2.5 rounded-xl font-bold text-xs text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 shadow-lg shadow-cyan-500/25 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition-all flex items-center gap-2 cursor-pointer">
                 <i class="fa-solid fa-table-columns text-[10px]"></i>
-                <span id="btnCompareLabel">Compare</span>
+                <span id="btnCompareLabel" class="font-black">Compare</span>
             </button>
 
             <button type="button"
                     onclick="clearCompare()"
-                    class="p-2.5 rounded-xl text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors text-xs"
+                    class="p-2.5 rounded-xl text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors text-xs cursor-pointer"
                     title="Clear comparison">
                 <i class="fa-solid fa-trash-can"></i>
             </button>
@@ -528,13 +528,13 @@
          id="compareModalContent">
         
         {{-- Modal Top Gradient Accent --}}
-        <div class="h-1.5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shrink-0 rounded-full mb-4"></div>
+        <div class="h-1.5 w-full bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600 shrink-0 rounded-full mb-4"></div>
 
         {{-- Modal Header --}}
         <div class="pb-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4 shrink-0">
             <div class="space-y-1.5">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/25 text-xs font-semibold text-purple-700 dark:text-purple-300">
-                    <i class="fa-solid fa-code-compare text-purple-500 dark:text-purple-400 text-xs"></i>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/25 text-xs font-semibold text-cyan-700 dark:text-cyan-300 font-mono">
+                    <i class="fa-solid fa-code-compare text-cyan-500 dark:text-cyan-400 text-xs"></i>
                     <span>Career Track Intelligence Matrix</span>
                 </div>
                 <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display">
@@ -875,8 +875,8 @@ function renderComparisonMatrix() {
             </td>
             ${items.map(item => `
                 <td class="p-5 align-middle">
-                    <a href="${item.url}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 hover:scale-105 transition-all shadow-md shadow-purple-500/20">
-                        <span>View Full Roadmap</span>
+                    <a href="${item.url}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 hover:scale-105 transition-all shadow-md shadow-cyan-500/25">
+                        <span class="font-black">View Full Roadmap</span>
                         <i class="fa-solid fa-arrow-right text-[9px]"></i>
                     </a>
                 </td>

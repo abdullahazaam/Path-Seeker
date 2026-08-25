@@ -86,7 +86,7 @@
         <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
 
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div class="space-y-3 max-w-2xl">
+            <div class="space-y-3">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/20 text-xs font-semibold text-cyan-700 dark:text-cyan-300 shadow-sm font-mono">
                     <i class="fa-solid fa-brain text-cyan-600 dark:text-cyan-400"></i>
                     <span>Cognitive Affinity &amp; Likert-Scale Assessment</span>
@@ -94,7 +94,7 @@
                 <h1 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white font-display">
                     Career Interest <span class="grad-text">&amp; Psychological</span> Alignment
                 </h1>
-                <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+                <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed max-w-3xl">
                     Evaluate your technical intuition, architectural problem solving, and work preference using interactive sliders and continuous Likert scaling.
                 </p>
             </div>
@@ -102,7 +102,7 @@
             {{-- 1. VISUAL COUNTDOWN TIMER WIDGET --}}
             <div class="p-5 rounded-2xl bg-slate-100/90 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10 text-center shrink-0 space-y-2 shadow-sm min-w-[190px]">
                 <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center justify-center gap-1.5 font-mono">
-                    <i class="fa-regular fa-stopwatch text-purple-500" :class="timeLeft < 60 ? 'text-rose-500 animate-pulse' : ''"></i>
+                    <i class="fa-regular fa-stopwatch text-cyan-500" :class="timeLeft < 60 ? 'text-rose-500 animate-pulse' : ''"></i>
                     <span>Assessment Timer</span>
                 </div>
                 <div class="text-3xl font-black font-mono tracking-wider transition-colors"
@@ -113,7 +113,7 @@
                 {{-- Horizontal Countdown Progress Track --}}
                 <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
                     <div class="h-full rounded-full transition-all duration-1000"
-                         :class="timeLeft < 60 ? 'bg-rose-500' : (timeLeft < 120 ? 'bg-amber-500' : 'bg-gradient-to-r from-indigo-500 to-purple-500')"
+                         :class="timeLeft < 60 ? 'bg-rose-500' : (timeLeft < 120 ? 'bg-amber-500' : 'bg-gradient-to-r from-cyan-400 to-blue-500')"
                          :style="'width: ' + timerPercent + '%'"></div>
                 </div>
                 <div class="text-[10px] text-slate-400 font-mono">
@@ -126,12 +126,12 @@
         <div class="mt-6 pt-4 border-t border-slate-200/60 dark:border-white/[0.06] relative z-10 space-y-2">
             <div class="flex items-center justify-between text-xs font-mono text-slate-600 dark:text-slate-400">
                 <span class="flex items-center gap-1.5 font-bold text-slate-900 dark:text-white">
-                    <i class="fa-solid fa-list-check text-purple-500"></i> Progress: <span x-text="answeredCount"></span> of <span x-text="totalQuestions"></span> Evaluated
+                    <i class="fa-solid fa-list-check text-cyan-500"></i> Progress: <span x-text="answeredCount"></span> of <span x-text="totalQuestions"></span> Evaluated
                 </span>
-                <span class="font-bold text-purple-600 dark:text-purple-400" x-text="progressPercent + '% Completed'"></span>
+                <span class="font-bold text-cyan-600 dark:text-cyan-400" x-text="progressPercent + '% Completed'"></span>
             </div>
             <div class="w-full bg-slate-200 dark:bg-slate-800/80 h-2 rounded-full overflow-hidden shadow-inner">
-                <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 h-full rounded-full transition-all duration-300 shadow-neon-purple"
+                <div class="bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 h-full rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(0,242,254,0.4)]"
                      :style="'width: ' + progressPercent + '%'"></div>
             </div>
         </div>
@@ -139,7 +139,7 @@
 
     @if($questions->isEmpty())
         <div class="bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl rounded-3xl p-12 text-center space-y-3 border border-slate-200/80 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
-            <div class="w-14 h-14 rounded-2xl bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mx-auto mb-2">
+            <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-2xl mx-auto mb-2">
                 <i class="fa-solid fa-clipboard-question"></i>
             </div>
             <p class="text-base font-bold text-slate-900 dark:text-slate-300">No assessment questions found in database.</p>
@@ -156,17 +156,17 @@
                     $likertLabels = [
                         0 => ['tag' => 'Strong Disagreement', 'color' => 'from-rose-500/20 to-rose-500/5 text-rose-700 dark:text-rose-400 border-rose-500/30'],
                         1 => ['tag' => 'Moderate Alignment', 'color' => 'from-amber-500/20 to-amber-500/5 text-amber-700 dark:text-amber-400 border-amber-500/30'],
-                        2 => ['tag' => 'High Preference', 'color' => 'from-indigo-500/20 to-indigo-500/5 text-indigo-700 dark:text-indigo-400 border-indigo-500/30'],
-                        3 => ['tag' => 'Core Specialization', 'color' => 'from-purple-500/20 to-pink-500/5 text-purple-700 dark:text-purple-300 border-purple-500/30'],
+                        2 => ['tag' => 'High Preference', 'color' => 'from-sky-500/20 to-sky-500/5 text-sky-700 dark:text-sky-400 border-sky-500/30'],
+                        3 => ['tag' => 'Core Specialization', 'color' => 'from-cyan-500/20 to-blue-500/5 text-cyan-700 dark:text-cyan-300 border-cyan-500/30'],
                     ];
                 @endphp
 
-                <div class="bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 space-y-6 border border-slate-200/80 dark:border-white/10 hover:border-purple-500/40 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] transition-all duration-300">
+                <div class="bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 space-y-6 border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] transition-all duration-300">
                     
                     {{-- Question Header --}}
                     <div class="flex items-start justify-between gap-4 border-b border-slate-100 dark:border-white/5 pb-4">
                         <div class="flex items-start gap-3.5">
-                            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 text-white font-black text-xs flex items-center justify-center shrink-0 shadow-md">
+                            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#00f2fe] via-sky-500 to-blue-600 text-slate-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">
                                 Q{{ $index + 1 }}
                             </div>
                             <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white pt-1 leading-snug font-display">
@@ -176,7 +176,7 @@
 
                         {{-- Active Selected Option Indicator --}}
                         <div class="shrink-0">
-                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25 shadow-xs">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/25 shadow-xs">
                                 Choice <span x-text="answers['{{ $question->id }}']"></span>
                             </span>
                         </div>
@@ -185,8 +185,8 @@
                     {{-- 2. INTERACTIVE RANGE SLIDER UI --}}
                     <div class="space-y-3 px-2">
                         <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
-                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-sliders text-indigo-500"></i> Interactive Alignment Slider</span>
-                            <span class="text-[11px]">Level: <strong class="text-purple-600 dark:text-purple-400 font-bold" x-text="parseInt(sliderValues['{{ $question->id }}']) + 1 + '/4'"></strong></span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-sliders text-cyan-500"></i> Interactive Alignment Slider</span>
+                            <span class="text-[11px]">Level: <strong class="text-cyan-600 dark:text-cyan-400 font-bold" x-text="parseInt(sliderValues['{{ $question->id }}']) + 1 + '/4'"></strong></span>
                         </div>
                         
                         <div class="relative py-1">
@@ -196,15 +196,15 @@
                                    step="1"
                                    :value="sliderValues['{{ $question->id }}']"
                                    @input="handleSliderChange('{{ $question->id }}', $event.target.value, {{ $keysJson }})"
-                                   class="w-full h-2.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500/40">
+                                   class="w-full h-2.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/40">
                             
                             {{-- Step points under the slider --}}
                             <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 px-1 pt-1.5">
                                 @foreach($keys as $kIndex => $key)
                                     <button type="button" 
                                             @click="setSliderChoice('{{ $question->id }}', {{ $kIndex }}, '{{ $key }}')"
-                                            class="hover:text-purple-600 transition-colors font-bold"
-                                            :class="sliderValues['{{ $question->id }}'] == {{ $kIndex }} ? 'text-purple-600 dark:text-purple-400 font-black' : ''">
+                                            class="hover:text-cyan-600 transition-colors font-bold"
+                                            :class="sliderValues['{{ $question->id }}'] == {{ $kIndex }} ? 'text-cyan-600 dark:text-cyan-400 font-black' : ''">
                                         {{ $key }}
                                     </button>
                                 @endforeach
@@ -221,20 +221,20 @@
                             @endphp
                             <div @click="setSliderChoice('{{ $question->id }}', {{ $optIndex }}, '{{ $key }}')"
                                  :class="answers['{{ $question->id }}'] === '{{ $key }}' 
-                                    ? 'bg-gradient-to-r from-purple-500/15 via-indigo-500/10 to-transparent border-purple-500 ring-2 ring-purple-500/30 shadow-lg -translate-y-0.5' 
-                                    : 'bg-slate-100/70 dark:bg-white/[0.02] border-slate-200/80 dark:border-white/[0.06] hover:border-purple-500/30 hover:bg-slate-100 dark:hover:bg-white/[0.04]'"
+                                    ? 'bg-gradient-to-r from-cyan-500/15 via-sky-500/10 to-transparent border-cyan-500 ring-2 ring-cyan-500/30 shadow-lg -translate-y-0.5' 
+                                    : 'bg-slate-100/70 dark:bg-white/[0.02] border-slate-200/80 dark:border-white/[0.06] hover:border-cyan-500/30 hover:bg-slate-100 dark:hover:bg-white/[0.04]'"
                                  class="p-4 rounded-2xl border cursor-pointer transition-all duration-200 flex items-start gap-3.5 relative group">
                                 
                                 {{-- Radio Selection Indicator --}}
                                 <div class="mt-0.5 w-5 h-5 rounded-full border flex items-center justify-center shrink-0 transition-all"
-                                     :class="answers['{{ $question->id }}'] === '{{ $key }}' ? 'border-purple-600 bg-purple-600 text-white' : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800'">
+                                     :class="answers['{{ $question->id }}'] === '{{ $key }}' ? 'border-cyan-500 bg-cyan-400 text-slate-950 font-bold' : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800'">
                                     <i class="fa-solid fa-check text-[10px]" x-show="answers['{{ $question->id }}'] === '{{ $key }}'"></i>
                                 </div>
 
                                 <div class="space-y-1.5 flex-1">
                                     <div class="flex items-center justify-between gap-2">
                                         <span class="text-xs font-black uppercase font-mono"
-                                              :class="answers['{{ $question->id }}'] === '{{ $key }}' ? 'text-purple-700 dark:text-purple-300' : 'text-slate-500 dark:text-slate-400'">
+                                              :class="answers['{{ $question->id }}'] === '{{ $key }}' ? 'text-cyan-700 dark:text-cyan-300' : 'text-slate-500 dark:text-slate-400'">
                                             Option {{ $key }}
                                         </span>
                                         <span class="text-[9px] font-mono px-2 py-0.5 rounded-full border {{ $likert['color'] }}">

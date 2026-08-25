@@ -456,9 +456,9 @@
                         <i class="fa-solid fa-user-gear text-purple-500"></i>
                         <span>Settings</span>
                     </a>
-                    <a href="{{ route('dashboard') }}" class="flex-1 py-2.5 px-3 rounded-xl text-center font-bold text-xs text-white bg-gradient-to-r {{ $isAdmin ? 'from-purple-600 to-indigo-600' : 'from-indigo-600 to-pink-600' }} shadow-md flex items-center justify-center gap-1.5">
-                        <i class="fa-solid {{ $isAdmin ? 'fa-screwdriver-wrench' : 'fa-gauge-high' }}"></i>
-                        <span>{{ $isAdmin ? 'Admin' : 'Passport' }}</span>
+                    <a href="{{ route('dashboard') }}" class="flex-1 py-2.5 px-3 rounded-xl text-center font-bold text-xs text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 shadow-md flex items-center justify-center gap-1.5">
+                        <i class="fa-solid {{ $isAdmin ? 'fa-screwdriver-wrench' : 'fa-gauge-high' }} text-slate-950"></i>
+                        <span class="text-slate-950 font-black">{{ $isAdmin ? 'Admin' : 'Passport' }}</span>
                     </a>
                 </div>
                 <form action="{{ url('/logout') }}" method="POST" class="w-full m-0 p-0">
@@ -473,7 +473,7 @@
                 <a href="{{ route('login') }}" class="flex-1 text-center py-2.5 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-800 dark:text-slate-200 font-bold text-xs">
                     Sign In
                 </a>
-                <a href="{{ route('register') }}" class="flex-1 text-center py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-xs shadow-md">
+                <a href="{{ route('register') }}" class="flex-1 text-center py-2.5 rounded-xl bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 text-slate-950 font-black text-xs shadow-md">
                     Get Started
                 </a>
             </div>

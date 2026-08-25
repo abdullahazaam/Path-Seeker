@@ -781,9 +781,9 @@
             <div class="shrink-0">
                 <button type="button"
                         @click="feedbackModalOpen = true"
-                        class="btn-sweep inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-bold text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-xl shadow-purple-500/25 hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
-                    <i class="fa-solid fa-paper-plane text-xs text-white"></i>
-                    <span>Send Feedback</span>
+                        class="btn-sweep inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-black text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-xl shadow-cyan-500/25 hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <i class="fa-solid fa-paper-plane text-xs text-slate-950"></i>
+                    <span class="text-slate-950 font-black">Send Feedback</span>
                 </button>
             </div>
 
@@ -801,38 +801,37 @@
              style="display: none;"
              @keydown.escape.window="feedbackModalOpen = false">
             
-            <div class="relative w-full max-w-xl rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto"
+            <div class="relative w-full max-w-lg rounded-3xl bg-[#0b0f19] border border-white/10 p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto"
                  @click.away="feedbackModalOpen = false">
                 
-                {{-- Modal Top Gradient Accent --}}
-                <div class="h-1.5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"></div>
-
-                <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
-                    <div class="space-y-1">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/25 text-xs font-semibold text-purple-700 dark:text-purple-300">
-                            <i class="fa-solid fa-comments text-purple-500 text-xs"></i>
-                            <span>Submit Feedback</span>
+                {{-- Modal Header --}}
+                <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-comments"></i>
                         </div>
-                        <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">
-                            Help Shape the Future of <span class="grad-text">PathSeeker</span>
-                        </h3>
+                        <div>
+                            <h3 class="text-lg font-black text-white font-display">System Feedback</h3>
+                            <p class="text-xs text-slate-400">Help shape future intelligence models</p>
+                        </div>
                     </div>
-                    <button type="button" @click="feedbackModalOpen = false" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-slate-600 dark:text-slate-300 flex items-center justify-center transition-all">
+                    <button type="button" @click="feedbackModalOpen = false" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors">
                         <i class="fa-solid fa-xmark text-sm"></i>
                     </button>
                 </div>
 
-                <form action="{{ route('feedback.store') }}" method="POST" class="space-y-4">
+                {{-- Form --}}
+                <form action="{{ route('feedback.store') }}" method="POST" class="space-y-4" x-data="{ selectedCategory: 'suggestion' }">
                     @csrf
                     
                     <div>
                         <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
                             Feedback Category
                         </label>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" x-data="{ selectedCategory: 'suggestion' }">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
                             <label class="cursor-pointer">
                                 <input type="radio" name="category" value="suggestion" class="sr-only" x-model="selectedCategory">
-                                <div :class="selectedCategory === 'suggestion' ? 'bg-purple-500/20 border-purple-500/50 text-purple-700 dark:text-purple-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
+                                <div :class="selectedCategory === 'suggestion' ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-700 dark:text-cyan-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
                                     <i class="fa-solid fa-lightbulb text-xs text-amber-500"></i>
                                     <span>Suggestion</span>
                                 </div>
@@ -846,8 +845,8 @@
                             </label>
                             <label class="cursor-pointer">
                                 <input type="radio" name="category" value="query" class="sr-only" x-model="selectedCategory">
-                                <div :class="selectedCategory === 'query' ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-700 dark:text-indigo-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
-                                    <i class="fa-solid fa-circle-question text-xs text-indigo-500"></i>
+                                <div :class="selectedCategory === 'query' ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-700 dark:text-cyan-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-circle-question text-xs text-cyan-500"></i>
                                     <span>Inquiry</span>
                                 </div>
                             </label>
@@ -867,13 +866,13 @@
                             <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-1.5">
                                 Your Name (Optional)
                             </label>
-                            <input type="text" name="name" placeholder="e.g., Alex Vance" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500 focus:outline-none">
+                            <input type="text" name="name" placeholder="e.g., Alex Vance" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:outline-none">
                         </div>
                         <div>
                             <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-1.5">
                                 Email Address (Optional)
                             </label>
-                            <input type="email" name="email" placeholder="alex@example.com" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500 focus:outline-none">
+                            <input type="email" name="email" placeholder="alex@example.com" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:outline-none">
                         </div>
                     </div>
                     @endguest
@@ -882,16 +881,16 @@
                         <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
                             Your Message &amp; Feedback
                         </label>
-                        <textarea name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Share your recommendations, feature requests, or issue details with us..." class="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500 focus:outline-none shadow-inner"></textarea>
+                        <textarea name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Share your recommendations, feature requests, or issue details with us..." class="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:outline-none shadow-inner"></textarea>
                     </div>
 
                     <div class="flex items-center justify-between pt-2">
                         <p class="text-[10px] text-slate-500 font-mono">
                             @auth Signed in as {{ Auth::user()->name }} @else Submitting as Guest Visitor @endauth
                         </p>
-                        <button type="submit" class="btn-sweep px-7 py-3 rounded-full text-xs font-bold text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-md transition-all flex items-center gap-2 cursor-pointer">
-                            <span>Submit Feedback</span>
-                            <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                        <button type="submit" class="btn-sweep px-7 py-3 rounded-full text-xs font-black text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-md transition-all flex items-center gap-2 cursor-pointer">
+                            <span class="text-slate-950 font-black">Submit Feedback</span>
+                            <i class="fa-solid fa-paper-plane text-[10px] text-slate-950"></i>
                         </button>
                     </div>
 
@@ -995,9 +994,9 @@
             <button type="button"
                     id="btnOpenModal"
                     onclick="openCompareModal()"
-                    class="px-5 py-2.5 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-lg shadow-purple-500/25 hover:scale-105 transition-all flex items-center gap-2">
-                <i class="fa-solid fa-table-columns text-[10px]"></i>
-                <span id="btnCompareLabel">Compare</span>
+                    class="px-5 py-2.5 rounded-xl font-black text-xs text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 shadow-lg shadow-cyan-500/25 hover:scale-105 transition-all flex items-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-table-columns text-[10px] text-slate-950"></i>
+                <span id="btnCompareLabel" class="font-black">Compare</span>
             </button>
 
             <button type="button"
@@ -1535,8 +1534,8 @@ function renderComparisonMatrix() {
             </td>
             ${items.map(item => `
                 <td class="p-5 align-middle">
-                    <a href="${item.url}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 hover:scale-105 transition-all shadow-md shadow-purple-500/20">
-                        <span>View Full Roadmap</span>
+                    <a href="${item.url}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 hover:scale-105 transition-all shadow-md shadow-cyan-500/20">
+                        <span class="font-black">View Full Roadmap</span>
                         <i class="fa-solid fa-arrow-right text-[9px]"></i>
                     </a>
                 </td>

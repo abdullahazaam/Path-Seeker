@@ -292,9 +292,9 @@
                     <i class="fa-solid fa-arrow-left text-xs"></i>
                     <span>Browse All Media</span>
                 </a>
-                <a href="{{ route('careers.index') }}" class="btn-sweep px-5 py-2.5 rounded-xl font-black text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-compass text-xs text-white"></i>
-                    <span class="text-white">Explore Aligned Careers</span>
+                <a href="{{ route('careers.index') }}" class="btn-sweep px-5 py-2.5 rounded-xl font-black text-sm text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_20px_rgba(0,242,254,0.35)] transition-all flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-compass text-xs text-slate-950"></i>
+                    <span class="text-slate-950 font-black">Explore Aligned Careers</span>
                 </a>
             </div>
         </div>

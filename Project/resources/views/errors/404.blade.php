@@ -13,9 +13,9 @@
             </p>
         </div>
         <div class="pt-2">
-            <a href="{{ route('home') }}" class="btn-sweep inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-md">
-                <i class="fa-solid fa-house"></i>
-                <span>Return to Home Portal</span>
+            <a href="{{ route('home') }}" class="btn-sweep inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-black text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_20px_rgba(0,242,254,0.35)]">
+                <i class="fa-solid fa-house text-slate-950"></i>
+                <span class="text-slate-950 font-black">Return to Home Portal</span>
             </a>
         </div>
     </div>

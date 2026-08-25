@@ -40,8 +40,8 @@
         {{-- Root Node Card --}}
         <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl flex items-center justify-between gap-4">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white text-xl shadow-md">
-                    <i class="fa-solid fa-house"></i>
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-400 via-sky-500 to-blue-600 flex items-center justify-center text-slate-950 text-xl shadow-md font-black">
+                    <i class="fa-solid fa-house text-slate-950"></i>
                 </div>
                 <div>
                     <div class="flex items-center gap-2">

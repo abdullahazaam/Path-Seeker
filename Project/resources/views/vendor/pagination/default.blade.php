@@ -43,7 +43,7 @@
                     @if (is_array($element))
                         @foreach ($element as $page => $url)
                             @if ($page == $paginator->currentPage())
-                                <span class="px-4 py-2.5 text-xs font-black rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/25 border border-purple-400/30 flex items-center justify-center min-w-[40px]">
+                                <span class="px-4 py-2.5 text-xs font-black rounded-2xl bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 text-slate-950 font-black shadow-lg shadow-cyan-500/25 border border-cyan-400/30 flex items-center justify-center min-w-[40px]">
                                     {{ $page }}
                                 </span>
                             @else

@@ -12,7 +12,7 @@
 
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative z-10">
             <div class="flex items-center gap-4">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 text-white flex items-center justify-center text-2xl font-black shadow-neon-purple shrink-0">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-400 via-sky-500 to-blue-600 text-slate-950 flex items-center justify-center text-2xl font-black shadow-[0_0_20px_rgba(0,242,254,0.35)] shrink-0">
                     {{ substr($publicProfile['display_name'], 0, 1) }}
                 </div>
                 <div class="space-y-1">

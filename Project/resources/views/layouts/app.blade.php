@@ -616,8 +616,8 @@
             <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 space-y-4 max-w-3xl mx-auto">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/20 text-xs font-black uppercase tracking-wider text-purple-700 dark:text-purple-300 shadow-sm">
-                    <i class="fa-solid fa-meteor text-purple-600 dark:text-purple-400"></i>
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/20 text-xs font-black uppercase tracking-wider text-cyan-700 dark:text-cyan-300 shadow-sm font-mono">
+                    <i class="fa-solid fa-meteor text-cyan-600 dark:text-cyan-400"></i>
                     <span>Your Destiny Awaits</span>
                 </div>
                 <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight font-display">
@@ -627,9 +627,9 @@
                     Step into the global career intelligence passport. Explore role competencies, unlock verified toolkits, and build a world-class trajectory.
                 </p>
                 <div class="pt-4">
-                    <a href="{{ route('register') }}" class="btn-sweep group inline-flex items-center gap-3 px-10 py-4 rounded-full text-base font-black text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md hover:shadow-md transition-all duration-300 hover:scale-105">
-                        <i class="fa-solid fa-compass text-lg text-white"></i>
-                        <span class="text-white font-black">Build My Career Path &rarr;</span>
+                    <a href="{{ route('register') }}" class="btn-sweep group inline-flex items-center gap-3 px-10 py-4 rounded-full text-base font-black text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_25px_rgba(0,242,254,0.35)] transition-all duration-300 hover:scale-105">
+                        <i class="fa-solid fa-compass text-lg text-slate-950"></i>
+                        <span class="text-slate-950 font-black">Build My Career Path &rarr;</span>
                     </a>
                 </div>
             </div>
@@ -771,7 +771,7 @@
              class="relative w-full max-w-2xl rounded-3xl bg-[#090b16]/95 border border-purple-500/30 shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden scale-95 transition-transform duration-200">
             
             {{-- Top Accent Line --}}
-            <div class="h-1 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+            <div class="h-1 w-full bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600"></div>
 
             {{-- Search Bar Header --}}
             <div class="p-4 sm:p-5 border-b border-white/[0.08] flex items-center gap-3.5 bg-white/[0.02]">

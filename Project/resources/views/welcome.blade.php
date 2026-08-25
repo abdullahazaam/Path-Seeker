@@ -30,17 +30,17 @@
     <div class="absolute w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl -bottom-20 -right-20 pointer-events-none"></div>
 
     <div class="relative z-10 glass-panel rounded-3xl p-10 max-w-md w-full text-center space-y-6">
-        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white text-2xl shadow-[0_0_35px_rgba(168,85,247,0.35)]">
-            <i class="fa-solid fa-compass"></i>
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-cyan-400 via-sky-500 to-blue-600 flex items-center justify-center text-slate-950 text-2xl shadow-[0_0_35px_rgba(0,242,254,0.35)] font-black">
+            <i class="fa-solid fa-compass text-slate-950"></i>
         </div>
         <div class="space-y-2">
-            <h1 class="text-3xl font-black tracking-tight grad-text">PathSeeker</h1>
+            <h1 class="text-3xl font-black tracking-tight bg-gradient-to-r from-white via-cyan-100 to-cyan-400 bg-clip-text text-transparent">PathSeeker</h1>
             <p class="text-xs text-slate-400">Role-Based Career Exploration Passport Platform</p>
         </div>
         <div class="pt-2">
-            <a href="{{ route('home') }}" class="w-full py-3.5 px-6 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-[0_0_30px_rgba(99,102,241,0.35)] transition-all flex items-center justify-center gap-2">
-                <span>Enter Platform</span>
-                <i class="fa-solid fa-arrow-right text-xs"></i>
+            <a href="{{ route('home') }}" class="w-full py-3.5 px-6 rounded-2xl font-black text-sm text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_30px_rgba(0,242,254,0.35)] transition-all flex items-center justify-center gap-2">
+                <span class="text-slate-950 font-black">Enter Platform</span>
+                <i class="fa-solid fa-arrow-right text-xs text-slate-950"></i>
             </a>
         </div>
     </div>

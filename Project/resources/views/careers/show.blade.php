@@ -95,7 +95,7 @@
         <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
 
         {{-- Top accent bar --}}
-        <div class="h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+        <div class="h-1 bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600"></div>
 
         <div class="p-6 sm:p-10 lg:p-12 relative z-10">
             <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
@@ -315,9 +315,9 @@
                 </div>
                 <div class="space-y-1">
                     <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-white/[0.06] overflow-hidden">
-                        <div class="detail-bar h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500" data-width="{{ min(100, $career->market_metrics['growth_value'] * 2) }}" style="width:0%;transition:width 1s cubic-bezier(0.4,0,0.2,1) 0.15s"></div>
+                        <div class="detail-bar h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" data-width="{{ min(100, $career->market_metrics['growth_value'] * 2) }}" style="width:0%;transition:width 1s cubic-bezier(0.4,0,0.2,1) 0.15s"></div>
                     </div>
-                    <div class="flex items-center gap-1 text-[10px] text-pink-500">
+                    <div class="flex items-center gap-1 text-[10px] text-cyan-500">
                         <i class="fa-solid fa-arrow-up text-[9px]"></i>
                         <span>{{ $career->market_metrics['sentiment'] }}</span>
                     </div>
@@ -513,11 +513,11 @@
             <div class="space-y-2">
                 <div class="relative h-3 rounded-full bg-slate-200/80 dark:bg-white/[0.05] overflow-hidden">
                     <div class="absolute left-0 inset-y-0 w-[30%] bg-slate-300 dark:bg-white/10 rounded-l-full"></div>
-                    <div class="absolute left-[30%] inset-y-0 w-[40%] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 salary-bar" style="width:0%;transition:width 1.2s cubic-bezier(0.4,0,0.2,1)"></div>
+                    <div class="absolute left-[30%] inset-y-0 w-[40%] bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600 salary-bar" style="width:0%;transition:width 1.2s cubic-bezier(0.4,0,0.2,1)"></div>
                     <div class="absolute right-0 inset-y-0 w-[30%] bg-emerald-400/40 rounded-r-full"></div>
                 </div>
                 <div class="flex justify-between text-[9px] text-slate-500 dark:text-slate-400 px-1 font-mono">
-                    <span>$70k</span><span class="text-indigo-600 dark:text-indigo-400 font-semibold">Median Range</span><span>$200k+</span>
+                    <span>$70k</span><span class="text-cyan-600 dark:text-cyan-400 font-semibold">Median Range</span><span>$200k+</span>
                 </div>
             </div>
         </div>
@@ -527,24 +527,24 @@
     <div class="glass-panel rounded-3xl border border-slate-200/80 dark:border-white/[0.07] overflow-hidden">
         <div class="px-7 py-4 border-b border-slate-200/80 dark:border-white/[0.07] flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-xl bg-purple-500/15 flex items-center justify-center border border-purple-500/20">
-                    <i class="fa-solid fa-map-location-dot text-purple-600 dark:text-purple-400 text-sm"></i>
+                <div class="w-8 h-8 rounded-xl bg-cyan-500/15 flex items-center justify-center border border-cyan-500/20">
+                    <i class="fa-solid fa-map-location-dot text-cyan-600 dark:text-cyan-400 text-sm"></i>
                 </div>
                 <h2 class="text-sm font-black text-slate-900 dark:text-white">Career Path Progression Flow</h2>
             </div>
-            <span class="text-xs text-purple-600 dark:text-purple-400 font-mono font-semibold">4 Milestones</span>
+            <span class="text-xs text-cyan-600 dark:text-cyan-400 font-mono font-semibold">4 Milestones</span>
         </div>
         <div class="p-7">
             <div class="relative">
                 {{-- Glowing Desktop Connector Line --}}
-                <div class="hidden sm:block absolute top-10 left-12 right-12 h-1 bg-gradient-to-r from-emerald-500 via-indigo-500 to-purple-500/40 rounded-full"></div>
+                <div class="hidden sm:block absolute top-10 left-12 right-12 h-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500/40 rounded-full"></div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 sm:gap-4">
                     @foreach($roadmap as $i => $stage)
                     @php
                         $statusStyles = [
                             'Completed'   => ['badge' => 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30', 'dot' => 'bg-emerald-500', 'ring' => 'bg-emerald-600', 'glow' => 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400'],
-                            'In Progress' => ['badge' => 'bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border-indigo-500/40',   'dot' => 'bg-indigo-500 animate-ping', 'ring' => 'bg-indigo-600', 'glow' => 'bg-indigo-500/15 border-indigo-500/40 text-indigo-600 dark:text-indigo-400 shadow-lg shadow-indigo-500/20'],
+                            'In Progress' => ['badge' => 'bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border-cyan-500/40',   'dot' => 'bg-cyan-500 animate-ping', 'ring' => 'bg-cyan-600', 'glow' => 'bg-cyan-500/15 border-cyan-500/40 text-cyan-600 dark:text-cyan-400 shadow-lg shadow-cyan-500/20'],
                             'Upcoming'    => ['badge' => 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-white/10', 'dot' => 'bg-slate-400', 'ring' => 'bg-slate-600', 'glow' => 'bg-slate-100/80 dark:bg-white/[0.03] border-slate-200/80 dark:border-white/[0.08] text-slate-500 dark:text-slate-400'],
                         ];
                         $st = $statusStyles[$stage['status']];
@@ -583,9 +583,9 @@
             <p class="text-xs text-slate-500 mt-0.5">Take the interest quiz or access masterclasses and toolkits below.</p>
         </div>
         <div class="flex flex-wrap gap-3">
-            <a href="{{ route('quiz.index') }}" class="btn-sweep px-6 py-3 rounded-full font-bold text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-lg shadow-purple-500/25 transition-all flex items-center gap-2 hover:scale-105">
-                <i class="fa-solid fa-brain text-xs"></i>
-                <span>Assess Role Alignment</span>
+            <a href="{{ route('quiz.index') }}" class="btn-sweep px-6 py-3 rounded-full font-bold text-sm text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_20px_rgba(0,242,254,0.35)] transition-all flex items-center gap-2 hover:scale-105">
+                <i class="fa-solid fa-brain text-xs text-slate-950"></i>
+                <span class="text-slate-950 font-black">Assess Role Alignment</span>
             </a>
             <a href="{{ route('multimedia.index') }}" class="px-6 py-3 glass-panel rounded-full text-sm font-bold text-slate-800 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white border border-slate-200/80 dark:border-white/10 hover:border-purple-500/30 transition-all flex items-center gap-2 hover:scale-105">
                 <i class="fa-solid fa-play text-xs text-purple-400"></i>

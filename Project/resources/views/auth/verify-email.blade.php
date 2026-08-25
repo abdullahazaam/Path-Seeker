@@ -11,12 +11,12 @@
             <div class="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 text-center space-y-3">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white text-2xl shadow-md mx-auto">
-                    <i class="fa-solid fa-envelope-circle-check text-white"></i>
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-400 via-sky-500 to-blue-600 flex items-center justify-center text-slate-950 text-2xl shadow-md mx-auto font-black">
+                    <i class="fa-solid fa-envelope-circle-check text-slate-950"></i>
                 </div>
 
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 dark:bg-purple-500/20 border border-purple-500/20 text-xs font-mono font-bold text-purple-700 dark:text-purple-300">
-                    <span class="w-2 h-2 rounded-full bg-purple-500 animate-ping"></span>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-500/20 border border-cyan-500/20 text-xs font-mono font-bold text-cyan-700 dark:text-cyan-300">
+                    <span class="w-2 h-2 rounded-full bg-cyan-500 animate-ping"></span>
                     <span>Step 2 of 2: Security Verification</span>
                 </div>
 
@@ -41,9 +41,9 @@
             <div class="relative z-10 space-y-4 pt-2">
                 <form action="{{ route('verification.send') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn-sweep group w-full py-3.5 rounded-full font-black text-xs sm:text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md hover:shadow-md transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer">
-                        <i class="fa-solid fa-paper-plane text-xs text-white"></i>
-                        <span class="text-white font-black">Resend Verification Email</span>
+                    <button type="submit" class="btn-sweep group w-full py-3.5 rounded-full font-black text-xs sm:text-sm text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_20px_rgba(0,242,254,0.35)] transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer">
+                        <i class="fa-solid fa-paper-plane text-xs text-slate-950"></i>
+                        <span class="text-slate-950 font-black">Resend Verification Email</span>
                     </button>
                 </form>
 

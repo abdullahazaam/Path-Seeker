@@ -24,9 +24,9 @@
         @endif
 
         <div class="pt-4">
-            <a href="{{ route('home') }}" class="btn-sweep px-8 py-3 rounded-full font-bold text-xs text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-md inline-flex items-center gap-2">
-                <i class="fa-solid fa-house text-xs"></i>
-                <span>Return to Homepage</span>
+            <a href="{{ route('home') }}" class="btn-sweep px-8 py-3 rounded-full font-black text-xs text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_20px_rgba(0,242,254,0.35)] inline-flex items-center gap-2">
+                <i class="fa-solid fa-house text-xs text-slate-950"></i>
+                <span class="text-slate-950 font-black">Return to Homepage</span>
             </a>
         </div>
     </div>

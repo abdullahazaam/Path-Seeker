@@ -82,8 +82,8 @@
                     {{-- Header Section with Brand Emblem --}}
                     <div class="flex items-center justify-between pb-1">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white text-sm shadow-md shrink-0">
-                                <i class="fa-solid fa-passport text-white"></i>
+                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-400 via-sky-500 to-blue-600 flex items-center justify-center text-slate-950 text-sm shadow-md shrink-0 font-black">
+                                <i class="fa-solid fa-passport text-slate-950"></i>
                             </div>
                             <div>
                                 <div class="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase font-mono tracking-wider">Free Instant Registration</div>

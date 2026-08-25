@@ -267,9 +267,9 @@
                         <button type="button" @click="submitStoryModal = false" class="px-5 py-2.5 rounded-full text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 transition-colors">
                             Cancel
                         </button>
-                        <button type="submit" class="btn-sweep px-7 py-3 rounded-full text-xs font-bold text-white bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 hover:from-pink-500 hover:to-indigo-500 shadow-md transition-all flex items-center gap-2 cursor-pointer">
+                        <button type="submit" class="btn-sweep px-7 py-3 rounded-full text-xs font-bold text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-md transition-all flex items-center gap-2 cursor-pointer font-black">
                             <span>Submit for Verification</span>
-                            <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                            <i class="fa-solid fa-paper-plane text-[10px] text-slate-950"></i>
                         </button>
                     </div>
 
