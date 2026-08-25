@@ -8,17 +8,18 @@ use Illuminate\Http\Request;
 class CareerController extends Controller
 {
     /**
-     * Display a listing of the resource with pagination.
+     * Display a listing of the resource with advanced relational filters and pagination.
      */
     public function index(Request $request)
     {
         $query = Career::query();
 
         if ($request->filled('search')) {
-            $search = $request->input('search');
+            $search = trim($request->input('search'));
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
                   ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('domain', 'like', "%{$search}%")
                   ->orWhere('required_skills', 'like', "%{$search}%");
             });
         }
@@ -31,7 +32,28 @@ class CareerController extends Controller
             $query->forRole($request->input('role'));
         }
 
-        $careers = $query->orderBy('id', 'asc')->paginate(6)->withQueryString();
+        if ($request->filled('confidence')) {
+            $query->where('confidence_level', $request->input('confidence'));
+        }
+
+        // Relational sorting options
+        $sort = $request->input('sort', 'default');
+        switch ($sort) {
+            case 'title_asc':
+                $query->orderBy('title', 'asc');
+                break;
+            case 'title_desc':
+                $query->orderBy('title', 'desc');
+                break;
+            case 'newest':
+                $query->orderBy('created_at', 'desc');
+                break;
+            default:
+                $query->orderBy('id', 'asc');
+                break;
+        }
+
+        $careers = $query->paginate(6)->withQueryString();
         $domains = Career::select('domain')->distinct()->pluck('domain');
 
         $roleCounts = [
@@ -42,6 +64,26 @@ class CareerController extends Controller
         ];
 
         return view('careers.index', compact('careers', 'domains', 'roleCounts'));
+    }
+
+    /**
+     * Autocomplete API endpoint for instant indexed search suggestions.
+     */
+    public function autocomplete(Request $request)
+    {
+        $q = trim($request->query('q', ''));
+        if (strlen($q) < 2) {
+            return response()->json([]);
+        }
+
+        $results = Career::where('title', 'like', "%{$q}%")
+            ->orWhere('domain', 'like', "%{$q}%")
+            ->orWhere('required_skills', 'like', "%{$q}%")
+            ->select('id', 'title', 'domain', 'target_role', 'expected_salary', 'confidence_level')
+            ->take(8)
+            ->get();
+
+        return response()->json($results);
     }
 
     /**
@@ -63,9 +105,16 @@ class CareerController extends Controller
             'domain' => 'required|string|max:255',
             'required_skills' => 'required|string',
             'expected_salary' => 'required|string|max:255',
+            'target_role' => 'nullable|in:student,graduate,professional,all',
+            'salary_source_name' => 'nullable|string|max:255',
+            'source_url' => 'nullable|url',
+            'source_date' => 'nullable|string|max:50',
+            'currency' => 'nullable|string|max:10',
+            'methodology_notes' => 'nullable|string',
+            'confidence_level' => 'nullable|string|max:50',
         ]);
 
-        Career::create($validated);
+        $career = Career::create($validated);
 
         return redirect()->route('careers.index')->with('success', 'Career added successfully!');
     }
@@ -101,11 +150,18 @@ class CareerController extends Controller
             'domain' => 'required|string|max:255',
             'required_skills' => 'required|string',
             'expected_salary' => 'required|string|max:255',
+            'target_role' => 'nullable|in:student,graduate,professional,all',
+            'salary_source_name' => 'nullable|string|max:255',
+            'source_url' => 'nullable|url',
+            'source_date' => 'nullable|string|max:50',
+            'currency' => 'nullable|string|max:10',
+            'methodology_notes' => 'nullable|string',
+            'confidence_level' => 'nullable|string|max:50',
         ]);
 
         $career->update($validated);
 
-        return redirect()->route('careers.show', $career->id)->with('success', 'Career updated successfully!');
+        return redirect()->route('careers.index')->with('success', 'Career updated successfully!');
     }
 
     /**

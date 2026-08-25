@@ -163,13 +163,28 @@
                         </button>
                     </div>
 
-                    {{-- Data Source & Methodology Metadata --}}
-                    <div class="pt-2.5 border-t border-slate-200/60 dark:border-white/5 text-[9px] text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-1">
-                        <span class="flex items-center gap-1 font-medium text-slate-600 dark:text-slate-400">
-                            <i class="fa-solid fa-shield-halved text-emerald-500 text-[8px]"></i>
-                            <span>Source: Verified 2026 Tech Benchmarks</span>
-                        </span>
-                        <span class="font-mono text-[9px] text-slate-500">Region: Global / Remote</span>
+                    {{-- Data Source & Methodology Metadata (Phase 6 Career Intelligence) --}}
+                    <div class="pt-2.5 border-t border-slate-200/60 dark:border-white/5 text-[9px] text-slate-500 dark:text-slate-400 space-y-1.5 text-left">
+                        <div class="flex items-center justify-between gap-1">
+                            <span class="flex items-center gap-1 font-bold text-slate-700 dark:text-slate-300">
+                                <i class="fa-solid fa-shield-halved text-emerald-500 text-[8px]"></i>
+                                <span>{{ $career->salary_source_name ?? 'Verified 2026 Tech Benchmarks' }}</span>
+                            </span>
+                            <span class="font-mono text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold">
+                                {{ $career->confidence_level ?? 'Verified' }}
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between text-[9px] text-slate-500">
+                            <span>Date: {{ $career->source_date ?? '2026-Q1' }} ({{ $career->currency ?? 'USD' }})</span>
+                            @if($career->source_url)
+                                <a href="{{ $career->source_url }}" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline">Source Link &rarr;</a>
+                            @endif
+                        </div>
+                        @if($career->methodology_notes)
+                            <p class="text-[8px] text-slate-400 leading-tight border-t border-slate-200/40 dark:border-white/5 pt-1">
+                                {{ $career->methodology_notes }}
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>

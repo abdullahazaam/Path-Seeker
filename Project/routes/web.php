@@ -25,13 +25,20 @@ Route::get('/', function () {
 // Authentication Routes
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
+
+    // Password Reset Routes
+    Route::get('/forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
+    Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email')->middleware('throttle:5,1');
+    Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
+    Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update')->middleware('throttle:5,1');
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Public Features (Read-Only)
+// Public Features (Read-Only) & Indexed Career Intelligence Autocomplete
+Route::get('/api/careers/autocomplete', [CareerController::class, 'autocomplete'])->name('api.careers.autocomplete');
 Route::resource('careers', CareerController::class)->only(['index', 'show']);
 Route::resource('multimedia', MultimediaController::class)->only(['index', 'show']);
 Route::resource('resources', ResourceController::class)->only(['index', 'show']);
@@ -49,8 +56,8 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 
 use App\Http\Controllers\ChatController;
 
-// Real-Time AI Career Guide Chatbot Endpoint
-Route::post('/chat/message', [ChatController::class, 'sendMessage'])->name('chat.message');
+// Real-Time AI Career Guide Chatbot Endpoint (Rate-Limited)
+Route::post('/chat/message', [ChatController::class, 'sendMessage'])->name('chat.message')->middleware('throttle:20,1');
 
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\NewsletterController;

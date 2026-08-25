@@ -13,6 +13,12 @@ class Career extends Model
         'required_skills',
         'expected_salary',
         'target_role',
+        'salary_source_name',
+        'source_url',
+        'source_date',
+        'currency',
+        'methodology_notes',
+        'confidence_level',
     ];
 
     protected $appends = ['market_metrics'];
