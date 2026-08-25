@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Users & UserProfiles (Safe Idempotent Creation)
+        // 1. Initial System Seed Users (Only created if user does not exist, preventing recreation of deleted accounts)
         $users = [
             [
                 'name' => 'Admin User',
@@ -55,30 +55,24 @@ class DatabaseSeeder extends Seeder
                 'education_level' => 'B.S. Software Engineering',
                 'interests' => 'Tech Leadership, Enterprise Architecture',
             ],
-            [
-                'name' => 'Abdullah Azaam',
-                'email' => 'abdullahazaam1505@gmail.com',
-                'password' => Hash::make('student123'),
-                'role' => 'student',
-                'education_level' => 'Bachelor of Science in Computer Science',
-                'interests' => 'Full-Stack Development, Cloud Architecture, AI Systems',
-            ],
         ];
 
         foreach ($users as $userData) {
-            $user = User::updateOrCreate(
-                ['email' => $userData['email']],
-                $userData
-            );
+            if (User::where('email', $userData['email'])->doesntExist()) {
+                $user = User::create([
+                    'name' => $userData['name'],
+                    'email' => $userData['email'],
+                    'password' => $userData['password'],
+                    'role' => $userData['role'],
+                ]);
 
-            UserProfile::updateOrCreate(
-                ['user_id' => $user->id],
-                [
+                UserProfile::create([
+                    'user_id' => $user->id,
                     'education_level' => $userData['education_level'],
                     'interests' => $userData['interests'],
                     'profile_image' => null,
-                ]
-            );
+                ]);
+            }
         }
 
         // 2. Comprehensive 2026 Career Tracks with Role-Based Targeting
