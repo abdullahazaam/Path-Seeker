@@ -81,7 +81,11 @@ class AuthController extends Controller
             'interests' => $validated['interests'] ?? null,
         ]);
 
-        event(new Registered($user));
+        try {
+            event(new Registered($user));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning('Email verification dispatch failed during registration: ' . $e->getMessage());
+        }
 
         Auth::login($user);
         $request->session()->regenerate();
@@ -123,7 +127,11 @@ class AuthController extends Controller
         }
 
         if ($request->user()) {
-            $request->user()->sendEmailVerificationNotification();
+            try {
+                $request->user()->sendEmailVerificationNotification();
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::warning('Resend email verification notification failed: ' . $e->getMessage());
+            }
         }
 
         return back()->with('status', 'verification-link-sent');
