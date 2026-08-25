@@ -17,7 +17,7 @@
                     <i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400"></i>
                     <span>Assessment Completed</span>
                 </span>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/25 text-xs font-bold text-purple-700 dark:text-purple-300 font-mono">
+                <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/25 text-xs font-bold text-cyan-700 dark:text-cyan-300 font-mono">
                     <i class="fa-solid fa-code-branch text-[10px]"></i>
                     <span>Version {{ $attempt->quiz_version ?? '2026.v1' }}</span>
                 </span>

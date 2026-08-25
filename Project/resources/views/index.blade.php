@@ -658,15 +658,15 @@
         <div class="relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#080B12] shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
             <div class="px-7 py-5 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between bg-slate-50/50 dark:bg-white/[0.02]">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-2xl bg-rose-500/15 border border-rose-500/25 flex items-center justify-center shadow-sm">
-                        <i class="fa-solid fa-play text-rose-600 dark:text-rose-400 text-sm"></i>
+                    <div class="w-10 h-10 rounded-2xl bg-cyan-500/15 border border-cyan-500/25 flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-play text-cyan-600 dark:text-cyan-400 text-sm"></i>
                     </div>
                     <div>
                         <h3 class="text-base font-black text-slate-900 dark:text-white font-display">Multimedia Center</h3>
                         <p class="text-[11px] text-slate-500 dark:text-slate-400">HD masterclasses &amp; podcast walkthroughs</p>
                     </div>
                 </div>
-                <a href="{{ route('multimedia.index') }}" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors flex items-center gap-1.5 group">
+                <a href="{{ route('multimedia.index') }}" class="text-xs font-bold text-cyan-600 dark:text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1.5 group">
                     <span>View All</span>
                     <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-0.5 transition-transform"></i>
                 </a>
@@ -680,12 +680,12 @@
                                 <div class="absolute inset-0 bg-black/30 flex items-center justify-center"><i class="fa-solid fa-play text-[8px] text-white"></i></div>
                             </div>
                             <div class="space-y-0.5 min-w-0">
-                                <span class="inline-block text-[9px] font-bold px-2 py-0.5 rounded-full {{ $media->type === 'video' ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/20' : 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/20' }}">{{ strtoupper($media->type) }}</span>
-                                <h4 class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-1 font-display">{{ $media->title }}</h4>
+                                <span class="inline-block text-[9px] font-bold px-2 py-0.5 rounded-full {{ $media->type === 'video' ? 'bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20' : 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/20' }}">{{ strtoupper($media->type) }}</span>
+                                <h4 class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors line-clamp-1 font-display">{{ $media->title }}</h4>
                                 <p class="text-[10px] text-slate-500 dark:text-slate-400 line-clamp-1">{{ $media->tags }}</p>
                             </div>
                         </div>
-                        <a href="{{ route('multimedia.show', $media->id) }}" class="shrink-0 px-3 py-1.5 text-xs font-bold rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white border border-slate-200/80 dark:border-white/10 hover:border-purple-500/40 transition-all flex items-center gap-1.5 shadow-sm">
+                        <a href="{{ route('multimedia.show', $media->id) }}" class="shrink-0 px-3 py-1.5 text-xs font-bold rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-white border border-slate-200/80 dark:border-white/10 hover:border-cyan-500/40 transition-all flex items-center gap-1.5 shadow-sm">
                             <i class="fa-solid fa-play text-[9px]"></i> Stream
                         </a>
                     </div>
@@ -707,7 +707,7 @@
                         <p class="text-[11px] text-slate-500 dark:text-slate-400">Downloadable blueprints &amp; toolkits</p>
                     </div>
                 </div>
-                <a href="{{ route('resources.index') }}" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors flex items-center gap-1.5 group">
+                <a href="{{ route('resources.index') }}" class="text-xs font-bold text-cyan-600 dark:text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1.5 group">
                     <span>View All</span>
                     <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-0.5 transition-transform"></i>
                 </a>
@@ -723,7 +723,7 @@
                                 <span class="inline-block text-[9px] font-bold px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-600 dark:text-sky-400 border border-sky-500/20">
                                     <i class="fa-solid fa-folder text-[8px] mr-0.5"></i>{{ $res->category }}
                                 </span>
-                                <h4 class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors line-clamp-1 font-display">{{ $res->title }}</h4>
+                                <h4 class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors line-clamp-1 font-display">{{ $res->title }}</h4>
                             </div>
                         </div>
                         <a href="{{ $res->file_url }}" target="_blank" class="shrink-0 px-3 py-1.5 text-xs font-bold text-sky-600 dark:text-sky-400 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 hover:border-sky-500/40 hover:text-sky-700 dark:hover:text-sky-300 transition-all flex items-center gap-1.5 shadow-sm">
@@ -743,15 +743,15 @@
     <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         
         {{-- Ambient Corner Glows --}}
-        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none"></div>
 
         <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
             
             {{-- Left Column: Description & Community Callout --}}
             <div class="space-y-4 max-w-2xl">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/25 text-xs font-black uppercase tracking-wider text-purple-700 dark:text-purple-300">
-                    <i class="fa-solid fa-comments text-purple-500"></i>
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/25 text-xs font-black uppercase tracking-wider text-cyan-700 dark:text-cyan-300">
+                    <i class="fa-solid fa-comments text-cyan-500"></i>
                     <span>Community &amp; Engineering Hub</span>
                 </div>
                 <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight font-display">
@@ -904,83 +904,63 @@
     </div>
 </section>
 
-{{-- ══════════════════ SECTION 7: CINEMATIC FULL-SCREEN FINAL CTA (BUILD YOUR PATH) ══════════════════ --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-16 reveal-element">
-    <div class="relative min-h-[70vh] flex items-center justify-center py-16 sm:py-20 px-6 sm:px-10 lg:px-14 rounded-3xl bg-[#04060a] border border-cyan-500/30 overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.9)] w-full">
-        {{-- Converging Laser Warp Rays & Grid Mesh --}}
-        <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:24px_24px]"></div>
-        <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-cyan-500/15 blur-[160px] pointer-events-none"></div>
-        <div class="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-purple-600/15 blur-[160px] pointer-events-none"></div>
+{{-- ══════════════════ SECTION 7: FINAL CTA (BUILD YOUR PATH) ══════════════════ --}}
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
+    <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden text-center">
+        {{-- Ambient Corner Glows --}}
+        <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none"></div>
 
-        {{-- Converging Trajectory SVG Perspective Lines --}}
-        <svg class="absolute inset-0 w-full h-full opacity-20 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
-            <line x1="100%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
-            <line x1="0%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
-            <line x1="100%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
-            <line x1="50%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1.5"/>
-            <line x1="50%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1.5"/>
-            <defs>
-                <linearGradient id="cyanGradLine" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.1"/>
-                    <stop offset="50%" stop-color="#00f2fe" stop-opacity="0.8"/>
-                    <stop offset="100%" stop-color="#a855f7" stop-opacity="0.9"/>
-                </linearGradient>
-            </defs>
-        </svg>
-
-        <div class="relative z-10 max-w-4xl mx-auto text-center space-y-8">
-            {{-- Telemetry Badge --}}
-            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-cyan-500/40 text-xs font-mono font-bold text-cyan-400 shadow-[0_0_20px_rgba(0,242,254,0.25)] backdrop-blur-xl">
-                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        <div class="relative z-10 max-w-3xl mx-auto space-y-6 sm:space-y-8">
+            {{-- Category Eyebrow Tag --}}
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
                 <span class="tracking-widest uppercase">04 / GLOBAL TRAJECTORY CONVERGENCE</span>
             </div>
 
-            {{-- Glowing Passport Emblem Centerpiece --}}
-            <div class="flex items-center justify-center my-2">
-                <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-cyan-500 via-sky-600 to-indigo-600 border-2 border-white/40 flex items-center justify-center text-white text-3xl sm:text-4xl shadow-[0_0_50px_rgba(0,242,254,0.6)] animate-bounce duration-1000">
+            {{-- Signature Emblem --}}
+            <div class="flex items-center justify-center">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-tr from-cyan-500 via-sky-500 to-indigo-600 border border-cyan-400/40 flex items-center justify-center text-white text-2xl sm:text-3xl shadow-lg shadow-cyan-500/20">
                     <i class="fa-solid fa-compass text-white"></i>
-                    <div class="absolute inset-0 rounded-3xl border border-cyan-300 animate-ping opacity-30 pointer-events-none"></div>
                 </div>
             </div>
 
-            {{-- Standardized Cinematic Editorial Heading --}}
+            {{-- Standardized Heading with Electric Cyan Gradient --}}
             <div class="space-y-3">
-                <h2 class="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-black font-display tracking-tight uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-cyan-400 drop-shadow-[0_0_30px_rgba(0,242,254,0.3)] leading-tight">
-                    BUILD YOUR PATH
+                <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black font-display tracking-tight uppercase text-slate-900 dark:text-white leading-tight">
+                    BUILD YOUR <span class="bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-400 bg-clip-text text-transparent">PATH</span>
                 </h2>
-                <p class="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-normal pt-1">
+                <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed max-w-xl mx-auto font-normal">
                     Connect your ambition to verified 2026 tech economy trajectories. Claim your cryptographic Career Passport, master verified toolchains, and accelerate your professional destiny.
                 </p>
             </div>
 
-            {{-- Cinematic Action CTAs --}}
-            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-                <a href="{{ route('careers.index') }}" class="group relative inline-flex items-center gap-3 px-8 sm:px-10 py-4 text-sm sm:text-base font-black rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-500 text-slate-950 shadow-[0_0_35px_rgba(0,242,254,0.4)] hover:shadow-[0_0_45px_rgba(0,242,254,0.6)] hover:scale-105 transition-all duration-300">
+            {{-- Action CTAs (Restrained Cyan Glow) --}}
+            <div class="flex flex-wrap items-center justify-center gap-3.5 pt-2">
+                <a href="{{ route('careers.index') }}" class="group relative inline-flex items-center gap-2.5 px-8 py-3.5 text-xs sm:text-sm font-black rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-500 text-slate-950 shadow-[0_0_20px_rgba(0,242,254,0.3)] hover:shadow-[0_0_30px_rgba(0,242,254,0.45)] hover:scale-105 transition-all duration-300">
                     <i class="fa-solid fa-compass text-slate-950"></i>
                     <span class="text-slate-950">Explore All Pathways</span>
-                    <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1.5 transition-transform"></i>
+                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-950 group-hover:translate-x-1 transition-transform"></i>
                 </a>
 
-                <a href="{{ route('quiz.index') }}" class="group inline-flex items-center gap-3 px-8 sm:px-10 py-4 text-sm sm:text-base font-bold rounded-full bg-white/[0.05] text-white border border-white/20 hover:border-cyan-400 hover:bg-white/[0.1] hover:scale-105 transition-all duration-300 backdrop-blur-xl">
-                    <i class="fa-solid fa-brain text-purple-400"></i>
+                <a href="{{ route('quiz.index') }}" class="group inline-flex items-center gap-2.5 px-8 py-3.5 text-xs sm:text-sm font-bold rounded-full bg-slate-100 dark:bg-white/[0.04] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/10 hover:border-cyan-500/40 hover:bg-slate-200 dark:hover:bg-white/[0.08] hover:scale-105 transition-all duration-300 backdrop-blur-md">
+                    <i class="fa-solid fa-brain text-purple-500 dark:text-purple-400"></i>
                     <span>Launch Assessment</span>
-                    <i class="fa-solid fa-sparkles text-xs text-cyan-400"></i>
                 </a>
             </div>
 
             {{-- Verification Micro-Telemetry Footer --}}
-            <div class="flex flex-wrap items-center justify-center gap-6 pt-6 text-xs font-mono text-slate-500 border-t border-white/10">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-shield-check text-cyan-400"></i>
+            <div class="flex flex-wrap items-center justify-center gap-6 pt-6 text-[11px] font-mono text-slate-500 dark:text-slate-400 border-t border-slate-200/80 dark:border-white/5">
+                <div class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-check text-cyan-600 dark:text-cyan-400"></i>
                     <span>256-BIT CRYPTOGRAPHIC PASSPORT</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-satellite text-purple-400"></i>
+                <div class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-satellite text-sky-600 dark:text-sky-400"></i>
                     <span>15+ VERIFIED 2026 BLUEPRINTS</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-bolt text-emerald-400"></i>
+                <div class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-bolt text-emerald-600 dark:text-emerald-400"></i>
                     <span>ALGORITHMIC RIASEC MATCH</span>
                 </div>
             </div>

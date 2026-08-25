@@ -87,8 +87,8 @@
 
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div class="space-y-3 max-w-2xl">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/20 text-xs font-semibold text-purple-700 dark:text-purple-300 shadow-sm">
-                    <i class="fa-solid fa-brain text-purple-600 dark:text-purple-400"></i>
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/20 text-xs font-semibold text-cyan-700 dark:text-cyan-300 shadow-sm font-mono">
+                    <i class="fa-solid fa-brain text-cyan-600 dark:text-cyan-400"></i>
                     <span>Cognitive Affinity &amp; Likert-Scale Assessment</span>
                 </div>
                 <h1 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white font-display">

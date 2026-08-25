@@ -374,21 +374,27 @@
             box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 1);
         }
 
-        /* Gradient Text Hooks */
+        /* Gradient Text Hooks - Signature Electric Cyan / Sky / Indigo */
         .grad-text {
-            background: linear-gradient(135deg, #c084fc 0%, #a78bfa 40%, #f472b6 100%);
+            background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 50%, #818cf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         .grad-text-cyan {
-            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+            background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 60%, #6366f1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         html:not(.dark) .grad-text {
-            background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 45%, #db2777 100%);
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #4338ca 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        html:not(.dark) .grad-text-cyan {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #4338ca 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;

@@ -515,7 +515,7 @@
     <div class="relative rounded-3xl p-8 sm:p-10 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 overflow-hidden">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="space-y-1">
-                <div class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
+                <div class="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
                     <i class="fa-solid fa-list-check"></i> Action Plan
                 </div>
                 <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">Recommended Next Steps</h3>
