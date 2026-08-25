@@ -406,17 +406,19 @@
             box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
         }
 
-        /* 2026 Magnetic Card Lift with Crisp Restrained Border */
-        .card-tilt {
+        /* 2026 Magnetic Card Lift with Crisp Restrained Border & 3D Tilt */
+        .card-tilt, .card-tilt-3d, .career-card, [data-tilt] {
             position: relative;
+            transform-style: preserve-3d;
+            will-change: transform;
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
         }
-        .card-tilt:hover {
+        .card-tilt:hover, .card-tilt-3d:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.4);
             border-color: rgba(255, 255, 255, 0.18);
         }
-        html:not(.dark) .card-tilt:hover {
+        html:not(.dark) .card-tilt:hover, html:not(.dark) .card-tilt-3d:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.06);
             border-color: rgba(99, 102, 241, 0.30);
@@ -1174,6 +1176,30 @@
                 revealObserver.observe(el);
             });
 
+            // Universal 3D Tilt & Parallax Physics Engine
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
+                document.querySelectorAll('.card-tilt-3d, .career-card, [data-tilt]').forEach(card => {
+                    card.style.transformStyle = 'preserve-3d';
+                    card.style.transition = 'transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease';
+                    
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const rotateX = ((y - centerY) / centerY) * -5;
+                        const rotateY = ((x - centerX) / centerX) * 6;
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-2px)`;
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                    });
+                });
+            }
+
             // Radial Glow Tracker on Cards
             document.querySelectorAll('.card-tilt, .glass-panel').forEach(card => {
                 card.addEventListener('mousemove', (e) => {
@@ -1187,7 +1213,6 @@
 
             // Custom Desktop Cursor Physics
             const cursor = document.getElementById('customCursor');
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (cursor && !prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
                 document.addEventListener('mousemove', (e) => {
                     cursor.classList.add('active');

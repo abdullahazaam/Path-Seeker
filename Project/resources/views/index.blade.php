@@ -905,82 +905,84 @@
 </section>
 
 {{-- ══════════════════ SECTION 7: CINEMATIC FULL-SCREEN FINAL CTA (BUILD YOUR PATH) ══════════════════ --}}
-<section class="relative min-h-[75vh] flex items-center justify-center my-14 py-20 px-4 sm:px-6 lg:px-8 rounded-3xl bg-[#04060a] border border-cyan-500/30 overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.9)] max-w-7xl mx-auto reveal-element">
-    {{-- Converging Laser Warp Rays & Grid Mesh --}}
-    <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:24px_24px]"></div>
-    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-cyan-500/15 blur-[160px] pointer-events-none"></div>
-    <div class="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-purple-600/15 blur-[160px] pointer-events-none"></div>
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-16 reveal-element">
+    <div class="relative min-h-[70vh] flex items-center justify-center py-16 sm:py-20 px-6 sm:px-10 lg:px-14 rounded-3xl bg-[#04060a] border border-cyan-500/30 overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.9)] w-full">
+        {{-- Converging Laser Warp Rays & Grid Mesh --}}
+        <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-cyan-500/15 blur-[160px] pointer-events-none"></div>
+        <div class="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-purple-600/15 blur-[160px] pointer-events-none"></div>
 
-    {{-- Converging Trajectory SVG Perspective Lines --}}
-    <svg class="absolute inset-0 w-full h-full opacity-20 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
-        <line x1="100%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
-        <line x1="0%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
-        <line x1="100%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
-        <line x1="50%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1.5"/>
-        <line x1="50%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1.5"/>
-        <defs>
-            <linearGradient id="cyanGradLine" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.1"/>
-                <stop offset="50%" stop-color="#00f2fe" stop-opacity="0.8"/>
-                <stop offset="100%" stop-color="#a855f7" stop-opacity="0.9"/>
-            </linearGradient>
-        </defs>
-    </svg>
+        {{-- Converging Trajectory SVG Perspective Lines --}}
+        <svg class="absolute inset-0 w-full h-full opacity-20 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
+            <line x1="100%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
+            <line x1="0%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
+            <line x1="100%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1" stroke-dasharray="6,6"/>
+            <line x1="50%" y1="0%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1.5"/>
+            <line x1="50%" y1="100%" x2="50%" y2="50%" stroke="url(#cyanGradLine)" stroke-width="1.5"/>
+            <defs>
+                <linearGradient id="cyanGradLine" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.1"/>
+                    <stop offset="50%" stop-color="#00f2fe" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="#a855f7" stop-opacity="0.9"/>
+                </linearGradient>
+            </defs>
+        </svg>
 
-    <div class="relative z-10 max-w-4xl mx-auto text-center space-y-8">
-        {{-- Telemetry Badge --}}
-        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-cyan-500/40 text-xs font-mono font-bold text-cyan-400 shadow-[0_0_20px_rgba(0,242,254,0.25)] backdrop-blur-xl">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-            <span class="tracking-widest uppercase">04 / GLOBAL TRAJECTORY CONVERGENCE</span>
-        </div>
-
-        {{-- Glowing Passport Emblem Centerpiece --}}
-        <div class="flex items-center justify-center my-2">
-            <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-cyan-500 via-sky-600 to-indigo-600 border-2 border-white/40 flex items-center justify-center text-white text-3xl sm:text-4xl shadow-[0_0_50px_rgba(0,242,254,0.6)] animate-bounce duration-1000">
-                <i class="fa-solid fa-compass text-white"></i>
-                <div class="absolute inset-0 rounded-3xl border border-cyan-300 animate-ping opacity-30 pointer-events-none"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center space-y-8">
+            {{-- Telemetry Badge --}}
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-cyan-500/40 text-xs font-mono font-bold text-cyan-400 shadow-[0_0_20px_rgba(0,242,254,0.25)] backdrop-blur-xl">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                <span class="tracking-widest uppercase">04 / GLOBAL TRAJECTORY CONVERGENCE</span>
             </div>
-        </div>
 
-        {{-- Giant Cinematic Heading --}}
-        <div class="space-y-2">
-            <h2 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-cyan-400 drop-shadow-[0_0_40px_rgba(0,242,254,0.35)] leading-none">
-                BUILD YOUR PATH
-            </h2>
-            <p class="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-normal pt-2">
-                Connect your ambition to verified 2026 tech economy trajectories. Claim your cryptographic Career Passport, master verified toolchains, and accelerate your professional destiny.
-            </p>
-        </div>
-
-        {{-- Cinematic Action CTAs --}}
-        <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <a href="{{ route('careers.index') }}" class="group relative inline-flex items-center gap-3 px-8 sm:px-10 py-4 text-sm sm:text-base font-black rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-500 text-slate-950 shadow-[0_0_35px_rgba(0,242,254,0.5)] hover:shadow-[0_0_50px_rgba(0,242,254,0.7)] hover:scale-105 transition-all duration-300">
-                <i class="fa-solid fa-compass text-slate-950"></i>
-                <span class="text-slate-950">Explore All Pathways</span>
-                <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1.5 transition-transform"></i>
-            </a>
-
-            <a href="{{ route('quiz.index') }}" class="group inline-flex items-center gap-3 px-8 sm:px-10 py-4 text-sm sm:text-base font-bold rounded-full bg-white/[0.05] text-white border border-white/20 hover:border-cyan-400 hover:bg-white/[0.1] hover:scale-105 transition-all duration-300 backdrop-blur-xl">
-                <i class="fa-solid fa-brain text-purple-400"></i>
-                <span>Launch Assessment</span>
-                <i class="fa-solid fa-sparkles text-xs text-cyan-400"></i>
-            </a>
-        </div>
-
-        {{-- Verification Micro-Telemetry Footer --}}
-        <div class="flex flex-wrap items-center justify-center gap-6 pt-6 text-xs font-mono text-slate-500 border-t border-white/10">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-shield-check text-cyan-400"></i>
-                <span>256-BIT CRYPTOGRAPHIC PASSPORT</span>
+            {{-- Glowing Passport Emblem Centerpiece --}}
+            <div class="flex items-center justify-center my-2">
+                <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-cyan-500 via-sky-600 to-indigo-600 border-2 border-white/40 flex items-center justify-center text-white text-3xl sm:text-4xl shadow-[0_0_50px_rgba(0,242,254,0.6)] animate-bounce duration-1000">
+                    <i class="fa-solid fa-compass text-white"></i>
+                    <div class="absolute inset-0 rounded-3xl border border-cyan-300 animate-ping opacity-30 pointer-events-none"></div>
+                </div>
             </div>
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-satellite text-purple-400"></i>
-                <span>15+ VERIFIED 2026 BLUEPRINTS</span>
+
+            {{-- Giant Cinematic Heading --}}
+            <div class="space-y-2">
+                <h2 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-cyan-400 drop-shadow-[0_0_40px_rgba(0,242,254,0.35)] leading-none">
+                    BUILD YOUR PATH
+                </h2>
+                <p class="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-normal pt-2">
+                    Connect your ambition to verified 2026 tech economy trajectories. Claim your cryptographic Career Passport, master verified toolchains, and accelerate your professional destiny.
+                </p>
             </div>
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-bolt text-emerald-400"></i>
-                <span>ALGORITHMIC RIASEC MATCH</span>
+
+            {{-- Cinematic Action CTAs --}}
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+                <a href="{{ route('careers.index') }}" class="group relative inline-flex items-center gap-3 px-8 sm:px-10 py-4 text-sm sm:text-base font-black rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-indigo-500 text-slate-950 shadow-[0_0_35px_rgba(0,242,254,0.5)] hover:shadow-[0_0_50px_rgba(0,242,254,0.7)] hover:scale-105 transition-all duration-300">
+                    <i class="fa-solid fa-compass text-slate-950"></i>
+                    <span class="text-slate-950">Explore All Pathways</span>
+                    <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1.5 transition-transform"></i>
+                </a>
+
+                <a href="{{ route('quiz.index') }}" class="group inline-flex items-center gap-3 px-8 sm:px-10 py-4 text-sm sm:text-base font-bold rounded-full bg-white/[0.05] text-white border border-white/20 hover:border-cyan-400 hover:bg-white/[0.1] hover:scale-105 transition-all duration-300 backdrop-blur-xl">
+                    <i class="fa-solid fa-brain text-purple-400"></i>
+                    <span>Launch Assessment</span>
+                    <i class="fa-solid fa-sparkles text-xs text-cyan-400"></i>
+                </a>
+            </div>
+
+            {{-- Verification Micro-Telemetry Footer --}}
+            <div class="flex flex-wrap items-center justify-center gap-6 pt-6 text-xs font-mono text-slate-500 border-t border-white/10">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-check text-cyan-400"></i>
+                    <span>256-BIT CRYPTOGRAPHIC PASSPORT</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-satellite text-purple-400"></i>
+                    <span>15+ VERIFIED 2026 BLUEPRINTS</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-emerald-400"></i>
+                    <span>ALGORITHMIC RIASEC MATCH</span>
+                </div>
             </div>
         </div>
     </div>

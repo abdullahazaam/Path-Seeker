@@ -7,7 +7,7 @@
 
 @if(auth()->user()->role !== 'admin' && auth()->user()->email !== 'admin@pathseeker.com')
     {{-- Passport User Profile Header --}}
-    <div class="relative rounded-3xl p-8 md:p-10 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+    <div class="card-tilt-3d relative rounded-3xl p-8 md:p-10 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-purple-500/15 dark:bg-purple-500/20 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-cyan-500/15 dark:bg-cyan-500/20 blur-3xl pointer-events-none"></div>
@@ -1541,7 +1541,7 @@
         {{-- 1. Top Metrics Row (5 Stat Cards) --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
             {{-- Metric 1: Total Active Users --}}
-            <div @click="currentTab = 'users'" class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-indigo-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'users' ? 'ring-2 ring-indigo-500/50' : ''">
+            <div @click="currentTab = 'users'" class="card-tilt-3d p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-indigo-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'users' ? 'ring-2 ring-indigo-500/50' : ''">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider font-mono">User Base</span>
                     <div class="w-10 h-10 rounded-2xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg">
@@ -1558,7 +1558,7 @@
             </div>
 
             {{-- Metric 2: Total Career Tracks --}}
-            <div @click="currentTab = 'careers'" class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'careers' ? 'ring-2 ring-purple-500/50' : ''">
+            <div @click="currentTab = 'careers'" class="card-tilt-3d p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'careers' ? 'ring-2 ring-purple-500/50' : ''">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider font-mono">Career Tracks</span>
                     <div class="w-10 h-10 rounded-2xl bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center justify-center text-lg">
@@ -1575,7 +1575,7 @@
             </div>
 
             {{-- Metric 3: Multimedia Assets --}}
-            <div @click="currentTab = 'multimedia'" class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-pink-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'multimedia' ? 'ring-2 ring-pink-500/50' : ''">
+            <div @click="currentTab = 'multimedia'" class="card-tilt-3d p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-pink-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'multimedia' ? 'ring-2 ring-pink-500/50' : ''">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider font-mono">Media Assets</span>
                     <div class="w-10 h-10 rounded-2xl bg-pink-500/15 text-pink-600 dark:text-pink-400 flex items-center justify-center text-lg">
@@ -1592,7 +1592,7 @@
             </div>
 
             {{-- Metric 4: Total Resource Toolkits --}}
-            <div @click="currentTab = 'resources'" class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'resources' ? 'ring-2 ring-emerald-500/50' : ''">
+            <div @click="currentTab = 'resources'" class="card-tilt-3d p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'resources' ? 'ring-2 ring-emerald-500/50' : ''">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider font-mono">Resource Toolkits</span>
                     <div class="w-10 h-10 rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg">
@@ -1609,7 +1609,7 @@
             </div>
 
             {{-- Metric 5: Feedback Inbox --}}
-            <div @click="currentTab = 'feedback'" class="p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-amber-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'feedback' ? 'ring-2 ring-amber-500/50' : ''">
+            <div @click="currentTab = 'feedback'" class="card-tilt-3d p-6 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl space-y-3 hover:-translate-y-1 hover:shadow-2xl hover:border-amber-500/30 transition-all duration-300 cursor-pointer" :class="currentTab === 'feedback' ? 'ring-2 ring-amber-500/50' : ''">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-mono">Feedback Inbox</span>
                     <div class="w-10 h-10 rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg">

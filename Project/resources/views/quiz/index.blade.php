@@ -2,7 +2,7 @@
 @section('title', 'Career Interest & Psychological Alignment Quiz — PathSeeker')
 @section('content')
 
-<div class="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 space-y-8 md:space-y-10 my-6 md:my-8"
+<div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 space-y-8 md:space-y-10 my-6 md:my-8"
      x-data="{
          submitting: false,
          totalSeconds: 300,
