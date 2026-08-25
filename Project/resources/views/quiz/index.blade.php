@@ -266,18 +266,18 @@
                 <div>
                     <button type="submit" 
                             :disabled="submitting"
-                            class="group inline-flex items-center gap-3 px-10 py-4 text-sm font-black text-white rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple hover:shadow-neon-pink transition-all duration-300 hover:scale-105 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer">
+                            class="group inline-flex items-center gap-3 px-10 py-4 text-sm font-black text-slate-950 rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_25px_rgba(0,242,254,0.35)] hover:shadow-[0_0_35px_rgba(0,242,254,0.55)] transition-all duration-300 hover:scale-105 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer">
                         <template x-if="!submitting">
                             <span class="inline-flex items-center gap-3">
-                                <i class="fa-solid fa-calculator text-base text-white"></i>
-                                <span class="text-white font-black">Submit &amp; Calculate Alignment</span>
-                                <i class="fa-solid fa-arrow-right text-xs text-white group-hover:translate-x-1.5 transition-transform"></i>
+                                <i class="fa-solid fa-calculator text-base text-slate-950"></i>
+                                <span class="text-slate-950 font-black">Submit &amp; Calculate Alignment</span>
+                                <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1.5 transition-transform"></i>
                             </span>
                         </template>
                         <template x-if="submitting">
                             <span class="inline-flex items-center gap-3">
-                                <i class="fa-solid fa-circle-notch fa-spin text-base text-white"></i>
-                                <span class="text-white font-black">Evaluating Psychometrics...</span>
+                                <i class="fa-solid fa-circle-notch fa-spin text-base text-slate-950"></i>
+                                <span class="text-slate-950 font-black">Evaluating Psychometrics...</span>
                             </span>
                         </template>
                     </button>

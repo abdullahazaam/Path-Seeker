@@ -245,18 +245,18 @@
             padding: 0.75rem 1.75rem;
             font-size: 0.875rem;
             font-weight: 800;
-            color: #ffffff !important;
+            color: #040812 !important;
             border-radius: var(--radius-full);
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
-            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.25);
+            background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 50%, #3b82f6 100%);
+            box-shadow: 0 4px 18px rgba(0, 242, 254, 0.35);
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
         }
         .btn-primary:hover {
             transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 6px 22px rgba(124, 58, 237, 0.35);
-            background: linear-gradient(135deg, #4338ca 0%, #6d28d9 50%, #be185d 100%);
+            box-shadow: 0 6px 24px rgba(0, 242, 254, 0.50);
+            background: linear-gradient(135deg, #38bdf8 0%, #00f2fe 50%, #60a5fa 100%);
         }
 
         .btn-secondary {
@@ -279,13 +279,13 @@
             color: #0f172a;
         }
         .btn-secondary:hover {
-            border-color: rgba(255, 255, 255, 0.22);
-            color: #c084fc;
+            border-color: rgba(0, 242, 254, 0.40);
+            color: #00f2fe;
             transform: translateY(-1px);
         }
         html:not(.dark) .btn-secondary:hover {
-            border-color: rgba(99, 102, 241, 0.5);
-            color: #6366f1;
+            border-color: rgba(2, 132, 199, 0.5);
+            color: #0284c7;
         }
 
         .btn-outline {
@@ -298,13 +298,13 @@
             font-weight: 700;
             border-radius: var(--radius-full);
             background: transparent;
-            border: 1px solid rgba(168, 85, 247, 0.30);
-            color: #c084fc;
+            border: 1px solid rgba(0, 242, 254, 0.30);
+            color: #00f2fe;
             transition: all 0.25s ease;
         }
         .btn-outline:hover {
-            background: rgba(168, 85, 247, 0.10);
-            border-color: rgba(168, 85, 247, 0.5);
+            background: rgba(0, 242, 254, 0.10);
+            border-color: rgba(0, 242, 254, 0.60);
             transform: translateY(-1px);
         }
 
@@ -658,8 +658,8 @@
             {{-- Top Header --}}
             <div class="px-5 py-4 bg-white/90 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between shrink-0">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center text-white shadow-md shrink-0">
-                        <i class="fa-solid fa-wand-magic-sparkles text-xs text-white"></i>
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#00f2fe] via-sky-500 to-blue-600 flex items-center justify-center text-slate-950 shadow-md shrink-0">
+                        <i class="fa-solid fa-wand-magic-sparkles text-xs text-slate-950"></i>
                     </div>
                     <div>
                         <h4 class="text-xs sm:text-sm font-black text-slate-900 dark:text-white font-display flex items-center gap-1.5">
@@ -678,9 +678,9 @@
             <div id="chatMessagesContainer" class="flex-1 p-4 overflow-y-auto space-y-3.5 scrollbar-thin">
                 <template x-for="(msg, index) in messages" :key="index">
                     <div class="flex flex-col" :class="msg.sender === 'user' ? 'items-end' : 'items-start'">
-                        <div class="max-w-[88%] rounded-2xl p-3.5 text-xs sm:text-[13px] leading-relaxed shadow-sm"
+                        <div class="max-w-[88%] rounded-2xl p-3.5 text-xs sm:text-[13px] leading-relaxed shadow-sm font-medium"
                              :class="msg.sender === 'user' 
-                                 ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-br-none' 
+                                 ? 'bg-gradient-to-r from-[#00f2fe] via-sky-500 to-blue-600 text-slate-950 font-bold rounded-br-none shadow-[0_0_15px_rgba(0,242,254,0.3)]' 
                                  : 'bg-slate-100/90 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-white/5 rounded-bl-none'">
                             <div x-html="formatText(msg.text)"></div>
                         </div>
@@ -691,9 +691,9 @@
                 {{-- Typing / Thinking Indicator --}}
                 <div x-show="loading" class="flex flex-col items-start">
                     <div class="bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200/80 dark:border-white/10 rounded-2xl rounded-bl-none px-4 py-3 text-xs flex items-center gap-1.5 shadow-sm">
-                        <span class="w-2 h-2 rounded-full bg-purple-500 animate-bounce" style="animation-delay: 0ms"></span>
-                        <span class="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style="animation-delay: 150ms"></span>
-                        <span class="w-2 h-2 rounded-full bg-pink-500 animate-bounce" style="animation-delay: 300ms"></span>
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style="animation-delay: 0ms"></span>
+                        <span class="w-2 h-2 rounded-full bg-sky-400 animate-bounce" style="animation-delay: 150ms"></span>
+                        <span class="w-2 h-2 rounded-full bg-blue-500 animate-bounce" style="animation-delay: 300ms"></span>
                         <span class="text-[11px] font-mono text-slate-500 dark:text-slate-400 ml-1.5 font-medium">PathSeeker AI is thinking...</span>
                     </div>
                 </div>
@@ -703,7 +703,7 @@
                     <p class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 tracking-wider font-mono px-1">Suggested Inquiries</p>
                     <div class="flex flex-wrap gap-1.5">
                         <template x-for="(q, qIndex) in quickQuestions" :key="qIndex">
-                            <button @click="sendMessage(q)" class="text-[11px] text-left px-2.5 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200/70 dark:border-purple-500/20 hover:border-purple-400 transition-colors cursor-pointer font-medium">
+                            <button @click="sendMessage(q)" class="text-[11px] text-left px-2.5 py-1.5 rounded-xl bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 border border-cyan-200/70 dark:border-cyan-500/20 hover:border-cyan-400 transition-colors cursor-pointer font-medium">
                                 <span x-text="q"></span> &rarr;
                             </button>
                         </template>
@@ -718,11 +718,11 @@
                            x-model="userInput"
                            :disabled="loading"
                            placeholder="Ask about careers, skills, roadmaps..."
-                           class="w-full bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-white/10 rounded-full px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500/80 dark:focus:border-purple-400 disabled:opacity-50">
+                           class="w-full bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-white/10 rounded-full px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500/80 dark:focus:border-cyan-400 disabled:opacity-50">
                 </div>
                 <button type="submit"
                         :disabled="loading"
-                        class="w-9 h-9 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white flex items-center justify-center shadow-md hover:scale-105 transition-transform shrink-0 cursor-pointer disabled:opacity-50"
+                        class="w-9 h-9 rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 flex items-center justify-center shadow-md hover:scale-105 transition-transform shrink-0 cursor-pointer disabled:opacity-50"
                         title="Send Message">
                     <i class="fa-solid fa-paper-plane text-xs"></i>
                 </button>
@@ -741,10 +741,10 @@
                 id="floatingAiGuideBtn"
                 title="Toggle AI Career Guide"
                 style="transform-origin: bottom right;"
-                class="fixed bottom-6 right-6 z-[99999] h-12 sm:h-14 px-4 sm:px-5 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center gap-2.5 shadow-[0_0_25px_rgba(147,51,234,0.55)] hover:shadow-[0_0_35px_rgba(236,72,153,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer origin-bottom-right border border-white/20 overflow-hidden text-white group">
+                class="fixed bottom-6 right-6 z-[99999] h-12 sm:h-14 px-4 sm:px-5 rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 flex items-center justify-center gap-2.5 shadow-[0_0_25px_rgba(0,242,254,0.55)] hover:shadow-[0_0_35px_rgba(0,242,254,0.75)] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer origin-bottom-right border border-white/30 overflow-hidden text-slate-950 group">
             
-            <i class="fa-solid fa-wand-magic-sparkles text-sm sm:text-base text-white group-hover:rotate-12 transition-transform"></i>
-            <span class="text-xs sm:text-sm font-black font-display tracking-tight text-white hidden sm:inline">✦ Ask PathSeeker</span>
+            <i class="fa-solid fa-wand-magic-sparkles text-sm sm:text-base text-slate-950 group-hover:rotate-12 transition-transform"></i>
+            <span class="text-xs sm:text-sm font-black font-display tracking-tight text-slate-950 hidden sm:inline">✦ Ask PathSeeker</span>
         </button>
 
         <!-- Scroll to Top Button -->

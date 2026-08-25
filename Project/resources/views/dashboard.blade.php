@@ -15,32 +15,32 @@
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
             <div class="flex flex-col sm:flex-row sm:items-center gap-6">
                 {{-- Executive Large Avatar --}}
-                <div class="w-20 h-20 md:w-24 md:h-24 rounded-3xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white font-black text-3xl shadow-xl shadow-purple-500/25 border-2 border-white/20 shrink-0">
+                <div class="w-20 h-20 md:w-24 md:h-24 rounded-3xl bg-gradient-to-tr from-cyan-400 via-sky-500 to-blue-600 flex items-center justify-center text-slate-950 font-black text-3xl shadow-xl shadow-cyan-500/25 border-2 border-white/20 shrink-0">
                     {{ substr($user->name, 0, 1) }}
                 </div>
                 <div class="space-y-2.5">
                     <div class="flex items-center gap-3 flex-wrap">
                         <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white font-display tracking-tight leading-none">{{ $user->name }}</h1>
-                        <span class="px-3.5 py-1 text-xs font-black uppercase tracking-wider rounded-full bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25 shadow-sm">
+                        <span class="px-3.5 py-1 text-xs font-black uppercase tracking-wider rounded-full bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/25 shadow-sm font-mono">
                             {{ $user->role }}
                         </span>
                         <span class="px-3.5 py-1 text-xs font-black uppercase tracking-wider rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/25 flex items-center gap-1.5 shadow-sm">
                             <i class="fa-solid fa-circle-check text-[10px]"></i> Active Passport
                         </span>
                         {{-- Subtle Edit Profile Pill --}}
-                        <button type="button" onclick="document.getElementById('pathBuilderSection')?.scrollIntoView({behavior: 'smooth'})" title="Edit Focus & Roadmap" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/10 hover:bg-purple-500/20 border border-slate-300 dark:border-white/10 hover:border-purple-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-purple-700 dark:hover:text-white transition-all shadow-sm cursor-pointer">
-                            <i class="fa-solid fa-pen text-[10px] text-purple-600 dark:text-purple-400"></i>
+                        <button type="button" onclick="document.getElementById('pathBuilderSection')?.scrollIntoView({behavior: 'smooth'})" title="Edit Focus & Roadmap" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/10 hover:bg-cyan-500/20 border border-slate-300 dark:border-white/10 hover:border-cyan-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-white transition-all shadow-sm cursor-pointer">
+                            <i class="fa-solid fa-pen text-[10px] text-cyan-600 dark:text-cyan-400"></i>
                             <span>Edit Profile</span>
                         </button>
                     </div>
                     <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 font-medium flex items-center gap-2 flex-wrap">
-                        <span><i class="fa-regular fa-envelope text-xs text-purple-500 mr-1"></i>{{ $user->email }}</span>
+                        <span><i class="fa-regular fa-envelope text-xs text-cyan-500 mr-1"></i>{{ $user->email }}</span>
                         <span class="text-slate-400 dark:text-slate-600">&bull;</span>
-                        <span><i class="fa-solid fa-graduation-cap text-xs text-indigo-500 mr-1"></i>{{ $user->profile->education_level ?? 'Career Explorer' }}</span>
+                        <span><i class="fa-solid fa-graduation-cap text-xs text-sky-500 mr-1"></i>{{ $user->profile->education_level ?? 'Career Explorer' }}</span>
                     </p>
                     @if($user->profile && $user->profile->interests)
                         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 flex items-center gap-1.5 flex-wrap pt-0.5">
-                            <strong class="text-slate-800 dark:text-slate-200"><i class="fa-solid fa-crosshairs text-pink-500 mr-1 text-xs"></i>Focus Areas:</strong>
+                            <strong class="text-slate-800 dark:text-slate-200"><i class="fa-solid fa-crosshairs text-cyan-500 mr-1 text-xs"></i>Focus Areas:</strong>
                             <span class="px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 font-medium text-slate-700 dark:text-slate-300">{{ $user->profile->interests }}</span>
                         </p>
                     @endif
@@ -48,10 +48,10 @@
             </div>
 
             <div class="flex items-center gap-3 shrink-0">
-                <a href="{{ route('quiz.index') }}" class="btn-sweep group inline-flex items-center gap-3 px-8 py-4 rounded-full font-black text-sm sm:text-base text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md transition-all duration-300 hover:scale-105">
-                    <i class="fa-solid fa-brain text-sm text-white"></i>
-                    <span class="text-white font-black">Take Assessment</span>
-                    <i class="fa-solid fa-arrow-right text-xs text-white group-hover:translate-x-1 transition-transform"></i>
+                <a href="{{ route('quiz.index') }}" class="btn-sweep group inline-flex items-center gap-3 px-8 py-4 rounded-full font-black text-sm sm:text-base text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_25px_rgba(0,242,254,0.35)] transition-all duration-300 hover:scale-105">
+                    <i class="fa-solid fa-brain text-sm text-slate-950"></i>
+                    <span class="text-slate-950 font-black">Take Assessment</span>
+                    <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
         </div>

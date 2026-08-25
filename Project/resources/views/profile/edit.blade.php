@@ -21,13 +21,13 @@
     {{-- Header Banner --}}
     <div class="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div class="flex items-center gap-5">
-            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white font-black text-2xl sm:text-3xl shadow-md shrink-0">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-tr from-cyan-400 via-sky-500 to-blue-600 flex items-center justify-center text-slate-950 font-black text-2xl sm:text-3xl shadow-md shrink-0">
                 {{ substr($user->name, 0, 1) }}
             </div>
             <div class="space-y-1">
                 <div class="flex items-center gap-2">
                     <h1 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display">{{ $user->name }}</h1>
-                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase font-mono {{ $user->role === 'admin' ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/25' : 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25' }}">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase font-mono {{ $user->role === 'admin' ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/25' : 'bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/25' }}">
                         {{ $user->role }}
                     </span>
                 </div>
@@ -169,7 +169,7 @@
                 <a href="{{ route('dashboard') }}" class="px-6 py-3 rounded-full text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 transition-all">
                     Cancel
                 </a>
-                <button type="submit" class="btn-sweep px-8 py-3 rounded-full font-black text-xs text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-md hover:scale-105 transition-all">
+                <button type="submit" class="btn-sweep px-8 py-3 rounded-full font-black text-xs text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 shadow-md hover:scale-105 transition-all cursor-pointer">
                     <span>Save Changes</span>
                 </button>
             </div>

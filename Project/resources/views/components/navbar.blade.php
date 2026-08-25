@@ -9,14 +9,14 @@
         <!-- Logo & Brand Emblem -->
         <a href="{{ route('home') }}" class="flex items-center gap-2 group shrink-0 flex-shrink-0 relative z-10">
             <div class="relative flex-shrink-0">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white font-black text-xs sm:text-base shadow-neon-purple group-hover:scale-110 transition-all duration-300">
-                    <i class="fa-solid fa-compass text-white text-xs sm:text-base"></i>
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-[#00f2fe] via-sky-500 to-blue-600 flex items-center justify-center text-slate-950 font-black text-xs sm:text-base shadow-[0_0_20px_rgba(0,242,254,0.4)] group-hover:scale-110 transition-all duration-300">
+                    <i class="fa-solid fa-compass text-slate-950 text-xs sm:text-base"></i>
                 </div>
-                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 blur-md opacity-40 group-hover:opacity-80 transition-opacity -z-10"></div>
+                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-[#00f2fe] via-sky-500 to-blue-600 blur-md opacity-40 group-hover:opacity-80 transition-opacity -z-10"></div>
             </div>
             <div class="hidden sm:flex items-center gap-1.5 flex-shrink-0">
                 <span class="text-base sm:text-lg lg:text-xl font-black tracking-tight text-slate-900 dark:text-white font-display">PathSeeker</span>
-                <span class="hidden xl:inline-block px-2 py-0.5 text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-purple-500/15 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 rounded-full border border-purple-500/25 dark:border-purple-500/30">Passport</span>
+                <span class="hidden xl:inline-block px-2 py-0.5 text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-cyan-500/15 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 rounded-full border border-cyan-500/25 dark:border-cyan-500/30 font-mono">Passport</span>
             </div>
         </a>
 
@@ -264,9 +264,9 @@
                 </div>
                 
                 <!-- Conditional Passport vs Admin Panel Button -->
-                <a href="{{ route('dashboard') }}" class="btn-sweep inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 xl:px-5 py-2 sm:py-2.5 text-xs xl:text-sm font-bold rounded-full text-white bg-gradient-to-r {{ $isAdmin ? 'from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-neon-purple' : 'from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple' }} hover:shadow-neon-pink transition-all duration-300 hover:-translate-y-0.5 shrink-0 flex-shrink-0 whitespace-nowrap">
-                    <i class="fa-solid {{ $isAdmin ? 'fa-screwdriver-wrench' : 'fa-gauge-high' }} text-xs text-white"></i>
-                    <span class="text-white hidden sm:inline">{{ $isAdmin ? 'Admin Panel' : 'Passport' }}</span>
+                <a href="{{ route('dashboard') }}" class="btn-sweep inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 xl:px-5 py-2 sm:py-2.5 text-xs xl:text-sm font-bold rounded-full text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_20px_rgba(0,242,254,0.35)] hover:shadow-[0_0_30px_rgba(0,242,254,0.55)] transition-all duration-300 hover:-translate-y-0.5 shrink-0 flex-shrink-0 whitespace-nowrap">
+                    <i class="fa-solid {{ $isAdmin ? 'fa-screwdriver-wrench' : 'fa-gauge-high' }} text-xs text-slate-950"></i>
+                    <span class="text-slate-950 font-black hidden sm:inline">{{ $isAdmin ? 'Admin Panel' : 'Passport' }}</span>
                 </a>
 
                 <!-- User Profile Interactive Dropdown Component (Far Right) -->
@@ -275,15 +275,15 @@
                             @click="profileOpen = !profileOpen"
                             title="Account Settings & Profile"
                             aria-label="User account menu"
-                            class="flex items-center gap-1.5 sm:gap-2 pl-1.5 pr-2.5 sm:pl-2 sm:pr-3 py-1 sm:py-1.5 bg-white/60 dark:bg-slate-900/60 hover:bg-white/90 dark:hover:bg-slate-800/80 backdrop-blur-xl rounded-full border border-slate-200 dark:border-white/10 hover:border-purple-500/40 transition-all shadow-sm shrink-0 flex-shrink-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500 group">
-                        <div class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-600 to-pink-600 flex items-center justify-center text-white font-black text-[10px] sm:text-xs shrink-0 shadow-sm group-hover:scale-105 transition-transform">
+                            class="flex items-center gap-1.5 sm:gap-2 pl-1.5 pr-2.5 sm:pl-2 sm:pr-3 py-1 sm:py-1.5 bg-white/60 dark:bg-slate-900/60 hover:bg-white/90 dark:hover:bg-slate-800/80 backdrop-blur-xl rounded-full border border-slate-200 dark:border-white/10 hover:border-cyan-500/40 transition-all shadow-sm shrink-0 flex-shrink-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-500 group">
+                        <div class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-full bg-gradient-to-tr from-cyan-400 via-sky-500 to-blue-600 flex items-center justify-center text-slate-950 font-black text-[10px] sm:text-xs shrink-0 shadow-sm group-hover:scale-105 transition-transform">
                             {{ substr($firstName, 0, 1) }}
                         </div>
                         <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 truncate max-w-[70px] sm:max-w-[90px] xl:max-w-[110px]">{{ $firstName }}</span>
-                        <span class="hidden xl:inline-block text-[9px] font-black uppercase px-2 py-0.5 {{ $isAdmin ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/25' : 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25' }} rounded-full shrink-0">
+                        <span class="hidden xl:inline-block text-[9px] font-black uppercase px-2 py-0.5 {{ $isAdmin ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/25' : 'bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/25' }} rounded-full shrink-0 font-mono">
                             {{ Auth::user()->role }}
                         </span>
-                        <i :class="profileOpen ? 'rotate-180 text-purple-600 dark:text-purple-400' : 'text-slate-400 dark:text-slate-500'" class="fa-solid fa-chevron-down text-[9px] sm:text-[10px] transition-transform duration-200"></i>
+                        <i :class="profileOpen ? 'rotate-180 text-cyan-600 dark:text-cyan-400' : 'text-slate-400 dark:text-slate-500'" class="fa-solid fa-chevron-down text-[9px] sm:text-[10px] transition-transform duration-200"></i>
                     </button>
 
                     <!-- Dropdown Panel -->
@@ -302,7 +302,7 @@
                         <div class="px-3.5 py-3 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 space-y-1 mb-1">
                             <p class="text-xs font-black text-slate-900 dark:text-white truncate font-display">{{ Auth::user()->name }}</p>
                             <div class="flex items-center gap-1.5 pt-0.5">
-                                <span class="inline-block text-[9px] font-black uppercase px-2 py-0.5 {{ $isAdmin ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/25' : 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25' }} rounded-full">
+                                <span class="inline-block text-[9px] font-black uppercase px-2 py-0.5 {{ $isAdmin ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/25' : 'bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/25' }} rounded-full font-mono">
                                     {{ ucfirst(Auth::user()->role) }}
                                 </span>
                                 <span class="text-[10px] text-slate-400 font-mono">Verified Member</span>
@@ -312,8 +312,8 @@
                         <!-- Edit Profile / Settings -->
                         <a href="{{ route('profile.edit') }}"
                            @click="profileOpen = false"
-                           class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-colors">
-                            <div class="w-7 h-7 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xs">
+                           class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/30 transition-colors">
+                            <div class="w-7 h-7 rounded-xl bg-cyan-500/10 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-xs">
                                 <i class="fa-solid fa-user-gear"></i>
                             </div>
                             <div class="flex-1">
@@ -324,8 +324,8 @@
                         <!-- Dashboard / Passport -->
                         <a href="{{ route('dashboard') }}"
                            @click="profileOpen = false"
-                           class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-colors">
-                            <div class="w-7 h-7 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs">
+                           class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/30 transition-colors">
+                            <div class="w-7 h-7 rounded-xl bg-sky-500/10 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center text-xs">
                                 <i class="fa-solid {{ $isAdmin ? 'fa-screwdriver-wrench' : 'fa-gauge-high' }}"></i>
                             </div>
                             <div class="flex-1">
@@ -351,10 +351,10 @@
                     </div>
                 </div>
             @else
-                <a href="{{ route('login') }}" class="px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-colors hidden sm:inline-flex items-center gap-1.5 shrink-0 flex-shrink-0">
+                <a href="{{ route('login') }}" class="px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-white transition-colors hidden sm:inline-flex items-center gap-1.5 shrink-0 flex-shrink-0">
                     <span>Sign In</span>
                 </a>
-                <a href="{{ route('register') }}" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-medium px-4 sm:px-6 py-2 sm:py-2.5 rounded-full shadow-lg shadow-purple-500/25 transition-all duration-300 inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm shrink-0 flex-shrink-0 whitespace-nowrap">
+                <a href="{{ route('register') }}" class="bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 font-black px-4 sm:px-6 py-2 sm:py-2.5 rounded-full shadow-[0_0_20px_rgba(0,242,254,0.35)] hover:shadow-[0_0_30px_rgba(0,242,254,0.55)] transition-all duration-300 inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm shrink-0 flex-shrink-0 whitespace-nowrap">
                     <span>Get Started</span>
                     <i class="fa-solid fa-arrow-right text-xs"></i>
                 </a>

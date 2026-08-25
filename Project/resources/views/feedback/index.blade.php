@@ -41,9 +41,9 @@
             </div>
 
             <div class="flex justify-end">
-                <button type="submit" class="btn-sweep px-8 py-3.5 rounded-full font-black text-xs text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-neon-purple hover:scale-105 transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-paper-plane text-xs text-white"></i>
-                    <span class="text-white font-black">Submit Feedback</span>
+                <button type="submit" class="btn-sweep px-8 py-3.5 rounded-full font-black text-xs text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 shadow-[0_0_20px_rgba(0,242,254,0.35)] hover:shadow-[0_0_30px_rgba(0,242,254,0.55)] hover:scale-105 transition-all flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-paper-plane text-xs text-slate-950"></i>
+                    <span class="text-slate-950 font-black">Submit Feedback</span>
                 </button>
             </div>
         </form>

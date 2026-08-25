@@ -146,10 +146,10 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="btn-sweep group w-full py-3 rounded-full font-black text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-md hover:shadow-md transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer">
-                            <i class="fa-solid fa-right-to-bracket text-xs text-white"></i>
-                            <span class="text-white font-black">Sign In to Passport</span>
-                            <i class="fa-solid fa-arrow-right text-xs text-white group-hover:translate-x-1.5 transition-transform"></i>
+                        <button type="submit" class="btn-sweep group w-full py-3 rounded-full font-black text-sm text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_20px_rgba(0,242,254,0.35)] transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer">
+                            <i class="fa-solid fa-right-to-bracket text-xs text-slate-950"></i>
+                            <span class="text-slate-950 font-black">Sign In to Passport</span>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1.5 transition-transform"></i>
                         </button>
                     </form>
 

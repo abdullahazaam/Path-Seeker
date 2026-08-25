@@ -26,14 +26,14 @@
             @auth
                 <button type="button"
                         @click="submitStoryModal = true"
-                        class="btn-sweep px-7 py-4 rounded-full font-black text-xs text-white bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 shadow-xl shadow-pink-500/20 hover:scale-105 transition-all flex items-center gap-2.5 cursor-pointer">
-                    <i class="fa-solid fa-feather-pointed text-xs"></i>
-                    <span>Share Your Story</span>
+                        class="btn-sweep px-7 py-4 rounded-full font-black text-xs text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 shadow-xl shadow-cyan-500/25 hover:scale-105 transition-all flex items-center gap-2.5 cursor-pointer">
+                    <i class="fa-solid fa-feather-pointed text-xs text-slate-950"></i>
+                    <span class="text-slate-950 font-black">Share Your Story</span>
                 </button>
             @else
-                <a href="{{ route('login') }}" class="btn-sweep px-7 py-4 rounded-full font-black text-xs text-white bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 shadow-xl shadow-pink-500/20 hover:scale-105 transition-all flex items-center gap-2.5">
-                    <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
-                    <span>Sign In to Share Story</span>
+                <a href="{{ route('login') }}" class="btn-sweep px-7 py-4 rounded-full font-black text-xs text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 shadow-xl shadow-cyan-500/25 hover:scale-105 transition-all flex items-center gap-2.5">
+                    <i class="fa-solid fa-arrow-right-to-bracket text-xs text-slate-950"></i>
+                    <span class="text-slate-950 font-black">Sign In to Share Story</span>
                 </a>
             @endauth
         </div>
