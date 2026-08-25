@@ -22,7 +22,74 @@ Route::get('/', function () {
     $featuredMultimedia = Multimedia::latest()->take(3)->get();
     $featuredResources = Resource::latest()->take(3)->get();
     $sampleQuestions = QuizQuestion::take(2)->get();
-    return view('index', compact('featuredCareers', 'featuredMultimedia', 'featuredResources', 'sampleQuestions'));
+
+    $authUser = \Illuminate\Support\Facades\Auth::user();
+    $digitalPassport = null;
+
+    if ($authUser) {
+        $latestAttempt = $authUser->quizAttempts()->latest()->first();
+        $bookmarksCount = $authUser->bookmarks()->count();
+
+        // 1. Calculate Profile Strength (%)
+        $strength = 40; // baseline for created account
+        if ($authUser->profile?->education_level || $authUser->education_level) $strength += 20;
+        if ($authUser->profile?->interests || $authUser->interests) $strength += 20;
+        if ($latestAttempt) $strength += 20;
+
+        // 2. Core Domain & Cloud Proficiency
+        $coreProficiency = 70;
+        $cloudReadiness = 65;
+        $activeTrack = $authUser->role ? ucfirst($authUser->role) . ' Track' : 'Technology Scholar';
+
+        if ($latestAttempt) {
+            $domainScores = $latestAttempt->domain_scores ?? [];
+            if (!empty($domainScores)) {
+                $maxScore = max($domainScores);
+                $coreProficiency = min(99, max(50, (int) round(($maxScore / 25) * 100)));
+            } elseif ($latestAttempt->total_score) {
+                $coreProficiency = min(99, max(50, 60 + (int) ($latestAttempt->total_score * 3)));
+            }
+
+            if (!empty($latestAttempt->top_domain)) {
+                $activeTrack = $latestAttempt->top_domain;
+            } elseif (!empty($latestAttempt->recommended_careers[0])) {
+                $firstRec = $latestAttempt->recommended_careers[0];
+                $activeTrack = is_array($firstRec) ? ($firstRec['title'] ?? 'Tech Specialist') : $firstRec;
+            }
+
+            $cloudReadiness = min(98, max(55, 60 + ($bookmarksCount * 6) + (count($domainScores) * 4)));
+        } else {
+            $cloudReadiness = min(90, max(50, 50 + ($bookmarksCount * 8)));
+        }
+
+        $digitalPassport = [
+            'is_auth' => true,
+            'id_code' => 'PS-2026-' . str_pad($authUser->id, 4, '0', STR_PAD_LEFT),
+            'name' => $authUser->name,
+            'role' => $authUser->role,
+            'education' => $authUser->profile?->education_level ?? $authUser->education_level,
+            'active_track' => $activeTrack,
+            'strength' => min(100, $strength),
+            'core_proficiency' => $coreProficiency,
+            'cloud_readiness' => $cloudReadiness,
+            'has_quiz' => (bool) $latestAttempt,
+        ];
+    } else {
+        $digitalPassport = [
+            'is_auth' => false,
+            'id_code' => 'PS-2026-DEMO',
+            'name' => 'Guest Visitor',
+            'role' => null,
+            'education' => null,
+            'active_track' => 'Explore 15+ Technology Tracks',
+            'strength' => 85,
+            'core_proficiency' => 88,
+            'cloud_readiness' => 82,
+            'has_quiz' => false,
+        ];
+    }
+
+    return view('index', compact('featuredCareers', 'featuredMultimedia', 'featuredResources', 'sampleQuestions', 'digitalPassport'));
 })->name('home');
 
 // Authentication Routes

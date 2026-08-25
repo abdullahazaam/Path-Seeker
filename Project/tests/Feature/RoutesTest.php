@@ -254,4 +254,22 @@ class RoutesTest extends TestCase
             'education_level' => 'Senior Computer Science Undergraduate',
         ]);
     }
+
+    public function test_homepage_renders_dynamic_digital_id_for_guest_and_user(): void
+    {
+        // 1. Guest views homepage - sees guest digital ID placeholder
+        $guestRes = $this->get('/');
+        $guestRes->assertStatus(200);
+        $guestRes->assertSee('PS-2026-DEMO');
+        $guestRes->assertSee('Guest Visitor');
+        $guestRes->assertSee('Guest Mode');
+
+        // 2. Auth user views homepage - sees dynamic user digital ID and metrics
+        $student = User::where('email', 'student@pathseeker.com')->first();
+        $authRes = $this->actingAs($student)->get('/');
+        $authRes->assertStatus(200);
+        $authRes->assertSee('PS-2026-' . str_pad($student->id, 4, '0', STR_PAD_LEFT));
+        $authRes->assertSee($student->name);
+        $authRes->assertSee('Verified ID');
+    }
 }

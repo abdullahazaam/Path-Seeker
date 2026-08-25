@@ -3,9 +3,9 @@
 @section('content')
 
 {{-- SECTION 1: HERO --}}
-<section class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-8 pb-12 md:pb-20">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-        <div class="lg:col-span-6 space-y-8 text-center lg:text-left">
+<section class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 md:pt-6 pb-10 md:pb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-6 space-y-6 sm:space-y-8 text-center lg:text-left">
             <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-panel border border-purple-500/25 text-xs font-semibold text-purple-700 dark:text-purple-300 shadow-sm">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0"></span>
                 <span>AI-Powered Career Intelligence System</span>
@@ -41,7 +41,23 @@
                 </div>
             </div>
         </div>
-        <div class="lg:col-span-6 perspective-stage flex justify-center lg:justify-end">
+
+        @php
+            $dp = $digitalPassport ?? [
+                'is_auth' => Auth::check(),
+                'id_code' => Auth::check() ? 'PS-2026-' . str_pad(Auth::id(), 4, '0', STR_PAD_LEFT) : 'PS-2026-DEMO',
+                'name' => Auth::check() ? Auth::user()->name : 'Guest Visitor',
+                'role' => Auth::check() ? Auth::user()->role : null,
+                'education' => Auth::check() ? (Auth::user()->profile?->education_level ?? Auth::user()->education_level) : null,
+                'active_track' => Auth::check() ? (Auth::user()->role ? ucfirst(Auth::user()->role) . ' Track' : 'Technology Scholar') : 'Explore 15+ Technology Tracks',
+                'strength' => Auth::check() ? 80 : 85,
+                'core_proficiency' => Auth::check() ? 78 : 88,
+                'cloud_readiness' => Auth::check() ? 74 : 82,
+                'has_quiz' => false,
+            ];
+        @endphp
+
+        <div class="lg:col-span-6 perspective-stage flex justify-center lg:justify-end items-center my-auto">
             <div id="passportCard" class="passport-card-3d relative w-full max-w-md bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] rounded-3xl p-6 overflow-hidden cursor-pointer select-none transition-all">
                 {{-- Ambient Aurora Glows --}}
                 <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-purple-500/15 dark:bg-purple-500/20 blur-3xl pointer-events-none"></div>
@@ -60,7 +76,7 @@
                                 <div class="text-sm font-black text-slate-900 dark:text-white font-display">PathSeeker Digital ID</div>
                             </div>
                         </div>
-                        @auth
+                        @if($dp['is_auth'])
                             <span class="bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 shadow-sm">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
                                 <span>Verified ID</span>
@@ -70,30 +86,26 @@
                                 <span class="w-1.5 h-1.5 rounded-full bg-purple-500 dark:bg-purple-400"></span>
                                 <span>Guest Mode &bull; Sign In</span>
                             </a>
-                        @endauth
+                        @endif
                     </div>
 
                     {{-- Candidate Profile Box --}}
                     <div class="bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/5 rounded-2xl p-4 flex items-center gap-4 shadow-sm dark:shadow-inner">
                         <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-500 flex items-center justify-center text-2xl sm:text-3xl shrink-0 shadow-lg">
-                            <i class="fa-solid {{ Auth::check() ? 'fa-user-graduate' : 'fa-compass' }} text-white text-xl sm:text-2xl"></i>
+                            <i class="fa-solid {{ $dp['is_auth'] ? 'fa-user-graduate' : 'fa-compass' }} text-white text-xl sm:text-2xl"></i>
                         </div>
-                        <div class="space-y-0.5">
+                        <div class="space-y-0.5 min-w-0">
                             <div class="text-[10px] text-purple-600 dark:text-purple-300 font-bold uppercase tracking-wider">
-                                {{ Auth::check() ? 'Active Candidate Profile' : 'Demo Passport View' }}
+                                {{ $dp['is_auth'] ? 'Active Candidate Profile' : 'Demo Passport View' }}
                             </div>
-                            <div class="text-base sm:text-lg font-black text-slate-900 dark:text-white font-display">
-                                {{ Auth::check() ? Auth::user()->name : 'Guest Visitor' }}
+                            <div class="text-base sm:text-lg font-black text-slate-900 dark:text-white font-display truncate">
+                                {{ $dp['name'] }}
                             </div>
-                            <div class="text-xs text-slate-600 dark:text-slate-400 font-medium capitalize">
-                                @auth
-                                    {{ Auth::user()->role ? ucfirst(Auth::user()->role) . ' Track' : 'Technology Scholar' }}
-                                    @if(Auth::user()->education_level)
-                                        &bull; {{ ucfirst(str_replace('_', ' ', Auth::user()->education_level)) }}
-                                    @endif
-                                @else
-                                    Explore 15+ Technology Tracks
-                                @endauth
+                            <div class="text-xs text-slate-600 dark:text-slate-400 font-medium capitalize truncate">
+                                {{ $dp['active_track'] }}
+                                @if($dp['education'])
+                                    &bull; {{ ucfirst(str_replace('_', ' ', $dp['education'])) }}
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -103,26 +115,30 @@
                         <div class="flex items-center justify-between text-xs text-slate-700 dark:text-slate-300 font-medium">
                             <span>Competency Matrix</span>
                             <span class="text-indigo-600 dark:text-indigo-400 font-bold font-mono">
-                                {{ Auth::check() ? '96% Profile Strength' : 'Industry Standards' }}
+                                {{ $dp['is_auth'] ? $dp['strength'] . '% Profile Strength' : 'Industry Standards' }}
                             </span>
                         </div>
                         <div class="space-y-2.5">
                             <div class="p-3 rounded-xl bg-slate-100/70 dark:bg-slate-950/40 border border-slate-200/80 dark:border-white/5 space-y-2">
                                 <div class="flex justify-between text-xs text-slate-700 dark:text-slate-300 font-medium">
                                     <span>Core Domain Proficiency</span>
-                                    <span class="text-purple-600 dark:text-purple-400 font-bold font-mono">{{ Auth::check() ? '94%' : 'Benchmark' }}</span>
+                                    <span class="text-purple-600 dark:text-purple-400 font-bold font-mono">
+                                        {{ $dp['is_auth'] ? $dp['core_proficiency'] . '%' : 'Benchmark (' . $dp['core_proficiency'] . '%)' }}
+                                    </span>
                                 </div>
                                 <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
-                                    <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 {{ Auth::check() ? 'w-[94%]' : 'w-[88%]' }}"></div>
+                                    <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-700" style="width: {{ $dp['core_proficiency'] }}%"></div>
                                 </div>
                             </div>
                             <div class="p-3 rounded-xl bg-slate-100/70 dark:bg-slate-950/40 border border-slate-200/80 dark:border-white/5 space-y-2">
                                 <div class="flex justify-between text-xs text-slate-700 dark:text-slate-300 font-medium">
                                     <span>Cloud &amp; DevOps Readiness</span>
-                                    <span class="text-pink-600 dark:text-pink-400 font-bold font-mono">{{ Auth::check() ? '92%' : 'Benchmark' }}</span>
+                                    <span class="text-pink-600 dark:text-pink-400 font-bold font-mono">
+                                        {{ $dp['is_auth'] ? $dp['cloud_readiness'] . '%' : 'Benchmark (' . $dp['cloud_readiness'] . '%)' }}
+                                    </span>
                                 </div>
                                 <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
-                                    <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 {{ Auth::check() ? 'w-[92%]' : 'w-[85%]' }}"></div>
+                                    <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-700" style="width: {{ $dp['cloud_readiness'] }}%"></div>
                                 </div>
                             </div>
                         </div>
@@ -131,15 +147,11 @@
                     {{-- Footer Metadata --}}
                     <div class="pt-3.5 border-t border-slate-200/80 dark:border-white/10 flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs">
                         <span class="font-mono font-medium">
-                            @auth
-                                ID: PS-2026-{{ str_pad(Auth::user()->id, 4, '0', STR_PAD_LEFT) }}
-                            @else
-                                ID: PS-2026-DEMO
-                            @endauth
+                            ID: {{ $dp['id_code'] }}
                         </span>
-                        <a href="{{ Auth::check() ? route('dashboard') : route('register') }}" class="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium flex items-center gap-1.5 transition-colors">
+                        <a href="{{ $dp['is_auth'] ? route('dashboard') : route('register') }}" class="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium flex items-center gap-1.5 transition-colors">
                             <i class="fa-solid fa-sparkles text-[10px]"></i>
-                            <span>{{ Auth::check() ? 'View My Passport' : 'Create Your Passport' }}</span>
+                            <span>{{ $dp['is_auth'] ? 'View My Passport' : 'Create Your Passport' }}</span>
                         </a>
                     </div>
                 </div>
