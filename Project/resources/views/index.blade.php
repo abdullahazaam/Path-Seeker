@@ -58,73 +58,73 @@
         @endphp
 
         <div class="lg:col-span-6 perspective-stage flex justify-center lg:justify-end items-center my-auto">
-            {{-- Premium High-End Digital ID Passport Document --}}
-            <div id="passportCard" class="passport-card-3d relative w-full max-w-lg bg-gradient-to-b from-[#0e1322] via-[#090d18] to-[#060810] border border-white/15 shadow-2xl dark:shadow-[0_12px_40px_rgba(0,0,0,0.6)] rounded-3xl p-6 sm:p-7 overflow-hidden cursor-pointer select-none transition-all duration-300">
+            {{-- Premium High-End Digital ID Passport Document (Light & Dark Mode) --}}
+            <div id="passportCard" class="passport-card-3d relative w-full max-w-lg bg-white/90 dark:bg-gradient-to-b dark:from-[#0e1322] dark:via-[#090d18] dark:to-[#060810] border border-slate-200/90 dark:border-white/15 shadow-xl dark:shadow-[0_12px_40px_rgba(0,0,0,0.6)] backdrop-blur-2xl rounded-3xl p-6 sm:p-7 overflow-hidden cursor-pointer select-none transition-all duration-300">
                 
                 {{-- Document Security Micro-Pattern & Guilloche Background --}}
                 <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                <div class="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-purple-500/15 blur-3xl pointer-events-none"></div>
+                <div class="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
                 <div class="absolute -bottom-20 -left-20 w-56 h-56 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"></div>
 
                 <div class="relative z-10 space-y-6">
                     
                     {{-- Top Header Row: Logo Left | Title Center | Readiness Score Right --}}
-                    <div class="flex items-center justify-between gap-3 pb-5 border-b border-white/10">
+                    <div class="flex items-center justify-between gap-3 pb-5 border-b border-slate-200/80 dark:border-white/10">
                         {{-- Logo / Emblem Left --}}
                         <div class="flex items-center gap-3 shrink-0">
-                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500/20 via-purple-600/30 to-indigo-600/30 border border-purple-400/30 flex items-center justify-center text-white shadow-md">
-                                <i class="fa-solid fa-compass text-lg text-purple-300"></i>
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-500/15 via-indigo-500/20 to-pink-500/15 dark:from-amber-500/20 dark:via-purple-600/30 dark:to-indigo-600/30 border border-purple-500/20 dark:border-purple-400/30 flex items-center justify-center shadow-md">
+                                <i class="fa-solid fa-compass text-lg text-purple-600 dark:text-purple-300"></i>
                             </div>
                         </div>
 
                         {{-- Title Center --}}
                         <div class="text-center flex-1 min-w-0">
-                            <div class="text-[9px] font-mono font-black text-purple-400 uppercase tracking-wider">Global Career Passport</div>
-                            <h3 class="text-base sm:text-lg font-black text-white font-display tracking-tight truncate">PathSeeker Digital ID</h3>
-                            <div class="text-[10px] font-mono text-slate-400">ID: {{ $dp['id_code'] }}</div>
+                            <div class="text-[9px] font-mono font-black text-purple-600 dark:text-purple-400 uppercase tracking-wider">Global Career Passport</div>
+                            <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white font-display tracking-tight truncate">PathSeeker Digital ID</h3>
+                            <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400">ID: {{ $dp['id_code'] }}</div>
                         </div>
 
                         {{-- Readiness Score Right --}}
                         <div class="text-right shrink-0">
-                            <div class="inline-flex flex-col items-end px-3 py-1.5 rounded-2xl bg-white/[0.04] border border-white/10">
-                                <span class="text-base sm:text-lg font-black text-emerald-400 font-mono leading-none">{{ $dp['strength'] }}%</span>
-                                <span class="text-[8px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">Readiness</span>
+                            <div class="inline-flex flex-col items-end px-3 py-1.5 rounded-2xl bg-slate-100/80 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10">
+                                <span class="text-base sm:text-lg font-black text-emerald-600 dark:text-emerald-400 font-mono leading-none">{{ $dp['strength'] }}%</span>
+                                <span class="text-[8px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-0.5">Readiness</span>
                             </div>
                         </div>
                     </div>
 
                     {{-- Candidate Identification Credential Block --}}
-                    <div class="p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center gap-4 sm:gap-5">
+                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50/90 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 flex items-center gap-4 sm:gap-5">
                         {{-- Photo / Holographic Avatar Seal --}}
                         <div class="relative shrink-0">
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg border border-white/20">
-                                <i class="fa-solid {{ $dp['is_auth'] ? 'fa-user-graduate' : 'fa-user' }} text-xl sm:text-2xl"></i>
+                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg border border-slate-200 dark:border-white/20">
+                                <i class="fa-solid {{ $dp['is_auth'] ? 'fa-user-graduate' : 'fa-user' }} text-xl sm:text-2xl text-white"></i>
                             </div>
-                            <div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#080B12] border border-white/20 flex items-center justify-center">
-                                <span class="w-2.5 h-2.5 rounded-full {{ $dp['is_auth'] ? 'bg-emerald-400 animate-pulse' : 'bg-purple-400' }}"></span>
+                            <div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/20 flex items-center justify-center shadow-sm">
+                                <span class="w-2.5 h-2.5 rounded-full {{ $dp['is_auth'] ? 'bg-emerald-500 animate-pulse' : 'bg-purple-500' }}"></span>
                             </div>
                         </div>
 
                         {{-- Core Holder Metadata --}}
                         <div class="space-y-1 min-w-0 flex-1">
                             <div class="flex items-center justify-between gap-2">
-                                <span class="text-[9px] font-mono font-bold text-purple-400 uppercase tracking-wider">
+                                <span class="text-[9px] font-mono font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
                                     {{ $dp['is_auth'] ? 'Certified Candidate' : 'Guest Document' }}
                                 </span>
                                 @if($dp['is_auth'])
-                                    <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[9px] font-bold text-emerald-400 font-mono">
+                                    <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[9px] font-bold text-emerald-700 dark:text-emerald-400 font-mono">
                                         Verified ID
                                     </span>
                                 @else
-                                    <span class="px-2 py-0.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-[9px] font-bold text-purple-300 font-mono">
+                                    <span class="px-2 py-0.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-[9px] font-bold text-purple-700 dark:text-purple-300 font-mono">
                                         Guest Mode
                                     </span>
                                 @endif
                             </div>
-                            <div class="text-base sm:text-lg font-black text-white font-display truncate">
+                            <div class="text-base sm:text-lg font-black text-slate-900 dark:text-white font-display truncate">
                                 {{ $dp['name'] }}
                             </div>
-                            <div class="text-xs text-slate-300 font-medium truncate">
+                            <div class="text-xs text-slate-600 dark:text-slate-300 font-medium truncate">
                                 {{ $dp['active_track'] }}
                                 @if($dp['education'])
                                     &bull; {{ ucfirst(str_replace('_', ' ', $dp['education'])) }}
@@ -135,16 +135,16 @@
 
                     {{-- Bottom Security MRZ Strip & Clean CTA --}}
                     <div class="pt-2 space-y-3">
-                        <div class="p-2.5 rounded-xl bg-black/40 border border-white/5 font-mono text-[9px] tracking-widest text-slate-500 uppercase truncate select-none">
+                        <div class="p-2.5 rounded-xl bg-slate-100/90 dark:bg-black/40 border border-slate-200/80 dark:border-white/5 font-mono text-[9px] tracking-widest text-slate-500 uppercase truncate select-none">
                             P&lt;PSK{{ substr(md5($dp['id_code']), 0, 6) }}&lt;&lt;{{ strtoupper(preg_replace('/[^A-Za-z0-9]/', '', $dp['name'])) }}&lt;&lt;&lt;&lt;&lt;&lt;2026&lt;&lt;
                         </div>
 
-                        <div class="flex items-center justify-between text-xs text-slate-400 pt-1">
+                        <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-1">
                             <div class="flex items-center gap-1.5 text-[11px]">
-                                <i class="fa-solid fa-shield-halved text-purple-400"></i>
+                                <i class="fa-solid fa-shield-halved text-purple-600 dark:text-purple-400"></i>
                                 <span>Official Verified Document</span>
                             </div>
-                            <a href="{{ $dp['is_auth'] ? route('dashboard') : route('register') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 hover:text-purple-300 transition-colors">
+                            <a href="{{ $dp['is_auth'] ? route('dashboard') : route('register') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors">
                                 <span>{{ $dp['is_auth'] ? 'View My Passport' : 'Create Your Passport' }}</span>
                                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </a>

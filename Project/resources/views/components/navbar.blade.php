@@ -31,12 +31,68 @@
             <a href="{{ route('quiz.index') }}" class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all {{ request()->routeIs('quiz.*') ? 'text-indigo-600 dark:text-indigo-300 font-bold bg-indigo-500/15 border border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
                 <span>Interest Quiz</span>
             </a>
-            <a href="{{ route('multimedia.index') }}" class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all {{ request()->routeIs('multimedia.*') ? 'text-indigo-600 dark:text-indigo-300 font-bold bg-indigo-500/15 border border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
-                <span>Multimedia</span>
-            </a>
-            <a href="{{ route('resources.index') }}" class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all {{ request()->routeIs('resources.*') ? 'text-indigo-600 dark:text-indigo-300 font-bold bg-indigo-500/15 border border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
-                <span>Resources</span>
-            </a>
+
+            <!-- Explore Dropdown (Multimedia, Resources, Success Stories) -->
+            <div x-data="{ exploreOpen: false }" @click.outside="exploreOpen = false" class="relative">
+                <button type="button"
+                        @click="exploreOpen = !exploreOpen"
+                        class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer focus:outline-none {{ request()->routeIs('multimedia.*', 'resources.*', 'stories.*') ? 'text-indigo-600 dark:text-indigo-300 font-bold bg-indigo-500/15 border border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
+                    <span>Explore</span>
+                    <i :class="exploreOpen ? 'rotate-180 text-purple-600 dark:text-purple-400' : 'text-slate-400 dark:text-slate-500'" class="fa-solid fa-chevron-down text-[9px] transition-transform duration-200"></i>
+                </button>
+
+                <!-- Dropdown Menu Glass Panel -->
+                <div x-show="exploreOpen"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                     x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                     x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                     style="display: none;"
+                     class="absolute left-0 mt-3 w-64 rounded-3xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden z-50 p-2 space-y-1">
+                    
+                    <!-- Multimedia Hub -->
+                    <a href="{{ route('multimedia.index') }}"
+                       @click="exploreOpen = false"
+                       class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-colors {{ request()->routeIs('multimedia.*') ? 'bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-300' : 'text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-slate-50 dark:hover:bg-white/[0.03]' }}">
+                        <div class="w-8 h-8 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xs shrink-0">
+                            <i class="fa-solid fa-photo-film"></i>
+                        </div>
+                        <div class="space-y-0.5">
+                            <div class="font-bold">Multimedia Hub</div>
+                            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-normal">Videos, podcasts & media</div>
+                        </div>
+                    </a>
+
+                    <!-- Resource Library -->
+                    <a href="{{ route('resources.index') }}"
+                       @click="exploreOpen = false"
+                       class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-colors {{ request()->routeIs('resources.*') ? 'bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-300' : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-slate-50 dark:hover:bg-white/[0.03]' }}">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs shrink-0">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+                        <div class="space-y-0.5">
+                            <div class="font-bold">Resource Library</div>
+                            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-normal">Blueprints & cheat sheets</div>
+                        </div>
+                    </a>
+
+                    <!-- Success Stories -->
+                    <a href="{{ route('stories.index') }}"
+                       @click="exploreOpen = false"
+                       class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-colors {{ request()->routeIs('stories.*') ? 'bg-pink-50 dark:bg-pink-950/30 text-pink-600 dark:text-pink-300' : 'text-slate-700 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-300 hover:bg-slate-50 dark:hover:bg-white/[0.03]' }}">
+                        <div class="w-8 h-8 rounded-xl bg-pink-500/10 dark:bg-pink-500/20 text-pink-600 dark:text-pink-400 flex items-center justify-center text-xs shrink-0">
+                            <i class="fa-solid fa-quote-left"></i>
+                        </div>
+                        <div class="space-y-0.5">
+                            <div class="font-bold">Success Stories</div>
+                            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-normal">Real candidate journeys</div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
         </div>
 
         <!-- Right Actions: Theme Toggle, Notifications, User Auth & Dropdown, Mobile Toggle -->
@@ -338,8 +394,8 @@
         <a href="{{ route('multimedia.index') }}"
            class="px-4 py-3 rounded-2xl text-xs sm:text-sm font-bold flex items-center justify-between transition-colors {{ request()->routeIs('multimedia.*') ? 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 border border-indigo-500/30' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5' }}">
             <span class="flex items-center gap-3">
-                <i class="fa-solid fa-video text-xs text-sky-500"></i>
-                <span>Multimedia</span>
+                <i class="fa-solid fa-photo-film text-xs text-purple-500"></i>
+                <span>Multimedia Hub</span>
             </span>
             <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
         </a>
@@ -348,7 +404,16 @@
            class="px-4 py-3 rounded-2xl text-xs sm:text-sm font-bold flex items-center justify-between transition-colors {{ request()->routeIs('resources.*') ? 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 border border-indigo-500/30' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5' }}">
             <span class="flex items-center gap-3">
                 <i class="fa-solid fa-folder-open text-xs text-emerald-500"></i>
-                <span>Resource Toolkits</span>
+                <span>Resource Library</span>
+            </span>
+            <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+        </a>
+
+        <a href="{{ route('stories.index') }}"
+           class="px-4 py-3 rounded-2xl text-xs sm:text-sm font-bold flex items-center justify-between transition-colors {{ request()->routeIs('stories.*') ? 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 border border-indigo-500/30' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5' }}">
+            <span class="flex items-center gap-3">
+                <i class="fa-solid fa-quote-left text-xs text-pink-500"></i>
+                <span>Success Stories</span>
             </span>
             <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
         </a>
@@ -372,6 +437,7 @@
                     </button>
                 </form>
             </div>
+        @else
             <div class="pt-3 mt-1 border-t border-slate-200 dark:border-white/10 flex items-center gap-2">
                 <a href="{{ route('login') }}" class="flex-1 text-center py-2.5 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-800 dark:text-slate-200 font-bold text-xs">
                     Sign In
