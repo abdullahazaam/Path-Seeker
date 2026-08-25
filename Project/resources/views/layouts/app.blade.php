@@ -96,7 +96,8 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Alpine.js CDN -->
+    <!-- Alpine.js Plugins & Core CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
     <script>
         tailwind.config = {
@@ -104,11 +105,14 @@
             theme: {
                 extend: {
                     colors: {
-                        obsidian: '#050507',
+                        obsidian: '#06080f',
                         surface: {
-                            800: '#12141c',
-                            900: '#0a0b10',
-                            950: '#050507',
+                            800: '#121624',
+                            900: '#090d18',
+                            950: '#06080f',
+                        },
+                        cyan: {
+                            accent: '#00f2fe',
                         }
                     },
                     fontFamily: {
@@ -118,7 +122,7 @@
                     boxShadow: {
                         'neon-purple': '0 4px 20px rgba(168, 85, 247, 0.20), 0 10px 30px rgba(168, 85, 247, 0.08)',
                         'neon-pink': '0 4px 20px rgba(244, 114, 182, 0.20), 0 10px 30px rgba(244, 114, 182, 0.08)',
-                        'neon-cyan': '0 4px 20px rgba(56, 189, 248, 0.20), 0 10px 30px rgba(56, 189, 248, 0.08)',
+                        'neon-cyan': '0 4px 20px rgba(0, 242, 254, 0.25), 0 10px 30px rgba(0, 242, 254, 0.12)',
                         'glass-card': '0 10px 30px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)',
                     }
                 }
@@ -190,11 +194,11 @@
             --color-primary: #a855f7;
             --color-primary-hover: #9333ea;
             --color-primary-light: rgba(168, 85, 247, 0.08);
-            --color-secondary: #38bdf8;
-            --color-secondary-hover: #0ea5e9;
-            --color-bg: #050507;
-            --color-surface: #080b12;
-            --color-surface-hover: #0f1523;
+            --color-secondary: #00f2fe;
+            --color-secondary-hover: #38bdf8;
+            --color-bg: #06080f;
+            --color-surface: #090d18;
+            --color-surface-hover: #101524;
             --color-text: #f8fafc;
             --color-text-muted: #94a3b8;
             --color-text-dim: #64748b;
@@ -543,10 +547,10 @@
         html:not(.dark) footer .text-slate-500 { color: #64748b !important; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased transition-colors duration-500 relative overflow-x-hidden bg-slate-50 dark:bg-[#050507]">
+<body class="min-h-screen flex flex-col antialiased transition-colors duration-500 relative overflow-x-hidden bg-slate-50 dark:bg-[#06080f]">
 
     <!-- ══════════════════ SAFE FULL-SCREEN ANIMATED AMBIENT BACKGROUND CONTAINER ══════════════════ -->
-    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-slate-50 dark:bg-[#050507] transition-colors duration-500" aria-hidden="true">
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-slate-50 dark:bg-[#06080f] transition-colors duration-500" aria-hidden="true">
         <!-- Floating Aurora Orb 1 (Top-Left Indigo/Purple) -->
         <div class="absolute -top-[15%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-indigo-500/20 via-purple-600/20 to-transparent dark:from-indigo-600/30 dark:via-purple-700/25 dark:to-transparent blur-[120px] sm:blur-[160px] animate-aurora-drift-1"></div>
         
