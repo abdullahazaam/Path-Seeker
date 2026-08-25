@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SuccessStoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\UserProfileController;
 use App\Models\Career;
 use App\Models\Multimedia;
 use App\Models\Resource;
@@ -113,6 +114,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/multimedia/{id}/rate', [MultimediaController::class, 'rate'])->name('multimedia.rate');
     Route::post('/multimedia/{id}/progress', [MultimediaController::class, 'saveProgress'])->name('multimedia.progress');
     Route::post('/resources/{id}/rate', [ResourceController::class, 'rate'])->name('resources.rate');
+
+    // User Profile & Account Settings
+    Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [UserProfileController::class, 'update'])->name('profile.update');
 
     // Feedback History & Conversation Thread for Auth User
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');

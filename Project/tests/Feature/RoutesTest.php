@@ -188,4 +188,38 @@ class RoutesTest extends TestCase
         $r->assertSessionHasErrors('email');
         $this->assertGuest();
     }
+
+    public function test_user_profile_edit_and_update_lifecycle(): void
+    {
+        $student = User::where('email', 'student@pathseeker.com')->first();
+
+        // 1. Guest is redirected
+        $this->get('/profile')->assertRedirect('/login');
+
+        // 2. Auth user views profile edit screen
+        $res = $this->actingAs($student)->get('/profile');
+        $res->assertStatus(200);
+        $res->assertSee('Personal &amp; Academic Credentials', false);
+        $res->assertSee($student->email);
+
+        // 3. User updates profile details
+        $updateRes = $this->actingAs($student)->put('/profile', [
+            'name' => 'Alex Rivera Updated',
+            'email' => 'student@pathseeker.com',
+            'education_level' => 'Senior Computer Science Undergraduate',
+            'interests' => 'Distributed Cloud Systems, Generative AI',
+        ]);
+        $updateRes->assertRedirect('/profile');
+        $updateRes->assertSessionHas('success');
+
+        $this->assertDatabaseHas('users', [
+            'id' => $student->id,
+            'name' => 'Alex Rivera Updated',
+        ]);
+
+        $this->assertDatabaseHas('user_profiles', [
+            'user_id' => $student->id,
+            'education_level' => 'Senior Computer Science Undergraduate',
+        ]);
+    }
 }

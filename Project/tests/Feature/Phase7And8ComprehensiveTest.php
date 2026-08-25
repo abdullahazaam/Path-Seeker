@@ -152,7 +152,8 @@ class Phase7And8ComprehensiveTest extends TestCase
         $token = $tokenRes->json('token');
         $this->assertNotEmpty($token);
 
-        // 2. Public Access to Shared Passport
+        // 2. Public Access to Shared Passport (Guest View)
+        auth()->logout();
         $publicRes = $this->get(route('passport.shared', $token));
         $publicRes->assertStatus(200);
         $publicRes->assertSee($student->name, false);

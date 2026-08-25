@@ -188,33 +188,93 @@
                     </div>
                 </div>
                 
-                <!-- User Profile Badge -->
-                <div class="hidden sm:flex items-center gap-2 px-3 py-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-full border border-slate-200 dark:border-white/10 shrink-0 flex-shrink-0 shadow-sm">
-                    <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white font-black text-[11px] shrink-0 shadow-sm">
-                        {{ substr($firstName, 0, 1) }}
-                    </div>
-                    <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 truncate max-w-[90px]">{{ $firstName }}</span>
-                    <span class="hidden lg:inline-block text-[9px] font-black uppercase px-2 py-0.5 {{ $isAdmin ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/25' : 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25' }} rounded-full shrink-0">
-                        {{ Auth::user()->role }}
-                    </span>
-                </div>
-
                 <!-- Conditional Passport vs Admin Panel Button -->
-                <a href="{{ route('dashboard') }}" class="btn-sweep inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-bold rounded-full text-white bg-gradient-to-r {{ $isAdmin ? 'from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-neon-purple' : 'from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple' }} hover:shadow-neon-pink transition-all duration-300 hover:-translate-y-0.5 shrink-0 flex-shrink-0 whitespace-nowrap">
+                <a href="{{ route('dashboard') }}" class="btn-sweep inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-bold rounded-full text-white bg-gradient-to-r {{ $isAdmin ? 'from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-neon-purple' : 'from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-neon-purple' }} hover:shadow-neon-pink transition-all duration-300 hover:-translate-y-0.5 shrink-0 flex-shrink-0 whitespace-nowrap">
                     <i class="fa-solid {{ $isAdmin ? 'fa-screwdriver-wrench' : 'fa-gauge-high' }} text-xs text-white"></i>
                     <span class="text-white">{{ $isAdmin ? 'Admin Panel' : 'Passport' }}</span>
                 </a>
 
-                <!-- Dedicated Sleek Logout Button -->
-                <form action="{{ url('/logout') }}" method="POST" class="inline shrink-0 flex-shrink-0 m-0 p-0">
-                    @csrf
-                    <button type="submit"
-                        title="Sign Out of Account"
-                        aria-label="Sign out"
-                        class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-rose-500/10 dark:hover:bg-rose-500/15 hover:text-rose-600 dark:hover:text-rose-400 hover:border-rose-500/40 transition-all shadow-sm shrink-0 flex-shrink-0 cursor-pointer group focus:outline-none focus:ring-2 focus:ring-rose-500">
-                        <i class="fa-solid fa-arrow-right-from-bracket text-xs sm:text-sm text-slate-700 dark:text-slate-300 group-hover:text-rose-500 transition-colors"></i>
+                <!-- User Profile Interactive Dropdown Component (Far Right) -->
+                <div x-data="{ profileOpen: false }" class="relative shrink-0 flex-shrink-0">
+                    <button type="button"
+                            @click="profileOpen = !profileOpen"
+                            title="Account Settings & Profile"
+                            aria-label="User account menu"
+                            class="flex items-center gap-2 pl-2 pr-3 py-1.5 sm:py-2 bg-white/60 dark:bg-slate-900/60 hover:bg-white/90 dark:hover:bg-slate-800/80 backdrop-blur-xl rounded-full border border-slate-200 dark:border-white/10 hover:border-purple-500/40 transition-all shadow-sm shrink-0 flex-shrink-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500 group">
+                        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-600 to-pink-600 flex items-center justify-center text-white font-black text-xs shrink-0 shadow-sm group-hover:scale-105 transition-transform">
+                            {{ substr($firstName, 0, 1) }}
+                        </div>
+                        <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 truncate max-w-[85px] sm:max-w-[100px]">{{ $firstName }}</span>
+                        <span class="hidden lg:inline-block text-[9px] font-black uppercase px-2 py-0.5 {{ $isAdmin ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/25' : 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25' }} rounded-full shrink-0">
+                            {{ Auth::user()->role }}
+                        </span>
+                        <i :class="profileOpen ? 'rotate-180 text-purple-600 dark:text-purple-400' : 'text-slate-400 dark:text-slate-500'" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
                     </button>
-                </form>
+
+                    <!-- Dropdown Panel -->
+                    <div x-show="profileOpen"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                         @click.outside="profileOpen = false"
+                         style="display: none;"
+                         class="absolute right-0 mt-3 w-64 rounded-3xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden z-50 p-2 space-y-1">
+                        
+                        <!-- User Card Header -->
+                        <div class="px-3.5 py-3 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 space-y-1 mb-1">
+                            <p class="text-xs font-black text-slate-900 dark:text-white truncate font-display">{{ Auth::user()->name }}</p>
+                            <div class="flex items-center gap-1.5 pt-0.5">
+                                <span class="inline-block text-[9px] font-black uppercase px-2 py-0.5 {{ $isAdmin ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/25' : 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25' }} rounded-full">
+                                    {{ ucfirst(Auth::user()->role) }}
+                                </span>
+                                <span class="text-[10px] text-slate-400 font-mono">Verified Member</span>
+                            </div>
+                        </div>
+
+                        <!-- Edit Profile / Settings -->
+                        <a href="{{ route('profile.edit') }}"
+                           @click="profileOpen = false"
+                           class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-colors">
+                            <div class="w-7 h-7 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xs">
+                                <i class="fa-solid fa-user-gear"></i>
+                            </div>
+                            <div class="flex-1">
+                                <span>Edit Profile / Settings</span>
+                            </div>
+                        </a>
+
+                        <!-- Dashboard / Passport -->
+                        <a href="{{ route('dashboard') }}"
+                           @click="profileOpen = false"
+                           class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-colors">
+                            <div class="w-7 h-7 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs">
+                                <i class="fa-solid {{ $isAdmin ? 'fa-screwdriver-wrench' : 'fa-gauge-high' }}"></i>
+                            </div>
+                            <div class="flex-1">
+                                <span>{{ $isAdmin ? 'Admin Control Center' : 'Career Passport' }}</span>
+                            </div>
+                        </a>
+
+                        <!-- Divider -->
+                        <div class="my-1 border-t border-slate-100 dark:border-white/5"></div>
+
+                        <!-- Logout Form -->
+                        <form action="{{ url('/logout') }}" method="POST" class="m-0 p-0">
+                            @csrf
+                            <button type="submit"
+                                    class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors text-left cursor-pointer">
+                                <div class="w-7 h-7 rounded-xl bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xs">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                </div>
+                                <span>Sign Out / Logout</span>
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
             @else
                 <a href="{{ route('login') }}" class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-colors hidden sm:inline-flex items-center gap-1.5 shrink-0 flex-shrink-0">
                     <span>Sign In</span>
@@ -294,15 +354,21 @@
         </a>
 
         @auth
-            <div class="pt-3 mt-1 border-t border-slate-200 dark:border-white/10 flex items-center justify-between gap-3">
-                <a href="{{ route('dashboard') }}" class="flex-1 py-2.5 px-4 rounded-xl text-center font-bold text-xs text-white bg-gradient-to-r {{ $isAdmin ? 'from-purple-600 to-indigo-600' : 'from-indigo-600 to-pink-600' }} shadow-md">
-                    <i class="fa-solid {{ $isAdmin ? 'fa-screwdriver-wrench' : 'fa-gauge-high' }} mr-1"></i>
-                    <span>{{ $isAdmin ? 'Admin Control Panel' : 'My Passport Dashboard' }}</span>
-                </a>
-                <form action="{{ url('/logout') }}" method="POST" class="inline m-0 p-0">
+            <div class="pt-3 mt-1 border-t border-slate-200 dark:border-white/10 flex flex-col gap-2">
+                <div class="flex items-center gap-2">
+                    <a href="{{ route('profile.edit') }}" class="flex-1 py-2.5 px-3 rounded-xl text-center font-bold text-xs bg-slate-100 dark:bg-white/5 text-slate-800 dark:text-slate-200 hover:bg-purple-500/15 hover:text-purple-600 transition-colors flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-user-gear text-purple-500"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a href="{{ route('dashboard') }}" class="flex-1 py-2.5 px-3 rounded-xl text-center font-bold text-xs text-white bg-gradient-to-r {{ $isAdmin ? 'from-purple-600 to-indigo-600' : 'from-indigo-600 to-pink-600' }} shadow-md flex items-center justify-center gap-1.5">
+                        <i class="fa-solid {{ $isAdmin ? 'fa-screwdriver-wrench' : 'fa-gauge-high' }}"></i>
+                        <span>{{ $isAdmin ? 'Admin' : 'Passport' }}</span>
+                    </a>
+                </div>
+                <form action="{{ url('/logout') }}" method="POST" class="w-full m-0 p-0">
                     @csrf
-                    <button type="submit" class="px-4 py-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 font-bold text-xs border border-rose-500/20">
-                        Sign Out
+                    <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 font-bold text-xs border border-rose-500/20 text-center cursor-pointer">
+                        Sign Out / Logout
                     </button>
                 </form>
             </div>
