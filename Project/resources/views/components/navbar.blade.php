@@ -39,20 +39,8 @@
             </a>
         </div>
 
-        <!-- Right Actions: Theme Toggle, User Auth Section, Sign Out & Mobile Toggle -->
-        <div class="flex items-center gap-2 sm:gap-3 shrink-0 flex-shrink-0 relative z-10">
-            <!-- Accessible Font-Size Adjustment Controls (Phase 9 A11y SRS Requirement) -->
-            <div x-data="fontSizeController()" class="hidden sm:flex items-center gap-1 px-2 py-1 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-full shrink-0 shadow-sm" role="group" aria-label="Font size adjustment controls">
-                <button type="button" @click="decreaseFontSize()" :class="scaleIndex === 0 ? 'bg-indigo-500/25 text-indigo-600 dark:text-indigo-300 font-black' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'" class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500" title="Decrease Text Size (90%)" aria-label="Decrease text size">
-                    A-
-                </button>
-                <button type="button" @click="resetFontSize()" :class="scaleIndex === 1 ? 'bg-indigo-500/25 text-indigo-600 dark:text-indigo-300 font-black' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'" class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500" title="Default Text Size (100%)" aria-label="Default text size">
-                    A
-                </button>
-                <button type="button" @click="increaseFontSize()" :class="scaleIndex === 2 ? 'bg-indigo-500/25 text-indigo-600 dark:text-indigo-300 font-black' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'" class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500" title="Increase Text Size (115%)" aria-label="Increase text size">
-                    A+
-                </button>
-            </div>
+        <!-- Right Actions: Theme Toggle, Notifications, User Auth & Sign Out, Mobile Toggle -->
+        <div class="flex items-center gap-2 sm:gap-2.5 shrink-0 flex-shrink-0 relative z-10">
 
             <!-- Theme Toggle -->
             <button id="themeToggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode" aria-label="Toggle light or dark theme"
@@ -67,10 +55,73 @@
                 @endphp
 
                 <!-- Live Notification Center Dropdown (Real-Time Reactive) -->
-                <div x-data="notificationCenter()" class="relative shrink-0 flex-shrink-0">
-                    <button type="button" @click="toggleDropdown()"
-                        title="Notifications" aria-label="View notifications"
-                        class="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-white/80 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/40 transition-all shadow-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <div x-data="{
+                        notifOpen: false,
+                        unreadCount: 0,
+                        notifications: [],
+                        init() {
+                            this.fetchNotifs();
+                            setInterval(() => { this.fetchNotifs(); }, 45000);
+                        },
+                        toggle() {
+                            this.notifOpen = !this.notifOpen;
+                            if (this.notifOpen) {
+                                this.fetchNotifs();
+                            }
+                        },
+                        fetchNotifs() {
+                            fetch('/api/notifications', {
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name=\'csrf-token\']')?.getAttribute('content') || ''
+                                }
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                this.unreadCount = data.unread_count || 0;
+                                this.notifications = data.notifications || [];
+                            })
+                            .catch(() => {});
+                        },
+                        markAsRead(id) {
+                            fetch(`/api/notifications/${id}/read`, {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name=\'csrf-token\']')?.getAttribute('content') || ''
+                                }
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                this.unreadCount = data.unread_count || 0;
+                                const target = this.notifications.find(n => n.id === id);
+                                if (target) target.read = true;
+                            })
+                            .catch(() => {});
+                        },
+                        markAllAsRead() {
+                            fetch('/api/notifications/read-all', {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name=\'csrf-token\']')?.getAttribute('content') || ''
+                                }
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                this.unreadCount = 0;
+                                this.notifications.forEach(n => n.read = true);
+                            })
+                            .catch(() => {});
+                        }
+                    }" 
+                    class="relative shrink-0 flex-shrink-0">
+                    
+                    <button type="button" 
+                            @click="toggle()"
+                            title="Notifications" 
+                            aria-label="View notifications"
+                            class="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-white/80 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white hover:border-purple-500/40 transition-all shadow-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500">
                         <i class="fa-solid fa-bell text-xs sm:text-sm"></i>
                         <span x-show="unreadCount > 0"
                               x-text="unreadCount"
@@ -79,25 +130,25 @@
                         </span>
                     </button>
 
-                    <!-- Notifications Dropdown Flyout -->
-                    <div x-show="open"
+                    <!-- Notifications Dropdown Panel -->
+                    <div x-show="notifOpen"
                          x-transition:enter="transition ease-out duration-200"
                          x-transition:enter-start="opacity-0 translate-y-2 scale-95"
                          x-transition:enter-end="opacity-100 translate-y-0 scale-100"
                          x-transition:leave="transition ease-in duration-150"
                          x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                          x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-                         @click.outside="open = false"
+                         @click.outside="notifOpen = false"
                          style="display: none;"
                          class="absolute right-0 mt-3 w-80 sm:w-96 rounded-3xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden z-50">
                         
                         <div class="px-5 py-4 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between bg-slate-50/80 dark:bg-white/[0.02]">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-bell text-purple-500 text-xs"></i>
-                                <span class="text-xs font-black text-slate-900 dark:text-white font-display">Notifications</span>
+                                <span class="text-xs font-black text-slate-900 dark:text-white font-display">Live Notifications</span>
                                 <span x-show="unreadCount > 0" class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-purple-500/15 text-purple-600 dark:text-purple-300" x-text="unreadCount + ' new'"></span>
                             </div>
-                            <button type="button" @click="markAllAsRead()" x-show="unreadCount > 0" class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
+                            <button type="button" @click="markAllAsRead()" x-show="unreadCount > 0" class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline cursor-pointer">
                                 Mark all read
                             </button>
                         </div>
@@ -121,11 +172,12 @@
                                             <span class="text-[9px] text-slate-400 font-mono shrink-0" x-text="item.time_ago"></span>
                                         </div>
                                         <p class="text-[11px] text-slate-600 dark:text-slate-400 leading-snug line-clamp-2" x-text="item.message"></p>
-                                        <div class="pt-1 flex items-center gap-3">
-                                            <a :href="item.action_url" @click="markAsRead(item.id)" class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
-                                                View &rarr;
+                                        <div class="pt-1 flex items-center justify-between">
+                                            <a :href="item.action_url" @click="markAsRead(item.id)" class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">
+                                                <span>Open</span>
+                                                <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
                                             </a>
-                                            <button type="button" x-show="!item.read" @click="markAsRead(item.id)" class="text-[9px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                            <button type="button" x-show="!item.read" @click="markAsRead(item.id)" class="text-[9px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer">
                                                 Mark read
                                             </button>
                                         </div>
@@ -153,12 +205,13 @@
                     <span class="text-white">{{ $isAdmin ? 'Admin Panel' : 'Passport' }}</span>
                 </a>
 
-                <!-- Sleek Circular Sign Out Button Matching Theme Toggle -->
+                <!-- Dedicated Sleek Logout Button -->
                 <form action="{{ url('/logout') }}" method="POST" class="inline shrink-0 flex-shrink-0 m-0 p-0">
                     @csrf
                     <button type="submit"
-                        title="Sign Out"
-                        class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-white/80 dark:hover:bg-slate-800/80 hover:text-rose-600 dark:hover:text-rose-400 hover:border-rose-500/40 transition-all shadow-sm shrink-0 flex-shrink-0 cursor-pointer group">
+                        title="Sign Out of Account"
+                        aria-label="Sign out"
+                        class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-rose-500/10 dark:hover:bg-rose-500/15 hover:text-rose-600 dark:hover:text-rose-400 hover:border-rose-500/40 transition-all shadow-sm shrink-0 flex-shrink-0 cursor-pointer group focus:outline-none focus:ring-2 focus:ring-rose-500">
                         <i class="fa-solid fa-arrow-right-from-bracket text-xs sm:text-sm text-slate-700 dark:text-slate-300 group-hover:text-rose-500 transition-colors"></i>
                     </button>
                 </form>
