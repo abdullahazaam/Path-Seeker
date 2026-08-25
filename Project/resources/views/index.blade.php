@@ -501,41 +501,30 @@
                         $badgeClass = 'badge-game'; $domIcon = 'fa-gamepad';
                     }
                     $skills = array_filter(array_map('trim', explode(',', $career->required_skills)));
+                    $cId = $career->id;
+                    $tEsc = addslashes($career->title);
+                    $dEsc = addslashes($career->domain);
+                    $sEsc = addslashes($career->expected_salary);
+                    $skEsc = addslashes($career->required_skills);
+                    $urlEsc = route('careers.show', $career->id);
+                    $diffLevel = ($cId % 3 === 0) ? 'Advanced' : (($cId % 3 === 2) ? 'Intermediate' : 'Beginner / Intermediate');
                 @endphp
 
-                <div class="career-card bg-white/90 dark:bg-slate-950/50 border border-slate-200 dark:border-white/5 rounded-3xl flex flex-col group relative overflow-hidden shadow-xl dark:shadow-sm hover:shadow-2xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300">
-
-                    {{-- Card Top Gradient Accent --}}
-                    <div class="h-1 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
+                <div class="career-card bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 rounded-3xl flex flex-col justify-between group relative overflow-hidden shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300">
                     <div class="p-6 flex flex-col flex-1 space-y-5">
-
                         {{-- Domain Badge + Salary Badge + Compare Button --}}
-                        <div class="flex flex-wrap items-center justify-between gap-2.5">
-                            <div class="flex flex-wrap items-center gap-2">
+                        <div class="flex items-center justify-between gap-2.5">
+                            <div class="flex items-center gap-2">
                                 <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full border {{ $badgeClass }} flex items-center gap-1.5 shadow-sm">
                                     <i class="fa-solid {{ $domIcon }} text-[10px]"></i>
                                     <span>{{ $career->domain }}</span>
                                 </span>
-                                
-                                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-black text-emerald-600 dark:text-emerald-400 font-mono shadow-sm">
-                                    {{ $career->expected_salary }}
-                                </span>
                             </div>
                             
-                            @php
-                                $cId = $career->id;
-                                $tEsc = addslashes($career->title);
-                                $dEsc = addslashes($career->domain);
-                                $sEsc = addslashes($career->expected_salary);
-                                $skEsc = addslashes($career->required_skills);
-                                $urlEsc = route('careers.show', $career->id);
-                                $diffLevel = ($cId % 3 === 0) ? 'Advanced' : (($cId % 3 === 2) ? 'Intermediate' : 'Beginner / Intermediate');
-                            @endphp
                             <button type="button"
                                     onclick="toggleCompare({{ $cId }}, '{{ $tEsc }}', '{{ $dEsc }}', '{{ $sEsc }}', '94%', '{{ $diffLevel }}', '{{ $skEsc }}', '{{ $urlEsc }}', '{{ $badgeClass }}', '{{ $domIcon }}')"
                                     id="btn-compare-{{ $cId }}"
-                                    class="compare-toggle-btn px-3 py-1 text-[11px] font-bold rounded-full border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:border-purple-500/30 transition-all flex items-center gap-1.5 bg-white/60 dark:bg-white/[0.04] backdrop-blur-sm shrink-0 shadow-sm"
+                                    class="compare-toggle-btn px-2.5 py-1 text-[10px] font-bold rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:border-purple-500/30 transition-all flex items-center gap-1.5 bg-slate-50 dark:bg-white/[0.04] shrink-0"
                                     title="Add to career comparison matrix">
                                 <i class="fa-solid fa-plus text-[9px] icon-state"></i>
                                 <span class="label-state">Compare</span>
@@ -547,74 +536,32 @@
                             <h2 class="text-xl font-black text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug font-display">
                                 {{ $career->title }}
                             </h2>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
                                 {{ $career->description }}
                             </p>
                         </div>
 
-                        {{-- Market Demand Indicator --}}
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-500 dark:text-slate-400">
-                                    <i class="fa-solid fa-chart-line text-indigo-500 dark:text-indigo-400 text-[9px]"></i>
-                                    <span>Market Demand</span>
-                                </div>
-                                <div class="flex items-center gap-1.5">
-                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span> High
-                                    </span>
-                                    <span class="text-xs font-black text-indigo-600 dark:text-indigo-400">94%</span>
-                                </div>
+                        {{-- Primary Metric Row --}}
+                        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/5 flex items-center justify-between">
+                            <div>
+                                <span class="block text-[10px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Target Benchmark</span>
+                                <span class="text-sm font-black text-emerald-600 dark:text-emerald-400 font-mono">{{ $career->expected_salary }}</span>
                             </div>
-                            <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/[0.06] overflow-hidden">
-                                <div class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 career-bar" data-width="94" style="width:0%;transition:width 0.9s cubic-bezier(0.4,0,0.2,1)"></div>
-                            </div>
-
-                            {{-- Growth Rate --}}
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-500 dark:text-slate-400">
-                                    <i class="fa-solid fa-arrow-trend-up text-pink-500 dark:text-pink-400 text-[9px]"></i>
-                                    <span>5-Year Growth</span>
-                                </div>
-                                <span class="text-xs font-black text-pink-600 dark:text-pink-400">+28%</span>
-                            </div>
-                            <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/[0.06] overflow-hidden">
-                                <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 career-bar" data-width="88" style="width:0%;transition:width 0.9s cubic-bezier(0.4,0,0.2,1) 0.1s"></div>
+                            <div class="text-right">
+                                <span class="block text-[10px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Market Demand</span>
+                                <span class="inline-flex items-center gap-1 text-xs font-black text-indigo-600 dark:text-indigo-400 font-mono">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> 94% High
+                                </span>
                             </div>
                         </div>
-
-                        {{-- Core Skills Tags --}}
-                        <div class="space-y-2">
-                            <div class="text-[10px] font-semibold text-slate-500 dark:text-slate-500 flex items-center gap-1.5">
-                                <i class="fa-solid fa-code text-indigo-500 dark:text-indigo-400 text-[9px]"></i>
-                                <span>Core Skills</span>
-                            </div>
-                            <div class="flex flex-wrap gap-1.5">
-                                @foreach(array_slice($skills, 0, 5) as $s)
-                                    <span class="px-2.5 py-1 text-[10px] font-medium rounded-lg bg-white/80 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/[0.08] text-slate-700 dark:text-slate-300 hover:border-purple-500/30 transition-colors">
-                                        {{ $s }}
-                                    </span>
-                                @endforeach
-                                @if(count($skills) > 5)
-                                    <span class="px-2.5 py-1 text-[10px] font-medium rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400">
-                                        +{{ count($skills) - 5 }} more
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                     </div>
 
-                    {{-- Card Footer --}}
-                    <div class="px-6 py-4 border-t border-slate-200/80 dark:border-white/[0.07] bg-white/40 dark:bg-white/[0.01] flex items-center justify-between">
-                        <a href="{{ route('careers.show', $career->id) }}" class="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors group/link">
+                    {{-- Card Clean CTA Footer --}}
+                    <div class="px-6 py-4 border-t border-slate-200/80 dark:border-white/[0.07] bg-slate-50/50 dark:bg-white/[0.01]">
+                        <a href="{{ route('careers.show', $career->id) }}" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 dark:bg-indigo-500/15 border border-indigo-500/20 hover:bg-indigo-500/20 transition-all flex items-center justify-center gap-2 group/link">
                             <span>View Full Roadmap</span>
-                            <i class="fa-solid fa-arrow-right text-xs group-hover/link:translate-x-1.5 transition-transform"></i>
+                            <i class="fa-solid fa-arrow-right text-[10px] group-hover/link:translate-x-1 transition-transform"></i>
                         </a>
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold shadow-sm shrink-0">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            <span>Live &bull; {{ now()->subMinutes(($career->id * 7 + 3) % 43 + 2)->diffForHumans() }}</span>
-                        </span>
                     </div>
                 </div>
             @empty
@@ -711,18 +658,18 @@
     </div>
 </section>
 
-{{-- ══════════════════ SECTION 6: HOMEPAGE COMMUNITY FEEDBACK & SUGGESTIONS ══════════════════ --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
+{{-- ══════════════════ SECTION 6: HOMEPAGE COMMUNITY FEEDBACK & SUGGESTIONS (MODAL FLOW) ══════════════════ --}}
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element" x-data="{ feedbackModalOpen: false }">
     <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none"></div>
 
-        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
             
             {{-- Left Column: Description & Community Callout --}}
-            <div class="lg:col-span-5 space-y-4">
+            <div class="space-y-4 max-w-2xl">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/25 text-xs font-black uppercase tracking-wider text-purple-700 dark:text-purple-300">
                     <i class="fa-solid fa-comments text-purple-500"></i>
                     <span>Community &amp; Engineering Hub</span>
@@ -731,103 +678,145 @@
                     Help Shape the Future of <span class="grad-text">PathSeeker</span>
                 </h2>
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                    Have a technical suggestion, identified a roadmap gap, or encountered a platform bug? Submit your feedback directly to our engineering team.
+                    Have a technical suggestion, identified a roadmap gap, or encountered a platform bug? Submit your feedback directly to our core engineering team.
                 </p>
                 
-                <div class="pt-2 space-y-2.5 text-xs text-slate-600 dark:text-slate-400">
-                    <div class="flex items-center gap-2.5">
+                <div class="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-600 dark:text-slate-400">
+                    <div class="flex items-center gap-2">
                         <i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>
-                        <span>Reviewed directly by core platform architects</span>
+                        <span>Reviewed by architects</span>
                     </div>
-                    <div class="flex items-center gap-2.5">
+                    <div class="flex items-center gap-2">
                         <i class="fa-solid fa-circle-check text-indigo-500 text-sm"></i>
-                        <span>Real-time in-app notification when your ticket is resolved</span>
+                        <span>Real-time status updates</span>
                     </div>
-                    <div class="flex items-center gap-2.5">
+                    <div class="flex items-center gap-2">
                         <i class="fa-solid fa-circle-check text-pink-500 text-sm"></i>
-                        <span>Guaranteed privacy and discrete handling</span>
+                        <span>Guaranteed privacy</span>
                     </div>
                 </div>
             </div>
 
-            {{-- Right Column: Interactive Feedback Form --}}
-            <div class="lg:col-span-7">
-                <div class="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/10 shadow-xl">
-                    <form action="{{ route('feedback.store') }}" method="POST" class="space-y-4">
-                        @csrf
-                        
-                        <div>
-                            <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
-                                Feedback Category
-                            </label>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" x-data="{ selectedCategory: 'suggestion' }">
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="category" value="suggestion" class="sr-only" x-model="selectedCategory">
-                                    <div :class="selectedCategory === 'suggestion' ? 'bg-purple-500/20 border-purple-500/50 text-purple-700 dark:text-purple-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
-                                        <i class="fa-solid fa-lightbulb text-xs text-amber-500"></i>
-                                        <span>Suggestion</span>
-                                    </div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="category" value="bug" class="sr-only" x-model="selectedCategory">
-                                    <div :class="selectedCategory === 'bug' ? 'bg-rose-500/20 border-rose-500/50 text-rose-700 dark:text-rose-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
-                                        <i class="fa-solid fa-bug text-xs text-rose-500"></i>
-                                        <span>Bug Report</span>
-                                    </div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="category" value="query" class="sr-only" x-model="selectedCategory">
-                                    <div :class="selectedCategory === 'query' ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-700 dark:text-indigo-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
-                                        <i class="fa-solid fa-circle-question text-xs text-indigo-500"></i>
-                                        <span>Inquiry</span>
-                                    </div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="category" value="general" class="sr-only" x-model="selectedCategory">
-                                    <div :class="selectedCategory === 'general' ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-700 dark:text-emerald-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
-                                        <i class="fa-solid fa-comment-dots text-xs text-emerald-500"></i>
-                                        <span>General</span>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
+            {{-- Right Column: Sleek Send Feedback Trigger Button --}}
+            <div class="shrink-0">
+                <button type="button"
+                        @click="feedbackModalOpen = true"
+                        class="btn-sweep inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-bold text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-xl shadow-purple-500/25 hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <i class="fa-solid fa-paper-plane text-xs text-white"></i>
+                    <span>Send Feedback</span>
+                </button>
+            </div>
 
-                        @guest
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-1.5">
-                                    Your Name (Optional)
-                                </label>
-                                <input type="text" name="name" placeholder="e.g., Alex Vance" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-1.5">
-                                    Email Address (Optional)
-                                </label>
-                                <input type="email" name="email" placeholder="alex@example.com" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500 focus:outline-none">
-                            </div>
-                        </div>
-                        @endguest
+        </div>
 
-                        <div>
-                            <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
-                                Your Message &amp; Feedback
-                            </label>
-                            <textarea name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Share your recommendations, feature requests, or issue details with us..." class="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500 focus:outline-none shadow-inner"></textarea>
-                        </div>
+        {{-- ══════════════════ MODAL: FEEDBACK SUBMISSION ══════════════════ --}}
+        <div x-show="feedbackModalOpen"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm"
+             style="display: none;"
+             @keydown.escape.window="feedbackModalOpen = false">
+            
+            <div class="relative w-full max-w-xl rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto"
+                 @click.away="feedbackModalOpen = false">
+                
+                {{-- Modal Top Gradient Accent --}}
+                <div class="h-1.5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"></div>
 
-                        <div class="flex items-center justify-between pt-2">
-                            <p class="text-[10px] text-slate-500 font-mono">
-                                @auth Signed in as {{ Auth::user()->name }} @else Submitting as Guest Visitor @endauth
-                            </p>
-                            <button type="submit" class="btn-sweep px-7 py-3 rounded-full text-xs font-bold text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-md hover:shadow-md transition-all flex items-center gap-2 cursor-pointer">
-                                <span>Submit Feedback</span>
-                                <i class="fa-solid fa-paper-plane text-[10px]"></i>
-                            </button>
+                <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
+                    <div class="space-y-1">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/25 text-xs font-semibold text-purple-700 dark:text-purple-300">
+                            <i class="fa-solid fa-comments text-purple-500 text-xs"></i>
+                            <span>Submit Feedback</span>
                         </div>
-
-                    </form>
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">
+                            Help Shape the Future of <span class="grad-text">PathSeeker</span>
+                        </h3>
+                    </div>
+                    <button type="button" @click="feedbackModalOpen = false" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-slate-600 dark:text-slate-300 flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
                 </div>
+
+                <form action="{{ route('feedback.store') }}" method="POST" class="space-y-4">
+                    @csrf
+                    
+                    <div>
+                        <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
+                            Feedback Category
+                        </label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" x-data="{ selectedCategory: 'suggestion' }">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="category" value="suggestion" class="sr-only" x-model="selectedCategory">
+                                <div :class="selectedCategory === 'suggestion' ? 'bg-purple-500/20 border-purple-500/50 text-purple-700 dark:text-purple-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-lightbulb text-xs text-amber-500"></i>
+                                    <span>Suggestion</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="category" value="bug" class="sr-only" x-model="selectedCategory">
+                                <div :class="selectedCategory === 'bug' ? 'bg-rose-500/20 border-rose-500/50 text-rose-700 dark:text-rose-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-bug text-xs text-rose-500"></i>
+                                    <span>Bug Report</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="category" value="query" class="sr-only" x-model="selectedCategory">
+                                <div :class="selectedCategory === 'query' ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-700 dark:text-indigo-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-circle-question text-xs text-indigo-500"></i>
+                                    <span>Inquiry</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="category" value="general" class="sr-only" x-model="selectedCategory">
+                                <div :class="selectedCategory === 'general' ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-700 dark:text-emerald-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-comment-dots text-xs text-emerald-500"></i>
+                                    <span>General</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    @guest
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-1.5">
+                                Your Name (Optional)
+                            </label>
+                            <input type="text" name="name" placeholder="e.g., Alex Vance" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-1.5">
+                                Email Address (Optional)
+                            </label>
+                            <input type="email" name="email" placeholder="alex@example.com" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500 focus:outline-none">
+                        </div>
+                    </div>
+                    @endguest
+
+                    <div>
+                        <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
+                            Your Message &amp; Feedback
+                        </label>
+                        <textarea name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Share your recommendations, feature requests, or issue details with us..." class="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500 focus:outline-none shadow-inner"></textarea>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <p class="text-[10px] text-slate-500 font-mono">
+                            @auth Signed in as {{ Auth::user()->name }} @else Submitting as Guest Visitor @endauth
+                        </p>
+                        <button type="submit" class="btn-sweep px-7 py-3 rounded-full text-xs font-bold text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-md transition-all flex items-center gap-2 cursor-pointer">
+                            <span>Submit Feedback</span>
+                            <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                        </button>
+                    </div>
+
+                </form>
+
             </div>
 
         </div>
@@ -862,8 +851,7 @@
             <button type="button"
                     id="btnOpenModal"
                     onclick="openCompareModal()"
-                    disabled
-                    class="px-5 py-2.5 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-lg shadow-purple-500/25 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition-all flex items-center gap-2">
+                    class="px-5 py-2.5 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-lg shadow-purple-500/25 hover:scale-105 transition-all flex items-center gap-2">
                 <i class="fa-solid fa-table-columns text-[10px]"></i>
                 <span id="btnCompareLabel">Compare</span>
             </button>
@@ -880,7 +868,7 @@
 
 {{-- ══════════════════ COMPARISON MATRIX MODAL ══════════════════ --}}
 <div id="compareModal"
-     class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80  opacity-0 pointer-events-none transition-opacity duration-300"
+     class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 opacity-0 pointer-events-none transition-opacity duration-300"
      onclick="handleModalBackdropClick(event)">
     
     <div class="relative w-full max-w-5xl max-h-[90vh] flex flex-col rounded-2xl bg-slate-900 border border-white/10 p-6 sm:p-8 shadow-2xl overflow-hidden scale-95 transition-transform duration-300"
@@ -909,10 +897,10 @@
             </button>
         </div>
 
-        {{-- Modal Scrollable Body / Comparison Matrix Table --}}
-        <div class="py-6 overflow-y-auto flex-1 space-y-6 scrollbar-thin">
+        {{-- Modal Scrollable Body / Comparison Matrix Table & Empty State --}}
+        <div class="py-6 overflow-y-auto flex-1 space-y-6 scrollbar-thin" id="matrixContainer">
             
-            <div class="overflow-x-auto rounded-xl border border-white/10 bg-white/[0.02]">
+            <div class="overflow-x-auto rounded-xl border border-white/10 bg-white/[0.02]" id="matrixTableWrapper">
                 <table class="w-full text-left border-collapse" id="matrixTable">
                     <thead>
                         <tr class="border-b border-white/10 bg-white/[0.03]" id="matrixHeaderRow">
@@ -924,6 +912,23 @@
                         <!-- Dynamic Rows injected by JS -->
                     </tbody>
                 </table>
+            </div>
+
+            {{-- Empty State when 0 items selected --}}
+            <div id="matrixEmptyState" class="hidden py-12 px-6 text-center space-y-4">
+                <div class="w-16 h-16 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center text-2xl mx-auto shadow-sm">
+                    <i class="fa-solid fa-code-compare"></i>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="text-lg font-black text-white font-display">Choose up to three roles to compare</h4>
+                    <p class="text-xs text-slate-400 max-w-md mx-auto">Select 2 or 3 career tracks from the Career Bank to see live side-by-side salary benchmarks, market demand scores, and skill requirements.</p>
+                </div>
+                <div class="pt-2">
+                    <a href="{{ route('careers.index') }}" onclick="closeCompareModal()" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-indigo-600 shadow-md hover:scale-105 transition-all">
+                        <span>Browse Career Bank</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
             </div>
 
         </div>
@@ -1163,8 +1168,6 @@ function clearCompare() {
 }
 
 function openCompareModal() {
-    if (compareState.items.length < 2) return;
-
     renderComparisonMatrix();
 
     const modal = document.getElementById('compareModal');
@@ -1198,8 +1201,19 @@ document.addEventListener('keydown', (e) => {
 
 function renderComparisonMatrix() {
     const items = compareState.items;
+    const tableWrapper = document.getElementById('matrixTableWrapper');
+    const emptyState = document.getElementById('matrixEmptyState');
     const headerRow = document.getElementById('matrixHeaderRow');
     const body = document.getElementById('matrixBody');
+
+    if (items.length === 0) {
+        if (tableWrapper) tableWrapper.classList.add('hidden');
+        if (emptyState) emptyState.classList.remove('hidden');
+        return;
+    }
+
+    if (tableWrapper) tableWrapper.classList.remove('hidden');
+    if (emptyState) emptyState.classList.add('hidden');
 
     // Header Row with dismissal actions
     headerRow.innerHTML = `<th class="p-5 text-xs font-black text-slate-300 uppercase tracking-wider w-1/4 min-w-[170px] border-r border-white/10">Key Dimensions</th>`;
@@ -1213,7 +1227,7 @@ function renderComparisonMatrix() {
                         <i class="fa-solid ${item.domIcon} text-[8px]"></i>
                         <span>${item.domain}</span>
                     </span>
-                    <button type="button" onclick="toggleCompare(${item.id}); if(compareState.items.length < 2) closeCompareModal(); else renderComparisonMatrix();" class="w-6 h-6 rounded-full bg-white/5 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 flex items-center justify-center transition-colors text-[10px]" title="Remove from comparison">
+                    <button type="button" onclick="toggleCompare(${item.id}); renderComparisonMatrix();" class="w-6 h-6 rounded-full bg-white/5 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 flex items-center justify-center transition-colors text-[10px]" title="Remove from comparison">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
