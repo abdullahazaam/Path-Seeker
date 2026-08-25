@@ -42,13 +42,45 @@ class RoutesTest extends TestCase
             'education_level' => 'Bachelor of IT',
             'interests' => 'Cloud, DevOps',
         ]);
-        $r->assertRedirect('/dashboard');
+        // 1. Mandatory redirect to email verification notice
+        $r->assertRedirect(route('verification.notice'));
         $this->assertAuthenticated();
+        
         $u = User::where('email', 'jane.test@pathseeker.com')->first();
         $this->assertNotNull($u);
         $this->assertEquals('graduate', $u->role);
         $this->assertNotNull($u->profile);
         $this->assertEquals('Bachelor of IT', $u->profile->education_level);
+        $this->assertFalse($u->hasVerifiedEmail());
+
+        // 2. Unverified user visiting dashboard is redirected to verification notice
+        $dashBlocked = $this->actingAs($u)->get('/dashboard');
+        $dashBlocked->assertRedirect(route('verification.notice'));
+
+        // 3. Verification notice renders correctly
+        $verifyNotice = $this->actingAs($u)->get(route('verification.notice'));
+        $verifyNotice->assertStatus(200);
+        $verifyNotice->assertSee('Verify Your Email Address');
+
+        // 4. Once verified, access to dashboard is granted
+        $u->markEmailAsVerified();
+        $dashAllowed = $this->actingAs($u)->get('/dashboard');
+        $dashAllowed->assertStatus(200);
+    }
+
+    public function test_forgot_password_flow_and_login_link(): void
+    {
+        // 1. Login page contains Forgot Password link
+        $loginRes = $this->get('/login');
+        $loginRes->assertStatus(200);
+        $loginRes->assertSee('Forgot Password?');
+        $loginRes->assertSee(route('password.request'));
+
+        // 2. Forgot password request page renders
+        $forgotRes = $this->get(route('password.request'));
+        $forgotRes->assertStatus(200);
+        $forgotRes->assertSee('Reset Password');
+        $forgotRes->assertSee('Send Reset Link');
     }
 
     public function test_user_can_login_and_access_personalized_dashboard(): void

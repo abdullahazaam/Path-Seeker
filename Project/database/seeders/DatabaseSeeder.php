@@ -64,6 +64,7 @@ class DatabaseSeeder extends Seeder
                     'email' => $userData['email'],
                     'password' => $userData['password'],
                     'role' => $userData['role'],
+                    'email_verified_at' => now(),
                 ]);
 
                 UserProfile::create([

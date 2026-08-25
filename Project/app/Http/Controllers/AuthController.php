@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\UserProfile;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -78,10 +81,52 @@ class AuthController extends Controller
             'interests' => $validated['interests'] ?? null,
         ]);
 
+        event(new Registered($user));
+
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard')->with('success', 'Registration successful! Welcome to your Career Passport, ' . $user->name . '.');
+        return redirect()->route('verification.notice')->with('success', 'Registration successful! Please check your email to verify your address.');
+    }
+
+    public function showVerificationNotice(Request $request)
+    {
+        if ($request->user() && $request->user()->hasVerifiedEmail()) {
+            return redirect()->route('dashboard');
+        }
+        return view('auth.verify-email');
+    }
+
+    public function verifyEmail(Request $request, $id, $hash)
+    {
+        $user = User::findOrFail($id);
+
+        if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+            throw new AuthorizationException();
+        }
+
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->route('dashboard')->with('status', 'Email is already verified.');
+        }
+
+        if ($user->markEmailAsVerified()) {
+            event(new Verified($user));
+        }
+
+        return redirect()->route('dashboard')->with('success', 'Your email has been successfully verified! Welcome to your Career Passport.');
+    }
+
+    public function resendVerificationEmail(Request $request)
+    {
+        if ($request->user() && $request->user()->hasVerifiedEmail()) {
+            return redirect()->route('dashboard');
+        }
+
+        if ($request->user()) {
+            $request->user()->sendEmailVerificationNotification();
+        }
+
+        return back()->with('status', 'verification-link-sent');
     }
 
     public function showForgotPasswordForm()

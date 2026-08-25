@@ -130,6 +130,9 @@
                                     <i class="fa-solid fa-lock text-purple-500 text-xs"></i>
                                     <span>Password</span>
                                 </label>
+                                <a href="{{ route('password.request') }}" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors">
+                                    Forgot Password?
+                                </a>
                             </div>
                             <input type="password" name="password" id="password" required
                                    placeholder="••••••••"

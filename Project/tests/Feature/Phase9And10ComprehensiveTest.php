@@ -88,10 +88,11 @@ class Phase9And10ComprehensiveTest extends TestCase
             'role' => 'graduate',
             'education_level' => 'Bachelor of Science in Software Engineering',
         ]);
-        $regRes->assertRedirect(route('dashboard'));
+        $regRes->assertRedirect(route('verification.notice'));
 
         $user = User::where('email', 'alex.rivera@example.com')->first();
         $this->assertNotNull($user);
+        $user->markEmailAsVerified();
 
         // 2. Take and Submit Interest Assessment Quiz
         $questions = QuizQuestion::take(5)->get();
