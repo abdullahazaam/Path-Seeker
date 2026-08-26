@@ -161,7 +161,9 @@
                 ]);
             @endphp
 
-            <div class="app-card bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 rounded-3xl p-6 flex flex-col justify-between h-full group relative overflow-hidden shadow-md dark:shadow-sm hover:shadow-xl hover:border-cyan-500/40 hover:-translate-y-1 transition-all duration-300" data-stagger-index="{{ $loop->index }}">
+            <div class="app-card resource-stagger-card bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 rounded-3xl p-6 flex flex-col justify-between h-full group relative overflow-hidden shadow-md dark:shadow-sm hover:shadow-xl hover:border-cyan-500/40 hover:-translate-y-1 transition-all duration-300"
+                 data-stagger-index="{{ $loop->index }}"
+                 style="animation-delay: {{ min($loop->index * 60, 600) }}ms;">
                 
                 <div class="relative z-10 flex flex-col flex-grow">
                     

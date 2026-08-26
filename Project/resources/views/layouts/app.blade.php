@@ -1044,6 +1044,35 @@
             box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.55) !important;
         }
 
+        /* ══════════════════ UNIFORM STAGGERED REVEAL & CASCADE ANIMATIONS ══════════════════ */
+        @keyframes uniformStaggerFadeInUp {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 24px, 0) scale(0.975);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+        }
+
+        .stagger-card,
+        .career-stagger-card,
+        .media-stagger-card,
+        .resource-stagger-card,
+        .home-stagger-card,
+        .story-stagger-card {
+            animation: uniformStaggerFadeInUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .stagger-section {
+            animation: uniformStaggerFadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
         /* Universal Dark Mode Secondary Panels, Drawers & Mini Elements */
         html.dark .inner-panel, .dark .inner-panel,
         html.dark .secondary-container, .dark .secondary-container {

@@ -150,7 +150,9 @@
     {{-- ══════════════════ VIDEO TRACKS GRID ══════════════════ --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch" data-stagger-grid id="multimediaGrid">
         @forelse($multimedia as $item)
-            <div class="app-card bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 rounded-3xl p-6 flex flex-col justify-between h-full group relative overflow-hidden shadow-md dark:shadow-sm hover:shadow-xl hover:border-cyan-500/40 hover:-translate-y-1 transition-all duration-300" data-stagger-index="{{ $loop->index }}">
+            <div class="app-card media-stagger-card bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 rounded-3xl p-6 flex flex-col justify-between h-full group relative overflow-hidden shadow-md dark:shadow-sm hover:shadow-xl hover:border-cyan-500/40 hover:-translate-y-1 transition-all duration-300"
+                 data-stagger-index="{{ $loop->index }}"
+                 style="animation-delay: {{ min($loop->index * 60, 600) }}ms;">
                 
                 <div class="relative z-10 flex flex-col flex-grow">
                     
