@@ -192,21 +192,12 @@
                             </span>
                         </div>
 
-                        {{-- Rating Badge & Top Bookmark Action --}}
-                        <div class="absolute top-3 right-3 z-20 flex items-center gap-1.5">
+                        {{-- Rating Badge --}}
+                        <div class="absolute top-3 right-3 z-20 pointer-events-none">
                             <span class="px-2.5 py-1 text-[10px] font-mono font-bold text-amber-300 bg-slate-900/80 dark:bg-black/75 rounded-full backdrop-blur-md flex items-center gap-1 border border-white/15 shadow-sm">
                                 <i class="fa-solid fa-star text-[9px] text-amber-400"></i>
                                 <span>{{ $item->average_rating }}</span>
                             </span>
-                            <button type="button"
-                                    onclick="toggleBookmark(event, {{ $item->id }}, 'multimedia')"
-                                    id="btn-bookmark-multimedia-thumb-{{ $item->id }}"
-                                    data-bookmark-target="multimedia-{{ $item->id }}"
-                                    data-bookmarked="{{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'true' : 'false' }}"
-                                    class="w-7 h-7 rounded-full border transition-all flex items-center justify-center text-xs cursor-pointer backdrop-blur-md {{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'bg-cyan-500/30 text-cyan-400 border-cyan-400/50 shadow-sm' : 'border-white/20 text-white/80 hover:text-cyan-300 hover:border-cyan-400/40 bg-slate-900/80 dark:bg-black/75' }}"
-                                    title="{{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'Saved in Passport Bookmarks' : 'Bookmark this masterclass' }}">
-                                <i class="{{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'fa-solid text-cyan-400' : 'fa-regular' }} fa-bookmark text-[10px] transition-transform"></i>
-                            </button>
                         </div>
 
                         {{-- Duration & Transcript Badge --}}

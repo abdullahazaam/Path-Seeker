@@ -192,18 +192,7 @@
                             </span>
                         </div>
 
-                        {{-- Top Bookmark Action --}}
-                        <div class="absolute top-3 right-3 z-20 flex items-center gap-1.5">
-                            <button type="button"
-                                    onclick="toggleBookmark(event, {{ $res->id }}, 'resource')"
-                                    id="btn-bookmark-resource-thumb-{{ $res->id }}"
-                                    data-bookmark-target="resource-{{ $res->id }}"
-                                    data-bookmarked="{{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'true' : 'false' }}"
-                                    class="w-7 h-7 rounded-full border transition-all flex items-center justify-center text-xs cursor-pointer backdrop-blur-md {{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'bg-cyan-500/30 text-cyan-400 border-cyan-400/50 shadow-sm' : 'border-white/20 text-white/80 hover:text-cyan-300 hover:border-cyan-400/40 bg-slate-900/80 dark:bg-black/75' }}"
-                                    title="{{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'Saved in Passport Bookmarks' : 'Bookmark this toolkit' }}">
-                                <i class="{{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'fa-solid text-cyan-400' : 'fa-regular' }} fa-bookmark text-[10px] transition-transform"></i>
-                            </button>
-                        </div>
+
 
                         {{-- Format Badge --}}
                         <div class="absolute bottom-3 right-3 z-20 pointer-events-none">

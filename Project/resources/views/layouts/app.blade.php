@@ -1900,13 +1900,36 @@
                 const btns = document.querySelectorAll(`#btn-bookmark-${itemType}-${itemId}, #btn-bookmark-${itemId}, [data-bookmark-target="${itemType}-${itemId}"]`);
                 if (btns.length === 0) return;
 
+                // Get current state from the first button
+                const currentlyBookmarked = btns[0].getAttribute('data-bookmarked') === 'true';
+                const nextState = !currentlyBookmarked;
+
+                // ⚡ OPTIMISTIC INSTANT UI FEEDBACK (0ms latency visual toggle)
+                btns.forEach(btn => {
+                    const icon = btn.querySelector('i');
+                    if (nextState) {
+                        btn.setAttribute('data-bookmarked', 'true');
+                        btn.classList.remove('border-slate-200', 'dark:border-white/10', 'text-slate-400', 'bg-slate-50', 'dark:bg-white/[0.04]', 'border-white/20', 'text-white/80', 'bg-slate-900/80', 'dark:bg-black/75');
+                        btn.classList.add('bg-cyan-500/20', 'text-cyan-600', 'dark:text-cyan-400', 'border-cyan-500/40', 'shadow-sm');
+                        if (icon) {
+                            icon.className = 'fa-solid fa-bookmark text-xs text-cyan-600 dark:text-cyan-400 transition-transform scale-110';
+                        }
+                        btn.setAttribute('title', 'Saved in Passport Bookmarks');
+                    } else {
+                        btn.setAttribute('data-bookmarked', 'false');
+                        btn.classList.remove('bg-cyan-500/20', 'text-cyan-600', 'dark:text-cyan-400', 'border-cyan-500/40', 'shadow-sm');
+                        btn.classList.add('border-slate-200', 'dark:border-white/10', 'text-slate-400', 'bg-slate-50', 'dark:bg-white/[0.04]');
+                        if (icon) {
+                            icon.className = 'fa-regular fa-bookmark text-xs transition-transform';
+                        }
+                        btn.setAttribute('title', `Bookmark this ${itemType}`);
+                    }
+                });
+
+                window.showBookmarkNotification(nextState ? 'Saved to your Career Passport bookmarks!' : 'Removed from bookmarks.');
+
                 const csrfMeta = document.querySelector('meta[name="csrf-token"]');
                 const token = csrfMeta ? csrfMeta.getAttribute('content') : '';
-
-                btns.forEach(b => {
-                    b.disabled = true;
-                    b.style.opacity = '0.6';
-                });
 
                 fetch('{{ route("bookmarks.toggle") }}', {
                     method: 'POST',
@@ -1928,40 +1951,45 @@
                     return response.json();
                 })
                 .then(data => {
-                    if (!data || !data.success) return;
-
+                    if (!data || !data.success) {
+                        revertState();
+                        return;
+                    }
+                    const serverState = data.bookmarked;
                     btns.forEach(btn => {
                         const icon = btn.querySelector('i');
-                        if (data.bookmarked) {
-                            btn.setAttribute('data-bookmarked', 'true');
-                            btn.classList.remove('border-slate-200', 'dark:border-white/10', 'text-slate-400', 'bg-slate-50', 'dark:bg-white/[0.04]', 'border-white/20', 'text-white/80', 'bg-slate-900/80', 'dark:bg-black/75');
+                        btn.setAttribute('data-bookmarked', serverState ? 'true' : 'false');
+                        if (serverState) {
+                            btn.classList.remove('border-slate-200', 'dark:border-white/10', 'text-slate-400', 'bg-slate-50', 'dark:bg-white/[0.04]');
                             btn.classList.add('bg-cyan-500/20', 'text-cyan-600', 'dark:text-cyan-400', 'border-cyan-500/40', 'shadow-sm');
-                            if (icon) {
-                                icon.className = 'fa-solid fa-bookmark text-xs text-cyan-600 dark:text-cyan-400 transition-transform scale-110';
-                            }
-                            btn.setAttribute('title', 'Saved in Passport Bookmarks');
+                            if (icon) icon.className = 'fa-solid fa-bookmark text-xs text-cyan-600 dark:text-cyan-400 transition-transform scale-110';
                         } else {
-                            btn.setAttribute('data-bookmarked', 'false');
                             btn.classList.remove('bg-cyan-500/20', 'text-cyan-600', 'dark:text-cyan-400', 'border-cyan-500/40', 'shadow-sm');
                             btn.classList.add('border-slate-200', 'dark:border-white/10', 'text-slate-400', 'bg-slate-50', 'dark:bg-white/[0.04]');
-                            if (icon) {
-                                icon.className = 'fa-regular fa-bookmark text-xs transition-transform';
-                            }
-                            btn.setAttribute('title', `Bookmark this ${itemType}`);
+                            if (icon) icon.className = 'fa-regular fa-bookmark text-xs transition-transform';
                         }
                     });
-
-                    window.showBookmarkNotification(data.bookmarked ? 'Saved to your Career Passport bookmarks!' : 'Removed from bookmarks.');
                 })
                 .catch(err => {
                     console.error('Bookmark toggle error:', err);
-                })
-                .finally(() => {
-                    btns.forEach(b => {
-                        b.disabled = false;
-                        b.style.opacity = '1';
-                    });
+                    revertState();
                 });
+
+                function revertState() {
+                    btns.forEach(btn => {
+                        const icon = btn.querySelector('i');
+                        btn.setAttribute('data-bookmarked', currentlyBookmarked ? 'true' : 'false');
+                        if (currentlyBookmarked) {
+                            btn.classList.remove('border-slate-200', 'dark:border-white/10', 'text-slate-400', 'bg-slate-50', 'dark:bg-white/[0.04]');
+                            btn.classList.add('bg-cyan-500/20', 'text-cyan-600', 'dark:text-cyan-400', 'border-cyan-500/40', 'shadow-sm');
+                            if (icon) icon.className = 'fa-solid fa-bookmark text-xs text-cyan-600 dark:text-cyan-400';
+                        } else {
+                            btn.classList.remove('bg-cyan-500/20', 'text-cyan-600', 'dark:text-cyan-400', 'border-cyan-500/40', 'shadow-sm');
+                            btn.classList.add('border-slate-200', 'dark:border-white/10', 'text-slate-400', 'bg-slate-50', 'dark:bg-white/[0.04]');
+                            if (icon) icon.className = 'fa-regular fa-bookmark text-xs';
+                        }
+                    });
+                }
             };
 
             window.showBookmarkNotification = function(message) {
