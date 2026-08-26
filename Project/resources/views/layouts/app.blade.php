@@ -662,6 +662,61 @@
             }
         }
 
+        /* ══════════════════ 3D GLASS BUBBLE STYLING & MOTION (90FPS GPU) ══════════════════ */
+        .glass-bubble-3d {
+            position: absolute;
+            border-radius: 9999px;
+            pointer-events: none;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(255, 255, 255, 0.75);
+            box-shadow: inset -12px -12px 28px rgba(118, 87, 255, 0.16),
+                        inset 12px 12px 28px rgba(255, 255, 255, 0.90),
+                        0 20px 45px -10px rgba(30, 40, 70, 0.12);
+            will-change: transform;
+        }
+        .glass-bubble-cyan {
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.88) 0%, rgba(18, 207, 243, 0.25) 40%, rgba(118, 87, 255, 0.18) 75%, rgba(59, 130, 246, 0.28) 100%);
+        }
+        .glass-bubble-purple {
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.88) 0%, rgba(118, 87, 255, 0.25) 40%, rgba(18, 207, 243, 0.16) 75%, rgba(139, 92, 246, 0.28) 100%);
+        }
+        .glass-bubble-blue {
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.88) 0%, rgba(59, 130, 246, 0.24) 40%, rgba(18, 207, 243, 0.18) 75%, rgba(118, 87, 255, 0.25) 100%);
+        }
+        .glass-bubble-specular {
+            position: absolute;
+            top: 15%;
+            left: 20%;
+            width: 35%;
+            height: 25%;
+            border-radius: 9999px;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 80%);
+            transform: rotate(-35deg);
+            filter: blur(1px);
+        }
+
+        @keyframes bubbleFloat1 {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(35px, -30px, 0) scale(1.04); }
+        }
+        @keyframes bubbleFloat2 {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(-40px, 35px, 0) scale(0.96); }
+        }
+        @keyframes bubbleFloat3 {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(30px, 40px, 0) scale(1.03); }
+        }
+        @keyframes bubbleFloat4 {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(-35px, -35px, 0) scale(0.97); }
+        }
+        .anim-bubble-1 { animation: bubbleFloat1 18s ease-in-out infinite; will-change: transform; }
+        .anim-bubble-2 { animation: bubbleFloat2 22s ease-in-out infinite; will-change: transform; }
+        .anim-bubble-3 { animation: bubbleFloat3 26s ease-in-out infinite; will-change: transform; }
+        .anim-bubble-4 { animation: bubbleFloat4 20s ease-in-out infinite; will-change: transform; }
+
         /* ══════════════════ VISIBLE LIGHT-MODE SVG CONSTELLATION ANIMATIONS (90FPS GPU) ══════════════════ */
         @keyframes floatDrift1 {
             0%, 100% { transform: translate3d(0, 0, 0); }
@@ -701,7 +756,7 @@
             color: #111827 !important;
         }
 
-        /* Main Elevated Frosted Glass Cards (70-85% Translucent White with 20px Blur) */
+        /* Main Elevated Frosted Glass Cards (Floating Physically Above 3D Background) */
         html:not(.dark) .card-tilt,
         html:not(.dark) .card-tilt-3d,
         html:not(.dark) .career-card,
@@ -720,7 +775,7 @@
             backdrop-filter: blur(20px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
             border: 1px solid rgba(255, 255, 255, 0.70) !important;
-            box-shadow: 0 10px 35px -5px rgba(30, 40, 70, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.04) !important;
+            box-shadow: 0 12px 40px -4px rgba(30, 40, 70, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.04) !important;
         }
 
         /* Elevated Frosted Glass Card Hover Elevation */
@@ -900,14 +955,38 @@
     <!-- ══════════════════ ISOLATED FIXED AMBIENT BACKGROUND LAYER (LIGHT MODE ONLY) ══════════════════ -->
     <div id="ambientBackgroundLayer" class="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#F8FAFC] dark:bg-[#06080f] transition-colors duration-500" aria-hidden="true">
         
-        <!-- ─── VISIBLE LIGHT-MODE SVG CONSTELLATION & GRID LAYER (STRICTLY LIGHT THEME ONLY) ─── -->
+        <!-- ─── 3D AMBIENT GLASS-BUBBLE & PASTEL GRADIENT LAYER (STRICTLY LIGHT THEME ONLY) ─── -->
         <div class="absolute inset-0 block dark:hidden pointer-events-none">
-            <!-- 1. Ambient Radial Glow Zones -->
-            <div class="absolute -top-[10%] -left-[5%] w-[55vw] h-[55vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-br from-[#12CFF3]/[0.12] via-[#7657FF]/[0.08] to-transparent blur-[120px] animate-aurora-drift-1"></div>
-            <div class="absolute top-[35%] -right-[8%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] rounded-full bg-gradient-to-bl from-[#7657FF]/[0.10] via-[#3b82f6]/[0.06] to-transparent blur-[120px] animate-aurora-drift-2"></div>
-            <div class="absolute -bottom-[10%] left-[10%] w-[52vw] h-[52vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-tr from-[#3b82f6]/[0.09] via-[#12CFF3]/[0.07] to-transparent blur-[130px] animate-aurora-drift-3"></div>
+            <!-- 1. Soft Pastel Radial Gradient Light Pools -->
+            <div class="absolute -top-[10%] -left-[5%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] rounded-full bg-gradient-to-br from-[#12CFF3]/[0.14] via-[#7657FF]/[0.08] to-transparent blur-[130px] animate-aurora-drift-1"></div>
+            <div class="absolute top-[35%] -right-[8%] w-[55vw] h-[55vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-bl from-[#7657FF]/[0.12] via-[#3b82f6]/[0.07] to-transparent blur-[130px] animate-aurora-drift-2"></div>
+            <div class="absolute -bottom-[10%] left-[10%] w-[58vw] h-[58vw] max-w-[900px] max-h-[900px] rounded-full bg-gradient-to-tr from-[#3b82f6]/[0.10] via-[#12CFF3]/[0.08] to-transparent blur-[140px] animate-aurora-drift-3"></div>
 
-            <!-- 2. Visible SVG Constellation Nodes, Trajectory Lines & Particles (15-25% Opacity) -->
+            <!-- 2. 3D Frosted Glass Spheres / Bubbles with Specular Highlights & Depth -->
+            <div class="w-64 h-64 top-[6%] left-[3%] glass-bubble-3d glass-bubble-cyan anim-bubble-1">
+                <div class="glass-bubble-specular"></div>
+            </div>
+            <div class="w-60 h-60 top-[10%] right-[6%] glass-bubble-3d glass-bubble-purple anim-bubble-2">
+                <div class="glass-bubble-specular"></div>
+            </div>
+            <div class="w-48 h-48 top-[40%] left-[5%] glass-bubble-3d glass-bubble-blue anim-bubble-3">
+                <div class="glass-bubble-specular"></div>
+            </div>
+            <div class="w-72 h-72 top-[48%] right-[3%] glass-bubble-3d glass-bubble-cyan anim-bubble-4">
+                <div class="glass-bubble-specular"></div>
+            </div>
+            <div class="w-56 h-56 bottom-[10%] left-[15%] glass-bubble-3d glass-bubble-purple anim-bubble-1">
+                <div class="glass-bubble-specular"></div>
+            </div>
+            <!-- Floating Micro Glass Pearls -->
+            <div class="w-20 h-20 top-[28%] left-[45%] glass-bubble-3d glass-bubble-cyan anim-bubble-2">
+                <div class="glass-bubble-specular"></div>
+            </div>
+            <div class="w-24 h-24 bottom-[24%] right-[28%] glass-bubble-3d glass-bubble-blue anim-bubble-3">
+                <div class="glass-bubble-specular"></div>
+            </div>
+
+            <!-- 3. Visible SVG Constellation Nodes & Trajectory Grid Lines (15-25% Opacity) -->
             <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
                 <defs>
                     <linearGradient id="visLightGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -922,73 +1001,30 @@
                     </linearGradient>
                 </defs>
 
-                <!-- Drifting Trajectory Grid Curves (Visibly moving at 15-25% opacity) -->
+                <!-- Drifting Trajectory Grid Curves -->
                 <path d="M-80,180 C320,80 520,380 860,220 C1200,80 1340,420 1580,310" fill="none" stroke="url(#visLightGrad1)" stroke-width="2.5" class="anim-dash-line" />
                 <path d="M-40,680 C280,520 600,820 960,640 C1240,500 1400,780 1560,680" fill="none" stroke="url(#visLightGrad2)" stroke-width="2" class="anim-dash-line" style="animation-direction: reverse; animation-duration: 45s;" />
-                <path d="M100,50 C400,250 700,50 1100,350 C1300,500 1450,200 1520,250" fill="none" stroke="#7657FF" stroke-opacity="0.16" stroke-width="1.8" stroke-dasharray="6, 8" />
 
-                <!-- Cluster A (Top Right — Animated Drift 1) -->
+                <!-- Star Nodes -->
                 <g class="anim-drift-1">
-                    <line x1="1050" y1="120" x2="1150" y2="170" stroke="#7657FF" stroke-opacity="0.24" stroke-width="1.5" stroke-dasharray="4,4" />
-                    <line x1="1150" y1="170" x2="1260" y2="130" stroke="#12CFF3" stroke-opacity="0.26" stroke-width="1.5" />
-                    <line x1="1150" y1="170" x2="1200" y2="260" stroke="#7657FF" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="4,4" />
-                    <line x1="1260" y1="130" x2="1340" y2="190" stroke="#12CFF3" stroke-opacity="0.20" stroke-width="1.5" />
-                    
-                    <!-- Nodes -->
                     <circle cx="1050" cy="120" r="5" fill="#7657FF" fill-opacity="0.24" />
                     <circle cx="1150" cy="170" r="10" fill="#12CFF3" fill-opacity="0.22" stroke="#12CFF3" stroke-opacity="0.28" stroke-width="2" class="anim-pulse-glow" style="transform-origin: 1150px 170px;" />
                     <circle cx="1150" cy="170" r="4.5" fill="#12CFF3" fill-opacity="0.30" />
                     <circle cx="1260" cy="130" r="6" fill="#7657FF" fill-opacity="0.25" />
-                    <circle cx="1200" cy="260" r="8" fill="#3b82f6" fill-opacity="0.22" stroke="#3b82f6" stroke-opacity="0.26" stroke-width="1.5" />
-                    <circle cx="1340" cy="190" r="5" fill="#12CFF3" fill-opacity="0.24" />
                 </g>
-
-                <!-- Cluster B (Center Left — Animated Drift 2) -->
                 <g class="anim-drift-2">
-                    <line x1="120" y1="440" x2="220" y2="500" stroke="#12CFF3" stroke-opacity="0.25" stroke-width="1.5" />
-                    <line x1="220" y1="500" x2="310" y2="440" stroke="#7657FF" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="4,4" />
-                    <line x1="220" y1="500" x2="180" y2="580" stroke="#3b82f6" stroke-opacity="0.24" stroke-width="1.5" />
-                    <line x1="310" y1="440" x2="390" y2="510" stroke="#7657FF" stroke-opacity="0.20" stroke-width="1.5" />
-
-                    <!-- Nodes -->
                     <circle cx="120" cy="440" r="6" fill="#12CFF3" fill-opacity="0.24" />
                     <circle cx="220" cy="500" r="12" fill="#7657FF" fill-opacity="0.20" stroke="#7657FF" stroke-opacity="0.30" stroke-width="2" class="anim-pulse-glow" style="transform-origin: 220px 500px;" />
                     <circle cx="220" cy="500" r="5" fill="#7657FF" fill-opacity="0.30" />
-                    <circle cx="310" cy="440" r="6" fill="#12CFF3" fill-opacity="0.25" />
-                    <circle cx="180" cy="580" r="5" fill="#3b82f6" fill-opacity="0.22" />
-                    <circle cx="390" cy="510" r="7" fill="#7657FF" fill-opacity="0.22" />
                 </g>
-
-                <!-- Cluster C (Bottom Right — Animated Drift 3) -->
                 <g class="anim-drift-3">
-                    <line x1="980" y1="680" x2="1080" y2="740" stroke="#12CFF3" stroke-opacity="0.24" stroke-width="1.5" stroke-dasharray="4,4" />
-                    <line x1="1080" y1="740" x2="1190" y2="700" stroke="#7657FF" stroke-opacity="0.25" stroke-width="1.5" />
-                    <line x1="1080" y1="740" x2="1120" y2="820" stroke="#12CFF3" stroke-opacity="0.22" stroke-width="1.5" />
-
-                    <!-- Nodes -->
                     <circle cx="980" cy="680" r="5" fill="#12CFF3" fill-opacity="0.24" />
                     <circle cx="1080" cy="740" r="11" fill="#7657FF" fill-opacity="0.20" stroke="#7657FF" stroke-opacity="0.28" stroke-width="2" class="anim-pulse-glow" style="transform-origin: 1080px 740px;" />
                     <circle cx="1080" cy="740" r="4.5" fill="#7657FF" fill-opacity="0.30" />
-                    <circle cx="1190" cy="700" r="6.5" fill="#12CFF3" fill-opacity="0.25" />
-                    <circle cx="1120" cy="820" r="5" fill="#3b82f6" fill-opacity="0.22" />
-                </g>
-
-                <!-- Additional Floating Constellation Stars across viewport -->
-                <g class="anim-drift-1">
-                    <circle cx="580" cy="160" r="7" fill="#12CFF3" fill-opacity="0.24" stroke="#12CFF3" stroke-opacity="0.26" stroke-width="1.5" />
-                    <circle cx="580" cy="160" r="3" fill="#12CFF3" fill-opacity="0.35" />
-                </g>
-                <g class="anim-drift-2">
-                    <circle cx="820" cy="460" r="8" fill="#7657FF" fill-opacity="0.22" stroke="#7657FF" stroke-opacity="0.26" stroke-width="1.5" />
-                    <circle cx="820" cy="460" r="3.5" fill="#7657FF" fill-opacity="0.35" />
-                </g>
-                <g class="anim-drift-3">
-                    <circle cx="460" cy="720" r="7" fill="#12CFF3" fill-opacity="0.22" stroke="#12CFF3" stroke-opacity="0.26" stroke-width="1.5" />
-                    <circle cx="460" cy="720" r="3" fill="#12CFF3" fill-opacity="0.35" />
                 </g>
             </svg>
 
-            <!-- 3. Soft Micro Data Grid Dot Pattern Overlay -->
+            <!-- 4. Soft Micro Data Grid Dot Pattern Overlay -->
             <div class="absolute inset-0 bg-[radial-gradient(#7657FF_1px,transparent_1px)] [background-size:30px_30px] opacity-[0.04] pointer-events-none"></div>
         </div>
 
