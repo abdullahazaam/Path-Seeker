@@ -10,7 +10,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10 w-full">
         {{-- Left Column: Editorial Typography & Actions --}}
-        <div class="lg:col-span-6 space-y-4 sm:space-y-5 text-center lg:text-left">
+        <div data-aos="fade-up" class="lg:col-span-6 space-y-4 sm:space-y-5 text-center lg:text-left">
             {{-- Category / Sub-label Tag --}}
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 dark:bg-[#0c101d] border border-cyan-500/30 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 shadow-sm backdrop-blur-md">
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping shrink-0"></span>
@@ -263,7 +263,7 @@
 </section>
 
 {{-- SECTION 2: HOW YOUR PATH COMES TOGETHER (HORIZONTAL / STAGGERED SCROLL STORYTELLING) --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-12 md:my-16 reveal-element">
+<section data-aos="fade-up" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-12 md:my-16">
     <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
@@ -415,7 +415,7 @@
 </section>
 
 {{-- SECTION 3: AI CAREER MATCH CONSTELLATION --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-16 reveal-element">
+<section data-aos="fade-up" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-16">
     <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#070b14] border border-slate-200 dark:border-cyan-500/20 shadow-2xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden">
         {{-- Ambient Corner & Orbit Glows --}}
         <div class="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-cyan-500/15 dark:bg-cyan-500/20 blur-[130px] pointer-events-none"></div>
@@ -545,7 +545,7 @@
 </section>
 
 {{-- SECTION 4: FEATURED INTELLIGENCE TRACKS --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
+<section data-aos="fade-up" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14">
     <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden space-y-10">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
@@ -661,7 +661,7 @@
 </section>
 
 {{-- SECTION 5: MULTIMEDIA & RESOURCES --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
+<section data-aos="fade-up" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {{-- Multimedia Card --}}
         <div data-aos="fade-up" data-aos-delay="100" class="relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#080B12] shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
@@ -749,7 +749,7 @@
 </section>
 
 {{-- ══════════════════ SECTION 6: HOMEPAGE COMMUNITY FEEDBACK & SUGGESTIONS (DIRECT INLINE FORM) ══════════════════ --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-12 md:my-16 reveal-element">
+<section data-aos="fade-up" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-12 md:my-16">
     <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         
         {{-- Ambient Corner Glows --}}
@@ -889,7 +889,7 @@
 </section>
 
 {{-- ══════════════════ SECTION 7: FINAL CTA (BUILD YOUR PATH) ══════════════════ --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
+<section data-aos="fade-up" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14">
     <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden text-center">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>

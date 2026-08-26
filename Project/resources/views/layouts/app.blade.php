@@ -1895,13 +1895,14 @@
     <!-- AOS (Animate On Scroll) JS & Initialization -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        AOS.init({
+            once: true,
+            duration: 800,
+            offset: 40
+        });
+        window.addEventListener('load', function() {
             if (typeof AOS !== 'undefined') {
-                AOS.init({
-                    once: true,
-                    duration: 800,
-                    offset: 50
-                });
+                AOS.refresh();
             }
         });
     </script>
