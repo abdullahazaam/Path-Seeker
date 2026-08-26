@@ -97,78 +97,37 @@
         {{-- Top accent bar --}}
         <div class="h-1 bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600"></div>
 
-        <div class="p-6 sm:p-10 lg:p-12 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                
-                {{-- Left Column: Track Info, Badges, Summary & Core Stack --}}
-                <div class="lg:col-span-7 space-y-6">
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold border {{ $badgeClass }}">
-                                <i class="fa-solid {{ $domIcon }} text-[10px]"></i>
-                                <span>{{ $career->domain }}</span>
-                            </span>
-                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400">
-                                NODE #{{ sprintf('%02d', $career->id) }}
-                            </span>
-                        </div>
-
-                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white leading-tight font-display">
-                            {{ $career->title }}
-                        </h1>
-
-                        @if($career->description)
-                            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl font-medium">
-                                {{ $career->description }}
-                            </p>
-                        @endif
-                    </div>
-
-                    {{-- Badges & Status Indicators --}}
-                    <div class="flex flex-wrap items-center gap-2.5">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25 shadow-xs">
+        <div class="p-6 sm:p-8 lg:p-10 relative z-10">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                <div class="space-y-4 max-w-2xl">
+                    <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold border {{ $badgeClass }}">
+                        <i class="fa-solid {{ $domIcon }} text-[10px]"></i>
+                        <span>{{ $career->domain }}</span>
+                    </span>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white leading-tight font-display">
+                        {{ $career->title }}
+                    </h1>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">
                             <i class="fa-solid fa-circle-check text-[10px]"></i> Verified 2026 Role
                         </span>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25 shadow-xs">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25">
                             <i class="fa-solid fa-chart-line text-[10px]"></i> High Demand
                         </span>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25 shadow-xs">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/25">
                             <i class="fa-solid fa-trophy text-[10px]"></i> Top Earning Track
                         </span>
                     </div>
-
-                    {{-- Key Competencies Stack --}}
-                    @if(count($skills) > 0)
-                        <div class="pt-1 space-y-2">
-                            <div class="text-[11px] uppercase tracking-wider font-bold text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5">
-                                <i class="fa-solid fa-layer-group text-cyan-500 text-xs"></i>
-                                <span>Core Tech Stack &amp; Competencies:</span>
-                            </div>
-                            <div class="flex flex-wrap gap-2">
-                                @foreach(array_slice($skills, 0, 6) as $sk)
-                                    <span class="px-3 py-1 text-xs font-medium rounded-xl bg-slate-100 dark:bg-white/[0.04] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/10 font-mono shadow-xs hover:border-cyan-500/40 transition-colors">
-                                        {{ $sk }}
-                                    </span>
-                                @endforeach
-                                @if(count($skills) > 6)
-                                    <span class="px-2.5 py-1 text-xs font-mono text-slate-400 dark:text-slate-500">
-                                        +{{ count($skills) - 6 }} more
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                    @endif
                 </div>
 
-                {{-- Right Column: Interactive Salary Calculator Card --}}
-                <div class="lg:col-span-5 w-full flex justify-center lg:justify-end">
-                    @php
-                        $salaryParts = explode('-', str_replace(['$', ',', '/ yr', ' '], '', $career->expected_salary));
-                        $rawMin = isset($salaryParts[0]) ? (int)$salaryParts[0] : 75000;
-                        $rawMax = isset($salaryParts[1]) ? (int)$salaryParts[1] : 130000;
-                    @endphp
-                    <div x-data="salaryCalculator({{ $rawMin }}, {{ $rawMax }})"
-                         class="p-6 rounded-3xl bg-slate-100/90 dark:bg-slate-950/75 border border-emerald-500/30 text-center w-full max-w-md shadow-xl space-y-4 backdrop-blur-md">
+                {{-- Interactive Salary Calculator Card (Feature 1) --}}
+                @php
+                    $salaryParts = explode('-', str_replace(['$', ',', '/ yr', ' '], '', $career->expected_salary));
+                    $rawMin = isset($salaryParts[0]) ? (int)$salaryParts[0] : 75000;
+                    $rawMax = isset($salaryParts[1]) ? (int)$salaryParts[1] : 130000;
+                @endphp
+                <div x-data="salaryCalculator({{ $rawMin }}, {{ $rawMax }})"
+                     class="shrink-0 p-5 sm:p-6 rounded-3xl bg-slate-100/90 dark:bg-slate-950/70 border border-emerald-500/30 text-center w-full lg:w-80 shadow-xl space-y-4">
                     <div class="flex items-center justify-between">
                         <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
                             <i class="fa-solid fa-calculator text-[10px]"></i> Salary Estimator
