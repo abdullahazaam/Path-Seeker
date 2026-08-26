@@ -470,28 +470,28 @@
 
             {{-- Right Column: Interactive Constellation Visualizer --}}
             <div class="lg:col-span-7">
-                <div class="relative rounded-3xl p-6 sm:p-8 bg-slate-900/90 dark:bg-gradient-to-b dark:from-[#090d18] dark:to-[#04060c] border border-slate-700/80 dark:border-cyan-500/30 shadow-2xl overflow-hidden min-h-[420px] flex flex-col justify-between" id="aiAdvisorOutput">
+                <div class="relative rounded-3xl p-6 sm:p-8 bg-slate-50/90 dark:bg-gradient-to-b dark:from-[#090d18] dark:to-[#04060c] border border-slate-200/90 dark:border-cyan-500/30 shadow-xl dark:shadow-2xl overflow-hidden min-h-[420px] flex flex-col justify-between" id="aiAdvisorOutput">
                     
                     {{-- Top Status Bar --}}
-                    <div class="flex items-center justify-between gap-3 pb-3 border-b border-white/10 relative z-20">
-                        <div class="flex items-center gap-2 text-xs font-mono text-cyan-400">
-                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                    <div class="flex items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-white/10 relative z-20">
+                        <div class="flex items-center gap-2 text-xs font-mono text-cyan-600 dark:text-cyan-400">
+                            <span class="w-2 h-2 rounded-full bg-cyan-500 animate-ping"></span>
                             <span class="font-bold">CONSTELLATION ENGINE v2.6</span>
                         </div>
-                        <span id="advisorMatchScore" class="px-3 py-1 text-xs font-black font-mono rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.3)]">98% Match</span>
+                        <span id="advisorMatchScore" class="px-3 py-1 text-xs font-black font-mono rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]">98% Match</span>
                     </div>
 
                     {{-- Central System Constellation Stage --}}
                     <div class="relative my-6 py-10 flex items-center justify-center min-h-[260px] z-10" id="constellationStage">
                         
                         {{-- Concentric Orbital Rings --}}
-                        <div class="absolute w-64 h-64 sm:w-80 sm:h-80 rounded-full border border-cyan-500/20 dark:border-cyan-400/20 animate-pulse pointer-events-none"></div>
-                        <div class="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full border border-dashed border-purple-500/30 pointer-events-none animate-[spin_40s_linear_infinite]"></div>
-                        <div class="absolute w-28 h-28 rounded-full border border-white/15 pointer-events-none"></div>
+                        <div class="absolute w-64 h-64 sm:w-80 sm:h-80 rounded-full border border-cyan-500/30 dark:border-cyan-400/20 animate-pulse pointer-events-none"></div>
+                        <div class="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full border border-dashed border-indigo-400/30 dark:border-purple-500/30 pointer-events-none animate-[spin_40s_linear_infinite]"></div>
+                        <div class="absolute w-28 h-28 rounded-full border border-slate-300 dark:border-white/15 pointer-events-none"></div>
 
                         {{-- Central Core Holographic Node --}}
-                        <div class="relative z-20 flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-cyan-600 via-indigo-600 to-purple-600 border-2 border-white/40 shadow-[0_0_35px_rgba(0,242,254,0.5)] cursor-pointer group">
-                            <div class="text-[9px] font-mono font-bold text-cyan-200 tracking-wider uppercase">MATCH CORE</div>
+                        <div class="relative z-20 flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-cyan-600 via-indigo-600 to-purple-600 border-2 border-white/60 dark:border-white/40 shadow-[0_0_35px_rgba(0,242,254,0.4)] cursor-pointer group">
+                            <div class="text-[9px] font-mono font-bold text-cyan-100 tracking-wider uppercase">MATCH CORE</div>
                             <div id="arc-fit-label" class="text-xl sm:text-2xl font-black text-white font-display tracking-tight leading-none">94%</div>
                             <div class="text-[8px] font-mono text-cyan-200/90 mt-0.5">FIT INDEX</div>
                         </div>
@@ -512,10 +512,10 @@
                     </div>
 
                     {{-- Core Required Skills Pills --}}
-                    <div class="space-y-2 pt-2 border-t border-white/10 relative z-20">
-                        <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                    <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-white/10 relative z-20">
+                        <div class="flex items-center justify-between text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                             <span>Orbiting Node Competencies</span>
-                            <span class="text-cyan-400">8 Synchronized</span>
+                            <span class="text-cyan-600 dark:text-cyan-400 font-bold">8 Synchronized</span>
                         </div>
                         <div id="advisorSkills" class="flex flex-wrap gap-1.5">
                             {{-- Populated dynamically by JS --}}
@@ -523,9 +523,9 @@
                     </div>
 
                     {{-- Bottom Toolchain Strip --}}
-                    <div class="pt-2.5 flex items-center justify-between gap-3 text-xs font-mono text-slate-400 border-t border-white/5 relative z-20">
-                        <p id="advisorToolchain" class="truncate text-[11px] text-slate-300">Laravel, Vue/React, Tailwind, Docker, MySQL</p>
-                        <i class="fa-solid fa-code-branch text-cyan-400 shrink-0"></i>
+                    <div class="pt-2.5 flex items-center justify-between gap-3 text-xs font-mono text-slate-500 dark:text-slate-400 border-t border-slate-200/80 dark:border-white/5 relative z-20">
+                        <p id="advisorToolchain" class="truncate text-[11px] text-slate-700 dark:text-slate-300 font-medium">Laravel, Vue/React, Tailwind, Docker, MySQL</p>
+                        <i class="fa-solid fa-code-branch text-cyan-500 dark:text-cyan-400 shrink-0"></i>
                     </div>
 
                 </div>
@@ -738,18 +738,18 @@
     </div>
 </section>
 
-{{-- ══════════════════ SECTION 6: HOMEPAGE COMMUNITY FEEDBACK & SUGGESTIONS (MODAL FLOW) ══════════════════ --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element" x-data="{ feedbackModalOpen: false }">
+{{-- ══════════════════ SECTION 6: HOMEPAGE COMMUNITY FEEDBACK & SUGGESTIONS (DIRECT INLINE FORM) ══════════════════ --}}
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-12 md:my-16 reveal-element">
     <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         
         {{-- Ambient Corner Glows --}}
-        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none"></div>
 
-        <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {{-- Left Column: Description & Community Callout --}}
-            <div class="space-y-4 max-w-2xl">
+            <div class="lg:col-span-5 space-y-5">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/25 text-xs font-black uppercase tracking-wider text-cyan-700 dark:text-cyan-300">
                     <i class="fa-solid fa-comments text-cyan-500"></i>
                     <span>Community &amp; Engineering Hub</span>
@@ -761,141 +761,116 @@
                     Have a technical suggestion, identified a roadmap gap, or encountered a platform bug? Submit your feedback directly to our core engineering team.
                 </p>
                 
-                <div class="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-600 dark:text-slate-400">
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>
-                        <span>Reviewed by architects</span>
+                <div class="space-y-3 pt-2 text-xs text-slate-600 dark:text-slate-400 font-medium">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0">
+                            <i class="fa-solid fa-check text-[10px]"></i>
+                        </div>
+                        <span>Reviewed directly by platform architects</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-circle-check text-indigo-500 text-sm"></i>
-                        <span>Real-time status updates</span>
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-5 h-5 rounded-full bg-indigo-500/15 text-indigo-500 flex items-center justify-center text-xs shrink-0">
+                            <i class="fa-solid fa-bell text-[10px]"></i>
+                        </div>
+                        <span>Live status updates on roadmap progression</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-circle-check text-pink-500 text-sm"></i>
-                        <span>Guaranteed privacy</span>
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-5 h-5 rounded-full bg-pink-500/15 text-pink-500 flex items-center justify-center text-xs shrink-0">
+                            <i class="fa-solid fa-shield-halved text-[10px]"></i>
+                        </div>
+                        <span>Guaranteed privacy and end-to-end security</span>
                     </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 space-y-2 font-mono text-xs">
+                    <div class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span>Live Telemetry Channel</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-sans">
+                        All submissions are routed straight to our triage dashboard and logged with telemetry context.
+                    </p>
                 </div>
             </div>
 
-            {{-- Right Column: Sleek Send Feedback Trigger Button --}}
-            <div class="shrink-0">
-                <button type="button"
-                        @click="feedbackModalOpen = true"
-                        class="btn-sweep inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-black text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-xl shadow-cyan-500/25 hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
-                    <i class="fa-solid fa-paper-plane text-xs text-slate-950"></i>
-                    <span class="text-slate-950 font-black">Send Feedback</span>
-                </button>
-            </div>
-
-        </div>
-
-        {{-- ══════════════════ MODAL: FEEDBACK SUBMISSION ══════════════════ --}}
-        <div x-show="feedbackModalOpen"
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0 scale-95"
-             x-transition:enter-end="opacity-100 scale-100"
-             x-transition:leave="transition ease-in duration-200"
-             x-transition:leave-start="opacity-100 scale-100"
-             x-transition:leave-end="opacity-0 scale-95"
-             class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm"
-             style="display: none;"
-             @keydown.escape.window="feedbackModalOpen = false">
-            
-            <div class="relative w-full max-w-lg rounded-3xl bg-[#0b0f19] border border-white/10 p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto"
-                 @click.away="feedbackModalOpen = false">
-                
-                {{-- Modal Header --}}
-                <div class="flex items-center justify-between pb-4 border-b border-white/10">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-sm">
-                            <i class="fa-solid fa-comments"></i>
-                        </div>
+            {{-- Right Column: Fully Visible Direct Inline Form --}}
+            <div class="lg:col-span-7">
+                <div class="rounded-3xl bg-slate-50/80 dark:bg-[#0b0f19] border border-slate-200/90 dark:border-white/10 p-6 sm:p-8 shadow-xl relative">
+                    <form action="{{ route('feedback.store') }}" method="POST" class="space-y-5" x-data="{ selectedCategory: 'suggestion' }">
+                        @csrf
+                        
                         <div>
-                            <h3 class="text-lg font-black text-white font-display">System Feedback</h3>
-                            <p class="text-xs text-slate-400">Help shape future intelligence models</p>
+                            <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
+                                Feedback Category
+                            </label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="category" value="suggestion" class="sr-only" x-model="selectedCategory">
+                                    <div :class="selectedCategory === 'suggestion' ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-700 dark:text-cyan-300 font-bold shadow-sm' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all flex items-center justify-center gap-1.5 hover:border-cyan-500/30">
+                                        <i class="fa-solid fa-lightbulb text-xs text-amber-500"></i>
+                                        <span>Suggestion</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="category" value="bug" class="sr-only" x-model="selectedCategory">
+                                    <div :class="selectedCategory === 'bug' ? 'bg-rose-500/20 border-rose-500/50 text-rose-700 dark:text-rose-300 font-bold shadow-sm' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all flex items-center justify-center gap-1.5 hover:border-rose-500/30">
+                                        <i class="fa-solid fa-bug text-xs text-rose-500"></i>
+                                        <span>Bug Report</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="category" value="query" class="sr-only" x-model="selectedCategory">
+                                    <div :class="selectedCategory === 'query' ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-700 dark:text-cyan-300 font-bold shadow-sm' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all flex items-center justify-center gap-1.5 hover:border-cyan-500/30">
+                                        <i class="fa-solid fa-circle-question text-xs text-cyan-500"></i>
+                                        <span>Inquiry</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="category" value="general" class="sr-only" x-model="selectedCategory">
+                                    <div :class="selectedCategory === 'general' ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-700 dark:text-emerald-300 font-bold shadow-sm' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all flex items-center justify-center gap-1.5 hover:border-emerald-500/30">
+                                        <i class="fa-solid fa-comment-dots text-xs text-emerald-500"></i>
+                                        <span>General</span>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <button type="button" @click="feedbackModalOpen = false" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors">
-                        <i class="fa-solid fa-xmark text-sm"></i>
-                    </button>
+
+                        @guest
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-1.5">
+                                    Your Name (Optional)
+                                </label>
+                                <input type="text" name="name" placeholder="e.g., Alex Vance" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-1.5">
+                                    Email Address (Optional)
+                                </label>
+                                <input type="email" name="email" placeholder="alex@example.com" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-all">
+                            </div>
+                        </div>
+                        @endguest
+
+                        <div>
+                            <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
+                                Your Message &amp; Feedback
+                            </label>
+                            <textarea name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Share your recommendations, feature requests, or issue details with us..." class="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:outline-none shadow-inner transition-all"></textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-1">
+                            <p class="text-[10px] text-slate-500 font-mono">
+                                @auth Signed in as {{ Auth::user()->name }} @else Submitting as Guest Visitor @endauth
+                            </p>
+                            <button type="submit" class="btn-sweep w-full sm:w-auto px-8 py-3.5 rounded-full text-xs font-black text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-lg shadow-cyan-500/25 hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer">
+                                <span class="text-slate-950 font-black">Submit Feedback</span>
+                                <i class="fa-solid fa-paper-plane text-[10px] text-slate-950"></i>
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
-
-                {{-- Form --}}
-                <form action="{{ route('feedback.store') }}" method="POST" class="space-y-4" x-data="{ selectedCategory: 'suggestion' }">
-                    @csrf
-                    
-                    <div>
-                        <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
-                            Feedback Category
-                        </label>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                            <label class="cursor-pointer">
-                                <input type="radio" name="category" value="suggestion" class="sr-only" x-model="selectedCategory">
-                                <div :class="selectedCategory === 'suggestion' ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-700 dark:text-cyan-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
-                                    <i class="fa-solid fa-lightbulb text-xs text-amber-500"></i>
-                                    <span>Suggestion</span>
-                                </div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="category" value="bug" class="sr-only" x-model="selectedCategory">
-                                <div :class="selectedCategory === 'bug' ? 'bg-rose-500/20 border-rose-500/50 text-rose-700 dark:text-rose-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
-                                    <i class="fa-solid fa-bug text-xs text-rose-500"></i>
-                                    <span>Bug Report</span>
-                                </div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="category" value="query" class="sr-only" x-model="selectedCategory">
-                                <div :class="selectedCategory === 'query' ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-700 dark:text-cyan-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
-                                    <i class="fa-solid fa-circle-question text-xs text-cyan-500"></i>
-                                    <span>Inquiry</span>
-                                </div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="category" value="general" class="sr-only" x-model="selectedCategory">
-                                <div :class="selectedCategory === 'general' ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-700 dark:text-emerald-300 font-bold' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400'" class="p-2.5 rounded-xl border text-center text-xs transition-all shadow-sm flex items-center justify-center gap-1.5">
-                                    <i class="fa-solid fa-comment-dots text-xs text-emerald-500"></i>
-                                    <span>General</span>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-
-                    @guest
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-1.5">
-                                Your Name (Optional)
-                            </label>
-                            <input type="text" name="name" placeholder="e.g., Alex Vance" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-1.5">
-                                Email Address (Optional)
-                            </label>
-                            <input type="email" name="email" placeholder="alex@example.com" class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:outline-none">
-                        </div>
-                    </div>
-                    @endguest
-
-                    <div>
-                        <label class="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
-                            Your Message &amp; Feedback
-                        </label>
-                        <textarea name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Share your recommendations, feature requests, or issue details with us..." class="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:outline-none shadow-inner"></textarea>
-                    </div>
-
-                    <div class="flex items-center justify-between pt-2">
-                        <p class="text-[10px] text-slate-500 font-mono">
-                            @auth Signed in as {{ Auth::user()->name }} @else Submitting as Guest Visitor @endauth
-                        </p>
-                        <button type="submit" class="btn-sweep px-7 py-3 rounded-full text-xs font-black text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-md transition-all flex items-center gap-2 cursor-pointer">
-                            <span class="text-slate-950 font-black">Submit Feedback</span>
-                            <i class="fa-solid fa-paper-plane text-[10px] text-slate-950"></i>
-                        </button>
-                    </div>
-
-                </form>
-
             </div>
 
         </div>
@@ -1165,8 +1140,8 @@ function renderConstellation(skills) {
         node.style.transform = `translate(-50%, -50%) scale(0.6)`;
         
         node.innerHTML = `
-            <div class="px-2.5 py-1 rounded-xl bg-slate-950/90 dark:bg-[#0c1222] border border-cyan-500/40 text-[10px] font-mono font-bold text-cyan-300 shadow-[0_0_15px_rgba(0,242,254,0.25)] flex items-center gap-1.5 backdrop-blur-md group-hover:scale-110 group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(0,242,254,0.5)] transition-all">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            <div class="px-2.5 py-1 rounded-xl bg-white/95 dark:bg-[#0c1222] border border-cyan-500/40 text-[10px] font-mono font-bold text-slate-800 dark:text-cyan-300 shadow-md dark:shadow-[0_0_15px_rgba(0,242,254,0.25)] flex items-center gap-1.5 backdrop-blur-md group-hover:scale-110 group-hover:border-cyan-500 dark:group-hover:border-cyan-400 group-hover:shadow-lg dark:group-hover:shadow-[0_0_20px_rgba(0,242,254,0.5)] transition-all">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse"></span>
                 <span>${skills[i]}</span>
             </div>
         `;
@@ -1187,7 +1162,7 @@ function renderSkills(skills) {
     container.innerHTML = '';
     skills.forEach((skill, i) => {
         const pill = document.createElement('span');
-        pill.className = 'px-2.5 py-1 text-[10px] font-mono font-medium rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 opacity-0';
+        pill.className = 'px-2.5 py-1 text-[10px] font-mono font-bold rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/[0.06] text-slate-800 dark:text-slate-200 opacity-0 shadow-2xs';
         pill.style.transition = `opacity 0.3s ease ${i * 0.06}s, transform 0.3s ease ${i * 0.06}s`;
         pill.style.transform = 'translateY(4px)';
         pill.textContent = skill;
