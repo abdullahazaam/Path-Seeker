@@ -918,10 +918,107 @@
             box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.15) !important;
             color: #FFFFFF !important;
         }
-        html.dark select option, .dark select option,
-        html.dark select.app-input option, .dark select.app-input option {
-            background: #080B12 !important;
-            color: #F8FAFC !important;
+        /* ══════════════════ DARK MODE 3D ROTATING FLUID BLOB ENGINE (90FPS GPU) ══════════════════ */
+        .dark-fluid-blob-3d {
+            position: absolute;
+            pointer-events: none;
+            filter: blur(55px) saturate(170%);
+            -webkit-filter: blur(55px) saturate(170%);
+            mix-blend-mode: screen;
+            opacity: 0.60;
+            will-change: transform, border-radius;
+        }
+
+        .dark-fluid-blob-1 {
+            background: radial-gradient(circle at 30% 30%, #a855f7 0%, #7c3aed 40%, #2563eb 70%, #00f2fe 100%);
+            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            animation: darkBlobRotate3D1 22s ease-in-out infinite;
+        }
+
+        .dark-fluid-blob-2 {
+            background: radial-gradient(circle at 70% 30%, #3b82f6 0%, #6366f1 40%, #8b5cf6 70%, #d946ef 100%);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: darkBlobRotate3D2 26s ease-in-out infinite;
+        }
+
+        .dark-fluid-blob-3 {
+            background: radial-gradient(circle at 40% 60%, #00f2fe 0%, #3b82f6 35%, #7c3aed 70%, #9333ea 100%);
+            border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%;
+            animation: darkBlobRotate3D3 20s ease-in-out infinite;
+        }
+
+        .dark-fluid-blob-4 {
+            background: radial-gradient(circle at 60% 50%, #9333ea 0%, #6366f1 40%, #2563eb 75%, #06b6d4 100%);
+            border-radius: 35% 65% 55% 45% / 55% 40% 60% 45%;
+            animation: darkBlobRotate3D4 24s ease-in-out infinite;
+        }
+
+        @keyframes darkBlobRotate3D1 {
+            0% {
+                transform: translate3d(0, 0, 0) rotate3d(1, 1, 0.5, 0deg) scale(1);
+                border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            }
+            33% {
+                transform: translate3d(50px, -40px, 0) rotate3d(1, 1, 0.5, 120deg) scale(1.15);
+                border-radius: 58% 42% 38% 62% / 60% 35% 65% 40%;
+            }
+            66% {
+                transform: translate3d(-35px, 45px, 0) rotate3d(1, 1, 0.5, 240deg) scale(0.90);
+                border-radius: 35% 65% 60% 40% / 40% 65% 35% 60%;
+            }
+            100% {
+                transform: translate3d(0, 0, 0) rotate3d(1, 1, 0.5, 360deg) scale(1);
+                border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            }
+        }
+
+        @keyframes darkBlobRotate3D2 {
+            0% {
+                transform: translate3d(0, 0, 0) rotate3d(0.5, 1, 1, 0deg) scale(1);
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+            33% {
+                transform: translate3d(-45px, 40px, 0) rotate3d(0.5, 1, 1, -120deg) scale(1.10);
+                border-radius: 40% 60% 65% 35% / 45% 55% 45% 55%;
+            }
+            66% {
+                transform: translate3d(40px, -45px, 0) rotate3d(0.5, 1, 1, -240deg) scale(0.92);
+                border-radius: 65% 35% 45% 55% / 55% 40% 60% 45%;
+            }
+            100% {
+                transform: translate3d(0, 0, 0) rotate3d(0.5, 1, 1, -360deg) scale(1);
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+        }
+
+        @keyframes darkBlobRotate3D3 {
+            0% {
+                transform: translate3d(0, 0, 0) rotate3d(1, 0.5, 1, 0deg) scale(1);
+                border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%;
+            }
+            50% {
+                transform: translate3d(35px, 40px, 0) rotate3d(1, 0.5, 1, 180deg) scale(1.18);
+                border-radius: 35% 65% 58% 42% / 62% 38% 62% 38%;
+            }
+            100% {
+                transform: translate3d(0, 0, 0) rotate3d(1, 0.5, 1, 360deg) scale(1);
+                border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%;
+            }
+        }
+
+        @keyframes darkBlobRotate3D4 {
+            0% {
+                transform: translate3d(0, 0, 0) rotate3d(0.8, 1, 0.3, 0deg) scale(1);
+                border-radius: 35% 65% 55% 45% / 55% 40% 60% 45%;
+            }
+            50% {
+                transform: translate3d(-40px, -35px, 0) rotate3d(0.8, 1, 0.3, -180deg) scale(1.12);
+                border-radius: 60% 40% 40% 60% / 45% 60% 40% 55%;
+            }
+            100% {
+                transform: translate3d(0, 0, 0) rotate3d(0.8, 1, 0.3, -360deg) scale(1);
+                border-radius: 35% 65% 55% 45% / 55% 40% 60% 45%;
+            }
         }
     </style>
 </head>
@@ -968,19 +1065,27 @@
             </div>
         </div>
 
-        <!-- ─── DARK MODE AMBIENT LAYER (100% Preserved Pristine Obsidian Auroras) ─── -->
-        <div class="absolute inset-0 hidden dark:block pointer-events-none">
-            <!-- Floating Aurora Orb 1 (Top-Left Deep Indigo/Purple) -->
-            <div class="absolute -top-[15%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-indigo-600/30 via-purple-700/25 to-transparent blur-[120px] sm:blur-[160px] animate-aurora-drift-1"></div>
-            
-            <!-- Floating Aurora Orb 2 (Bottom-Right Deep Pink/Purple) -->
-            <div class="absolute -bottom-[15%] -right-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-tl from-pink-600/25 via-purple-700/15 to-transparent blur-[120px] sm:blur-[160px] animate-aurora-drift-2"></div>
+        <!-- ─── DARK MODE 3D ROTATING FLUID/BLOB AMBIENT LAYER (STRICTLY DARK THEME ONLY) ─── -->
+        <div class="absolute inset-0 hidden dark:block pointer-events-none overflow-hidden bg-[#06080f]">
+            <!-- 1. Deep Space Ambient Radial Lighting -->
+            <div class="absolute -top-[15%] -left-[10%] w-[65vw] h-[65vw] max-w-[950px] max-h-[950px] rounded-full bg-gradient-to-br from-purple-700/25 via-indigo-600/20 to-transparent blur-[140px]"></div>
+            <div class="absolute -bottom-[15%] -right-[10%] w-[65vw] h-[65vw] max-w-[950px] max-h-[950px] rounded-full bg-gradient-to-tl from-blue-700/25 via-violet-700/20 to-transparent blur-[140px]"></div>
 
-            <!-- Floating Aurora Orb 3 (Center-Floating Cyan/Indigo Aurora) -->
-            <div class="absolute top-[35%] left-[20%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-cyan-500/20 via-indigo-500/15 to-transparent blur-[130px] sm:blur-[170px] animate-aurora-drift-3"></div>
+            <!-- 2. 3D Rotating Glowing Fluid Blob Shapes (Deep Purple, Violet & Electric Blue) -->
+            <!-- Fluid Blob 1 (Top Left — 3D Rotating Purple-Blue-Cyan) -->
+            <div class="w-[50vw] h-[50vw] max-w-[720px] max-h-[720px] -top-[10%] -left-[8%] dark-fluid-blob-3d dark-fluid-blob-1"></div>
 
-            <!-- Dark Mode Ambient Micro-Dot Matrix -->
-            <div class="absolute inset-0 bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.05]"></div>
+            <!-- Fluid Blob 2 (Bottom Right — 3D Rotating Electric Blue-Magenta) -->
+            <div class="w-[52vw] h-[52vw] max-w-[760px] max-h-[760px] -bottom-[12%] -right-[8%] dark-fluid-blob-3d dark-fluid-blob-2"></div>
+
+            <!-- Fluid Blob 3 (Center / Mid Left — 3D Rotating Cyan-Indigo-Purple) -->
+            <div class="w-[42vw] h-[42vw] max-w-[600px] max-h-[600px] top-[28%] left-[12%] dark-fluid-blob-3d dark-fluid-blob-3"></div>
+
+            <!-- Fluid Blob 4 (Mid Right — 3D Rotating Deep Purple-Cyan) -->
+            <div class="w-[40vw] h-[40vw] max-w-[580px] max-h-[580px] top-[18%] right-[8%] dark-fluid-blob-3d dark-fluid-blob-4"></div>
+
+            <!-- 3. Micro-Star Grid Accent -->
+            <div class="absolute inset-0 bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.04]"></div>
         </div>
 
     </div>
