@@ -174,7 +174,7 @@
             --color-primary-light: rgba(118, 87, 255, 0.08);
             --color-secondary: #12CFF3;
             --color-secondary-hover: #00b4d8;
-            --color-bg: #F8F9FC;
+            --color-bg: #F8FAFC;
             --color-surface: #FFFFFF;
             --color-surface-secondary: #F5F6FA;
             --color-surface-hover: #F0F2F8;
@@ -680,13 +680,13 @@
 
         /* ══════════════════ SOFT FUTURISTIC LIGHT MODE HIERARCHY ══════════════════ */
         html:not(.dark) {
-            background-color: #F8F9FC;
+            background-color: #F8FAFC;
             color: #111827;
         }
 
         /* Base Body & Container Foundations */
         html:not(.dark) body {
-            background-color: #F8F9FC !important;
+            background-color: #F8FAFC !important;
             color: #111827 !important;
         }
 
@@ -825,21 +825,83 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased transition-colors duration-500 relative overflow-x-hidden bg-[#F8F9FC] dark:bg-[#06080f] text-[#111827] dark:text-[#f8fafc]">
+<body class="min-h-screen flex flex-col antialiased transition-colors duration-500 relative overflow-x-hidden bg-[#F8FAFC] dark:bg-[#06080f] text-[#111827] dark:text-[#f8fafc]">
 
     <!-- ══════════════════ SAFE FULL-SCREEN ANIMATED AMBIENT BACKGROUND CONTAINER ══════════════════ -->
-    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-[#F8F9FC] dark:bg-[#06080f] transition-colors duration-500" aria-hidden="true">
-        <!-- Floating Aurora Orb 1 (Top-Left Soft Purple/Cyan) -->
-        <div class="absolute -top-[15%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-[#7657FF]/[0.04] via-[#12CFF3]/[0.03] to-transparent dark:from-indigo-600/30 dark:via-purple-700/25 dark:to-transparent blur-[120px] sm:blur-[160px] animate-aurora-drift-1"></div>
+    <div id="ambientBackgroundLayer" class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-[#F8FAFC] dark:bg-[#06080f] transition-colors duration-500" aria-hidden="true">
         
-        <!-- Floating Aurora Orb 2 (Bottom-Right Soft Cyan/Purple) -->
-        <div class="absolute -bottom-[15%] -right-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-tl from-[#12CFF3]/[0.04] via-[#7657FF]/[0.03] to-transparent dark:from-pink-600/25 dark:via-purple-700/15 dark:to-transparent blur-[120px] sm:blur-[160px] animate-aurora-drift-2"></div>
+        <!-- ─── LIGHT MODE DEDICATED AMBIENT LAYER ─── -->
+        <div class="absolute inset-0 block dark:hidden pointer-events-none">
+            <!-- 1. Hero Ambient Zone (Cyan to Soft Violet Radial Gradient, blur-[140px], 6-8% opacity) -->
+            <div class="absolute -top-[12%] -left-[8%] w-[55vw] h-[55vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-br from-[#12CFF3]/[0.08] via-[#7657FF]/[0.05] to-transparent blur-[140px] animate-aurora-drift-1"></div>
+            
+            <!-- 2. Mid-Page Ambient Zone (Violet to Electric Blue Radial Gradient, blur-[140px], 5-7% opacity) -->
+            <div class="absolute top-[35%] -right-[8%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] rounded-full bg-gradient-to-bl from-[#7657FF]/[0.07] via-[#3b82f6]/[0.04] to-transparent blur-[140px] animate-aurora-drift-2"></div>
 
-        <!-- Floating Aurora Orb 3 (Center-Floating Atmospheric Shimmer) -->
-        <div class="absolute top-[35%] left-[20%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-[#7657FF]/[0.03] via-[#12CFF3]/[0.03] to-transparent dark:from-cyan-500/20 dark:via-indigo-500/15 dark:to-transparent blur-[130px] sm:blur-[170px] animate-aurora-drift-3"></div>
+            <!-- 3. Bottom / Footer Ambient Zone (Sky Blue to Cyan Radial Gradient, blur-[150px], 5-7% opacity) -->
+            <div class="absolute -bottom-[12%] left-[10%] w-[52vw] h-[52vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-tr from-[#3b82f6]/[0.06] via-[#12CFF3]/[0.04] to-transparent blur-[150px] animate-aurora-drift-3"></div>
 
-        <!-- Subtle Ambient Grid / Dot Texture -->
-        <div class="absolute inset-0 bg-[radial-gradient(#7657FF_1px,transparent_1px)] dark:bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.025] dark:opacity-[0.05]"></div>
+            <!-- 4. Subtle Futuristic Career Trajectory Curving SVG Lines (Very Low Opacity 5-7%) -->
+            <svg class="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1440 900">
+                <path d="M-100,160 C320,60 540,340 880,200 C1200,60 1340,400 1600,300" fill="none" stroke="url(#lightTrajGrad1)" stroke-width="2" stroke-dasharray="10, 14" />
+                <path d="M-50,660 C300,500 620,800 980,620 C1260,480 1420,760 1550,670" fill="none" stroke="url(#lightTrajGrad2)" stroke-width="1.8" stroke-dasharray="10, 14" />
+                <defs>
+                    <linearGradient id="lightTrajGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#12CFF3" />
+                        <stop offset="50%" stop-color="#7657FF" />
+                        <stop offset="100%" stop-color="#3b82f6" />
+                    </linearGradient>
+                    <linearGradient id="lightTrajGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#7657FF" />
+                        <stop offset="50%" stop-color="#12CFF3" />
+                        <stop offset="100%" stop-color="#8b5cf6" />
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <!-- 5. Subtle Skill Constellation Nodes SVG (Very Low Opacity 6-8%) -->
+            <svg class="absolute inset-0 w-full h-full opacity-[0.07] pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900">
+                <!-- Cluster Top Right -->
+                <g>
+                    <line x1="1080" y1="130" x2="1160" y2="180" stroke="#7657FF" stroke-width="1" stroke-dasharray="4,4" />
+                    <line x1="1160" y1="180" x2="1240" y2="140" stroke="#12CFF3" stroke-width="1" />
+                    <line x1="1160" y1="180" x2="1190" y2="250" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,4" />
+                    <circle cx="1080" cy="130" r="3.5" fill="#7657FF" />
+                    <circle cx="1160" cy="180" r="5" fill="#12CFF3" />
+                    <circle cx="1240" cy="140" r="3" fill="#7657FF" />
+                    <circle cx="1190" cy="250" r="4" fill="#3b82f6" />
+                </g>
+                <!-- Cluster Mid Left -->
+                <g>
+                    <line x1="160" y1="460" x2="240" y2="520" stroke="#12CFF3" stroke-width="1" />
+                    <line x1="240" y1="520" x2="310" y2="470" stroke="#7657FF" stroke-width="1" stroke-dasharray="4,4" />
+                    <line x1="240" y1="520" x2="210" y2="590" stroke="#3b82f6" stroke-width="1" />
+                    <circle cx="160" cy="460" r="3" fill="#12CFF3" />
+                    <circle cx="240" cy="520" r="5" fill="#7657FF" />
+                    <circle cx="310" cy="470" r="3.5" fill="#12CFF3" />
+                    <circle cx="210" cy="590" r="3" fill="#3b82f6" />
+                </g>
+            </svg>
+
+            <!-- 6. Micro Data Grid Dot Pattern Overlay (Opacity 3-4%) -->
+            <div class="absolute inset-0 bg-[radial-gradient(#7657FF_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.035] pointer-events-none"></div>
+        </div>
+
+        <!-- ─── DARK MODE AMBIENT LAYER (100% Preserved Pristine Obsidian Auroras) ─── -->
+        <div class="absolute inset-0 hidden dark:block pointer-events-none">
+            <!-- Floating Aurora Orb 1 (Top-Left Deep Indigo/Purple) -->
+            <div class="absolute -top-[15%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-indigo-600/30 via-purple-700/25 to-transparent blur-[120px] sm:blur-[160px] animate-aurora-drift-1"></div>
+            
+            <!-- Floating Aurora Orb 2 (Bottom-Right Deep Pink/Purple) -->
+            <div class="absolute -bottom-[15%] -right-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-tl from-pink-600/25 via-purple-700/15 to-transparent blur-[120px] sm:blur-[160px] animate-aurora-drift-2"></div>
+
+            <!-- Floating Aurora Orb 3 (Center-Floating Cyan/Indigo Aurora) -->
+            <div class="absolute top-[35%] left-[20%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-cyan-500/20 via-indigo-500/15 to-transparent blur-[130px] sm:blur-[170px] animate-aurora-drift-3"></div>
+
+            <!-- Dark Mode Ambient Micro-Dot Matrix -->
+            <div class="absolute inset-0 bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.05]"></div>
+        </div>
+
     </div>
 
     <!-- ══════════════════ FLOATING GLASS PILL NAVBAR ══════════════════ -->
