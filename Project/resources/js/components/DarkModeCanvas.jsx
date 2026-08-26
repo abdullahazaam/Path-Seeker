@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 
 /**
- * DarkModeCanvas - Subtle, Atmospheric HTML5 Canvas Ambient Background
+ * DarkModeCanvas - Ultra-Premium, Flawless HTML5 Canvas Background
  * Features:
- *  1. Faint Digital Rain (#7657FF & #12CFF3) with reduced opacity (10-20%) and thickness (0.8-1.2px)
- *  2. Delicate, Tiny Floating Bubbles (3.5-10px radius) widely dispersed across the entire viewport (max 10-14% opacity)
- *  3. Removed bottom wave grid for maximum UI clarity and focus
- *  4. Atmospheric deep base trailing with ctx.fillStyle = 'rgba(6, 8, 15, 0.28)'
+ *  1. Sleek Vertical Digital Rain (#12CFF3 & #7657FF) with alpha-fading linear gradients and glowing tips
+ *  2. High-End Floating Glass Bubbles (3.5px - 10px radius) with subtle stroke and micro specular glints
+ *  3. ZERO residual web/arc/mesh artifacts
+ *  4. Cinematic frame clearing with ctx.fillStyle = 'rgba(6, 8, 15, 0.25)' for buttery smooth motion blur
  */
 export const DarkModeCanvas = () => {
     const canvasRef = useRef(null);
@@ -25,26 +25,26 @@ export const DarkModeCanvas = () => {
         let lastTime = 0;
         let time = 0;
 
-        // ── 1. Subtle Digital Rain System ──
-        const RAIN_COUNT = 45;
+        // ── 1. Sleek Digital Rain ──
+        const RAIN_COUNT = 48;
         const rainDrops = [];
         for (let i = 0; i < RAIN_COUNT; i++) {
             const isCyan = Math.random() > 0.45;
             rainDrops.push({
                 x: Math.random() * width,
-                y: Math.random() * height * 1.5 - height * 0.5,
-                speed: 3.2 + Math.random() * 4.5,
-                length: 35 + Math.random() * 65,
-                width: 0.8 + Math.random() * 0.4,
+                y: Math.random() * (height * 1.5) - (height * 0.5),
+                speed: 3.5 + Math.random() * 4.5,
+                length: 40 + Math.random() * 75,
+                width: 0.85 + Math.random() * 0.45,
                 r: isCyan ? 18 : 118,
                 g: isCyan ? 207 : 87,
                 b: isCyan ? 243 : 255,
-                alpha: 0.10 + Math.random() * 0.12
+                alpha: 0.12 + Math.random() * 0.14
             });
         }
 
-        // ── 2. Delicate Micro Floating Bubbles System ──
-        const BUBBLE_COUNT = 24;
+        // ── 2. High-End Glass Bubbles ──
+        const BUBBLE_COUNT = 22;
         const bubbles = [];
         for (let i = 0; i < BUBBLE_COUNT; i++) {
             const isCyan = Math.random() > 0.45;
@@ -53,9 +53,9 @@ export const DarkModeCanvas = () => {
                 x: 0,
                 y: Math.random() * height,
                 radius: 3.5 + Math.random() * 6.5,
-                vy: -(0.25 + Math.random() * 0.55),
-                driftFreq: 0.001 + Math.random() * 0.0018,
-                driftAmp: 12 + Math.random() * 22,
+                vy: -(0.20 + Math.random() * 0.35),
+                driftFreq: 0.0008 + Math.random() * 0.0014,
+                driftAmp: 10 + Math.random() * 20,
                 driftPhase: Math.random() * Math.PI * 2,
                 r: isCyan ? 18 : 118,
                 g: isCyan ? 207 : 87,
@@ -78,31 +78,31 @@ export const DarkModeCanvas = () => {
         handleResize();
         window.addEventListener('resize', handleResize, { passive: true });
 
-        // ── 60FPS Ambient Draw Loop ──
+        // ── Cinematic Frame Draw Loop ──
         const draw = (now) => {
             if (!lastTime) lastTime = now;
             const dt = Math.min((now - lastTime) / 1000, 0.1);
             lastTime = now;
             time += dt;
 
-            // 1. Semi-transparent Deep Base (#06080f)
-            ctx.fillStyle = 'rgba(6, 8, 15, 0.28)';
+            // 1. Cinematic Frame Clearing
+            ctx.fillStyle = 'rgba(6, 8, 15, 0.25)';
             ctx.fillRect(0, 0, width, height);
 
-            // 2. Faint Ambient Deep Space Light Pools
+            // 2. Faint Ambient Sheen
             const radialGrad1 = ctx.createRadialGradient(width * 0.2, height * 0.25, 10, width * 0.2, height * 0.25, width * 0.5);
-            radialGrad1.addColorStop(0, 'rgba(118, 87, 255, 0.035)');
+            radialGrad1.addColorStop(0, 'rgba(118, 87, 255, 0.03)');
             radialGrad1.addColorStop(1, 'rgba(6, 8, 15, 0)');
             ctx.fillStyle = radialGrad1;
             ctx.fillRect(0, 0, width, height);
 
             const radialGrad2 = ctx.createRadialGradient(width * 0.8, height * 0.7, 10, width * 0.8, height * 0.7, width * 0.55);
-            radialGrad2.addColorStop(0, 'rgba(18, 207, 243, 0.028)');
+            radialGrad2.addColorStop(0, 'rgba(18, 207, 243, 0.025)');
             radialGrad2.addColorStop(1, 'rgba(6, 8, 15, 0)');
             ctx.fillStyle = radialGrad2;
             ctx.fillRect(0, 0, width, height);
 
-            // ── 3. Render Subtle Digital Rain ──
+            // ── 3. Render Sleek Digital Rain ──
             for (let i = 0; i < rainDrops.length; i++) {
                 const drop = rainDrops[i];
                 drop.y += drop.speed * (dt * 60);
@@ -110,8 +110,8 @@ export const DarkModeCanvas = () => {
                 if (drop.y - drop.length > height) {
                     drop.y = -drop.length - Math.random() * 50;
                     drop.x = Math.random() * width;
-                    drop.speed = 3.2 + Math.random() * 4.5;
-                    drop.length = 35 + Math.random() * 65;
+                    drop.speed = 3.5 + Math.random() * 4.5;
+                    drop.length = 40 + Math.random() * 75;
                 }
 
                 const startY = Math.max(0, drop.y - drop.length);
@@ -120,7 +120,7 @@ export const DarkModeCanvas = () => {
                 if (endY > 0 && startY < height) {
                     const grad = ctx.createLinearGradient(drop.x, startY, drop.x, endY);
                     grad.addColorStop(0, `rgba(${drop.r}, ${drop.g}, ${drop.b}, 0)`);
-                    grad.addColorStop(0.8, `rgba(${drop.r}, ${drop.g}, ${drop.b}, ${drop.alpha * 0.45})`);
+                    grad.addColorStop(0.75, `rgba(${drop.r}, ${drop.g}, ${drop.b}, ${drop.alpha * 0.5})`);
                     grad.addColorStop(1, `rgba(${drop.r}, ${drop.g}, ${drop.b}, ${drop.alpha})`);
 
                     ctx.strokeStyle = grad;
@@ -130,15 +130,15 @@ export const DarkModeCanvas = () => {
                     ctx.lineTo(drop.x, endY);
                     ctx.stroke();
 
-                    // Faint head tip
-                    ctx.fillStyle = `rgba(${drop.r}, ${drop.g}, ${drop.b}, ${drop.alpha * 1.3})`;
+                    // Luminous head tip
+                    ctx.fillStyle = `rgba(${drop.r}, ${drop.g}, ${drop.b}, ${drop.alpha * 1.25})`;
                     ctx.beginPath();
                     ctx.arc(drop.x, endY, drop.width * 0.9, 0, Math.PI * 2);
                     ctx.fill();
                 }
             }
 
-            // ── 4. Render Widely Dispersed Tiny Floating Bubbles ──
+            // ── 4. Render Elegant Glass Bubbles ──
             for (let i = 0; i < bubbles.length; i++) {
                 const b = bubbles[i];
                 b.y += b.vy * (dt * 60);
@@ -154,12 +154,12 @@ export const DarkModeCanvas = () => {
                 const bx = b.x;
                 const by = b.y;
 
-                // Subtle Glass Radial Sheen (Max 10-14% opacity)
+                // Glass Sheen Body
                 const bubbleGrad = ctx.createRadialGradient(
                     bx - r * 0.25, by - r * 0.25, r * 0.1,
                     bx, by, r
                 );
-                bubbleGrad.addColorStop(0, `rgba(255, 255, 255, ${b.alpha * 0.5})`);
+                bubbleGrad.addColorStop(0, `rgba(255, 255, 255, ${b.alpha * 0.45})`);
                 bubbleGrad.addColorStop(0.6, `rgba(${b.r}, ${b.g}, ${b.b}, ${b.alpha * 0.2})`);
                 bubbleGrad.addColorStop(1, `rgba(${b.r}, ${b.g}, ${b.b}, ${b.alpha})`);
 
@@ -168,12 +168,12 @@ export const DarkModeCanvas = () => {
                 ctx.arc(bx, by, r, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Delicate Crisp Stroke (Max 12% opacity)
-                ctx.strokeStyle = `rgba(${b.r}, ${b.g}, ${b.b}, ${b.alpha * 1.1})`;
-                ctx.lineWidth = 0.8;
+                // Delicate Outer Stroke
+                ctx.strokeStyle = `rgba(${b.r}, ${b.g}, ${b.b}, ${Math.min(0.40, b.alpha * 2.5)})`;
+                ctx.lineWidth = 0.75;
                 ctx.stroke();
 
-                // Micro Specular Glint
+                // Micro Specular Highlight
                 const glintGrad = ctx.createRadialGradient(
                     bx - r * 0.3, by - r * 0.3, 0.5,
                     bx - r * 0.3, by - r * 0.3, r * 0.4
