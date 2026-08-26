@@ -1057,99 +1057,15 @@
         html.dark select.app-input option, .dark select.app-input option {
             background: #080B12 !important;
             color: #F8FAFC !important;
+        /* ══════════════════ DARK MODE 3D CANVAS BACKGROUND STYLING ══════════════════ */
+        #darkCanvasContainer {
+            background-color: #06080f;
         }
-        /* ══════════════════ DARK MODE 3D ROTATIONAL GLOWING ARCS & LINES (90FPS GPU) ══════════════════ */
-        .dark-arc-container {
-            perspective: 1200px;
-            transform-style: preserve-3d;
-        }
-
-        .dark-arc-3d {
-            position: absolute;
-            border-radius: 50%;
+        #darkCanvasBg {
+            width: 100%;
+            height: 100%;
+            display: block;
             pointer-events: none;
-            will-change: transform;
-            transform-origin: center center;
-        }
-
-        .dark-arc-1 {
-            width: 75vw;
-            height: 75vw;
-            max-width: 950px;
-            max-height: 950px;
-            top: -15%;
-            left: 10%;
-            border: 1.5px solid transparent;
-            border-top-color: #8b5cf6;
-            border-right-color: #3b82f6;
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.35), inset 0 0 25px rgba(59, 130, 246, 0.25);
-            opacity: 0.32;
-            animation: darkArcRotate1 34s linear infinite;
-        }
-
-        .dark-arc-2 {
-            width: 65vw;
-            height: 65vw;
-            max-width: 820px;
-            max-height: 820px;
-            bottom: -15%;
-            right: 5%;
-            border: 1.5px solid transparent;
-            border-bottom-color: #3b82f6;
-            border-left-color: #00f2fe;
-            box-shadow: 0 0 30px rgba(0, 242, 254, 0.30), inset 0 0 25px rgba(59, 130, 246, 0.20);
-            opacity: 0.28;
-            animation: darkArcRotate2 40s linear infinite reverse;
-        }
-
-        .dark-arc-3 {
-            width: 55vw;
-            height: 55vw;
-            max-width: 700px;
-            max-height: 700px;
-            top: 25%;
-            left: -5%;
-            border: 1.2px solid transparent;
-            border-top-color: #a855f7;
-            border-left-color: #6366f1;
-            box-shadow: 0 0 25px rgba(168, 85, 247, 0.28);
-            opacity: 0.25;
-            animation: darkArcRotate3 38s ease-in-out infinite;
-        }
-
-        .dark-arc-4 {
-            width: 50vw;
-            height: 50vw;
-            max-width: 650px;
-            max-height: 650px;
-            top: 35%;
-            right: -5%;
-            border: 1.2px solid transparent;
-            border-right-color: #00f2fe;
-            border-bottom-color: #3b82f6;
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
-            opacity: 0.22;
-            animation: darkArcRotate4 44s ease-in-out infinite alternate;
-        }
-
-        @keyframes darkArcRotate1 {
-            0% { transform: rotateX(65deg) rotateY(15deg) rotateZ(0deg); }
-            100% { transform: rotateX(65deg) rotateY(15deg) rotateZ(360deg); }
-        }
-
-        @keyframes darkArcRotate2 {
-            0% { transform: rotateX(60deg) rotateY(-20deg) rotateZ(0deg); }
-            100% { transform: rotateX(60deg) rotateY(-20deg) rotateZ(360deg); }
-        }
-
-        @keyframes darkArcRotate3 {
-            0%, 100% { transform: rotateX(55deg) rotateY(30deg) rotateZ(0deg) scale(1); }
-            50% { transform: rotateX(65deg) rotateY(15deg) rotateZ(180deg) scale(1.06); }
-        }
-
-        @keyframes darkArcRotate4 {
-            0%, 100% { transform: rotateX(50deg) rotateY(-35deg) rotateZ(0deg) scale(1); }
-            50% { transform: rotateX(62deg) rotateY(-15deg) rotateZ(-180deg) scale(1.05); }
         }
     </style>
 </head>
@@ -1196,30 +1112,9 @@
             </div>
         </div>
 
-        <!-- ─── DARK MODE SUBTLE 3D ROTATING GLOWING ARCS LAYER (STRICTLY DARK THEME ONLY) ─── -->
-        <div class="absolute inset-0 hidden dark:block pointer-events-none overflow-hidden bg-[#04060b]">
-            <!-- 1. Smooth Deep Space Ambient Lighting Pools -->
-            <div class="absolute -top-[20%] -left-[15%] w-[70vw] h-[70vw] max-w-[1000px] max-h-[1000px] rounded-full bg-gradient-to-br from-purple-900/20 via-indigo-900/15 to-transparent blur-[160px]"></div>
-            <div class="absolute -bottom-[20%] -right-[15%] w-[70vw] h-[70vw] max-w-[1000px] max-h-[1000px] rounded-full bg-gradient-to-tl from-blue-900/20 via-violet-900/15 to-transparent blur-[160px]"></div>
-            <div class="absolute top-[30%] left-[25%] w-[50vw] h-[50vw] max-w-[750px] max-h-[750px] rounded-full bg-gradient-to-tr from-cyan-950/15 via-purple-950/10 to-transparent blur-[150px]"></div>
-
-            <!-- 2. Subtle, Thin 3D Rotational Glowing Curved Arcs -->
-            <div class="absolute inset-0 dark-arc-container">
-                <!-- 3D Arc 1 (Top-Left to Center — Soft Purple/Blue Glowing Arc) -->
-                <div class="dark-arc-3d dark-arc-1"></div>
-
-                <!-- 3D Arc 2 (Bottom-Right to Center — Electric Blue/Cyan Glowing Arc) -->
-                <div class="dark-arc-3d dark-arc-2"></div>
-
-                <!-- 3D Arc 3 (Mid-Left Floating Diagonal Arc — Violet/Indigo) -->
-                <div class="dark-arc-3d dark-arc-3"></div>
-
-                <!-- 3D Arc 4 (Mid-Right Floating Orbital Arc — Cyan/Blue) -->
-                <div class="dark-arc-3d dark-arc-4"></div>
-            </div>
-
-            <!-- 3. Minimal Ambient Star Dust Accent -->
-            <div class="absolute inset-0 bg-[radial-gradient(#8b5cf6_1px,transparent_1px)] [background-size:36px_36px] opacity-[0.035]"></div>
+        <!-- ─── DARK MODE CANVAS 3D BACKGROUND LAYER (3D PARTICLE WAVE, DIGITAL RAIN & GLASS BUBBLES) ─── -->
+        <div id="darkCanvasContainer" class="absolute inset-0 hidden dark:block pointer-events-none overflow-hidden bg-[#06080f]">
+            <canvas id="darkCanvasBg" class="w-full h-full block pointer-events-none"></canvas>
         </div>
 
     </div>
@@ -1680,9 +1575,11 @@
             if (theme === 'light') {
                 html.classList.remove('dark');
                 html.setAttribute('data-theme', 'light');
+                if (window.stopDarkCanvasEngine) window.stopDarkCanvasEngine();
             } else {
                 html.classList.add('dark');
                 html.setAttribute('data-theme', 'dark');
+                if (window.startDarkCanvasEngine) window.startDarkCanvasEngine();
             }
             syncThemeIcon(theme);
         }
@@ -2156,6 +2053,344 @@
                     closeCommandPalette();
                 }
             });
+            // ══════════════════ 4. HIGH-PERFORMANCE 3D DARK MODE CANVAS ENGINE ══════════════════
+            // (3D Undulating Particle Wave, Luminous Digital Rain & Floating Glass Bubbles)
+            (function initDarkCanvasEngine() {
+                const canvas = document.getElementById('darkCanvasBg');
+                const container = document.getElementById('darkCanvasContainer');
+                if (!canvas || !container) return;
+
+                const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+                if (!ctx) return;
+
+                let width = 0;
+                let height = 0;
+                let dpr = 1;
+                let animationFrameId = null;
+                let isRunning = false;
+                let lastTime = 0;
+                let time = 0;
+
+                // ── 1. 3D Wave Configuration ──
+                const GRID_X = 54;
+                const GRID_Z = 32;
+                const projectedGrid = [];
+                for (let i = 0; i < GRID_X; i++) {
+                    projectedGrid[i] = [];
+                    for (let j = 0; j < GRID_Z; j++) {
+                        projectedGrid[i][j] = { sx: 0, sy: 0, scale: 0, alpha: 0, isCrest: false };
+                    }
+                }
+
+                // ── 2. Digital Rain Configuration ──
+                const RAIN_COUNT = 52;
+                const rainStreams = [];
+                function initRain() {
+                    rainStreams.length = 0;
+                    for (let i = 0; i < RAIN_COUNT; i++) {
+                        rainStreams.push({
+                            x: Math.random() * (width || 1200),
+                            y: Math.random() * (height || 800) - (height || 800),
+                            speed: 4.2 + Math.random() * 6.5,
+                            length: 50 + Math.random() * 110,
+                            width: 1.2 + Math.random() * 1.2,
+                            isCyan: Math.random() > 0.45,
+                            alpha: 0.35 + Math.random() * 0.55
+                        });
+                    }
+                }
+
+                // ── 3. Floating Glass Bubbles Configuration ──
+                const BUBBLE_COUNT = 15;
+                const bubbles = [];
+                function initBubbles() {
+                    bubbles.length = 0;
+                    for (let i = 0; i < BUBBLE_COUNT; i++) {
+                        bubbles.push({
+                            baseX: Math.random() * (width || 1200),
+                            x: 0,
+                            y: Math.random() * (height || 800),
+                            radius: 18 + Math.random() * 45,
+                            vy: -(0.35 + Math.random() * 0.65),
+                            driftFreq: 0.001 + Math.random() * 0.002,
+                            driftAmp: 25 + Math.random() * 40,
+                            driftPhase: Math.random() * Math.PI * 2,
+                            isCyan: Math.random() > 0.5,
+                            alpha: 0.22 + Math.random() * 0.28
+                        });
+                    }
+                }
+
+                // ── Canvas Resizing with High-DPI Normalization ──
+                function handleResize() {
+                    dpr = Math.min(window.devicePixelRatio || 1, 2);
+                    width = window.innerWidth;
+                    height = window.innerHeight;
+                    canvas.width = Math.floor(width * dpr);
+                    canvas.height = Math.floor(height * dpr);
+                    canvas.style.width = width + 'px';
+                    canvas.style.height = height + 'px';
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                    if (rainStreams.length === 0) initRain();
+                    if (bubbles.length === 0) initBubbles();
+                }
+
+                window.addEventListener('resize', () => {
+                    if (document.documentElement.classList.contains('dark')) {
+                        handleResize();
+                    }
+                }, { passive: true });
+
+                // ── Main Render & Physics Frame Loop ──
+                function renderFrame(now) {
+                    if (!isRunning) return;
+
+                    if (!lastTime) lastTime = now;
+                    const dt = Math.min((now - lastTime) / 1000, 0.1);
+                    lastTime = now;
+                    time += dt;
+
+                    // 1. Deep Space Black Base
+                    ctx.fillStyle = '#06080f';
+                    ctx.fillRect(0, 0, width, height);
+
+                    // 2. Ambient Color Light Pools (Deep Violet / Cyan Background Sheen)
+                    const radialGradient1 = ctx.createRadialGradient(width * 0.2, height * 0.3, 20, width * 0.2, height * 0.3, width * 0.5);
+                    radialGradient1.addColorStop(0, 'rgba(118, 87, 255, 0.07)');
+                    radialGradient1.addColorStop(1, 'rgba(6, 8, 15, 0)');
+                    ctx.fillStyle = radialGradient1;
+                    ctx.fillRect(0, 0, width, height);
+
+                    const radialGradient2 = ctx.createRadialGradient(width * 0.8, height * 0.7, 20, width * 0.8, height * 0.7, width * 0.55);
+                    radialGradient2.addColorStop(0, 'rgba(18, 207, 243, 0.06)');
+                    radialGradient2.addColorStop(1, 'rgba(6, 8, 15, 0)');
+                    ctx.fillStyle = radialGradient2;
+                    ctx.fillRect(0, 0, width, height);
+
+                    // ── 3. Render Luminous Digital Rain ──
+                    ctx.lineWidth = 1.5;
+                    for (let i = 0; i < rainStreams.length; i++) {
+                        const s = rainStreams[i];
+                        s.y += s.speed * (dt * 60);
+
+                        if (s.y - s.length > height) {
+                            s.y = -s.length - Math.random() * 80;
+                            s.x = Math.random() * width;
+                            s.speed = 4.2 + Math.random() * 6.5;
+                            s.length = 50 + Math.random() * 110;
+                            s.isCyan = Math.random() > 0.45;
+                        }
+
+                        const startY = Math.max(0, s.y - s.length);
+                        const endY = s.y;
+
+                        if (endY > 0 && startY < height) {
+                            const grad = ctx.createLinearGradient(s.x, startY, s.x, endY);
+                            const r = s.isCyan ? 18 : 118;
+                            const g = s.isCyan ? 207 : 87;
+                            const b = s.isCyan ? 243 : 255;
+
+                            grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0)`);
+                            grad.addColorStop(0.75, `rgba(${r}, ${g}, ${b}, ${s.alpha * 0.4})`);
+                            grad.addColorStop(0.95, `rgba(${r}, ${g}, ${b}, ${s.alpha})`);
+                            grad.addColorStop(1, '#ffffff');
+
+                            ctx.strokeStyle = grad;
+                            ctx.beginPath();
+                            ctx.moveTo(s.x, startY);
+                            ctx.lineTo(s.x, endY);
+                            ctx.stroke();
+
+                            // Leading luminous head dot
+                            ctx.fillStyle = s.isCyan ? '#12CFF3' : '#7657FF';
+                            ctx.beginPath();
+                            ctx.arc(s.x, endY, s.width * 1.1, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+
+                    // ── 4. Render Floating Glass Bubbles ──
+                    for (let i = 0; i < bubbles.length; i++) {
+                        const b = bubbles[i];
+                        b.y += b.vy * (dt * 60);
+                        b.x = b.baseX + Math.sin(time * 1000 * b.driftFreq + b.driftPhase) * b.driftAmp;
+
+                        if (b.y < -b.radius * 2) {
+                            b.y = height + b.radius * 2;
+                            b.baseX = Math.random() * width;
+                            b.radius = 18 + Math.random() * 45;
+                            b.isCyan = Math.random() > 0.5;
+                        }
+
+                        const r = b.radius;
+                        const bx = b.x;
+                        const by = b.y;
+
+                        // Outer Soft Glow Ring
+                        const bubbleGrad = ctx.createRadialGradient(
+                            bx - r * 0.25, by - r * 0.25, r * 0.1,
+                            bx, by, r
+                        );
+                        const cr = b.isCyan ? 18 : 118;
+                        const cg = b.isCyan ? 207 : 87;
+                        const cb = b.isCyan ? 243 : 255;
+
+                        bubbleGrad.addColorStop(0, `rgba(255, 255, 255, ${b.alpha * 0.35})`);
+                        bubbleGrad.addColorStop(0.5, `rgba(${cr}, ${cg}, ${cb}, ${b.alpha * 0.15})`);
+                        bubbleGrad.addColorStop(0.85, `rgba(${cr}, ${cg}, ${cb}, ${b.alpha * 0.45})`);
+                        bubbleGrad.addColorStop(1, `rgba(${cr}, ${cg}, ${cb}, ${b.alpha * 0.70})`);
+
+                        ctx.fillStyle = bubbleGrad;
+                        ctx.beginPath();
+                        ctx.arc(bx, by, r, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        // Crisp Glass Rim
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${b.alpha * 0.6})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+
+                        // Top-Left Specular Glint Crescent
+                        const specularGrad = ctx.createRadialGradient(
+                            bx - r * 0.35, by - r * 0.35, 1,
+                            bx - r * 0.35, by - r * 0.35, r * 0.45
+                        );
+                        specularGrad.addColorStop(0, `rgba(255, 255, 255, ${b.alpha * 0.95})`);
+                        specularGrad.addColorStop(0.5, `rgba(255, 255, 255, ${b.alpha * 0.4})`);
+                        specularGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+                        ctx.fillStyle = specularGrad;
+                        ctx.beginPath();
+                        ctx.arc(bx - r * 0.32, by - r * 0.32, r * 0.38, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+
+                    // ── 5. Render 3D Undulating Particle Wave (Bottom Sea) ──
+                    const fov = 380;
+                    const horizonY = height * 0.58;
+                    const cameraY = 190;
+
+                    // Compute projected 3D Grid Positions
+                    for (let i = 0; i < GRID_X; i++) {
+                        const u = (i / (GRID_X - 1)) - 0.5;
+                        const wx = u * (width * 1.85);
+
+                        for (let j = 0; j < GRID_Z; j++) {
+                            const v = j / (GRID_Z - 1);
+                            const wz = 90 + v * 1280;
+
+                            const wy = Math.sin(wx * 0.0032 + time * 1.35) * Math.cos(wz * 0.0038 + time * 1.1) * 58 +
+                                       Math.sin((wx - wz) * 0.0024 + time * 1.6) * 32 +
+                                       Math.cos(wx * 0.0048 - time * 0.8) * 16;
+
+                            const scale = fov / (fov + wz);
+                            const sx = (width * 0.5) + wx * scale;
+                            const sy = horizonY + (wy + cameraY) * scale;
+                            const alpha = Math.min(Math.max((scale * 1.3) * (0.35 + 0.65 * ((wy + 65) / 130)), 0.05), 0.95);
+                            const isCrest = wy > 4;
+
+                            projectedGrid[i][j].sx = sx;
+                            projectedGrid[i][j].sy = sy;
+                            projectedGrid[i][j].scale = scale;
+                            projectedGrid[i][j].alpha = alpha;
+                            projectedGrid[i][j].isCrest = isCrest;
+                        }
+                    }
+
+                    // Draw Connecting 3D Grid Mesh Lines
+                    ctx.lineWidth = 1;
+                    for (let i = 0; i < GRID_X; i++) {
+                        for (let j = 0; j < GRID_Z; j++) {
+                            const p = projectedGrid[i][j];
+
+                            // Line along X axis
+                            if (i < GRID_X - 1) {
+                                const nextX = projectedGrid[i + 1][j];
+                                const lineAlpha = (p.alpha + nextX.alpha) * 0.14;
+                                ctx.strokeStyle = p.isCrest
+                                    ? `rgba(18, 207, 243, ${lineAlpha})`
+                                    : `rgba(118, 87, 255, ${lineAlpha})`;
+                                ctx.beginPath();
+                                ctx.moveTo(p.sx, p.sy);
+                                ctx.lineTo(nextX.sx, nextX.sy);
+                                ctx.stroke();
+                            }
+
+                            // Line along Z depth
+                            if (j < GRID_Z - 1) {
+                                const nextZ = projectedGrid[i][j + 1];
+                                const lineAlpha = (p.alpha + nextZ.alpha) * 0.12;
+                                ctx.strokeStyle = p.isCrest
+                                    ? `rgba(18, 207, 243, ${lineAlpha})`
+                                    : `rgba(118, 87, 255, ${lineAlpha})`;
+                                ctx.beginPath();
+                                ctx.moveTo(p.sx, p.sy);
+                                ctx.lineTo(nextZ.sx, nextZ.sy);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    // Draw Glowing 3D Particles / Nodes
+                    for (let i = 0; i < GRID_X; i++) {
+                        for (let j = 0; j < GRID_Z; j++) {
+                            const p = projectedGrid[i][j];
+                            const radius = Math.max(0.75, (0.8 + p.scale * 3.2));
+
+                            ctx.fillStyle = p.isCrest
+                                ? `rgba(18, 207, 243, ${p.alpha})`
+                                : `rgba(118, 87, 255, ${p.alpha})`;
+
+                            ctx.beginPath();
+                            ctx.arc(p.sx, p.sy, radius, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+
+                    animationFrameId = requestAnimationFrame(renderFrame);
+                }
+
+                // ── Engine Lifecycle Controllers ──
+                function startEngine() {
+                    if (isRunning) return;
+                    if (!document.documentElement.classList.contains('dark')) return;
+                    handleResize();
+                    isRunning = true;
+                    lastTime = 0;
+                    animationFrameId = requestAnimationFrame(renderFrame);
+                }
+
+                function stopEngine() {
+                    isRunning = false;
+                    if (animationFrameId) {
+                        cancelAnimationFrame(animationFrameId);
+                        animationFrameId = null;
+                    }
+                }
+
+                // Expose global lifecycle handles
+                window.startDarkCanvasEngine = startEngine;
+                window.stopDarkCanvasEngine = stopEngine;
+
+                // Tab Visibility Listener (Sleep when tab is hidden)
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        stopEngine();
+                    } else if (document.documentElement.classList.contains('dark')) {
+                        startEngine();
+                    }
+                });
+
+                // Auto-start if initial load is dark mode
+                if (document.documentElement.classList.contains('dark')) {
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', startEngine);
+                    } else {
+                        startEngine();
+                    }
+                }
+            })();
         });
     </script>
 </body>
