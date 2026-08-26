@@ -416,18 +416,42 @@
             box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
         }
 
-        /* 2026 Magnetic Card Lift with Crisp Restrained Border & 3D Tilt */
-        .card-tilt, .card-tilt-3d, .career-card, [data-tilt] {
+        /* ══════════════════ GLOBAL DARK MODE CARD ELEVATION & AMBIENT SHADING ══════════════════ */
+        .card-tilt, .card-tilt-3d, .career-card, [data-tilt], .app-card, .glass-panel {
             position: relative;
             transform-style: preserve-3d;
             will-change: transform;
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
         }
-        .card-tilt:hover, .card-tilt-3d:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.18);
+        
+        .dark .card-tilt, 
+        .dark .card-tilt-3d, 
+        .dark .career-card, 
+        .dark [data-tilt],
+        .dark .app-card,
+        .dark .glass-panel,
+        .dark .dashboard-widget,
+        .dark .control-room-card,
+        .dark .grid > .rounded-3xl,
+        .dark .grid > div[class*="rounded-3xl"] {
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
         }
+
+        .dark .card-tilt:hover, 
+        .dark .card-tilt-3d:hover, 
+        .dark .career-card:hover, 
+        .dark [data-tilt]:hover,
+        .dark .app-card:hover,
+        .dark .glass-panel:hover,
+        .dark .dashboard-widget:hover,
+        .dark .control-room-card:hover,
+        .dark .grid > .rounded-3xl:hover,
+        .dark .grid > div[class*="rounded-3xl"]:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 242, 254, 0.35);
+            box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 242, 254, 0.14), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+        }
+
         html:not(.dark) .card-tilt:hover, html:not(.dark) .card-tilt-3d:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.06);
@@ -810,7 +834,7 @@
             </form>
         </div>
 
-        <!-- Floating AI Guide Button with Morphing Animation & Shared bottom-6 right-6 Positioning -->
+        <!-- Floating AI Guide Button (Compact Circular Icon Button) -->
         <button @click="openAI = !openAI"
                 x-show="!openAI"
                 x-transition:enter="transition ease-out duration-300 transform"
@@ -820,12 +844,12 @@
                 x-transition:leave-start="opacity-100 scale-100"
                 x-transition:leave-end="opacity-0 scale-75"
                 id="floatingAiGuideBtn"
-                title="Toggle AI Career Guide"
+                title="Ask PathSeeker AI"
+                aria-label="Ask PathSeeker AI"
                 style="transform-origin: bottom right;"
-                class="fixed bottom-6 right-6 z-[99999] h-12 sm:h-14 px-4 sm:px-5 rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 flex items-center justify-center gap-2.5 shadow-[0_0_25px_rgba(0,242,254,0.55)] hover:shadow-[0_0_35px_rgba(0,242,254,0.75)] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer origin-bottom-right border border-white/30 overflow-hidden text-slate-950 group">
+                class="fixed bottom-6 right-6 z-[99999] w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 flex items-center justify-center shadow-[0_0_25px_rgba(0,242,254,0.55)] hover:shadow-[0_0_35px_rgba(0,242,254,0.8)] hover:scale-110 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer origin-bottom-right border border-white/30 text-slate-950 group">
             
-            <i class="fa-solid fa-wand-magic-sparkles text-sm sm:text-base text-slate-950 group-hover:rotate-12 transition-transform"></i>
-            <span class="text-xs sm:text-sm font-black font-display tracking-tight text-slate-950 hidden sm:inline">✦ Ask PathSeeker</span>
+            <i class="fa-solid fa-wand-magic-sparkles text-base sm:text-lg text-slate-950 group-hover:rotate-12 transition-transform"></i>
         </button>
 
         <!-- Scroll to Top Button -->

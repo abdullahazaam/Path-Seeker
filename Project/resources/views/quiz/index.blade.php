@@ -259,28 +259,38 @@
             @endforeach
 
             {{-- Submit Action Console --}}
-            <div class="p-8 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl text-center space-y-4 reveal-element">
-                <div class="text-xs text-slate-500 dark:text-slate-400">
-                    Clicking submit processes your weighted scores and computes real-time career alignment models.
-                </div>
-                <div>
-                    <button type="submit" 
-                            :disabled="submitting"
-                            class="group inline-flex items-center gap-3 px-10 py-4 text-sm font-black text-slate-950 rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_25px_rgba(0,242,254,0.35)] hover:shadow-[0_0_35px_rgba(0,242,254,0.55)] transition-all duration-300 hover:scale-105 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer">
-                        <template x-if="!submitting">
-                            <span class="inline-flex items-center gap-3">
-                                <i class="fa-solid fa-calculator text-base text-slate-950"></i>
-                                <span class="text-slate-950 font-black">Submit &amp; Calculate Alignment</span>
-                                <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1.5 transition-transform"></i>
-                            </span>
-                        </template>
-                        <template x-if="submitting">
-                            <span class="inline-flex items-center gap-3">
-                                <i class="fa-solid fa-circle-notch fa-spin text-base text-slate-950"></i>
-                                <span class="text-slate-950 font-black">Evaluating Psychometrics...</span>
-                            </span>
-                        </template>
-                    </button>
+            <div class="relative p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] text-center space-y-5 reveal-element overflow-hidden">
+                {{-- Ambient Corner Glows --}}
+                <div class="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -right-24 w-64 h-64 rounded-full bg-blue-500/10 dark:bg-blue-500/15 blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10 space-y-4 max-w-xl mx-auto">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/20 text-xs font-mono font-bold text-cyan-700 dark:text-cyan-400">
+                        <i class="fa-solid fa-satellite-dish text-cyan-500"></i>
+                        <span>AI Inference Engine Ready</span>
+                    </div>
+                    <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                        Clicking submit processes your weighted scores and computes real-time career alignment models across verified engineering pathways.
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" 
+                                :disabled="submitting"
+                                class="btn-sweep group inline-flex items-center gap-3 px-10 py-4 text-sm font-black text-slate-950 rounded-full bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-[0_0_25px_rgba(0,242,254,0.4)] hover:shadow-[0_0_35px_rgba(0,242,254,0.65)] transition-all duration-300 hover:scale-105 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer">
+                            <template x-if="!submitting">
+                                <span class="inline-flex items-center gap-3">
+                                    <i class="fa-solid fa-calculator text-base text-slate-950"></i>
+                                    <span class="text-slate-950 font-black">Submit &amp; Calculate Alignment</span>
+                                    <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1.5 transition-transform"></i>
+                                </span>
+                            </template>
+                            <template x-if="submitting">
+                                <span class="inline-flex items-center gap-3">
+                                    <i class="fa-solid fa-circle-notch fa-spin text-base text-slate-950"></i>
+                                    <span class="text-slate-950 font-black">Evaluating Psychometrics...</span>
+                                </span>
+                            </template>
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>
