@@ -1,5 +1,5 @@
 {{-- ══════════════════ DEDICATED DARK MODE FLOATING PLEXUS NETWORK BACKGROUND ══════════════════ --}}
-{{-- 60FPS WebGL/Canvas Plexus Constellation Clusters ("Jal") with Smooth Floating Drift & Subtle Rotation --}}
+{{-- 60FPS WebGL/Canvas Scaled Plexus Constellation Clusters ("Jal") with Smooth Floating Drift & Subtle Rotation --}}
 <canvas id="darkPlexusCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#030508] hidden dark:block transition-colors duration-500"></canvas>
 
 <script>
@@ -20,27 +20,34 @@
     let lastTime = 0;
     let time = 0;
 
-    // ── 7 Floating Constellation Clusters ("Jal") ──
-    const CLUSTER_COUNT = 7;
+    // ── 14 Scaled Floating Constellation Clusters ("Jal") ──
+    const CLUSTER_COUNT = 14;
     const clusters = [];
 
     function initClusters() {
         clusters.length = 0;
         const basePositions = [
-            { x: 0.15, y: 0.22 }, // Top-Left
-            { x: 0.82, y: 0.18 }, // Top-Right
-            { x: 0.50, y: 0.35 }, // Center-Upper
-            { x: 0.18, y: 0.65 }, // Mid-Left
-            { x: 0.85, y: 0.60 }, // Mid-Right
-            { x: 0.38, y: 0.85 }, // Bottom-Center-Left
-            { x: 0.72, y: 0.88 }  // Bottom-Right
+            { x: 0.10, y: 0.15 }, // Top-Left Outer
+            { x: 0.35, y: 0.12 }, // Top-Center-Left
+            { x: 0.65, y: 0.14 }, // Top-Center-Right
+            { x: 0.90, y: 0.16 }, // Top-Right Outer
+            { x: 0.22, y: 0.38 }, // Upper-Mid-Left
+            { x: 0.50, y: 0.32 }, // Upper-Center
+            { x: 0.78, y: 0.40 }, // Upper-Mid-Right
+            { x: 0.12, y: 0.62 }, // Lower-Mid-Left
+            { x: 0.42, y: 0.60 }, // Center-Lower
+            { x: 0.88, y: 0.64 }, // Lower-Mid-Right
+            { x: 0.25, y: 0.84 }, // Bottom-Left
+            { x: 0.55, y: 0.82 }, // Bottom-Center
+            { x: 0.75, y: 0.88 }, // Bottom-Right-Mid
+            { x: 0.92, y: 0.85 }  // Bottom-Right Outer
         ];
 
         for (let i = 0; i < CLUSTER_COUNT; i++) {
             const pos = basePositions[i] || { x: Math.random(), y: Math.random() };
             const isCyan = i % 2 === 0;
-            const nodeCount = 7 + Math.floor(Math.random() * 5); // 7-11 nodes per cluster
-            const clusterRadius = 75 + Math.random() * 45; // 75px - 120px spread
+            const nodeCount = 8 + Math.floor(Math.random() * 6); // 8-13 nodes per cluster
+            const clusterRadius = 90 + Math.random() * 55; // 90px - 145px spread (Scaled Up)
             const nodes = [];
 
             for (let j = 0; j < nodeCount; j++) {
@@ -49,20 +56,20 @@
                 nodes.push({
                     lx: Math.cos(angle) * dist,
                     ly: Math.sin(angle) * dist,
-                    vx: (Math.random() - 0.5) * 0.25,
-                    vy: (Math.random() - 0.5) * 0.25,
-                    radius: 1.5 + Math.random() * 1.5
+                    vx: (Math.random() - 0.5) * 0.28,
+                    vy: (Math.random() - 0.5) * 0.28,
+                    radius: 1.6 + Math.random() * 1.6
                 });
             }
 
             clusters.push({
                 cx: pos.x * width,
                 cy: pos.y * height,
-                vx: (Math.random() - 0.5) * 0.35,
-                vy: (Math.random() - 0.5) * 0.35,
+                vx: (Math.random() - 0.5) * 0.38,
+                vy: (Math.random() - 0.5) * 0.38,
                 angle: Math.random() * Math.PI * 2,
-                rotSpeed: (Math.random() - 0.5) * 0.003,
-                connectDist: 85,
+                rotSpeed: (Math.random() - 0.5) * 0.0035,
+                connectDist: 105, // Increased connect distance for distinct web links
                 isCyan: isCyan,
                 r: isCyan ? 18 : 118,
                 g: isCyan ? 207 : 87,
@@ -101,13 +108,13 @@
 
         // 2. Faint Ambient Deep Lighting Pools
         const radialGrad1 = ctx.createRadialGradient(width * 0.2, height * 0.3, 10, width * 0.2, height * 0.3, width * 0.5);
-        radialGrad1.addColorStop(0, 'rgba(118, 87, 255, 0.04)');
+        radialGrad1.addColorStop(0, 'rgba(118, 87, 255, 0.045)');
         radialGrad1.addColorStop(1, 'rgba(3, 5, 8, 0)');
         ctx.fillStyle = radialGrad1;
         ctx.fillRect(0, 0, width, height);
 
         const radialGrad2 = ctx.createRadialGradient(width * 0.8, height * 0.7, 10, width * 0.8, height * 0.7, width * 0.55);
-        radialGrad2.addColorStop(0, 'rgba(18, 207, 243, 0.035)');
+        radialGrad2.addColorStop(0, 'rgba(18, 207, 243, 0.040)');
         radialGrad2.addColorStop(1, 'rgba(3, 5, 8, 0)');
         ctx.fillStyle = radialGrad2;
         ctx.fillRect(0, 0, width, height);
@@ -122,7 +129,7 @@
             cl.angle += cl.rotSpeed * (dt * 60);
 
             // Screen edge bounce / wrap
-            const padding = 100;
+            const padding = 120;
             if (cl.cx < -padding) cl.cx = width + padding;
             if (cl.cx > width + padding) cl.cx = -padding;
             if (cl.cy < -padding) cl.cy = height + padding;
@@ -140,7 +147,7 @@
 
                 // Keep nodes within local radius
                 const d = Math.hypot(n.lx, n.ly);
-                if (d > 110) {
+                if (d > 135) {
                     n.vx *= -1;
                     n.vy *= -1;
                 }
@@ -159,9 +166,9 @@
                     const dist = Math.hypot(dx, dy);
 
                     if (dist < cl.connectDist) {
-                        const alpha = (1 - dist / cl.connectDist) * 0.28; // 20-30% opacity max
+                        const alpha = (1 - dist / cl.connectDist) * 0.32; // Crisp 20-32% opacity
                         ctx.strokeStyle = `rgba(${cl.r}, ${cl.g}, ${cl.b}, ${alpha})`;
-                        ctx.lineWidth = 0.9;
+                        ctx.lineWidth = 1.0;
                         ctx.beginPath();
                         ctx.moveTo(worldNodes[i].wx, worldNodes[i].wy);
                         ctx.lineTo(worldNodes[j].wx, worldNodes[j].wy);
@@ -174,16 +181,16 @@
             for (let i = 0; i < worldNodes.length; i++) {
                 const wn = worldNodes[i];
 
-                // Node Point Glow
-                ctx.fillStyle = `rgba(${cl.r}, ${cl.g}, ${cl.b}, 0.45)`;
+                // Node Point Core
+                ctx.fillStyle = `rgba(${cl.r}, ${cl.g}, ${cl.b}, 0.55)`;
                 ctx.beginPath();
                 ctx.arc(wn.wx, wn.wy, wn.radius, 0, Math.PI * 2);
                 ctx.fill();
 
                 // Subtle Outer Halo
-                ctx.fillStyle = `rgba(${cl.r}, ${cl.g}, ${cl.b}, 0.15)`;
+                ctx.fillStyle = `rgba(${cl.r}, ${cl.g}, ${cl.b}, 0.18)`;
                 ctx.beginPath();
-                ctx.arc(wn.wx, wn.wy, wn.radius * 2.2, 0, Math.PI * 2);
+                ctx.arc(wn.wx, wn.wy, wn.radius * 2.4, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
