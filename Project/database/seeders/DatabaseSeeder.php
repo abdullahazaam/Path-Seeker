@@ -341,58 +341,7 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        // 6. Success Stories
-        $studentUser = User::where('role', 'student')->first() ?? $admin;
-        $stories = [
-            [
-                'title' => 'Elena Rostova — From QA to Production AI Engineer',
-                'domain' => 'Artificial Intelligence & Data',
-                'educational_path' => 'B.S. in Information Systems & Self-Paced Machine Learning Specialization',
-                'challenges' => 'Overcoming imposter syndrome transitioning from manual testing to advanced PyTorch and vector embedding pipelines.',
-                'timeline_path' => 'QA Engineer (2023) → Deep Learning Track on PathSeeker → LLM Prompt Engineer → Production AI Architect (2026)',
-                'outcome' => 'Landed Senior AI Engineering role at a Tier-1 Google Partner with a 140% salary increase.',
-                'story_text' => 'PathSeeker mapped out the exact mathematics, PyTorch roadmap, and vector search milestones I needed. Within 9 months, I transitioned from manual QA to training production LLM agents at a DeepMind / Google Partner.',
-                'image_url' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
-                'submitted_by' => $studentUser?->id,
-                'user_id' => $studentUser?->id,
-                'status' => SuccessStory::STATUS_APPROVED,
-                'reviewed_at' => now(),
-            ],
-            [
-                'title' => 'Marcus Vance — Support Tech to AWS Cloud Solutions Architect',
-                'domain' => 'Cloud & Infrastructure',
-                'educational_path' => 'Associate Degree & AWS Certified Solutions Architect Associate + Professional',
-                'challenges' => 'Balancing full-time Tier-1 technical support shift work while studying distributed multi-region Kubernetes topologies.',
-                'timeline_path' => 'Helpdesk Technician (2024) → Cloud Track Blueprint on PathSeeker → Multi-Cloud Certification → Principal Cloud Architect (2026)',
-                'outcome' => 'Secured a high-impact $145k remote Solutions Architect role at a global cloud consulting firm.',
-                'story_text' => 'The multi-cloud architecture guides and verified cheat sheets helped me pass my AWS Solutions Architect Professional exam on the first attempt and secure a six-figure remote role at AWS.',
-                'image_url' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80',
-                'submitted_by' => $studentUser?->id,
-                'user_id' => $studentUser?->id,
-                'status' => SuccessStory::STATUS_APPROVED,
-                'reviewed_at' => now(),
-            ],
-            [
-                'title' => 'Amina Al-Mansoor — Self-Taught to Full-Stack Engineer at Stripe',
-                'domain' => 'Software Engineering',
-                'educational_path' => 'Self-Taught & Open Source Contributor to modern TypeScript/Laravel ecosystems',
-                'challenges' => 'Navigating technical screening without a traditional Computer Science degree and passing distributed system design rounds.',
-                'timeline_path' => 'Junior Web Enthusiast (2023) → Software Engineering Track on PathSeeker → Full-Stack Open Source Builder → Stripe Core Team (2026)',
-                'outcome' => 'Joined Stripe as a Core Platform Full-Stack Engineer working on global payment gateway infrastructure.',
-                'story_text' => 'The skill radar benchmarks and interview kits gave me the confidence to stand out among thousands of applicants. PathSeeker is truly the modern compass for software engineers.',
-                'image_url' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80',
-                'submitted_by' => $studentUser?->id,
-                'user_id' => $studentUser?->id,
-                'status' => SuccessStory::STATUS_APPROVED,
-                'reviewed_at' => now(),
-            ],
-        ];
-
-        foreach ($stories as $story) {
-            SuccessStory::updateOrCreate(
-                ['title' => $story['title']],
-                $story
-            );
-        }
+        // 6. Success Stories (22 Authentic Pakistani Tech Career Transition Journeys)
+        $this->call(SuccessStorySeeder::class);
     }
 }

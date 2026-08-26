@@ -32,13 +32,16 @@
                 {{ $story->title }}
             </h1>
 
+            @php
+                $authorDisplayName = str_contains($story->title, ' — ') ? explode(' — ', $story->title)[0] : ($story->author?->name ?? 'PathSeeker Scholar');
+            @endphp
             <div class="flex items-center gap-3 pt-2 text-xs text-slate-600 dark:text-slate-400">
                 <div class="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white flex items-center justify-center font-bold text-xs">
-                    {{ substr($story->author?->name ?? 'P', 0, 1) }}
+                    {{ substr($authorDisplayName, 0, 1) }}
                 </div>
                 <div>
-                    <span class="font-bold text-slate-900 dark:text-white">{{ $story->author?->name ?? 'PathSeeker Member' }}</span>
-                    <span class="block text-[11px] text-slate-400">{{ ucfirst($story->author?->role ?? 'Alumni') }}</span>
+                    <span class="font-bold text-slate-900 dark:text-white">{{ $authorDisplayName }}</span>
+                    <span class="block text-[11px] text-slate-400">Verified Alumni</span>
                 </div>
             </div>
         </div>

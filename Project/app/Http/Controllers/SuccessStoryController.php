@@ -15,7 +15,7 @@ class SuccessStoryController extends Controller
      */
     public function index()
     {
-        $stories = SuccessStory::approved()->latest()->paginate(9);
+        $stories = SuccessStory::approved()->latest()->paginate(12);
         return view('stories.index', compact('stories'));
     }
 
