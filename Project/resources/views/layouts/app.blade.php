@@ -1044,6 +1044,26 @@
             box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.55) !important;
         }
 
+        /* ══════════════════ LARAVEL BLADE STAGGERED SCROLL-REVEAL SYSTEM ══════════════════ */
+        .reveal-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .reveal-card.is-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-card {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
 
         /* Universal Dark Mode Secondary Panels, Drawers & Mini Elements */
         html.dark .inner-panel, .dark .inner-panel,
@@ -2091,6 +2111,76 @@
                     }
                 });
             }
+
+            // ══════════════════ BULLETPROOF LARAVEL BLADE STAGGERED OBSERVER ══════════════════
+            function initStaggerAnimations() {
+                if (!('IntersectionObserver' in window) || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+                    document.querySelectorAll('.reveal-card').forEach(card => card.classList.add('is-visible'));
+                    return;
+                }
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const cards = entry.target.querySelectorAll('.reveal-card');
+                            cards.forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.classList.add('is-visible');
+                                }, index * 120); // 120ms stagger delay
+                            });
+                            observer.unobserve(entry.target); // Run only once
+                        }
+                    });
+                }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+                const wrappers = document.querySelectorAll('.stagger-wrapper');
+                wrappers.forEach(wrapper => {
+                    observer.observe(wrapper);
+                    // Immediate trigger if already in viewport on load
+                    const rect = wrapper.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        const cards = wrapper.querySelectorAll('.reveal-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('is-visible');
+                            }, index * 80);
+                        });
+                        observer.unobserve(wrapper);
+                    }
+                });
+
+                // Fallback for standalone .reveal-card elements
+                document.querySelectorAll('.reveal-card').forEach(card => {
+                    if (!card.closest('.stagger-wrapper')) {
+                        const rect = card.getBoundingClientRect();
+                        if (rect.top < window.innerHeight && rect.bottom > 0) {
+                            card.classList.add('is-visible');
+                        } else {
+                            const singleObs = new IntersectionObserver((entries, obs) => {
+                                entries.forEach(e => {
+                                    if (e.isIntersecting) {
+                                        e.target.classList.add('is-visible');
+                                        obs.unobserve(e.target);
+                                    }
+                                });
+                            }, { threshold: 0.08 });
+                            singleObs.observe(card);
+                        }
+                    }
+                });
+            }
+
+            initStaggerAnimations();
+
+            // Safety guard: ensure visible cards in initial view are never left hidden
+            setTimeout(() => {
+                document.querySelectorAll('.reveal-card').forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0 && !card.classList.contains('is-visible')) {
+                        card.classList.add('is-visible');
+                    }
+                });
+            }, 400);
 
 
             // Global Keyboard Shortcut: Cmd/Ctrl + K or Escape

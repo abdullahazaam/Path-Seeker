@@ -234,10 +234,10 @@
     </div>
 
     {{-- ══════════════════ 3. CAREER OPERATING SYSTEM CORE MATRIX ══════════════════ --}}
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <div class="stagger-wrapper grid grid-cols-1 md:grid-cols-12 gap-6">
 
         {{-- Widget 1: Career Readiness Index --}}
-        <div class="md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
+        <div class="reveal-card md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
             <div class="space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
@@ -292,7 +292,7 @@
         </div>
 
         {{-- Widget 2: Active Career Direction --}}
-        <div class="md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
+        <div class="reveal-card md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
             <div class="space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
@@ -330,7 +330,7 @@
         </div>
 
         {{-- Widget 3: Skill Development Progress --}}
-        <div class="md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
+        <div class="reveal-card md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
             <div class="space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
@@ -392,10 +392,64 @@
     </div>
 
     {{-- ══════════════════ 3.5 DYNAMIC SYSTEM INTELLIGENCE & RECOMMENDATION ENGINES ══════════════════ --}}
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div class="stagger-wrapper grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {{-- Section A: Recently Viewed Careers --}}
-        <div class="lg:col-span-6 rounded-3xl p-7 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col justify-between space-y-6">
+        <div class="reveal-card lg:col-span-6 rounded-3xl p-7 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col justify-between space-y-6">
+            <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
+                        <i class="fa-solid fa-clock-rotate-left"></i> System Intelligence
+                    </span>
+                    <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Session &amp; DB Sync</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">Recently Viewed Careers</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400">Quickly resume exploration of your recently browsed career profiles.</p>
+            </div>
+
+            @if(isset($recentlyViewedCareers) && $recentlyViewedCareers->isNotEmpty())
+                <div class="space-y-3">
+                    @foreach($recentlyViewedCareers->take(3) as $rCareer)
+                        <a href="{{ route('careers.show', $rCareer->id) }}" class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-white/5 hover:border-sky-500/40 hover:bg-sky-50/50 dark:hover:bg-sky-950/20 transition-all group">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div class="w-9 h-9 rounded-xl bg-sky-500/10 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-105 transition-transform">
+                                    <i class="fa-solid fa-compass"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <h4 class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors font-display">{{ $rCareer->title }}</h4>
+                                    <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{{ $rCareer->domain }}</span>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0 pl-3">
+                                <div class="text-xs font-black text-emerald-600 dark:text-emerald-400 font-mono">{{ $rCareer->expected_salary }}</div>
+                                <div class="text-[9px] text-slate-400 flex items-center justify-end gap-1">
+                                    <span>View</span>
+                                    <i class="fa-solid fa-arrow-right text-[8px] group-hover:translate-x-0.5 transition-transform"></i>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            @else
+                <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950/40 border border-dashed border-slate-300 dark:border-white/10 text-center space-y-2">
+                    <i class="fa-regular fa-compass text-2xl text-slate-400"></i>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">No careers viewed in this session yet.</p>
+                    <a href="{{ route('careers.index') }}" class="inline-flex items-center gap-1 text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline">
+                        <span>Browse Career Bank</span> &rarr;
+                    </a>
+                </div>
+            @endif
+
+            <div class="pt-2 border-t border-slate-200/80 dark:border-white/5 flex items-center justify-between text-xs">
+                <a href="{{ route('careers.index') }}" class="text-sky-600 dark:text-sky-400 font-bold hover:underline inline-flex items-center gap-1.5">
+                    <span>Explore All Roles</span>
+                    <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                </a>
+            </div>
+        </div>
+
+        {{-- Section B: "Because you liked X..." Suggestion Engine --}}
+        <div class="reveal-card lg:col-span-6 rounded-3xl p-7 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col justify-between space-y-6">
             <div class="space-y-1.5">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
