@@ -234,10 +234,10 @@
     </div>
 
     {{-- ══════════════════ 3. CAREER OPERATING SYSTEM CORE MATRIX ══════════════════ --}}
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <div class="stagger-wrapper grid grid-cols-1 md:grid-cols-12 gap-6">
 
         {{-- Widget 1: Career Readiness Index --}}
-        <div class="md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
+        <div class="reveal-card md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
             <div class="space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
@@ -292,7 +292,7 @@
         </div>
 
         {{-- Widget 2: Active Career Direction --}}
-        <div class="md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
+        <div class="reveal-card md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
             <div class="space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
@@ -330,7 +330,7 @@
         </div>
 
         {{-- Widget 3: Skill Development Progress --}}
-        <div class="md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
+        <div class="reveal-card md:col-span-4 rounded-3xl p-7 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:border-cyan-500/40 transition-all duration-300">
             <div class="space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
@@ -392,10 +392,10 @@
     </div>
 
     {{-- ══════════════════ 3.5 DYNAMIC SYSTEM INTELLIGENCE & RECOMMENDATION ENGINES ══════════════════ --}}
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div class="stagger-wrapper grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {{-- Section A: Recently Viewed Careers --}}
-        <div class="lg:col-span-6 rounded-3xl p-7 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col justify-between space-y-6">
+        <div class="reveal-card lg:col-span-6 rounded-3xl p-7 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col justify-between space-y-6">
             <div class="space-y-1.5">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
@@ -449,7 +449,7 @@
         </div>
 
         {{-- Section B: "Because you liked X..." Suggestion Engine --}}
-        <div class="lg:col-span-6 rounded-3xl p-7 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col justify-between space-y-6">
+        <div class="reveal-card lg:col-span-6 rounded-3xl p-7 sm:p-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col justify-between space-y-6">
             <div class="space-y-1.5">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
