@@ -669,82 +669,55 @@
             pointer-events: none;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1.5px solid rgba(255, 255, 255, 0.75);
-            box-shadow: inset -12px -12px 28px rgba(118, 87, 255, 0.16),
-                        inset 12px 12px 28px rgba(255, 255, 255, 0.90),
-                        0 20px 45px -10px rgba(30, 40, 70, 0.12);
+            border: 1.5px solid rgba(255, 255, 255, 0.85);
+            box-shadow: inset -15px -15px 35px rgba(118, 87, 255, 0.20),
+                        inset 15px 15px 35px rgba(255, 255, 255, 0.95),
+                        0 25px 50px -10px rgba(30, 40, 70, 0.15);
             will-change: transform;
         }
         .glass-bubble-cyan {
-            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.88) 0%, rgba(18, 207, 243, 0.25) 40%, rgba(118, 87, 255, 0.18) 75%, rgba(59, 130, 246, 0.28) 100%);
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.92) 0%, rgba(18, 207, 243, 0.32) 40%, rgba(118, 87, 255, 0.22) 75%, rgba(59, 130, 246, 0.35) 100%);
         }
         .glass-bubble-purple {
-            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.88) 0%, rgba(118, 87, 255, 0.25) 40%, rgba(18, 207, 243, 0.16) 75%, rgba(139, 92, 246, 0.28) 100%);
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.92) 0%, rgba(118, 87, 255, 0.32) 40%, rgba(18, 207, 243, 0.20) 75%, rgba(139, 92, 246, 0.35) 100%);
         }
         .glass-bubble-blue {
-            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.88) 0%, rgba(59, 130, 246, 0.24) 40%, rgba(18, 207, 243, 0.18) 75%, rgba(118, 87, 255, 0.25) 100%);
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.92) 0%, rgba(59, 130, 246, 0.30) 40%, rgba(18, 207, 243, 0.22) 75%, rgba(118, 87, 255, 0.32) 100%);
         }
         .glass-bubble-specular {
             position: absolute;
-            top: 15%;
-            left: 20%;
-            width: 35%;
-            height: 25%;
+            top: 14%;
+            left: 18%;
+            width: 38%;
+            height: 28%;
             border-radius: 9999px;
-            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 80%);
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0) 80%);
             transform: rotate(-35deg);
             filter: blur(1px);
         }
 
         @keyframes bubbleFloat1 {
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(35px, -30px, 0) scale(1.04); }
+            50% { transform: translate3d(35px, -30px, 0) scale(1.05); }
         }
         @keyframes bubbleFloat2 {
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(-40px, 35px, 0) scale(0.96); }
+            50% { transform: translate3d(-40px, 35px, 0) scale(0.95); }
         }
         @keyframes bubbleFloat3 {
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(30px, 40px, 0) scale(1.03); }
+            50% { transform: translate3d(30px, 40px, 0) scale(1.04); }
         }
         @keyframes bubbleFloat4 {
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(-35px, -35px, 0) scale(0.97); }
+            50% { transform: translate3d(-35px, -35px, 0) scale(0.96); }
         }
         .anim-bubble-1 { animation: bubbleFloat1 18s ease-in-out infinite; will-change: transform; }
         .anim-bubble-2 { animation: bubbleFloat2 22s ease-in-out infinite; will-change: transform; }
         .anim-bubble-3 { animation: bubbleFloat3 26s ease-in-out infinite; will-change: transform; }
         .anim-bubble-4 { animation: bubbleFloat4 20s ease-in-out infinite; will-change: transform; }
 
-        /* ══════════════════ VISIBLE LIGHT-MODE SVG CONSTELLATION ANIMATIONS (90FPS GPU) ══════════════════ */
-        @keyframes floatDrift1 {
-            0%, 100% { transform: translate3d(0, 0, 0); }
-            50% { transform: translate3d(25px, -20px, 0); }
-        }
-        @keyframes floatDrift2 {
-            0%, 100% { transform: translate3d(0, 0, 0); }
-            50% { transform: translate3d(-30px, 25px, 0); }
-        }
-        @keyframes floatDrift3 {
-            0%, 100% { transform: translate3d(0, 0, 0); }
-            50% { transform: translate3d(20px, 30px, 0); }
-        }
-        @keyframes nodeGlowPulse {
-            0%, 100% { transform: scale(1); opacity: 0.20; }
-            50% { transform: scale(1.25); opacity: 0.40; }
-        }
-        @keyframes lineDashMove {
-            0% { stroke-dashoffset: 600; }
-            100% { stroke-dashoffset: 0; }
-        }
-        .anim-drift-1 { animation: floatDrift1 14s ease-in-out infinite; will-change: transform; }
-        .anim-drift-2 { animation: floatDrift2 18s ease-in-out infinite; will-change: transform; }
-        .anim-drift-3 { animation: floatDrift3 22s ease-in-out infinite; will-change: transform; }
-        .anim-pulse-glow { animation: nodeGlowPulse 4s ease-in-out infinite; will-change: transform, opacity; }
-        .anim-dash-line { stroke-dasharray: 8, 10; animation: lineDashMove 30s linear infinite; }
-
-        /* ══════════════════ SOFT FUTURISTIC LIGHT MODE HIERARCHY ══════════════════ */
+        /* ══════════════════ TRUE FROSTED GLASSMORHPISM HIERARCHY (LIGHT MODE ONLY) ══════════════════ */
         html:not(.dark) {
             background-color: #F8FAFC;
             color: #111827;
@@ -756,7 +729,7 @@
             color: #111827 !important;
         }
 
-        /* Main Elevated Frosted Glass Cards (Floating Physically Above 3D Background) */
+        /* True Frosted Glassmorphism Across All Major Cards & Modules (Reference Standard) */
         html:not(.dark) .card-tilt,
         html:not(.dark) .card-tilt-3d,
         html:not(.dark) .career-card,
@@ -771,14 +744,14 @@
         html:not(.dark) .bg-white,
         html:not(.dark) .bg-white\/90,
         html:not(.dark) .bg-white\/95 {
-            background: rgba(255, 255, 255, 0.82) !important;
-            backdrop-filter: blur(20px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.70) !important;
-            box-shadow: 0 12px 40px -4px rgba(30, 40, 70, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.04) !important;
+            background: rgba(255, 255, 255, 0.65) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.80) !important;
+            box-shadow: 0 20px 50px -10px rgba(30, 40, 70, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.60) !important;
         }
 
-        /* Elevated Frosted Glass Card Hover Elevation */
+        /* Elevated Frosted Glass Card Hover State */
         html:not(.dark) .card-tilt:hover,
         html:not(.dark) .card-tilt-3d:hover,
         html:not(.dark) .career-card:hover,
@@ -790,13 +763,15 @@
         html:not(.dark) .control-room-card:hover,
         html:not(.dark) .grid > .rounded-3xl:hover,
         html:not(.dark) .grid > div[class*="rounded-3xl"]:hover {
-            background: rgba(255, 255, 255, 0.92) !important;
+            background: rgba(255, 255, 255, 0.80) !important;
+            backdrop-filter: blur(24px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.95) !important;
             transform: translate3d(0, -3px, 0);
-            box-shadow: 0 14px 38px -4px rgba(30, 40, 70, 0.10), 0 0 0 1px rgba(118, 87, 255, 0.25) !important;
-            border-color: rgba(118, 87, 255, 0.35) !important;
+            box-shadow: 0 24px 60px -10px rgba(30, 40, 70, 0.12), 0 0 0 1px rgba(118, 87, 255, 0.30) !important;
         }
 
-        /* Inner Panels & Secondary Containers (Translucent Neutral Hierarchy #F5F7FA) */
+        /* Inner Panels & Secondary Containers (Frosted Translucent Neutral #F5F7FA) */
         html:not(.dark) .bg-slate-50,
         html:not(.dark) .bg-slate-50\/50,
         html:not(.dark) .bg-slate-50\/60,
@@ -806,10 +781,10 @@
         html:not(.dark) .bg-slate-100\/90,
         html:not(.dark) .inner-panel,
         html:not(.dark) .secondary-container {
-            background-color: rgba(245, 247, 250, 0.85) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-            border-color: rgba(15, 23, 42, 0.06) !important;
+            background-color: rgba(245, 247, 250, 0.60) !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.65) !important;
         }
 
         /* Clean Boundaries across All Dividers */
@@ -958,74 +933,39 @@
         <!-- ─── 3D AMBIENT GLASS-BUBBLE & PASTEL GRADIENT LAYER (STRICTLY LIGHT THEME ONLY) ─── -->
         <div class="absolute inset-0 block dark:hidden pointer-events-none">
             <!-- 1. Soft Pastel Radial Gradient Light Pools -->
-            <div class="absolute -top-[10%] -left-[5%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] rounded-full bg-gradient-to-br from-[#12CFF3]/[0.14] via-[#7657FF]/[0.08] to-transparent blur-[130px] animate-aurora-drift-1"></div>
-            <div class="absolute top-[35%] -right-[8%] w-[55vw] h-[55vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-bl from-[#7657FF]/[0.12] via-[#3b82f6]/[0.07] to-transparent blur-[130px] animate-aurora-drift-2"></div>
-            <div class="absolute -bottom-[10%] left-[10%] w-[58vw] h-[58vw] max-w-[900px] max-h-[900px] rounded-full bg-gradient-to-tr from-[#3b82f6]/[0.10] via-[#12CFF3]/[0.08] to-transparent blur-[140px] animate-aurora-drift-3"></div>
+            <div class="absolute -top-[12%] -left-[6%] w-[62vw] h-[62vw] max-w-[920px] max-h-[920px] rounded-full bg-gradient-to-br from-[#12CFF3]/[0.15] via-[#7657FF]/[0.09] to-transparent blur-[130px] animate-aurora-drift-1"></div>
+            <div class="absolute top-[32%] -right-[8%] w-[58vw] h-[58vw] max-w-[880px] max-h-[880px] rounded-full bg-gradient-to-bl from-[#7657FF]/[0.14] via-[#3b82f6]/[0.08] to-transparent blur-[130px] animate-aurora-drift-2"></div>
+            <div class="absolute -bottom-[12%] left-[8%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] rounded-full bg-gradient-to-tr from-[#3b82f6]/[0.12] via-[#12CFF3]/[0.09] to-transparent blur-[140px] animate-aurora-drift-3"></div>
 
-            <!-- 2. 3D Frosted Glass Spheres / Bubbles with Specular Highlights & Depth -->
-            <div class="w-64 h-64 top-[6%] left-[3%] glass-bubble-3d glass-bubble-cyan anim-bubble-1">
+            <!-- 2. Smooth 3D Frosted Glass Spheres / Bubbles with Specular Highlights & Depth -->
+            <div class="w-72 h-72 top-[5%] left-[2%] glass-bubble-3d glass-bubble-cyan anim-bubble-1">
                 <div class="glass-bubble-specular"></div>
             </div>
-            <div class="w-60 h-60 top-[10%] right-[6%] glass-bubble-3d glass-bubble-purple anim-bubble-2">
+            <div class="w-64 h-64 top-[8%] right-[5%] glass-bubble-3d glass-bubble-purple anim-bubble-2">
                 <div class="glass-bubble-specular"></div>
             </div>
-            <div class="w-48 h-48 top-[40%] left-[5%] glass-bubble-3d glass-bubble-blue anim-bubble-3">
+            <div class="w-52 h-52 top-[38%] left-[4%] glass-bubble-3d glass-bubble-blue anim-bubble-3">
                 <div class="glass-bubble-specular"></div>
             </div>
-            <div class="w-72 h-72 top-[48%] right-[3%] glass-bubble-3d glass-bubble-cyan anim-bubble-4">
+            <div class="w-80 h-80 top-[45%] right-[2%] glass-bubble-3d glass-bubble-cyan anim-bubble-4">
                 <div class="glass-bubble-specular"></div>
             </div>
-            <div class="w-56 h-56 bottom-[10%] left-[15%] glass-bubble-3d glass-bubble-purple anim-bubble-1">
+            <div class="w-60 h-60 bottom-[8%] left-[12%] glass-bubble-3d glass-bubble-purple anim-bubble-1">
+                <div class="glass-bubble-specular"></div>
+            </div>
+            <div class="w-56 h-56 bottom-[12%] right-[10%] glass-bubble-3d glass-bubble-blue anim-bubble-2">
                 <div class="glass-bubble-specular"></div>
             </div>
             <!-- Floating Micro Glass Pearls -->
-            <div class="w-20 h-20 top-[28%] left-[45%] glass-bubble-3d glass-bubble-cyan anim-bubble-2">
+            <div class="w-20 h-20 top-[26%] left-[46%] glass-bubble-3d glass-bubble-cyan anim-bubble-3">
                 <div class="glass-bubble-specular"></div>
             </div>
-            <div class="w-24 h-24 bottom-[24%] right-[28%] glass-bubble-3d glass-bubble-blue anim-bubble-3">
+            <div class="w-24 h-24 bottom-[28%] right-[25%] glass-bubble-3d glass-bubble-blue anim-bubble-4">
                 <div class="glass-bubble-specular"></div>
             </div>
-
-            <!-- 3. Visible SVG Constellation Nodes & Trajectory Grid Lines (15-25% Opacity) -->
-            <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
-                <defs>
-                    <linearGradient id="visLightGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#12CFF3" stop-opacity="0.25" />
-                        <stop offset="50%" stop-color="#7657FF" stop-opacity="0.22" />
-                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.25" />
-                    </linearGradient>
-                    <linearGradient id="visLightGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#7657FF" stop-opacity="0.25" />
-                        <stop offset="50%" stop-color="#12CFF3" stop-opacity="0.20" />
-                        <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.24" />
-                    </linearGradient>
-                </defs>
-
-                <!-- Drifting Trajectory Grid Curves -->
-                <path d="M-80,180 C320,80 520,380 860,220 C1200,80 1340,420 1580,310" fill="none" stroke="url(#visLightGrad1)" stroke-width="2.5" class="anim-dash-line" />
-                <path d="M-40,680 C280,520 600,820 960,640 C1240,500 1400,780 1560,680" fill="none" stroke="url(#visLightGrad2)" stroke-width="2" class="anim-dash-line" style="animation-direction: reverse; animation-duration: 45s;" />
-
-                <!-- Star Nodes -->
-                <g class="anim-drift-1">
-                    <circle cx="1050" cy="120" r="5" fill="#7657FF" fill-opacity="0.24" />
-                    <circle cx="1150" cy="170" r="10" fill="#12CFF3" fill-opacity="0.22" stroke="#12CFF3" stroke-opacity="0.28" stroke-width="2" class="anim-pulse-glow" style="transform-origin: 1150px 170px;" />
-                    <circle cx="1150" cy="170" r="4.5" fill="#12CFF3" fill-opacity="0.30" />
-                    <circle cx="1260" cy="130" r="6" fill="#7657FF" fill-opacity="0.25" />
-                </g>
-                <g class="anim-drift-2">
-                    <circle cx="120" cy="440" r="6" fill="#12CFF3" fill-opacity="0.24" />
-                    <circle cx="220" cy="500" r="12" fill="#7657FF" fill-opacity="0.20" stroke="#7657FF" stroke-opacity="0.30" stroke-width="2" class="anim-pulse-glow" style="transform-origin: 220px 500px;" />
-                    <circle cx="220" cy="500" r="5" fill="#7657FF" fill-opacity="0.30" />
-                </g>
-                <g class="anim-drift-3">
-                    <circle cx="980" cy="680" r="5" fill="#12CFF3" fill-opacity="0.24" />
-                    <circle cx="1080" cy="740" r="11" fill="#7657FF" fill-opacity="0.20" stroke="#7657FF" stroke-opacity="0.28" stroke-width="2" class="anim-pulse-glow" style="transform-origin: 1080px 740px;" />
-                    <circle cx="1080" cy="740" r="4.5" fill="#7657FF" fill-opacity="0.30" />
-                </g>
-            </svg>
-
-            <!-- 4. Soft Micro Data Grid Dot Pattern Overlay -->
-            <div class="absolute inset-0 bg-[radial-gradient(#7657FF_1px,transparent_1px)] [background-size:30px_30px] opacity-[0.04] pointer-events-none"></div>
+            <div class="w-16 h-16 top-[68%] left-[32%] glass-bubble-3d glass-bubble-purple anim-bubble-1">
+                <div class="glass-bubble-specular"></div>
+            </div>
         </div>
 
         <!-- ─── DARK MODE AMBIENT LAYER (100% Preserved Pristine Obsidian Auroras) ─── -->
