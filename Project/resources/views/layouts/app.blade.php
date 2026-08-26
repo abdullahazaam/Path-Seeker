@@ -876,16 +876,20 @@
             color: #111827;
         }
 
-        /* ══════════════════ PRECISION STABLE DARK MODE 80% TRANSLUCENCY GLASSMORPHISM ══════════════════ */
+        /* ══════════════════ UNIVERSAL INNER PAGE & HOMEPAGE GLASS EFFECT PARITY (DARK MODE) ══════════════════ */
         html.dark, .dark {
             background-color: #04060b;
             color: #F8FAFC;
         }
 
-        /* Precision 80% Translucent Glass on All Dark Mode Cards, Modules & Containers */
+        /* Universal 80% High-Translucency Glass Across ALL Cards, Filters, Panels & Containers */
         html.dark .card-tilt, .dark .card-tilt,
         html.dark .card-tilt-3d, .dark .card-tilt-3d,
         html.dark .career-card, .dark .career-card,
+        html.dark .multimedia-card, .dark .multimedia-card,
+        html.dark .resource-card, .dark .resource-card,
+        html.dark .story-card, .dark .story-card,
+        html.dark .quiz-card, .dark .quiz-card,
         html.dark [data-tilt], .dark [data-tilt],
         html.dark .app-card, .dark .app-card,
         html.dark .glass-panel, .dark .glass-panel,
@@ -898,6 +902,12 @@
         html.dark .bg-slate-900\/90, .dark .bg-slate-900\/90,
         html.dark .bg-slate-950, .dark .bg-slate-950,
         html.dark .bg-\[\#080B12\], .dark .bg-\[\#080B12\],
+        html.dark .bg-\[\#070b14\], .dark .bg-\[\#070b14\],
+        html.dark .bg-\[\#0b0f19\], .dark .bg-\[\#0b0f19\],
+        html.dark .bg-\[\#090d18\], .dark .bg-\[\#090d18\],
+        html.dark .bg-\[\#070a13\], .dark .bg-\[\#070a13\],
+        html.dark .bg-\[\#0c111e\], .dark .bg-\[\#0c111e\],
+        html.dark .bg-\[\#0a0f1d\], .dark .bg-\[\#0a0f1d\],
         html.dark .dark\:bg-\[\#080B12\], .dark .dark\:bg-\[\#080B12\],
         html.dark .dark\:bg-\[\#070b14\], .dark .dark\:bg-\[\#070b14\],
         html.dark .dark\:bg-\[\#0b0f19\], .dark .dark\:bg-\[\#0b0f19\],
@@ -906,7 +916,10 @@
         html.dark .dark\:bg-\[\#0c111e\], .dark .dark\:bg-\[\#0c111e\],
         html.dark .dark\:bg-\[\#0a0f1d\], .dark .dark\:bg-\[\#0a0f1d\],
         html.dark .dark\:bg-slate-900, .dark .dark\:bg-slate-900,
+        html.dark .dark\:bg-slate-900\/60, .dark .dark\:bg-slate-900\/60,
         html.dark .dark\:bg-slate-950, .dark .dark\:bg-slate-950,
+        html.dark .dark\:bg-slate-950\/50, .dark .dark\:bg-slate-950\/50,
+        html.dark .dark\:bg-slate-950\/85, .dark .dark\:bg-slate-950\/85,
         html.dark .dark\:bg-black\/40, .dark .dark\:bg-black\/40,
         html.dark .dark\:bg-black\/50, .dark .dark\:bg-black\/50 {
             background: rgba(8, 11, 18, 0.25) !important;
@@ -917,10 +930,14 @@
             box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.40) !important;
         }
 
-        /* Precision Dark Mode Card Hover State */
+        /* Universal Interactive Card Hover State */
         html.dark .card-tilt:hover, .dark .card-tilt:hover,
         html.dark .card-tilt-3d:hover, .dark .card-tilt-3d:hover,
         html.dark .career-card:hover, .dark .career-card:hover,
+        html.dark .multimedia-card:hover, .dark .multimedia-card:hover,
+        html.dark .resource-card:hover, .dark .resource-card:hover,
+        html.dark .story-card:hover, .dark .story-card:hover,
+        html.dark .quiz-card:hover, .dark .quiz-card:hover,
         html.dark [data-tilt]:hover, .dark [data-tilt]:hover,
         html.dark .app-card:hover, .dark .app-card:hover,
         html.dark .glass-panel:hover, .dark .glass-panel:hover,
@@ -936,7 +953,7 @@
             box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.55) !important;
         }
 
-        /* Dark Mode Inner Nested Panels & Secondary Containers */
+        /* Universal Dark Mode Secondary Panels, Drawers & Filter Bars */
         html.dark .dark\:bg-slate-800, .dark .dark\:bg-slate-800,
         html.dark .dark\:bg-slate-800\/50, .dark .dark\:bg-slate-800\/50,
         html.dark .dark\:bg-slate-850, .dark .dark\:bg-slate-850,
@@ -949,6 +966,20 @@
             backdrop-filter: blur(16px) !important;
             -webkit-backdrop-filter: blur(16px) !important;
             border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+
+        /* Global Footer Glass Standard */
+        html.dark footer {
+            background-color: rgba(4, 6, 11, 0.40) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+        html:not(.dark) footer {
+            background-color: rgba(248, 250, 252, 0.55) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
         }
 
         /* Pristine Dark Mode Typography */
