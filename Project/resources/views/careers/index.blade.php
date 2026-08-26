@@ -329,6 +329,7 @@
                             <button type="button"
                                     onclick="toggleBookmark(event, {{ $career->id }}, 'career')"
                                     id="btn-bookmark-{{ $career->id }}"
+                                    data-bookmark-target="career-{{ $career->id }}"
                                     data-bookmarked="{{ $isBookmarked ? 'true' : 'false' }}"
                                     class="w-8 h-8 rounded-xl border transition-all flex items-center justify-center text-xs cursor-pointer {{ $isBookmarked ? 'bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border-cyan-500/40 shadow-sm' : 'border-slate-200 dark:border-white/10 text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 bg-slate-50 dark:bg-white/[0.04]' }}"
                                     title="{{ $isBookmarked ? 'Saved in Passport Bookmarks' : 'Bookmark this career' }}">
