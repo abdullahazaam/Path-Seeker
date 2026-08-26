@@ -1,27 +1,23 @@
 {{-- ══════════════════ DEDICATED DARK MODE FLOATING PLEXUS NETWORK BACKGROUND ══════════════════ --}}
-{{-- Ultra-Lightweight 60FPS Hardware-Accelerated WebGL/Canvas Plexus Constellation ("Jal") with Zero CPU Lag --}}
-<canvas id="darkPlexusCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#030508] hidden dark:block transition-colors duration-500 will-change-transform transform-gpu"></canvas>
+{{-- Ultra-Lightweight Lazy-Loaded 45FPS Hardware-Accelerated Plexus Background with Zero Main-Thread Blocking --}}
+<canvas id="darkPlexusCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#030508] hidden dark:block transition-colors duration-500 will-change-transform transform-gpu opacity-0 transition-opacity duration-700"></canvas>
 
 <script>
 (function() {
     'use strict';
 
-    const canvas = document.getElementById('darkPlexusCanvas');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
-    if (!ctx) return;
-
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    let dpr = 1; // Locked to 1 for maximum lightweight rendering speed & crisp lines
+    let canvas = null;
+    let ctx = null;
+    let width = 0;
+    let height = 0;
     let animationFrameId = null;
     let isRunning = false;
+    let isInitialized = false;
     let lastDrawTime = 0;
-    const TARGET_FPS = 45; // Smooth 45 FPS ceiling for buttery-smooth animations with 0% CPU overhead
+    const TARGET_FPS = 45;
     const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
-    // ── 9 Optimized Floating Constellation Clusters ("Jal") ──
+    // ── 9 Lightweight Floating Constellation Clusters ("Jal") ──
     const CLUSTER_COUNT = 9;
     const clusters = [];
 
@@ -40,20 +36,20 @@
         ];
 
         for (let i = 0; i < CLUSTER_COUNT; i++) {
-            const pos = basePositions[i] || { x: Math.random(), y: Math.random() };
+            const pos = basePositions[i] || { x: 0.5, y: 0.5 };
             const isCyan = i % 2 === 0;
-            const nodeCount = 6 + (i % 3); // 6-8 nodes per cluster (optimal O(N^2) = 15-28 checks max!)
-            const clusterRadius = 85 + (i % 4) * 15; // 85px - 130px spread
+            const nodeCount = 6 + (i % 3);
+            const clusterRadius = 85 + (i % 4) * 15;
             const nodes = [];
 
             for (let j = 0; j < nodeCount; j++) {
-                const angle = (j / nodeCount) * Math.PI * 2 + Math.random() * 0.5;
-                const dist = 25 + Math.random() * (clusterRadius - 25);
+                const angle = (j / nodeCount) * 6.283 + (j * 0.1);
+                const dist = 25 + (j * 8) % (clusterRadius - 25);
                 nodes.push({
                     lx: Math.cos(angle) * dist,
                     ly: Math.sin(angle) * dist,
-                    vx: ((j % 2 === 0 ? 1 : -1) * (0.15 + Math.random() * 0.12)),
-                    vy: ((j % 3 === 0 ? 1 : -1) * (0.15 + Math.random() * 0.12)),
+                    vx: (j % 2 === 0 ? 0.18 : -0.18),
+                    vy: (j % 3 === 0 ? 0.16 : -0.16),
                     radius: 1.8
                 });
             }
@@ -75,8 +71,8 @@
         }
     }
 
-    // ── High-Performance Canvas Resize ──
     function resize() {
+        if (!canvas) return;
         width = window.innerWidth;
         height = window.innerHeight;
         canvas.width = width;
@@ -86,20 +82,16 @@
         initClusters();
     }
 
-    // ── Throttled Zero-Lag Plexus Render Loop ──
     function draw(now) {
-        if (!isRunning) return;
+        if (!isRunning || !ctx) return;
 
         animationFrameId = requestAnimationFrame(draw);
 
-        // Frame throttle to eliminate GPU/CPU battery drain & lag
         const elapsed = now - lastDrawTime;
         if (elapsed < FRAME_INTERVAL) return;
         lastDrawTime = now - (elapsed % FRAME_INTERVAL);
 
-        const dt = 0.022; // Normalized stable delta time
-
-        // 1. Clear Frame (#030508 Deep Space)
+        // 1. Clear Frame (#030508)
         ctx.fillStyle = '#030508';
         ctx.fillRect(0, 0, width, height);
 
@@ -116,16 +108,14 @@
         ctx.fillStyle = radialGrad2;
         ctx.fillRect(0, 0, width, height);
 
-        // ── 3. Render Each Floating Plexus Network Cluster ──
+        // 3. Render Each Floating Plexus Network Cluster
         for (let c = 0; c < clusters.length; c++) {
             const cl = clusters[c];
 
-            // Drift cluster center
             cl.cx += cl.vx;
             cl.cy += cl.vy;
             cl.angle += cl.rotSpeed;
 
-            // Smooth screen bounce
             const pad = 100;
             if (cl.cx < -pad) cl.cx = width + pad;
             if (cl.cx > width + pad) cl.cx = -pad;
@@ -135,15 +125,13 @@
             const cosA = Math.cos(cl.angle);
             const sinA = Math.sin(cl.angle);
 
-            // Compute node positions
             const worldNodes = [];
             for (let i = 0; i < cl.nodes.length; i++) {
                 const n = cl.nodes[i];
                 n.lx += n.vx;
                 n.ly += n.vy;
 
-                // Local radius bounce
-                if (n.lx * n.lx + n.ly * n.ly > 14400) { // 120^2
+                if (n.lx * n.lx + n.ly * n.ly > 14400) {
                     n.vx *= -1;
                     n.vy *= -1;
                 }
@@ -153,7 +141,6 @@
                 worldNodes.push({ wx, wy, radius: n.radius });
             }
 
-            // Draw Connected Network Lines ("Jal")
             const connectDistSq = cl.connectDist * cl.connectDist;
             for (let i = 0; i < worldNodes.length; i++) {
                 for (let j = i + 1; j < worldNodes.length; j++) {
@@ -174,7 +161,6 @@
                 }
             }
 
-            // Draw Node Star Points
             for (let i = 0; i < worldNodes.length; i++) {
                 const wn = worldNodes[i];
 
@@ -191,10 +177,29 @@
         }
     }
 
+    function setupCanvas() {
+        if (isInitialized) return;
+        canvas = document.getElementById('darkPlexusCanvas');
+        if (!canvas) return;
+
+        ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+        if (!ctx) return;
+
+        isInitialized = true;
+        resize();
+        canvas.classList.remove('opacity-0');
+        canvas.classList.add('opacity-100');
+    }
+
     function start() {
         if (isRunning) return;
         if (!document.documentElement.classList.contains('dark')) return;
-        resize();
+
+        if (!isInitialized) {
+            setupCanvas();
+        }
+
+        if (!ctx) return;
         isRunning = true;
         lastDrawTime = performance.now();
         animationFrameId = requestAnimationFrame(draw);
@@ -211,15 +216,40 @@
     window.startDarkPlexusEngine = start;
     window.stopDarkPlexusEngine = stop;
 
+    // ── Lazy-Load Canvas Initialization (requestIdleCallback with fallback) ──
+    function lazyMount() {
+        if (typeof window.requestIdleCallback === 'function') {
+            window.requestIdleCallback(() => {
+                if (document.documentElement.classList.contains('dark')) {
+                    start();
+                }
+            }, { timeout: 800 });
+        } else {
+            setTimeout(() => {
+                if (document.documentElement.classList.contains('dark')) {
+                    start();
+                }
+            }, 100);
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', lazyMount, { once: true });
+    } else {
+        lazyMount();
+    }
+
+    // ── Lifecycle Event Listeners with Safe Debounce & Teardown ──
     let resizeTimer = null;
-    window.addEventListener('resize', () => {
+    const onResize = () => {
         if (resizeTimer) clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
-            if (document.documentElement.classList.contains('dark')) {
+            if (document.documentElement.classList.contains('dark') && isRunning) {
                 resize();
             }
-        }, 150);
-    }, { passive: true });
+        }, 200);
+    };
+    window.addEventListener('resize', onResize, { passive: true });
 
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
@@ -242,8 +272,8 @@
     });
     observer.observe(document.documentElement, { attributes: true });
 
-    if (document.documentElement.classList.contains('dark')) {
-        start();
-    }
+    // Complete cleanup on page unload / navigation
+    window.addEventListener('pagehide', stop, { passive: true });
+    window.addEventListener('beforeunload', stop, { passive: true });
 })();
 </script>

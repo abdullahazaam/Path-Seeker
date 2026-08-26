@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 /**
- * DarkPlexusBackground - Ultra-Optimized Zero-Lag Plexus Background Component (Dark Mode)
+ * DarkPlexusBackground - Lazy-Loaded Ultra-Optimized Canvas Background Component (Dark Mode)
  */
 export const DarkPlexusBackground = () => {
     const canvasRef = useRef(null);
@@ -10,18 +10,19 @@ export const DarkPlexusBackground = () => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
-        if (!ctx) return;
-
-        let width = window.innerWidth;
-        let height = window.innerHeight;
         let animationFrameId = null;
         let lastDrawTime = 0;
+        let isMounted = true;
         const TARGET_FPS = 45;
         const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
+        let width = window.innerWidth;
+        let height = window.innerHeight;
         const CLUSTER_COUNT = 9;
         const clusters = [];
+
+        const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+        if (!ctx) return;
 
         const initClusters = () => {
             clusters.length = 0;
@@ -38,20 +39,20 @@ export const DarkPlexusBackground = () => {
             ];
 
             for (let i = 0; i < CLUSTER_COUNT; i++) {
-                const pos = basePositions[i] || { x: Math.random(), y: Math.random() };
+                const pos = basePositions[i] || { x: 0.5, y: 0.5 };
                 const isCyan = i % 2 === 0;
                 const nodeCount = 6 + (i % 3);
                 const clusterRadius = 85 + (i % 4) * 15;
                 const nodes = [];
 
                 for (let j = 0; j < nodeCount; j++) {
-                    const angle = (j / nodeCount) * Math.PI * 2 + Math.random() * 0.5;
-                    const dist = 25 + Math.random() * (clusterRadius - 25);
+                    const angle = (j / nodeCount) * 6.283 + (j * 0.1);
+                    const dist = 25 + (j * 8) % (clusterRadius - 25);
                     nodes.push({
                         lx: Math.cos(angle) * dist,
                         ly: Math.sin(angle) * dist,
-                        vx: ((j % 2 === 0 ? 1 : -1) * (0.15 + Math.random() * 0.12)),
-                        vy: ((j % 3 === 0 ? 1 : -1) * (0.15 + Math.random() * 0.12)),
+                        vx: (j % 2 === 0 ? 0.18 : -0.18),
+                        vy: (j % 3 === 0 ? 0.16 : -0.16),
                         radius: 1.8
                     });
                 }
@@ -74,6 +75,7 @@ export const DarkPlexusBackground = () => {
         };
 
         const handleResize = () => {
+            if (!isMounted) return;
             width = window.innerWidth;
             height = window.innerHeight;
             canvas.width = width;
@@ -82,16 +84,16 @@ export const DarkPlexusBackground = () => {
             canvas.style.height = height + 'px';
             initClusters();
         };
-        handleResize();
 
         let resizeTimer = null;
         const onResize = () => {
             if (resizeTimer) clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(handleResize, 150);
+            resizeTimer = setTimeout(handleResize, 200);
         };
         window.addEventListener('resize', onResize, { passive: true });
 
         const draw = (now) => {
+            if (!isMounted) return;
             animationFrameId = requestAnimationFrame(draw);
 
             const elapsed = now - lastDrawTime;
@@ -181,11 +183,31 @@ export const DarkPlexusBackground = () => {
             }
         };
 
-        lastDrawTime = performance.now();
-        animationFrameId = requestAnimationFrame(draw);
+        // Defer rendering start using requestIdleCallback to keep initial UI load instantaneous
+        let idleId = null;
+        const startEngine = () => {
+            handleResize();
+            lastDrawTime = performance.now();
+            animationFrameId = requestAnimationFrame(draw);
+        };
+
+        if (typeof window.requestIdleCallback === 'function') {
+            idleId = window.requestIdleCallback(startEngine, { timeout: 800 });
+        } else {
+            const timeoutId = setTimeout(startEngine, 100);
+            idleId = { cancel: () => clearTimeout(timeoutId) };
+        }
 
         return () => {
+            isMounted = false;
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            if (idleId) {
+                if (typeof window.cancelIdleCallback === 'function' && typeof idleId === 'number') {
+                    window.cancelIdleCallback(idleId);
+                } else if (idleId.cancel) {
+                    idleId.cancel();
+                }
+            }
             window.removeEventListener('resize', onResize);
             if (resizeTimer) clearTimeout(resizeTimer);
         };
