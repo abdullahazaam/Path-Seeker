@@ -876,13 +876,15 @@
             color: #111827;
         }
 
-        /* ══════════════════ DARK MODE 80-90% HIGH-TRANSLUCENCY GLASSMORPHISM ══════════════════ */
+        /* ══════════════════ UNIVERSAL DARK MODE 80-90% TRANSLUCENCY GLASSMORPHISM ══════════════════ */
         html.dark, .dark {
             background-color: #04060b;
             color: #F8FAFC;
         }
 
-        /* Dark Mode High-Translucency (80-90%) Frosted Glass Cards */
+        /* Force 80-90% Translucency on ALL Dark Mode Section Containers, Wrapper Boxes & Feature Panels */
+        html.dark section > div,
+        html.dark main section > div,
         html.dark .card-tilt, .dark .card-tilt,
         html.dark .card-tilt-3d, .dark .card-tilt-3d,
         html.dark .career-card, .dark .career-card,
@@ -899,13 +901,24 @@
         html.dark .bg-slate-950, .dark .bg-slate-950,
         html.dark .bg-\[\#080B12\], .dark .bg-\[\#080B12\],
         html.dark .dark\:bg-\[\#080B12\], .dark .dark\:bg-\[\#080B12\],
+        html.dark .dark\:bg-\[\#070b14\], .dark .dark\:bg-\[\#070b14\],
+        html.dark .dark\:bg-\[\#0b0f19\], .dark .dark\:bg-\[\#0b0f19\],
+        html.dark .dark\:bg-\[\#090d18\], .dark .dark\:bg-\[\#090d18\],
+        html.dark .dark\:bg-\[\#070a13\], .dark .dark\:bg-\[\#070a13\],
+        html.dark .dark\:bg-\[\#0c111e\], .dark .dark\:bg-\[\#0c111e\],
+        html.dark .dark\:bg-\[\#0a0f1d\], .dark .dark\:bg-\[\#0a0f1d\],
         html.dark .dark\:bg-slate-900, .dark .dark\:bg-slate-900,
-        html.dark .dark\:bg-slate-950, .dark .dark\:bg-slate-950 {
-            background: rgba(8, 11, 18, 0.28) !important;
+        html.dark .dark\:bg-slate-950, .dark .dark\:bg-slate-950,
+        html.dark .dark\:bg-black\/40, .dark .dark\:bg-black\/40,
+        html.dark .dark\:bg-black\/50, .dark .dark\:bg-black\/50,
+        html.dark [class*="dark:bg-[#"], .dark [class*="dark:bg-[#"],
+        html.dark [class*="dark:bg-slate-9"], .dark [class*="dark:bg-slate-9"] {
+            background: rgba(8, 11, 18, 0.25) !important;
+            background-color: rgba(8, 11, 18, 0.25) !important;
             backdrop-filter: blur(24px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
-            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.10) !important;
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
         }
 
         /* Dark Mode Glass Card Hover State */
@@ -920,23 +933,27 @@
         html.dark .control-room-card:hover, .dark .control-room-card:hover,
         html.dark .grid > .rounded-3xl:hover, .dark .grid > .rounded-3xl:hover,
         html.dark .grid > div[class*="rounded-3xl"]:hover, .dark .grid > div[class*="rounded-3xl"]:hover {
-            background: rgba(15, 23, 42, 0.38) !important;
+            background: rgba(15, 23, 42, 0.35) !important;
+            background-color: rgba(15, 23, 42, 0.35) !important;
             backdrop-filter: blur(24px) saturate(190%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
             border: 1px solid rgba(139, 92, 246, 0.30) !important;
             transform: translate3d(0, -3px, 0);
-            box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.60), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
         }
 
-        /* Dark Mode Inner Panels & Secondary Containers */
+        /* Dark Mode Inner Nested Panels & Secondary Containers */
         html.dark .dark\:bg-slate-800, .dark .dark\:bg-slate-800,
         html.dark .dark\:bg-slate-800\/50, .dark .dark\:bg-slate-800\/50,
         html.dark .dark\:bg-slate-850, .dark .dark\:bg-slate-850,
         html.dark .dark\:bg-white\/5, .dark .dark\:bg-white\/5,
         html.dark .dark\:bg-white\/10, .dark .dark\:bg-white\/10,
         html.dark .inner-panel, .dark .inner-panel,
-        html.dark .secondary-container, .dark .secondary-container {
-            background-color: rgba(6, 8, 15, 0.22) !important;
+        html.dark .secondary-container, .dark .secondary-container,
+        html.dark section div[class*="rounded-2xl"],
+        html.dark [class*="dark:bg-slate-8"] {
+            background: rgba(6, 8, 15, 0.20) !important;
+            background-color: rgba(6, 8, 15, 0.20) !important;
             backdrop-filter: blur(16px) !important;
             -webkit-backdrop-filter: blur(16px) !important;
             border: 1px solid rgba(255, 255, 255, 0.08) !important;
