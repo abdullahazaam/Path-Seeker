@@ -297,7 +297,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-w-[760px] lg:min-w-0 relative z-10">
                     
                     {{-- Step 01: DISCOVER --}}
-                    <div class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-cyan-500/40 dark:border-cyan-500/30 hover:border-cyan-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
+                    <div data-aos="fade-up" data-aos-delay="100" class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-cyan-500/40 dark:border-cyan-500/30 hover:border-cyan-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-lg font-mono font-black shadow-md shadow-cyan-500/10">
@@ -325,7 +325,7 @@
                     </div>
 
                     {{-- Step 02: EXPLORE WHAT'S POSSIBLE --}}
-                    <div class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-purple-500/40 dark:border-purple-500/30 hover:border-purple-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
+                    <div data-aos="fade-up" data-aos-delay="200" class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-purple-500/40 dark:border-purple-500/30 hover:border-purple-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center text-lg font-mono font-black shadow-md shadow-purple-500/10">
@@ -353,7 +353,7 @@
                     </div>
 
                     {{-- Step 03: UNDERSTAND YOUR FIT --}}
-                    <div class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-pink-500/40 dark:border-pink-500/30 hover:border-pink-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
+                    <div data-aos="fade-up" data-aos-delay="300" class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-pink-500/40 dark:border-pink-500/30 hover:border-pink-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-12 h-12 rounded-2xl bg-pink-500/15 border border-pink-500/30 text-pink-400 flex items-center justify-center text-lg font-mono font-black shadow-md shadow-pink-500/10">
@@ -381,7 +381,7 @@
                     </div>
 
                     {{-- Step 04: BUILD YOUR PATH --}}
-                    <div class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-emerald-500/40 dark:border-emerald-500/30 hover:border-emerald-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
+                    <div data-aos="fade-up" data-aos-delay="400" class="group relative flex flex-col justify-between p-7 rounded-3xl bg-slate-50/90 dark:bg-[#0b0f19] border border-emerald-500/40 dark:border-emerald-500/30 hover:border-emerald-400 hover:-translate-y-1.5 transition-all duration-300 shadow-lg space-y-6">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg font-mono font-black shadow-md shadow-emerald-500/10">
@@ -594,7 +594,7 @@
                     $rowIndex = sprintf('%02d', $loop->iteration);
                 @endphp
 
-                <div class="career-card relative p-6 sm:p-7 rounded-3xl bg-slate-50/80 dark:bg-[#0b0f19] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-100/90 dark:hover:bg-[#0e1424] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
+                <div data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}" class="career-card relative p-6 sm:p-7 rounded-3xl bg-slate-50/80 dark:bg-[#0b0f19] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-100/90 dark:hover:bg-[#0e1424] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
                     {{-- Ambient Hover Glow --}}
                     <div class="absolute -right-20 -top-20 w-48 h-48 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 
@@ -664,7 +664,7 @@
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 md:my-14 reveal-element">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {{-- Multimedia Card --}}
-        <div class="relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#080B12] shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+        <div data-aos="fade-up" data-aos-delay="100" class="relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#080B12] shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
             <div class="px-7 py-5 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between bg-slate-50/50 dark:bg-white/[0.02]">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-2xl bg-cyan-500/15 border border-cyan-500/25 flex items-center justify-center shadow-sm">
@@ -682,7 +682,7 @@
             </div>
             <div class="divide-y divide-slate-200/80 dark:divide-white/[0.05] flex-1 p-2 sm:p-3">
                 @forelse($featuredMultimedia as $media)
-                    <div class="p-4 rounded-2xl flex items-center justify-between gap-4 hover:bg-slate-100/80 dark:hover:bg-white/[0.04] transition-all group">
+                    <div data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 80 }}" class="p-4 rounded-2xl flex items-center justify-between gap-4 hover:bg-slate-100/80 dark:hover:bg-white/[0.04] transition-all group">
                         <div class="flex items-center gap-3.5 min-w-0">
                             <div class="relative w-16 h-12 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-200/80 dark:border-white/5 shadow-sm">
                                 <img src="{{ $media->thumbnail_url ?? 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=200&auto=format&fit=crop&q=80' }}" alt="{{ $media->title }}" class="w-full h-full object-cover">
@@ -705,7 +705,7 @@
         </div>
 
         {{-- Resource Library Card --}}
-        <div class="relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#080B12] shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+        <div data-aos="fade-up" data-aos-delay="200" class="relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#080B12] shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
             <div class="px-7 py-5 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between bg-slate-50/50 dark:bg-white/[0.02]">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-2xl bg-sky-500/15 border border-sky-500/25 flex items-center justify-center shadow-sm">
@@ -723,7 +723,7 @@
             </div>
             <div class="divide-y divide-slate-200/80 dark:divide-white/[0.05] flex-1 p-2 sm:p-3">
                 @forelse($featuredResources as $res)
-                    <div class="p-4 rounded-2xl flex items-center justify-between gap-4 hover:bg-slate-100/80 dark:hover:bg-white/[0.04] transition-all group">
+                    <div data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 80 }}" class="p-4 rounded-2xl flex items-center justify-between gap-4 hover:bg-slate-100/80 dark:hover:bg-white/[0.04] transition-all group">
                         <div class="flex items-center gap-3.5 min-w-0">
                             <div class="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-200/80 dark:border-white/5 shadow-sm">
                                 <img src="{{ $res->thumbnail_url ?? 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=200&auto=format&fit=crop&q=80' }}" alt="{{ $res->title }}" class="w-full h-full object-cover">
