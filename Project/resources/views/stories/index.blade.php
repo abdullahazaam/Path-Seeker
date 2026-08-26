@@ -40,9 +40,9 @@
     </div>
 
     {{-- Timeline Stories Grid --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch" data-stagger-grid id="storiesGrid">
         @forelse($stories as $story)
-            <div class="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group reveal-on-scroll">
+            <div class="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group app-card" data-stagger-index="{{ $loop->index }}">
                 
                 <div class="space-y-4">
                     

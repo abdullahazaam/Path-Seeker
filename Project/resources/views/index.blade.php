@@ -90,7 +90,13 @@
                  glareOpacity: 0,
                  isHovered: false,
                  expanded: false,
+                 rafId: null,
+                 isTouch: false,
+                 init() {
+                     this.isTouch = window.matchMedia('(hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)').matches;
+                 },
                  handleMouseMove(e) {
+                     if (this.isTouch) return;
                      const card = this.$refs.passportCard;
                      if (!card) return;
                      const rect = card.getBoundingClientRect();
@@ -99,15 +105,18 @@
                      const centerX = rect.width / 2;
                      const centerY = rect.height / 2;
                      
-                     this.rotateX = ((y - centerY) / centerY) * -10;
-                     this.rotateY = ((x - centerX) / centerX) * 12;
-                     
-                     this.glareX = (x / rect.width) * 100;
-                     this.glareY = (y / rect.height) * 100;
-                     this.glareOpacity = 0.4;
-                     this.isHovered = true;
+                     if (this.rafId) cancelAnimationFrame(this.rafId);
+                     this.rafId = requestAnimationFrame(() => {
+                         this.rotateX = ((y - centerY) / centerY) * -9.5;
+                         this.rotateY = ((x - centerX) / centerX) * 11.5;
+                         this.glareX = (x / rect.width) * 100;
+                         this.glareY = (y / rect.height) * 100;
+                         this.glareOpacity = 0.4;
+                         this.isHovered = true;
+                     });
                  },
                  handleMouseLeave() {
+                     if (this.rafId) cancelAnimationFrame(this.rafId);
                      this.rotateX = 0;
                      this.rotateY = 0;
                      this.glareOpacity = 0;
@@ -124,8 +133,8 @@
                  @mousemove="handleMouseMove($event)"
                  @mouseleave="handleMouseLeave()"
                  @click="toggleExpanded()"
-                 :style="`transform: perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${isHovered ? 1.015 : 1}, ${isHovered ? 1.015 : 1}, ${isHovered ? 1.015 : 1});`"
-                 class="passport-card-3d relative w-full max-w-md lg:max-w-[480px] bg-white/95 dark:bg-gradient-to-b dark:from-[#0d121f] dark:via-[#080c16] dark:to-[#05070e] border border-slate-200/90 dark:border-white/15 hover:border-cyan-500/50 shadow-2xl dark:shadow-[0_16px_40px_rgba(0,0,0,0.6)] backdrop-blur-2xl rounded-3xl p-5 sm:p-6 overflow-hidden cursor-pointer select-none transition-transform duration-150 ease-out">
+                 :style="`transform: perspective(1000px) translate3d(0, 0, 0) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${isHovered ? 1.015 : 1}, ${isHovered ? 1.015 : 1}, ${isHovered ? 1.015 : 1});`"
+                 class="passport-card-3d relative w-full max-w-md lg:max-w-[480px] bg-white/95 dark:bg-gradient-to-b dark:from-[#0d121f] dark:via-[#080c16] dark:to-[#05070e] border border-slate-200/90 dark:border-white/15 hover:border-cyan-500/50 shadow-2xl dark:shadow-[0_16px_40px_rgba(0,0,0,0.6)] backdrop-blur-2xl rounded-3xl p-5 sm:p-6 overflow-hidden cursor-pointer select-none transition-transform duration-150 ease-out will-change-transform">
                 
                 {{-- Dynamic Specular Glare Sheen Overlay --}}
                 <div class="absolute inset-0 pointer-events-none transition-opacity duration-300 z-30"

@@ -421,18 +421,46 @@
         }
         .passport-card-3d {
             transform-style: preserve-3d;
-            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+            transition: transform 0.16s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
         }
         .passport-card-3d:hover {
             box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
         }
 
-        /* ══════════════════ GLOBAL DARK MODE CARD ELEVATION & AMBIENT SHADING ══════════════════ */
-        .card-tilt, .card-tilt-3d, .career-card, [data-tilt], .app-card, .glass-panel {
+        /* ══════════════════ 90FPS UNIVERSAL GPU ACCELERATION & RENDER CONTAINMENT ══════════════════ */
+        .card-tilt, 
+        .card-tilt-3d, 
+        .career-card, 
+        [data-tilt], 
+        .app-card, 
+        .glass-panel,
+        .signature-card,
+        .signature-container,
+        .dashboard-widget,
+        .control-room-card {
             position: relative;
             transform-style: preserve-3d;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             will-change: transform;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+        }
+
+        /* Long Scroll List & Card Grid Virtual Rendering Optimization (90FPS Core Web Vitals) */
+        #careerCardsContainer > div,
+        #multimediaGrid > div,
+        #resourcesGrid > div,
+        #storiesGrid > div,
+        .stories-grid > div,
+        .virtual-render-contain {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 400px;
         }
         
         .dark .card-tilt, 
@@ -458,7 +486,7 @@
         .dark .control-room-card:hover,
         .dark .grid > .rounded-3xl:hover,
         .dark .grid > div[class*="rounded-3xl"]:hover {
-            transform: translateY(-3px);
+            transform: translate3d(0, -3px, 0);
             border-color: rgba(0, 242, 254, 0.35);
             box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 242, 254, 0.14), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
         }
@@ -467,6 +495,8 @@
         .btn-sweep {
             position: relative;
             overflow: hidden;
+            transform: translate3d(0, 0, 0);
+            will-change: transform;
         }
         .btn-sweep::after {
             content: '';
@@ -484,12 +514,15 @@
             transition: left 0.75s ease-in-out;
         }
 
-        /* ══════════════════ EXACT STAGGERED SCROLL-TRIGGERED REVEAL SYSTEM ══════════════════ */
+        /* ══════════════════ EXACT STAGGERED SCROLL-TRIGGERED REVEAL SYSTEM (GPU COMPOSITED) ══════════════════ */
         .reveal-element,
         .reveal-on-scroll,
         [data-reveal] {
             opacity: 0;
-            transform: translateY(40px) scale(0.96);
+            transform: translate3d(0, 40px, 0) scale3d(0.96, 0.96, 1);
+            -webkit-transform: translate3d(0, 40px, 0) scale3d(0.96, 0.96, 1);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
@@ -497,33 +530,34 @@
         .reveal-element.reveal-fade,
         .reveal-on-scroll.reveal-fade,
         [data-reveal="fade"] {
-            transform: scale(0.98);
+            transform: translate3d(0, 0, 0) scale3d(0.98, 0.98, 1);
         }
 
         .reveal-element.reveal-left,
         .reveal-on-scroll.reveal-left,
         [data-reveal="left"] {
-            transform: translateX(-40px) scale(0.96);
+            transform: translate3d(-40px, 0, 0) scale3d(0.96, 0.96, 1);
         }
 
         .reveal-element.reveal-right,
         .reveal-on-scroll.reveal-right,
         [data-reveal="right"] {
-            transform: translateX(40px) scale(0.96);
+            transform: translate3d(40px, 0, 0) scale3d(0.96, 0.96, 1);
         }
 
         .reveal-element.reveal-scale,
         .reveal-on-scroll.reveal-scale,
         [data-reveal="scale"] {
-            transform: scale(0.92);
+            transform: translate3d(0, 0, 0) scale3d(0.92, 0.92, 1);
         }
 
-        /* Revealed State (locks in place, does not reverse on scroll up) */
+        /* Revealed State (locks in place, strictly composited) */
         .reveal-element.revealed,
         .reveal-on-scroll.revealed,
         [data-reveal].revealed {
             opacity: 1 !important;
-            transform: translateY(0px) translateX(0px) scale(1) !important;
+            transform: translate3d(0, 0, 0) scale3d(1, 1, 1) !important;
+            -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) !important;
         }
 
         /* Precise Stagger Delays (50ms - 100ms sequential intervals) */
@@ -1382,7 +1416,7 @@
             });
         }
 
-        // ══════════════════ 3. NEXORA-STYLE GSAP SCROLLTRIGGER ANIMATION ENGINE ══════════════════
+        // ══════════════════ 3. 90FPS GSAP SCROLLTRIGGER HARDWARE ACCELERATION ENGINE ══════════════════
         (function initGsapScrollEngine() {
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             
@@ -1401,9 +1435,12 @@
                 const hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
 
                 if (hasGsap) {
+                    // Global GPU Hardware Offloading (force3D: true on all tweens)
+                    gsap.config({ force3D: true, nullTargetWarn: false });
+                    gsap.defaults({ force3D: true, ease: 'power3.out' });
                     gsap.registerPlugin(ScrollTrigger);
 
-                    // A. Reveal Major Sections & Hero Wrappers
+                    // A. Reveal Major Sections & Hero Wrappers (Composited Transform & Opacity Only)
                     const sections = document.querySelectorAll('main > section, main > div > section, .reveal-element, .reveal-on-scroll, [data-reveal]');
                     sections.forEach((section) => {
                         if (section.dataset.gsapActive) return;
@@ -1414,16 +1451,17 @@
 
                         if (isAboveFold) {
                             gsap.fromTo(section, 
-                                { opacity: 0, y: 35, scale: 0.96 },
-                                { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: 'power3.out', overwrite: 'auto' }
+                                { opacity: 0, y: 35, scale: 0.96, force3D: true },
+                                { opacity: 1, y: 0, scale: 1, force3D: true, duration: 0.85, ease: 'power3.out', overwrite: 'auto' }
                             );
                         } else {
                             gsap.fromTo(section,
-                                { opacity: 0, y: 40, scale: 0.95 },
+                                { opacity: 0, y: 40, scale: 0.95, force3D: true },
                                 {
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
+                                    force3D: true,
                                     duration: 0.9,
                                     ease: 'power3.out',
                                     scrollTrigger: {
@@ -1438,7 +1476,7 @@
                     });
 
                     // B. Strict Sequential Staggered 1-by-1 Cascades for All Card Grids (0.1s Interval)
-                    const grids = document.querySelectorAll('.grid, [data-stagger-grid], #careerCardsContainer');
+                    const grids = document.querySelectorAll('.grid, [data-stagger-grid], #careerCardsContainer, #multimediaGrid, #resourcesGrid, #storiesGrid');
                     grids.forEach((grid) => {
                         if (grid.dataset.gsapGridActive) return;
                         grid.dataset.gsapGridActive = 'true';
@@ -1454,11 +1492,12 @@
 
                         if (isAboveFold) {
                             gsap.fromTo(cards,
-                                { opacity: 0, y: 35, scale: 0.96 },
+                                { opacity: 0, y: 35, scale: 0.96, force3D: true },
                                 {
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
+                                    force3D: true,
                                     duration: 0.8,
                                     stagger: 0.1, // Strict 0.1s (100ms) sequential delay: Card 1 -> Card 2 -> Card 3
                                     ease: 'power3.out',
@@ -1467,11 +1506,12 @@
                             );
                         } else {
                             gsap.fromTo(cards,
-                                { opacity: 0, y: 40, scale: 0.96 },
+                                { opacity: 0, y: 40, scale: 0.96, force3D: true },
                                 {
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
+                                    force3D: true,
                                     duration: 0.85,
                                     stagger: 0.1, // Strict 0.1s (100ms) sequential delay: Card 1 -> Card 2 -> Card 3
                                     ease: 'power3.out',
@@ -1497,16 +1537,17 @@
 
                         if (isAboveFold) {
                             gsap.fromTo(widget,
-                                { opacity: 0, y: 35, scale: 0.96 },
-                                { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: 'power3.out', overwrite: 'auto' }
+                                { opacity: 0, y: 35, scale: 0.96, force3D: true },
+                                { opacity: 1, y: 0, scale: 1, force3D: true, duration: 0.85, ease: 'power3.out', overwrite: 'auto' }
                             );
                         } else {
                             gsap.fromTo(widget,
-                                { opacity: 0, y: 40, scale: 0.95 },
+                                { opacity: 0, y: 40, scale: 0.95, force3D: true },
                                 {
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
+                                    force3D: true,
                                     duration: 0.9,
                                     ease: 'power3.out',
                                     scrollTrigger: {
@@ -1538,7 +1579,7 @@
                     }, observerOptions);
 
                     // Grid Sequential Stagger Fallback (100ms per card)
-                    document.querySelectorAll('.grid, [data-stagger-grid], #careerCardsContainer').forEach(grid => {
+                    document.querySelectorAll('.grid, [data-stagger-grid], #careerCardsContainer, #multimediaGrid, #resourcesGrid, #storiesGrid').forEach(grid => {
                         const cards = Array.from(grid.children).filter(c => !c.classList.contains('hidden') && c.tagName !== 'TEMPLATE');
                         if (cards.length > 0) {
                             cards.forEach((card, index) => {
@@ -1595,10 +1636,13 @@
             window.addEventListener('load', setupScrollTriggerAnimations);
         })();
 
-        // 4. Universal 3D Tilt & Mouse-Tracking Light Reflection Engine Across All Cards
+        // ══════════════════ 4. 90FPS SMART 3D TILT & MOUSE-TRACKING ENGINE (rAF THROTTLED & TOUCH DISABLED) ══════════════════
         (function initUniversalTiltEngine() {
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (prefersReducedMotion || !window.matchMedia('(pointer: fine)').matches) return;
+            const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+            
+            // Instantly disable 3D tilt calculations on touch/mobile devices to free CPU and memory on budget phones
+            if (prefersReducedMotion || isTouchDevice) return;
 
             function setupCardTilt() {
                 const cardSelectors = [
@@ -1622,7 +1666,9 @@
                     card.dataset.tiltInitialized = 'true';
 
                     card.style.transformStyle = 'preserve-3d';
-                    card.style.transition = 'transform 0.18s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease, border-color 0.25s ease';
+                    card.style.backfaceVisibility = 'hidden';
+                    card.style.willChange = 'transform';
+                    card.style.transition = 'transform 0.16s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease, border-color 0.25s ease';
 
                     // Inject glare reflection overlay if not already present
                     if (!card.querySelector('.tilt-glare-overlay')) {
@@ -1632,29 +1678,44 @@
                     }
 
                     let rafId = null;
+                    let targetX = 0;
+                    let targetY = 0;
+                    let centerX = 0;
+                    let centerY = 0;
+                    let isTicking = false;
+
+                    card.addEventListener('mouseenter', () => {
+                        const rect = card.getBoundingClientRect();
+                        centerX = rect.width / 2;
+                        centerY = rect.height / 2;
+                    }, { passive: true });
 
                     card.addEventListener('mousemove', (e) => {
                         const rect = card.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        const centerX = rect.width / 2;
-                        const centerY = rect.height / 2;
+                        targetX = e.clientX - rect.left;
+                        targetY = e.clientY - rect.top;
+                        centerX = rect.width / 2;
+                        centerY = rect.height / 2;
 
-                        card.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
-                        card.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
+                        if (!isTicking) {
+                            isTicking = true;
+                            rafId = requestAnimationFrame(() => {
+                                card.style.setProperty('--mouse-x', `${targetX.toFixed(1)}px`);
+                                card.style.setProperty('--mouse-y', `${targetY.toFixed(1)}px`);
 
-                        if (rafId) cancelAnimationFrame(rafId);
-                        rafId = requestAnimationFrame(() => {
-                            const rotateX = ((y - centerY) / centerY) * -5.5;
-                            const rotateY = ((x - centerX) / centerX) * 6.5;
-                            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-3px) scale3d(1.01, 1.01, 1.01)`;
-                        });
-                    });
+                                const rotateX = ((targetY - centerY) / centerY) * -5.5;
+                                const rotateY = ((targetX - centerX) / centerX) * 6.5;
+                                card.style.transform = `perspective(1000px) translate3d(0, -3px, 0) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.01, 1.01, 1.01)`;
+                                isTicking = false;
+                            });
+                        }
+                    }, { passive: true });
 
                     card.addEventListener('mouseleave', () => {
                         if (rafId) cancelAnimationFrame(rafId);
-                        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)';
-                    });
+                        isTicking = false;
+                        card.style.transform = 'perspective(1000px) translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    }, { passive: true });
                 });
             }
 
