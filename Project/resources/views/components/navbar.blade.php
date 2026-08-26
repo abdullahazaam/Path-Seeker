@@ -1,10 +1,10 @@
 <!-- ══════════════════ FLOATING GLASS PILL NAVBAR COMPONENT ══════════════════ -->
 <header x-data="{ mobileMenuOpen: false }" class="fixed top-3 sm:top-5 left-1/2 -translate-x-1/2 w-[96%] max-w-[85rem] z-50">
-    <nav class="max-w-[85rem] mx-auto py-2.5 sm:py-3.5 px-3 sm:px-5 lg:px-7 bg-white/40 dark:bg-slate-950/85 backdrop-blur-2xl border border-slate-200/60 dark:border-white/10 rounded-full flex items-center justify-between gap-2 sm:gap-3 lg:gap-4 shadow-lg dark:shadow-2xl relative transition-all duration-300">
+    <nav class="max-w-[85rem] mx-auto py-2.5 sm:py-3.5 px-3 sm:px-5 lg:px-7 bg-white/80 dark:bg-slate-950/85 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 rounded-full flex items-center justify-between gap-2 sm:gap-3 lg:gap-4 shadow-lg dark:shadow-2xl relative transition-all duration-300">
         
         <!-- Ambient Internal Glows -->
-        <div class="absolute -top-12 -left-12 w-36 h-36 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-2xl pointer-events-none"></div>
-        <div class="absolute -bottom-12 -right-12 w-36 h-36 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-2xl pointer-events-none"></div>
+        <div class="absolute -top-12 -left-12 w-36 h-36 rounded-full bg-purple-500/5 dark:bg-purple-500/15 blur-2xl pointer-events-none"></div>
+        <div class="absolute -bottom-12 -right-12 w-36 h-36 rounded-full bg-indigo-500/5 dark:bg-indigo-500/15 blur-2xl pointer-events-none"></div>
 
         <!-- Logo & Brand Emblem -->
         <a href="{{ route('home') }}" class="flex items-center gap-2 group shrink-0 flex-shrink-0 relative z-10">
@@ -21,14 +21,14 @@
         </a>
 
         <!-- Desktop Pill Nav Links with Responsive Breakpoints -->
-        <div class="hidden lg:flex items-center gap-0.5 xl:gap-1 px-2.5 xl:px-3.5 py-1 xl:py-1.5 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-full border border-slate-200 dark:border-white/10 shrink-0 flex-shrink-0 relative z-10 shadow-sm">
-            <a href="{{ route('home') }}" class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all {{ request()->routeIs('home') ? 'text-indigo-600 dark:text-indigo-300 font-bold bg-indigo-500/15 border border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
+        <div class="hidden lg:flex items-center gap-0.5 xl:gap-1 px-2.5 xl:px-3.5 py-1 xl:py-1.5 bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl rounded-full border border-slate-200/80 dark:border-white/10 shrink-0 flex-shrink-0 relative z-10 shadow-sm">
+            <a href="{{ route('home') }}" class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all {{ request()->routeIs('home') ? 'text-purple-600 dark:text-indigo-300 font-bold bg-purple-500/10 dark:bg-indigo-500/15 border border-purple-500/20 dark:border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
                 <span>Home</span>
             </a>
-            <a href="{{ route('careers.index') }}" class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all {{ request()->routeIs('careers.*') ? 'text-indigo-600 dark:text-indigo-300 font-bold bg-indigo-500/15 border border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
+            <a href="{{ route('careers.index') }}" class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all {{ request()->routeIs('careers.*') ? 'text-purple-600 dark:text-indigo-300 font-bold bg-purple-500/10 dark:bg-indigo-500/15 border border-purple-500/20 dark:border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
                 <span>Career Bank</span>
             </a>
-            <a href="{{ route('quiz.index') }}" class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all {{ request()->routeIs('quiz.*') ? 'text-indigo-600 dark:text-indigo-300 font-bold bg-indigo-500/15 border border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
+            <a href="{{ route('quiz.index') }}" class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all {{ request()->routeIs('quiz.*') ? 'text-purple-600 dark:text-indigo-300 font-bold bg-purple-500/10 dark:bg-indigo-500/15 border border-purple-500/20 dark:border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
                 <span>Interest Quiz</span>
             </a>
 
@@ -36,7 +36,7 @@
             <div x-data="{ exploreOpen: false }" @click.outside="exploreOpen = false" class="relative">
                 <button type="button"
                         @click="exploreOpen = !exploreOpen"
-                        class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer focus:outline-none {{ request()->routeIs('multimedia.*', 'resources.*', 'stories.*') ? 'text-indigo-600 dark:text-indigo-300 font-bold bg-indigo-500/15 border border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
+                        class="relative px-2.5 xl:px-3.5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer focus:outline-none {{ request()->routeIs('multimedia.*', 'resources.*', 'stories.*') ? 'text-purple-600 dark:text-indigo-300 font-bold bg-purple-500/10 dark:bg-indigo-500/15 border border-purple-500/20 dark:border-indigo-500/30 shadow-sm' : 'text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-white hover:bg-white/80 dark:hover:bg-slate-800/80' }}">
                     <span>Explore</span>
                     <i :class="exploreOpen ? 'rotate-180 text-purple-600 dark:text-purple-400' : 'text-slate-400 dark:text-slate-500'" class="fa-solid fa-chevron-down text-[9px] transition-transform duration-200"></i>
                 </button>
@@ -55,7 +55,7 @@
                     <!-- Multimedia Hub -->
                     <a href="{{ route('multimedia.index') }}"
                        @click="exploreOpen = false"
-                       class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-colors {{ request()->routeIs('multimedia.*') ? 'bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-300' : 'text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-slate-50 dark:hover:bg-white/[0.03]' }}">
+                       class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-colors {{ request()->routeIs('multimedia.*') ? 'bg-[#F5F6FA] dark:bg-purple-950/30 text-purple-600 dark:text-purple-300' : 'text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-[#F5F6FA] dark:hover:bg-white/[0.03]' }}">
                         <div class="w-8 h-8 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xs shrink-0">
                             <i class="fa-solid fa-photo-film"></i>
                         </div>
@@ -68,7 +68,7 @@
                     <!-- Resource Library -->
                     <a href="{{ route('resources.index') }}"
                        @click="exploreOpen = false"
-                       class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-colors {{ request()->routeIs('resources.*') ? 'bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-300' : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-slate-50 dark:hover:bg-white/[0.03]' }}">
+                       class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-colors {{ request()->routeIs('resources.*') ? 'bg-[#F5F6FA] dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-300' : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-[#F5F6FA] dark:hover:bg-white/[0.03]' }}">
                         <div class="w-8 h-8 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs shrink-0">
                             <i class="fa-solid fa-folder-open"></i>
                         </div>
@@ -81,7 +81,7 @@
                     <!-- Success Stories -->
                     <a href="{{ route('stories.index') }}"
                        @click="exploreOpen = false"
-                       class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-colors {{ request()->routeIs('stories.*') ? 'bg-pink-50 dark:bg-pink-950/30 text-pink-600 dark:text-pink-300' : 'text-slate-700 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-300 hover:bg-slate-50 dark:hover:bg-white/[0.03]' }}">
+                       class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-colors {{ request()->routeIs('stories.*') ? 'bg-[#F5F6FA] dark:bg-pink-950/30 text-pink-600 dark:text-pink-300' : 'text-slate-700 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-300 hover:bg-[#F5F6FA] dark:hover:bg-white/[0.03]' }}">
                         <div class="w-8 h-8 rounded-xl bg-pink-500/10 dark:bg-pink-500/20 text-pink-600 dark:text-pink-400 flex items-center justify-center text-xs shrink-0">
                             <i class="fa-solid fa-quote-left"></i>
                         </div>
@@ -237,7 +237,7 @@
                             </template>
 
                             <template x-for="item in notifications" :key="item.id">
-                                <div class="p-3.5 hover:bg-slate-50 dark:hover:bg-white/[0.03] transition-colors flex items-start gap-3 relative" :class="{'bg-purple-50/50 dark:bg-purple-950/20': !item.read}">
+                                <div class="p-3.5 hover:bg-[#F5F6FA] dark:hover:bg-white/[0.03] transition-colors flex items-start gap-3 relative" :class="{'bg-[#F5F6FA] dark:bg-purple-950/20': !item.read}">
                                     <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-500/20 to-indigo-500/20 border border-purple-500/30 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xs shrink-0 mt-0.5">
                                         <i :class="item.icon || 'fa-solid fa-bell'"></i>
                                     </div>
@@ -299,7 +299,7 @@
                          class="absolute right-0 mt-3 w-64 rounded-3xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden z-50 p-2 space-y-1">
                         
                         <!-- User Card Header -->
-                        <div class="px-3.5 py-3 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 space-y-1 mb-1">
+                        <div class="px-3.5 py-3 rounded-2xl bg-[#F5F6FA] dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 space-y-1 mb-1">
                             <p class="text-xs font-black text-slate-900 dark:text-white truncate font-display">{{ Auth::user()->name }}</p>
                             <div class="flex items-center gap-1.5 pt-0.5">
                                 <span class="inline-block text-[9px] font-black uppercase px-2 py-0.5 {{ $isAdmin ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/25' : 'bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/25' }} rounded-full font-mono">
@@ -312,7 +312,7 @@
                         <!-- Edit Profile / Settings -->
                         <a href="{{ route('profile.edit') }}"
                            @click="profileOpen = false"
-                           class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/30 transition-colors">
+                           class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-300 hover:bg-[#F5F6FA] dark:hover:bg-cyan-950/30 transition-colors">
                             <div class="w-7 h-7 rounded-xl bg-cyan-500/10 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-xs">
                                 <i class="fa-solid fa-user-gear"></i>
                             </div>
@@ -324,7 +324,7 @@
                         <!-- Dashboard / Passport -->
                         <a href="{{ route('dashboard') }}"
                            @click="profileOpen = false"
-                           class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/30 transition-colors">
+                           class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-300 hover:bg-[#F5F6FA] dark:hover:bg-cyan-950/30 transition-colors">
                             <div class="w-7 h-7 rounded-xl bg-sky-500/10 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center text-xs">
                                 <i class="fa-solid {{ $isAdmin ? 'fa-screwdriver-wrench' : 'fa-gauge-high' }}"></i>
                             </div>

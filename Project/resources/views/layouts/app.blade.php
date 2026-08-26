@@ -169,19 +169,20 @@
 
         /* ══════════════════ CENTRALIZED 2026 DESIGN TOKENS ══════════════════ */
         :root {
-            --color-primary: #7c3aed;
-            --color-primary-hover: #6d28d9;
-            --color-primary-light: rgba(124, 58, 237, 0.08);
-            --color-secondary: #0ea5e9;
-            --color-secondary-hover: #0284c7;
-            --color-bg: #f8fafc;
-            --color-surface: rgba(255, 255, 255, 0.95);
-            --color-surface-hover: rgba(241, 245, 249, 0.95);
-            --color-text: #0f172a;
-            --color-text-muted: #475569;
-            --color-text-dim: #64748b;
-            --color-border: rgba(226, 232, 240, 0.90);
-            --color-border-hover: rgba(124, 58, 237, 0.30);
+            --color-primary: #7657FF;
+            --color-primary-hover: #6544ea;
+            --color-primary-light: rgba(118, 87, 255, 0.08);
+            --color-secondary: #12CFF3;
+            --color-secondary-hover: #00b4d8;
+            --color-bg: #F8F9FC;
+            --color-surface: #FFFFFF;
+            --color-surface-secondary: #F5F6FA;
+            --color-surface-hover: #F0F2F8;
+            --color-text: #111827;
+            --color-text-muted: #667085;
+            --color-text-dim: #98A2B3;
+            --color-border: rgba(15, 23, 42, 0.07);
+            --color-border-hover: rgba(118, 87, 255, 0.30);
             --color-success: #10b981;
             --color-warning: #f59e0b;
             --color-danger: #ef4444;
@@ -190,8 +191,8 @@
             --radius-lg: 16px;
             --radius-xl: 24px;
             --radius-full: 9999px;
-            --shadow-glass: 0 8px 24px rgba(0, 0, 0, 0.04);
-            --shadow-neon-primary: 0 4px 20px rgba(124, 58, 237, 0.20);
+            --shadow-glass: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+            --shadow-neon-primary: 0 4px 20px rgba(118, 87, 255, 0.20);
         }
 
         .dark, html.dark {
@@ -225,9 +226,9 @@
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
         html:not(.dark) .app-card {
-            background: #ffffff;
-            border: 1px solid rgba(226, 232, 240, 0.95);
-            box-shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.05);
+            background: #FFFFFF;
+            border: 1px solid rgba(15, 23, 42, 0.07);
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
         }
         .app-card:hover, .career-card:hover {
             transform: translateY(-2px);
@@ -236,8 +237,8 @@
         }
         html:not(.dark) .app-card:hover, html:not(.dark) .career-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.08);
-            border-color: rgba(99, 102, 241, 0.35);
+            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+            border-color: rgba(118, 87, 255, 0.25);
         }
 
         /* Standardized Buttons */
@@ -278,9 +279,10 @@
             transition: all 0.25s ease;
         }
         html:not(.dark) .btn-secondary {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(226, 232, 240, 0.9);
-            color: #0f172a;
+            background: #FFFFFF;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            color: #111827;
+            box-shadow: 0 2px 8px -1px rgba(15, 23, 42, 0.04);
         }
         .btn-secondary:hover {
             border-color: rgba(0, 242, 254, 0.40);
@@ -288,8 +290,8 @@
             transform: translateY(-1px);
         }
         html:not(.dark) .btn-secondary:hover {
-            border-color: rgba(2, 132, 199, 0.5);
-            color: #0284c7;
+            border-color: rgba(118, 87, 255, 0.4);
+            color: #7657FF;
         }
 
         .btn-outline {
@@ -311,6 +313,14 @@
             border-color: rgba(0, 242, 254, 0.60);
             transform: translateY(-1px);
         }
+        html:not(.dark) .btn-outline {
+            border-color: rgba(118, 87, 255, 0.35);
+            color: #7657FF;
+        }
+        html:not(.dark) .btn-outline:hover {
+            background: rgba(118, 87, 255, 0.08);
+            border-color: #7657FF;
+        }
 
         .btn-danger {
             display: inline-flex;
@@ -331,7 +341,7 @@
             box-shadow: 0 6px 20px rgba(225, 29, 72, 0.35);
         }
 
-        /* 2026 Premium Signature Glassmorphic Container & Card Architecture (Reserved for Hero & Primary Stage) */
+        /* 2026 Premium Signature Glassmorphic Container & Card Architecture */
         .glass-panel, .signature-container {
             background: rgba(15, 23, 42, 0.65);
             backdrop-filter: blur(20px);
@@ -341,11 +351,11 @@
             position: relative;
         }
         html:not(.dark) .glass-panel, html:not(.dark) .signature-container {
-            background: rgba(255, 255, 255, 0.94);
+            background: #FFFFFF;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(226, 232, 240, 0.90);
-            box-shadow: 0 16px 35px -10px rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(15, 23, 42, 0.07);
+            box-shadow: 0 16px 35px -10px rgba(15, 23, 42, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
             position: relative;
         }
         .signature-card {
@@ -354,8 +364,9 @@
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
         html:not(.dark) .signature-card {
-            background: #ffffff;
-            border: 1px solid rgba(226, 232, 240, 0.90);
+            background: #FFFFFF;
+            border: 1px solid rgba(15, 23, 42, 0.07);
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .signature-card:hover {
@@ -373,9 +384,9 @@
             box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
         }
         html:not(.dark) .glass-pill-nav {
-            background: rgba(255, 255, 255, 0.94);
-            border: 1px solid rgba(226, 232, 240, 0.95);
-            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 12px 30px -8px rgba(15, 23, 42, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 1);
         }
 
         /* Gradient Text Hooks - Signature Electric Cyan / Sky / Indigo */
@@ -392,13 +403,13 @@
             background-clip: text;
         }
         html:not(.dark) .grad-text {
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #4338ca 100%);
+            background: linear-gradient(135deg, #7657FF 0%, #12CFF3 60%, #3b82f6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         html:not(.dark) .grad-text-cyan {
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #4338ca 100%);
+            background: linear-gradient(135deg, #12CFF3 0%, #7657FF 60%, #3b82f6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -450,12 +461,6 @@
             transform: translateY(-3px);
             border-color: rgba(0, 242, 254, 0.35);
             box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 242, 254, 0.14), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
-        }
-
-        html:not(.dark) .card-tilt:hover, html:not(.dark) .card-tilt-3d:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.06);
-            border-color: rgba(99, 102, 241, 0.30);
         }
 
         /* Glowing Sweep Button Effect */
@@ -566,47 +571,24 @@
             opacity: 1;
         }
 
-        /* Inputs */
-        .app-input {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.10);
-            color: #f1f5f9;
-            transition: all 0.25s;
-        }
-        .app-input:focus {
-            outline: none;
-            border-color: rgba(168, 85, 247, 0.5);
-            background: rgba(255, 255, 255, 0.06);
-            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
-        }
-        html:not(.dark) .app-input {
-            background: rgba(255, 255, 255, 0.95);
-            border-color: #cbd5e1;
-            color: #0f172a;
-        }
-        html:not(.dark) .app-input:focus {
-            border-color: #6366f1;
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
-        }
-        select.app-input option {
-            background: #050507;
-            color: #f1f5f9;
-        }
-        html:not(.dark) select.app-input option {
-            background: #ffffff;
-            color: #0f172a;
-        }
-
         /* Category Accent Badges & Borders */
-        .badge-software { border-color: rgba(168, 85, 247, 0.25); color: #c084fc; background: rgba(168, 85, 247, 0.08); }
-        .badge-cloud { border-color: rgba(56, 189, 248, 0.25); color: #38bdf8; background: rgba(56, 189, 248, 0.08); }
-        .badge-ai { border-color: rgba(244, 114, 182, 0.25); color: #f472b6; background: rgba(244, 114, 182, 0.08); }
-        .badge-cyber { border-color: rgba(52, 211, 153, 0.25); color: #34d399; background: rgba(52, 211, 153, 0.08); }
-        .badge-mobile { border-color: rgba(96, 165, 250, 0.25); color: #60a5fa; background: rgba(96, 165, 250, 0.08); }
-        .badge-design { border-color: rgba(192, 132, 252, 0.25); color: #e879f9; background: rgba(232, 121, 249, 0.08); }
-        .badge-game { border-color: rgba(251, 191, 36, 0.25); color: #fbbf24; background: rgba(251, 191, 36, 0.08); }
-        .badge-blockchain { border-color: rgba(45, 212, 191, 0.25); color: #2dd4bf; background: rgba(45, 212, 191, 0.08); }
+        .badge-software { border-color: rgba(118, 87, 255, 0.25); color: #7657FF; background: rgba(118, 87, 255, 0.08); }
+        .badge-cloud { border-color: rgba(18, 207, 243, 0.25); color: #0284c7; background: rgba(18, 207, 243, 0.08); }
+        .badge-ai { border-color: rgba(118, 87, 255, 0.25); color: #7657FF; background: rgba(118, 87, 255, 0.08); }
+        .badge-cyber { border-color: rgba(52, 211, 153, 0.25); color: #059669; background: rgba(52, 211, 153, 0.08); }
+        .badge-mobile { border-color: rgba(96, 165, 250, 0.25); color: #2563eb; background: rgba(96, 165, 250, 0.08); }
+        .badge-design { border-color: rgba(192, 132, 252, 0.25); color: #7657FF; background: rgba(118, 87, 255, 0.08); }
+        .badge-game { border-color: rgba(251, 191, 36, 0.25); color: #d97706; background: rgba(251, 191, 36, 0.08); }
+        .badge-blockchain { border-color: rgba(45, 212, 191, 0.25); color: #0d9488; background: rgba(45, 212, 191, 0.08); }
+
+        .dark .badge-software { border-color: rgba(168, 85, 247, 0.25); color: #c084fc; background: rgba(168, 85, 247, 0.08); }
+        .dark .badge-cloud { border-color: rgba(56, 189, 248, 0.25); color: #38bdf8; background: rgba(56, 189, 248, 0.08); }
+        .dark .badge-ai { border-color: rgba(0, 242, 254, 0.25); color: #00f2fe; background: rgba(0, 242, 254, 0.08); }
+        .dark .badge-cyber { border-color: rgba(52, 211, 153, 0.25); color: #34d399; background: rgba(52, 211, 153, 0.08); }
+        .dark .badge-mobile { border-color: rgba(96, 165, 250, 0.25); color: #60a5fa; background: rgba(96, 165, 250, 0.08); }
+        .dark .badge-design { border-color: rgba(192, 132, 252, 0.25); color: #e879f9; background: rgba(232, 121, 249, 0.08); }
+        .dark .badge-game { border-color: rgba(251, 191, 36, 0.25); color: #fbbf24; background: rgba(251, 191, 36, 0.08); }
+        .dark .badge-blockchain { border-color: rgba(45, 212, 191, 0.25); color: #2dd4bf; background: rgba(45, 212, 191, 0.08); }
 
         /* Custom Interactive Cursor (Desktop Only) */
         @media (hover: hover) and (pointer: fine) {
@@ -618,12 +600,16 @@
                 width: 18px;
                 height: 18px;
                 border-radius: 50%;
-                background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(236, 72, 153, 0.10) 70%, transparent 100%);
-                border: 1px solid rgba(255, 255, 255, 0.2);
+                background: radial-gradient(circle, rgba(118, 87, 255, 0.35) 0%, rgba(18, 207, 243, 0.10) 70%, transparent 100%);
+                border: 1px solid rgba(15, 23, 42, 0.15);
                 transform: translate(-50%, -50%);
                 transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
                 z-index: 99999;
                 opacity: 0;
+            }
+            .dark #customCursor {
+                background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(0, 242, 254, 0.10) 70%, transparent 100%);
+                border: 1px solid rgba(255, 255, 255, 0.2);
             }
             #customCursor.active {
                 opacity: 1;
@@ -631,8 +617,12 @@
             #customCursor.hovered {
                 width: 38px;
                 height: 38px;
-                background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(56, 189, 248, 0.10) 80%, transparent 100%);
-                border-color: rgba(168, 85, 247, 0.4);
+                background: radial-gradient(circle, rgba(118, 87, 255, 0.20) 0%, rgba(18, 207, 243, 0.10) 80%, transparent 100%);
+                border-color: rgba(118, 87, 255, 0.4);
+            }
+            .dark #customCursor.hovered {
+                background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(0, 242, 254, 0.10) 80%, transparent 100%);
+                border-color: rgba(0, 242, 254, 0.4);
             }
         }
 
@@ -654,44 +644,168 @@
             }
         }
 
-        /* Strict Light Mode Text Rules */
-        html:not(.dark) .text-slate-400 { color: #475569 !important; }
-        html:not(.dark) .text-slate-300 { color: #334155 !important; }
-        html:not(.dark) .text-slate-500 { color: #475569 !important; }
-        html:not(.dark) .text-slate-600 { color: #334155 !important; }
-        html:not(.dark) .text-white { color: #0f172a; }
+        /* ══════════════════ SOFT FUTURISTIC LIGHT MODE HIERARCHY ══════════════════ */
+        html:not(.dark) {
+            background-color: #F8F9FC;
+            color: #111827;
+        }
 
+        /* Base Body & Container Foundations */
+        html:not(.dark) body {
+            background-color: #F8F9FC !important;
+            color: #111827 !important;
+        }
+
+        /* Main Elevated Cards (Pure White #FFFFFF with Crisp Clean Boundaries) */
+        html:not(.dark) .card-tilt,
+        html:not(.dark) .card-tilt-3d,
+        html:not(.dark) .career-card,
+        html:not(.dark) [data-tilt],
+        html:not(.dark) .app-card,
+        html:not(.dark) .glass-panel,
+        html:not(.dark) .signature-card,
+        html:not(.dark) .signature-container,
+        html:not(.dark) .dashboard-widget,
+        html:not(.dark) .control-room-card,
+        html:not(.dark) .passport-card-3d,
+        html:not(.dark) .bg-white,
+        html:not(.dark) .bg-white\/90,
+        html:not(.dark) .bg-white\/95 {
+            background-color: #FFFFFF !important;
+            border-color: rgba(15, 23, 42, 0.07) !important;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+        }
+
+        /* Elevated Card Hover Elevation */
+        html:not(.dark) .card-tilt:hover,
+        html:not(.dark) .card-tilt-3d:hover,
+        html:not(.dark) .career-card:hover,
+        html:not(.dark) [data-tilt]:hover,
+        html:not(.dark) .app-card:hover,
+        html:not(.dark) .glass-panel:hover,
+        html:not(.dark) .signature-card:hover,
+        html:not(.dark) .dashboard-widget:hover,
+        html:not(.dark) .control-room-card:hover,
+        html:not(.dark) .grid > .rounded-3xl:hover,
+        html:not(.dark) .grid > div[class*="rounded-3xl"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+            border-color: rgba(118, 87, 255, 0.25) !important;
+        }
+
+        /* Inner Panels & Secondary Containers (Soft Gray-White #F5F6FA) */
+        html:not(.dark) .bg-slate-50,
+        html:not(.dark) .bg-slate-50\/50,
+        html:not(.dark) .bg-slate-50\/60,
+        html:not(.dark) .bg-slate-50\/80,
+        html:not(.dark) .bg-slate-100,
+        html:not(.dark) .bg-slate-100\/80,
+        html:not(.dark) .bg-slate-100\/90,
+        html:not(.dark) .inner-panel,
+        html:not(.dark) .secondary-container {
+            background-color: #F5F6FA !important;
+            border-color: rgba(15, 23, 42, 0.07) !important;
+        }
+
+        /* Clean Boundaries across All Dividers */
+        html:not(.dark) .border-slate-200,
+        html:not(.dark) .border-slate-200\/80,
+        html:not(.dark) .border-slate-200\/60,
+        html:not(.dark) .border-slate-300,
+        html:not(.dark) .divide-slate-100 > * + * {
+            border-color: rgba(15, 23, 42, 0.07) !important;
+        }
+
+        /* Strict Light Mode Text Hierarchy */
+        html:not(.dark) .text-slate-900,
+        html:not(.dark) .text-slate-800 {
+            color: #111827 !important;
+        }
+        html:not(.dark) .text-slate-700,
+        html:not(.dark) .text-slate-600 {
+            color: #374151 !important;
+        }
+        html:not(.dark) .text-slate-500,
+        html:not(.dark) .text-slate-400 {
+            color: #667085 !important;
+        }
+        html:not(.dark) .text-slate-300 {
+            color: #98A2B3 !important;
+        }
+        html:not(.dark) .text-white {
+            color: #111827;
+        }
+
+        /* Preserve Intentional White Text on Buttons, Modals & Footer */
         html:not(.dark) a.text-white,
         html:not(.dark) button.text-white,
         html:not(.dark) span.text-white,
         html:not(.dark) div.bg-gradient-to-tr .text-white,
         html:not(.dark) a.bg-gradient-to-r,
         html:not(.dark) button.bg-gradient-to-r,
+        html:not(.dark) .btn-primary,
+        html:not(.dark) .btn-danger,
+        html:not(.dark) .btn-sweep,
         html:not(.dark) .btn-white-text,
         html:not(.dark) .bg-[#050507] .text-white,
         html:not(.dark) .bg-slate-950 .text-white,
-        html:not(.dark) footer .text-white {
-            color: #ffffff !important;
+        html:not(.dark) footer .text-white,
+        html:not(.dark) .text-slate-950 {
+            color: inherit;
+        }
+        html:not(.dark) .btn-primary,
+        html:not(.dark) .btn-sweep,
+        html:not(.dark) .btn-primary *,
+        html:not(.dark) .btn-sweep * {
+            color: #040812 !important;
+        }
+        html:not(.dark) .btn-danger,
+        html:not(.dark) .btn-danger * {
+            color: #FFFFFF !important;
         }
         html:not(.dark) footer .text-slate-400 { color: #94a3b8 !important; }
         html:not(.dark) footer .text-slate-500 { color: #64748b !important; }
+
+        /* Light Mode Input Elements */
+        html:not(.dark) .app-input,
+        html:not(.dark) input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="submit"]):not([type="button"]),
+        html:not(.dark) select,
+        html:not(.dark) textarea {
+            background-color: #FFFFFF !important;
+            border-color: rgba(15, 23, 42, 0.12) !important;
+            color: #111827 !important;
+        }
+        html:not(.dark) input:focus,
+        html:not(.dark) select:focus,
+        html:not(.dark) textarea:focus {
+            border-color: #7657FF !important;
+            box-shadow: 0 0 0 3px rgba(118, 87, 255, 0.12) !important;
+        }
+        select.app-input option {
+            background: #050507;
+            color: #f1f5f9;
+        }
+        html:not(.dark) select.app-input option {
+            background: #ffffff;
+            color: #111827;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased transition-colors duration-500 relative overflow-x-hidden bg-slate-50 dark:bg-[#06080f]">
+<body class="min-h-screen flex flex-col antialiased transition-colors duration-500 relative overflow-x-hidden bg-[#F8F9FC] dark:bg-[#06080f] text-[#111827] dark:text-[#f8fafc]">
 
     <!-- ══════════════════ SAFE FULL-SCREEN ANIMATED AMBIENT BACKGROUND CONTAINER ══════════════════ -->
-    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-slate-50 dark:bg-[#06080f] transition-colors duration-500" aria-hidden="true">
-        <!-- Floating Aurora Orb 1 (Top-Left Indigo/Purple) -->
-        <div class="absolute -top-[15%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-indigo-500/20 via-purple-600/20 to-transparent dark:from-indigo-600/30 dark:via-purple-700/25 dark:to-transparent blur-[120px] sm:blur-[160px] animate-aurora-drift-1"></div>
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-[#F8F9FC] dark:bg-[#06080f] transition-colors duration-500" aria-hidden="true">
+        <!-- Floating Aurora Orb 1 (Top-Left Soft Purple/Cyan) -->
+        <div class="absolute -top-[15%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-[#7657FF]/[0.04] via-[#12CFF3]/[0.03] to-transparent dark:from-indigo-600/30 dark:via-purple-700/25 dark:to-transparent blur-[120px] sm:blur-[160px] animate-aurora-drift-1"></div>
         
-        <!-- Floating Aurora Orb 2 (Bottom-Right Pink/Rose) -->
-        <div class="absolute -bottom-[15%] -right-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-tl from-pink-500/20 via-purple-600/15 to-transparent dark:from-pink-600/25 dark:via-purple-700/15 dark:to-transparent blur-[120px] sm:blur-[160px] animate-aurora-drift-2"></div>
+        <!-- Floating Aurora Orb 2 (Bottom-Right Soft Cyan/Purple) -->
+        <div class="absolute -bottom-[15%] -right-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-tl from-[#12CFF3]/[0.04] via-[#7657FF]/[0.03] to-transparent dark:from-pink-600/25 dark:via-purple-700/15 dark:to-transparent blur-[120px] sm:blur-[160px] animate-aurora-drift-2"></div>
 
-        <!-- Floating Aurora Orb 3 (Center-Floating Cyan/Emerald Shimmer) -->
-        <div class="absolute top-[35%] left-[20%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-cyan-500/15 via-indigo-500/10 to-transparent dark:from-cyan-500/20 dark:via-indigo-500/15 dark:to-transparent blur-[130px] sm:blur-[170px] animate-aurora-drift-3"></div>
+        <!-- Floating Aurora Orb 3 (Center-Floating Atmospheric Shimmer) -->
+        <div class="absolute top-[35%] left-[20%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-[#7657FF]/[0.03] via-[#12CFF3]/[0.03] to-transparent dark:from-cyan-500/20 dark:via-indigo-500/15 dark:to-transparent blur-[130px] sm:blur-[170px] animate-aurora-drift-3"></div>
 
         <!-- Subtle Ambient Grid / Dot Texture -->
-        <div class="absolute inset-0 bg-[radial-gradient(#6366f1_1px,transparent_1px)] dark:bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.03] dark:opacity-[0.05]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#7657FF_1px,transparent_1px)] dark:bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.025] dark:opacity-[0.05]"></div>
     </div>
 
     <!-- ══════════════════ FLOATING GLASS PILL NAVBAR ══════════════════ -->
@@ -873,20 +987,20 @@
          onclick="handleCommandPaletteBackdrop(event)">
         
         <div id="commandPaletteCard"
-             class="relative w-full max-w-2xl rounded-3xl bg-[#090b16]/95 border border-purple-500/30 shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden scale-95 transition-transform duration-200">
+             class="relative w-full max-w-2xl rounded-3xl bg-white dark:bg-[#090b16]/95 border border-slate-200 dark:border-purple-500/30 shadow-2xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden scale-95 transition-transform duration-200">
             
             {{-- Top Accent Line --}}
             <div class="h-1 w-full bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600"></div>
 
             {{-- Search Bar Header --}}
-            <div class="p-4 sm:p-5 border-b border-white/[0.08] flex items-center gap-3.5 bg-white/[0.02]">
-                <i class="fa-solid fa-magnifying-glass text-purple-400 text-sm pl-2"></i>
+            <div class="p-4 sm:p-5 border-b border-slate-200/80 dark:border-white/[0.08] flex items-center gap-3.5 bg-slate-50/80 dark:bg-white/[0.02]">
+                <i class="fa-solid fa-magnifying-glass text-purple-600 dark:text-purple-400 text-sm pl-2"></i>
                 <input type="text"
                        id="cmdPaletteInput"
                        placeholder="Type a command or destination (e.g. Careers, Quiz, AI, Toolkits)..."
                        autocomplete="off"
-                       class="w-full bg-transparent text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none font-medium">
-                <kbd class="px-2 py-0.5 rounded-lg text-[10px] font-mono font-semibold bg-white/10 text-slate-400 border border-white/10 shrink-0">ESC</kbd>
+                       class="w-full bg-transparent text-sm sm:text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none font-medium">
+                <kbd class="px-2 py-0.5 rounded-lg text-[10px] font-mono font-semibold bg-slate-200/70 dark:bg-white/10 text-slate-600 dark:text-slate-400 border border-slate-300/60 dark:border-white/10 shrink-0">ESC</kbd>
             </div>
 
             {{-- Dynamic Filterable Command List --}}
@@ -894,161 +1008,163 @@
                 
                 {{-- Group: Navigation --}}
                 <div class="cmd-group space-y-1">
-                    <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500">Primary Navigation</div>
+                    <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 font-mono">Primary Navigation</div>
                     
-                    <a href="{{ route('home') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-purple-500/15 border border-transparent hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="home portal landing start">
+                    <a href="{{ route('home') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-[#F5F6FA] dark:hover:bg-purple-500/15 border border-transparent hover:border-purple-500/20 dark:hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="home portal landing start">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
+                            <div class="w-8 h-8 rounded-xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-house"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-purple-300">Home Portal</h4>
-                                <p class="text-[11px] text-slate-400">Main overview &amp; AI Career Match preview</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300">Home Portal</h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Main overview &amp; AI Career Match preview</p>
                             </div>
                         </div>
-                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
+                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
                     </a>
 
-                    <a href="{{ route('careers.index') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-purple-500/15 border border-transparent hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="careers career bank tracks explore jobs salary demand roadmap">
+                    <a href="{{ route('careers.index') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-[#F5F6FA] dark:hover:bg-purple-500/15 border border-transparent hover:border-purple-500/20 dark:hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="careers career bank tracks explore jobs salary demand roadmap">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
+                            <div class="w-8 h-8 rounded-xl bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-compass"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-purple-300">Career Bank</h4>
-                                <p class="text-[11px] text-slate-400">Explore 15+ tech tracks, comparison matrix &amp; roadmaps</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300">Career Bank</h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Explore 15+ tech tracks, comparison matrix &amp; roadmaps</p>
                             </div>
                         </div>
-                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
+                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
                     </a>
 
-                    <a href="{{ route('quiz.index') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-purple-500/15 border border-transparent hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="quiz interest assessment test match alignment">
+                    <a href="{{ route('quiz.index') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-[#F5F6FA] dark:hover:bg-purple-500/15 border border-transparent hover:border-purple-500/20 dark:hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="quiz interest assessment test match alignment">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-pink-500/15 text-pink-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
+                            <div class="w-8 h-8 rounded-xl bg-pink-500/15 text-pink-600 dark:text-pink-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-brain"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-purple-300">Career Interest Quiz</h4>
-                                <p class="text-[11px] text-slate-400">Discover your cognitive alignment &amp; top job matches</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300">Career Interest Quiz</h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Discover your cognitive alignment &amp; top job matches</p>
                             </div>
                         </div>
-                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
+                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
                     </a>
 
-                    <a href="{{ route('multimedia.index') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-purple-500/15 border border-transparent hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="multimedia videos video stream masterclass podcast learn">
+                    <a href="{{ route('multimedia.index') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-[#F5F6FA] dark:hover:bg-purple-500/15 border border-transparent hover:border-purple-500/20 dark:hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="multimedia videos video stream masterclass podcast learn">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
+                            <div class="w-8 h-8 rounded-xl bg-rose-500/15 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-play"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-purple-300">Multimedia Center</h4>
-                                <p class="text-[11px] text-slate-400">Stream 4K masterclasses &amp; technical walkthroughs</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300">Multimedia Center</h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Stream 4K masterclasses &amp; technical walkthroughs</p>
                             </div>
                         </div>
-                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
+                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
                     </a>
 
-                    <a href="{{ route('resources.index') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-purple-500/15 border border-transparent hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="resources toolkits blueprints download pdf cheat sheet templates">
+                    <a href="{{ route('resources.index') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-[#F5F6FA] dark:hover:bg-purple-500/15 border border-transparent hover:border-purple-500/20 dark:hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="resources toolkits blueprints download pdf cheat sheet templates">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-sky-500/15 text-sky-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
+                            <div class="w-8 h-8 rounded-xl bg-sky-500/15 text-sky-600 dark:text-sky-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-book-bookmark"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-purple-300">Resource Library</h4>
-                                <p class="text-[11px] text-slate-400">Download verified system design cheat sheets &amp; blueprints</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300">Resource Library</h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Download verified system design cheat sheets &amp; blueprints</p>
                             </div>
                         </div>
-                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
+                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
                     </a>
 
-                    <a href="{{ route('dashboard') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-purple-500/15 border border-transparent hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="dashboard passport readiness profile stats progress">
+                    <a href="{{ route('dashboard') }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-[#F5F6FA] dark:hover:bg-purple-500/15 border border-transparent hover:border-purple-500/20 dark:hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="dashboard passport readiness profile stats progress">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
+                            <div class="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xs shrink-0 group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-id-card"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-purple-300">Career Operating System</h4>
-                                <p class="text-[11px] text-slate-400">Personalized dashboard, Readiness Index &amp; saved tracks</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300">Career Operating System</h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Personalized dashboard, Readiness Index &amp; saved tracks</p>
                             </div>
                         </div>
-                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
+                        <i class="fa-solid fa-arrow-right text-[10px] text-slate-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-purple-300 group-hover:translate-x-1 transition-all"></i>
                     </a>
                 </div>
 
                 {{-- Group: Quick Actions --}}
-                <div class="cmd-group space-y-1 pt-2 border-t border-white/[0.05]">
-                    <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500">Quick Filters &amp; Actions</div>
+                <div class="cmd-group space-y-1 pt-2 border-t border-slate-200/80 dark:border-white/[0.05]">
+                    <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 font-mono">Quick Filters &amp; Actions</div>
 
-                    <a href="{{ route('careers.index', ['search' => 'Full-Stack']) }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-purple-500/15 border border-transparent hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="fullstack web developer laravel react vue backend frontend">
+                    <a href="{{ route('careers.index', ['search' => 'Full-Stack']) }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-[#F5F6FA] dark:hover:bg-purple-500/15 border border-transparent hover:border-purple-500/20 dark:hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="fullstack web developer laravel react vue backend frontend">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center text-xs shrink-0">
+                            <div class="w-8 h-8 rounded-xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs shrink-0">
                                 <i class="fa-solid fa-code"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-purple-300">Full-Stack Web Architect Roles</h4>
-                                <p class="text-[11px] text-slate-400">Filter software engineering careers</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300">Full-Stack Web Architect Roles</h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Filter software engineering careers</p>
                             </div>
                         </div>
-                        <span class="text-[10px] font-mono text-indigo-400">Filter</span>
+                        <span class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400">Filter</span>
                     </a>
 
-                    <a href="{{ route('careers.index', ['domain' => 'Cloud & Infrastructure']) }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-purple-500/15 border border-transparent hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="cloud devops aws gcp kubernetes terraform infrastructure">
+                    <a href="{{ route('careers.index', ['domain' => 'Cloud & Infrastructure']) }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-[#F5F6FA] dark:hover:bg-purple-500/15 border border-transparent hover:border-purple-500/20 dark:hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="cloud devops aws gcp kubernetes terraform infrastructure">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-sky-500/15 text-sky-400 flex items-center justify-center text-xs shrink-0">
+                            <div class="w-8 h-8 rounded-xl bg-sky-500/15 text-sky-600 dark:text-sky-400 flex items-center justify-center text-xs shrink-0">
                                 <i class="fa-solid fa-cloud"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-purple-300">Cloud &amp; DevOps Engineering</h4>
-                                <p class="text-[11px] text-slate-400">Filter cloud infrastructure pathways</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300">Cloud &amp; DevOps Engineering</h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Filter cloud infrastructure pathways</p>
                             </div>
                         </div>
-                        <span class="text-[10px] font-mono text-sky-400">Filter</span>
+                        <span class="text-[10px] font-mono text-sky-600 dark:text-sky-400">Filter</span>
                     </a>
 
-                    <a href="{{ route('careers.index', ['search' => 'AI']) }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-purple-500/15 border border-transparent hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="ai machine learning python pytorch data artificial intelligence">
+                    <a href="{{ route('careers.index', ['search' => 'AI']) }}" class="cmd-item flex items-center justify-between p-3 rounded-2xl hover:bg-[#F5F6FA] dark:hover:bg-purple-500/15 border border-transparent hover:border-purple-500/20 dark:hover:border-purple-500/30 transition-colors group cursor-pointer" data-keywords="ai machine learning python pytorch data artificial intelligence">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center text-xs shrink-0">
+                            <div class="w-8 h-8 rounded-xl bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xs shrink-0">
                                 <i class="fa-solid fa-microchip"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-purple-300">AI &amp; Machine Learning Engineering</h4>
-                                <p class="text-[11px] text-slate-400">Filter AI and data science pathways</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300">AI &amp; Machine Learning Engineering</h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Filter AI and data science pathways</p>
                             </div>
                         </div>
-                        <span class="text-[10px] font-mono text-purple-400">Filter</span>
+                        <span class="text-[10px] font-mono text-purple-600 dark:text-purple-400">Filter</span>
                     </a>
 
-                    <button type="button" onclick="toggleTheme(); closeCommandPalette();" class="cmd-item w-full flex items-center justify-between p-3 rounded-2xl hover:bg-purple-500/15 border border-transparent hover:border-purple-500/30 transition-colors group text-left cursor-pointer" data-keywords="theme dark light mode toggle switch color">
+                    <button type="button" onclick="toggleTheme(); closeCommandPalette();" class="cmd-item w-full flex items-center justify-between p-3 rounded-2xl hover:bg-[#F5F6FA] dark:hover:bg-purple-500/15 border border-transparent hover:border-purple-500/20 dark:hover:border-purple-500/30 transition-colors group text-left cursor-pointer" data-keywords="theme dark light mode toggle switch color">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-xs shrink-0">
+                            <div class="w-8 h-8 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xs shrink-0">
                                 <i class="fa-solid fa-circle-half-stroke"></i>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-purple-300">Toggle Dark / Light Theme</h4>
-                                <p class="text-[11px] text-slate-400">Switch application color scheme</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300">Toggle Dark / Light Theme</h4>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Switch application color scheme</p>
                             </div>
                         </div>
-                        <span class="text-[10px] font-mono text-amber-400">Action</span>
+                        <span class="text-[10px] font-mono text-amber-600 dark:text-amber-400">Action</span>
                     </button>
                 </div>
 
                 {{-- No Results State --}}
                 <div id="cmdNoResults" class="hidden py-8 text-center space-y-2">
-                    <i class="fa-solid fa-magnifying-glass text-slate-600 text-xl"></i>
-                    <p class="text-xs text-slate-400 font-medium">No matching destinations or commands found.</p>
+                    <i class="fa-solid fa-magnifying-glass text-slate-400 text-xl"></i>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">No matching destinations or commands found.</p>
                 </div>
 
             </div>
 
             {{-- Footer Shortcuts Bar --}}
-            <div class="px-5 py-3 border-t border-white/[0.08] bg-white/[0.02] flex items-center justify-between text-[11px] text-slate-500">
+            <div class="px-5 py-3 border-t border-slate-200/80 dark:border-white/[0.08] bg-slate-50/80 dark:bg-white/[0.02] flex items-center justify-between text-[11px] text-slate-500">
                 <div class="flex items-center gap-3">
-                    <span class="flex items-center gap-1"><kbd class="px-1 py-0.5 rounded bg-white/5 border border-white/10 font-mono text-[9px]">↑↓</kbd> Navigate</span>
-                    <span class="flex items-center gap-1"><kbd class="px-1 py-0.5 rounded bg-white/5 border border-white/10 font-mono text-[9px]">↵</kbd> Select</span>
-                    <span class="flex items-center gap-1"><kbd class="px-1 py-0.5 rounded bg-white/5 border border-white/10 font-mono text-[9px]">ESC</kbd> Close</span>
+                    <span class="flex items-center gap-1"><kbd class="px-1 py-0.5 rounded bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 font-mono text-[9px] text-slate-600 dark:text-slate-400">↑↓</kbd> Navigate</span>
+                    <span class="flex items-center gap-1"><kbd class="px-1 py-0.5 rounded bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 font-mono text-[9px] text-slate-600 dark:text-slate-400">↵</kbd> Select</span>
+                    <span class="flex items-center gap-1"><kbd class="px-1 py-0.5 rounded bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 font-mono text-[9px] text-slate-600 dark:text-slate-400">ESC</kbd> Close</span>
                 </div>
-                <span class="font-mono text-purple-400 text-[10px]">PathSeeker Command OS</span>
+                <span class="font-mono text-purple-600 dark:text-purple-400 text-[10px] font-bold">PathSeeker Command OS</span>
             </div>
+
+        </div>
 
         </div>
     </div>
