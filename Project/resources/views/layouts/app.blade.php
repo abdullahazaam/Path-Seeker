@@ -732,6 +732,21 @@
         /* True Frosted Glassmorphism Across All Major Cards & Modules (Reference Standard) */
         html:not(.dark) .card-tilt,
         html:not(.dark) .card-tilt-3d,
+        /* ══════════════════ 80-90% HIGH-TRANSLUCENCY GLASSMORPHISM HIERARCHY ══════════════════ */
+        html:not(.dark) {
+            background-color: #F8FAFC;
+            color: #111827;
+        }
+
+        /* Base Body & Container Foundations */
+        html:not(.dark) body {
+            background-color: #F8FAFC !important;
+            color: #111827 !important;
+        }
+
+        /* Light Mode High-Translucency (80-90%) Frosted Glass Cards */
+        html:not(.dark) .card-tilt,
+        html:not(.dark) .card-tilt-3d,
         html:not(.dark) .career-card,
         html:not(.dark) [data-tilt],
         html:not(.dark) .app-card,
@@ -744,14 +759,14 @@
         html:not(.dark) .bg-white,
         html:not(.dark) .bg-white\/90,
         html:not(.dark) .bg-white\/95 {
-            background: rgba(255, 255, 255, 0.65) !important;
-            backdrop-filter: blur(24px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.80) !important;
-            box-shadow: 0 20px 50px -10px rgba(30, 40, 70, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.60) !important;
+            background: rgba(255, 255, 255, 0.22) !important;
+            backdrop-filter: blur(24px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.45) !important;
+            box-shadow: 0 20px 50px -10px rgba(30, 40, 70, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.60) !important;
         }
 
-        /* Elevated Frosted Glass Card Hover State */
+        /* Light Mode Glass Card Hover State */
         html:not(.dark) .card-tilt:hover,
         html:not(.dark) .card-tilt-3d:hover,
         html:not(.dark) .career-card:hover,
@@ -763,15 +778,15 @@
         html:not(.dark) .control-room-card:hover,
         html:not(.dark) .grid > .rounded-3xl:hover,
         html:not(.dark) .grid > div[class*="rounded-3xl"]:hover {
-            background: rgba(255, 255, 255, 0.80) !important;
-            backdrop-filter: blur(24px) saturate(190%) !important;
-            -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.95) !important;
+            background: rgba(255, 255, 255, 0.35) !important;
+            backdrop-filter: blur(24px) saturate(200%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.70) !important;
             transform: translate3d(0, -3px, 0);
-            box-shadow: 0 24px 60px -10px rgba(30, 40, 70, 0.12), 0 0 0 1px rgba(118, 87, 255, 0.30) !important;
+            box-shadow: 0 24px 60px -10px rgba(30, 40, 70, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.80), 0 0 0 1px rgba(118, 87, 255, 0.25) !important;
         }
 
-        /* Inner Panels & Secondary Containers (Frosted Translucent Neutral #F5F7FA) */
+        /* Light Mode Inner Panels & Secondary Containers */
         html:not(.dark) .bg-slate-50,
         html:not(.dark) .bg-slate-50\/50,
         html:not(.dark) .bg-slate-50\/60,
@@ -781,10 +796,10 @@
         html:not(.dark) .bg-slate-100\/90,
         html:not(.dark) .inner-panel,
         html:not(.dark) .secondary-container {
-            background-color: rgba(245, 247, 250, 0.60) !important;
+            background-color: rgba(255, 255, 255, 0.15) !important;
             backdrop-filter: blur(16px) !important;
             -webkit-backdrop-filter: blur(16px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.65) !important;
+            border: 1px solid rgba(255, 255, 255, 0.35) !important;
         }
 
         /* Clean Boundaries across All Dividers */
@@ -793,17 +808,17 @@
         html:not(.dark) .border-slate-200\/60,
         html:not(.dark) .border-slate-300,
         html:not(.dark) .divide-slate-100 > * + * {
-            border-color: rgba(15, 23, 42, 0.07) !important;
+            border-color: rgba(15, 23, 42, 0.08) !important;
         }
 
         /* Strict Light Mode Text Hierarchy */
-        html:not(.dark) .text-slate-900 { color: #111827 !important; }
-        html:not(.dark) .text-slate-800 { color: #1f2937 !important; }
-        html:not(.dark) .text-slate-700 { color: #374151 !important; }
-        html:not(.dark) .text-slate-600 { color: #4b5563 !important; }
-        html:not(.dark) .text-slate-500 { color: #6b7280 !important; }
-        html:not(.dark) .text-slate-400 { color: #9ca3af !important; }
-        html:not(.dark) .text-slate-300 { color: #d1d5db !important; }
+        html:not(.dark) .text-slate-900 { color: #0f172a !important; }
+        html:not(.dark) .text-slate-800 { color: #1e293b !important; }
+        html:not(.dark) .text-slate-700 { color: #334155 !important; }
+        html:not(.dark) .text-slate-600 { color: #475569 !important; }
+        html:not(.dark) .text-slate-500 { color: #64748b !important; }
+        html:not(.dark) .text-slate-400 { color: #94a3b8 !important; }
+        html:not(.dark) .text-slate-300 { color: #cbd5e1 !important; }
 
         /* Preserve Intentional White Text on Buttons, Dark Containers, Modals & Footer in Light Mode */
         html:not(.dark) a.text-white,
@@ -839,31 +854,95 @@
         html:not(.dark) input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="submit"]):not([type="button"]),
         html:not(.dark) select,
         html:not(.dark) textarea {
-            background-color: #FFFFFF !important;
-            border-color: rgba(15, 23, 42, 0.14) !important;
-            color: #111827 !important;
+            background-color: rgba(255, 255, 255, 0.70) !important;
+            backdrop-filter: blur(12px) !important;
+            border-color: rgba(15, 23, 42, 0.16) !important;
+            color: #0f172a !important;
         }
         html:not(.dark) input::placeholder,
         html:not(.dark) textarea::placeholder {
-            color: #9ca3af !important;
+            color: #64748b !important;
         }
         html:not(.dark) input:focus,
         html:not(.dark) select:focus,
         html:not(.dark) textarea:focus {
             border-color: #7657FF !important;
-            box-shadow: 0 0 0 3px rgba(118, 87, 255, 0.12) !important;
-            color: #111827 !important;
+            box-shadow: 0 0 0 3px rgba(118, 87, 255, 0.15) !important;
+            color: #0f172a !important;
+            background-color: rgba(255, 255, 255, 0.90) !important;
         }
         html:not(.dark) select.app-input option {
             background: #ffffff;
             color: #111827;
         }
 
-        /* ══════════════════ PRISTINE DARK MODE TYPOGRAPHY & FORM CONTROLS ══════════════════ */
+        /* ══════════════════ DARK MODE 80-90% HIGH-TRANSLUCENCY GLASSMORPHISM ══════════════════ */
         html.dark, .dark {
-            background-color: #06080f;
+            background-color: #04060b;
             color: #F8FAFC;
         }
+
+        /* Dark Mode High-Translucency (80-90%) Frosted Glass Cards */
+        html.dark .card-tilt, .dark .card-tilt,
+        html.dark .card-tilt-3d, .dark .card-tilt-3d,
+        html.dark .career-card, .dark .career-card,
+        html.dark [data-tilt], .dark [data-tilt],
+        html.dark .app-card, .dark .app-card,
+        html.dark .glass-panel, .dark .glass-panel,
+        html.dark .signature-card, .dark .signature-card,
+        html.dark .signature-container, .dark .signature-container,
+        html.dark .dashboard-widget, .dark .dashboard-widget,
+        html.dark .control-room-card, .dark .control-room-card,
+        html.dark .passport-card-3d, .dark .passport-card-3d,
+        html.dark .bg-slate-900, .dark .bg-slate-900,
+        html.dark .bg-slate-900\/90, .dark .bg-slate-900\/90,
+        html.dark .bg-slate-950, .dark .bg-slate-950,
+        html.dark .bg-\[\#080B12\], .dark .bg-\[\#080B12\],
+        html.dark .dark\:bg-\[\#080B12\], .dark .dark\:bg-\[\#080B12\],
+        html.dark .dark\:bg-slate-900, .dark .dark\:bg-slate-900,
+        html.dark .dark\:bg-slate-950, .dark .dark\:bg-slate-950 {
+            background: rgba(8, 11, 18, 0.28) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+        }
+
+        /* Dark Mode Glass Card Hover State */
+        html.dark .card-tilt:hover, .dark .card-tilt:hover,
+        html.dark .card-tilt-3d:hover, .dark .card-tilt-3d:hover,
+        html.dark .career-card:hover, .dark .career-card:hover,
+        html.dark [data-tilt]:hover, .dark [data-tilt]:hover,
+        html.dark .app-card:hover, .dark .app-card:hover,
+        html.dark .glass-panel:hover, .dark .glass-panel:hover,
+        html.dark .signature-card:hover, .dark .signature-card:hover,
+        html.dark .dashboard-widget:hover, .dark .dashboard-widget:hover,
+        html.dark .control-room-card:hover, .dark .control-room-card:hover,
+        html.dark .grid > .rounded-3xl:hover, .dark .grid > .rounded-3xl:hover,
+        html.dark .grid > div[class*="rounded-3xl"]:hover, .dark .grid > div[class*="rounded-3xl"]:hover {
+            background: rgba(15, 23, 42, 0.38) !important;
+            backdrop-filter: blur(24px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+            border: 1px solid rgba(139, 92, 246, 0.30) !important;
+            transform: translate3d(0, -3px, 0);
+            box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+        }
+
+        /* Dark Mode Inner Panels & Secondary Containers */
+        html.dark .dark\:bg-slate-800, .dark .dark\:bg-slate-800,
+        html.dark .dark\:bg-slate-800\/50, .dark .dark\:bg-slate-800\/50,
+        html.dark .dark\:bg-slate-850, .dark .dark\:bg-slate-850,
+        html.dark .dark\:bg-white\/5, .dark .dark\:bg-white\/5,
+        html.dark .dark\:bg-white\/10, .dark .dark\:bg-white\/10,
+        html.dark .inner-panel, .dark .inner-panel,
+        html.dark .secondary-container, .dark .secondary-container {
+            background-color: rgba(6, 8, 15, 0.22) !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+
+        /* Pristine Dark Mode Typography */
         html.dark h1, .dark h1,
         html.dark h2, .dark h2,
         html.dark h3, .dark h3,
@@ -903,7 +982,8 @@
         .dark input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="submit"]):not([type="button"]),
         html.dark select, .dark select,
         html.dark textarea, .dark textarea {
-            background-color: #080B12 !important;
+            background-color: rgba(8, 11, 18, 0.60) !important;
+            backdrop-filter: blur(12px) !important;
             border-color: rgba(255, 255, 255, 0.15) !important;
             color: #F8FAFC !important;
         }
@@ -917,6 +997,12 @@
             border-color: #00f2fe !important;
             box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.15) !important;
             color: #FFFFFF !important;
+            background-color: rgba(8, 11, 18, 0.85) !important;
+        }
+        html.dark select option, .dark select option,
+        html.dark select.app-input option, .dark select.app-input option {
+            background: #080B12 !important;
+            color: #F8FAFC !important;
         }
         /* ══════════════════ DARK MODE 3D ROTATIONAL GLOWING ARCS & LINES (90FPS GPU) ══════════════════ */
         .dark-arc-container {
