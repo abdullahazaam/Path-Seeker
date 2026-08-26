@@ -1090,7 +1090,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased transition-colors duration-500 relative overflow-x-hidden bg-[#F8FAFC] dark:bg-[#06080f] text-[#111827] dark:text-[#f8fafc]">
+<body class="min-h-screen flex flex-col antialiased transition-colors duration-500 relative overflow-x-hidden bg-[#F8FAFC] dark:bg-[#030508] text-[#111827] dark:text-[#f8fafc]">
 
     <!-- ══════════════════ LIGHT MODE 3D AMBIENT BACKGROUND LAYER (STRICTLY LIGHT THEME ONLY) ══════════════════ -->
     <div id="ambientBackgroundLayer" class="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#F8FAFC] block dark:hidden transition-colors duration-500" aria-hidden="true">
@@ -1132,8 +1132,8 @@
 
     </div>
 
-    <!-- ══════════════════ DEDICATED DARK MODE 3D FLUID / SILK WAVE BACKGROUND (STRICTLY DARK THEME ONLY) ══════════════════ -->
-    @include('components.dark-wave-background')
+    <!-- ══════════════════ DEDICATED DARK MODE AMBIENT GLOW BEAM & AURA BACKGROUND (STRICTLY DARK THEME ONLY) ══════════════════ -->
+    @include('components.dark-glow-beam-background')
 
     <!-- ══════════════════ FLOATING GLASS PILL NAVBAR ══════════════════ -->
     @include('components.navbar')
@@ -1591,11 +1591,9 @@
             if (theme === 'light') {
                 html.classList.remove('dark');
                 html.setAttribute('data-theme', 'light');
-                if (window.stopDarkWaveEngine) window.stopDarkWaveEngine();
             } else {
                 html.classList.add('dark');
                 html.setAttribute('data-theme', 'dark');
-                if (window.startDarkWaveEngine) window.startDarkWaveEngine();
             }
             syncThemeIcon(theme);
         }
