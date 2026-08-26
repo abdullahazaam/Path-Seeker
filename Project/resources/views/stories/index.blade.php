@@ -53,12 +53,8 @@
                     {{-- Header Meta: Author Avatar, Name, Domain Pill & Date --}}
                     <div class="flex items-center justify-between gap-3 pb-3 border-b border-slate-200/80 dark:border-white/10">
                         <div class="flex items-center gap-3 min-w-0">
-                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-500/20 to-pink-500/20 border border-purple-500/30 flex items-center justify-center text-purple-600 dark:text-purple-300 font-bold text-xs shrink-0 shadow-sm overflow-hidden">
-                                @if($story->image_url)
-                                    <img src="{{ $story->image_url }}" alt="{{ $authorDisplayName }}" class="w-full h-full object-cover rounded-2xl">
-                                @else
-                                    <span class="font-bold text-xs">{{ substr($authorDisplayName, 0, 1) }}</span>
-                                @endif
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500/25 via-indigo-500/20 to-cyan-500/20 border border-purple-500/35 dark:border-purple-400/30 flex items-center justify-center text-purple-700 dark:text-purple-300 font-black text-sm shrink-0 shadow-md font-display backdrop-blur-md">
+                                <span>{{ strtoupper(substr($authorDisplayName, 0, 1)) }}</span>
                             </div>
                             <div class="min-w-0">
                                 <div class="text-xs font-black text-slate-900 dark:text-white truncate font-display">

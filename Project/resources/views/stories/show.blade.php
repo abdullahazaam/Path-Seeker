@@ -36,12 +36,12 @@
                 $authorDisplayName = str_contains($story->title, ' — ') ? explode(' — ', $story->title)[0] : ($story->author?->name ?? 'PathSeeker Scholar');
             @endphp
             <div class="flex items-center gap-3 pt-2 text-xs text-slate-600 dark:text-slate-400">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white flex items-center justify-center font-bold text-xs">
-                    {{ substr($authorDisplayName, 0, 1) }}
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500/25 via-indigo-500/20 to-cyan-500/20 border border-purple-500/35 dark:border-purple-400/30 flex items-center justify-center text-purple-700 dark:text-purple-300 font-black text-sm shrink-0 shadow-md font-display backdrop-blur-md">
+                    <span>{{ strtoupper(substr($authorDisplayName, 0, 1)) }}</span>
                 </div>
                 <div>
-                    <span class="font-bold text-slate-900 dark:text-white">{{ $authorDisplayName }}</span>
-                    <span class="block text-[11px] text-slate-400">Verified Alumni</span>
+                    <span class="font-bold text-slate-900 dark:text-white text-sm">{{ $authorDisplayName }}</span>
+                    <span class="block text-[11px] text-slate-500 dark:text-slate-400 font-mono">Verified Alumni</span>
                 </div>
             </div>
         </div>
