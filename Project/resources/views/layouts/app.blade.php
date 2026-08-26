@@ -918,107 +918,98 @@
             box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.15) !important;
             color: #FFFFFF !important;
         }
-        /* ══════════════════ DARK MODE 3D ROTATING FLUID BLOB ENGINE (90FPS GPU) ══════════════════ */
-        .dark-fluid-blob-3d {
+        /* ══════════════════ DARK MODE 3D ROTATIONAL GLOWING ARCS & LINES (90FPS GPU) ══════════════════ */
+        .dark-arc-container {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+
+        .dark-arc-3d {
             position: absolute;
+            border-radius: 50%;
             pointer-events: none;
-            filter: blur(55px) saturate(170%);
-            -webkit-filter: blur(55px) saturate(170%);
-            mix-blend-mode: screen;
-            opacity: 0.60;
-            will-change: transform, border-radius;
+            will-change: transform;
+            transform-origin: center center;
         }
 
-        .dark-fluid-blob-1 {
-            background: radial-gradient(circle at 30% 30%, #a855f7 0%, #7c3aed 40%, #2563eb 70%, #00f2fe 100%);
-            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
-            animation: darkBlobRotate3D1 22s ease-in-out infinite;
+        .dark-arc-1 {
+            width: 75vw;
+            height: 75vw;
+            max-width: 950px;
+            max-height: 950px;
+            top: -15%;
+            left: 10%;
+            border: 1.5px solid transparent;
+            border-top-color: #8b5cf6;
+            border-right-color: #3b82f6;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.35), inset 0 0 25px rgba(59, 130, 246, 0.25);
+            opacity: 0.32;
+            animation: darkArcRotate1 34s linear infinite;
         }
 
-        .dark-fluid-blob-2 {
-            background: radial-gradient(circle at 70% 30%, #3b82f6 0%, #6366f1 40%, #8b5cf6 70%, #d946ef 100%);
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            animation: darkBlobRotate3D2 26s ease-in-out infinite;
+        .dark-arc-2 {
+            width: 65vw;
+            height: 65vw;
+            max-width: 820px;
+            max-height: 820px;
+            bottom: -15%;
+            right: 5%;
+            border: 1.5px solid transparent;
+            border-bottom-color: #3b82f6;
+            border-left-color: #00f2fe;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.30), inset 0 0 25px rgba(59, 130, 246, 0.20);
+            opacity: 0.28;
+            animation: darkArcRotate2 40s linear infinite reverse;
         }
 
-        .dark-fluid-blob-3 {
-            background: radial-gradient(circle at 40% 60%, #00f2fe 0%, #3b82f6 35%, #7c3aed 70%, #9333ea 100%);
-            border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%;
-            animation: darkBlobRotate3D3 20s ease-in-out infinite;
+        .dark-arc-3 {
+            width: 55vw;
+            height: 55vw;
+            max-width: 700px;
+            max-height: 700px;
+            top: 25%;
+            left: -5%;
+            border: 1.2px solid transparent;
+            border-top-color: #a855f7;
+            border-left-color: #6366f1;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.28);
+            opacity: 0.25;
+            animation: darkArcRotate3 38s ease-in-out infinite;
         }
 
-        .dark-fluid-blob-4 {
-            background: radial-gradient(circle at 60% 50%, #9333ea 0%, #6366f1 40%, #2563eb 75%, #06b6d4 100%);
-            border-radius: 35% 65% 55% 45% / 55% 40% 60% 45%;
-            animation: darkBlobRotate3D4 24s ease-in-out infinite;
+        .dark-arc-4 {
+            width: 50vw;
+            height: 50vw;
+            max-width: 650px;
+            max-height: 650px;
+            top: 35%;
+            right: -5%;
+            border: 1.2px solid transparent;
+            border-right-color: #00f2fe;
+            border-bottom-color: #3b82f6;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
+            opacity: 0.22;
+            animation: darkArcRotate4 44s ease-in-out infinite alternate;
         }
 
-        @keyframes darkBlobRotate3D1 {
-            0% {
-                transform: translate3d(0, 0, 0) rotate3d(1, 1, 0.5, 0deg) scale(1);
-                border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
-            }
-            33% {
-                transform: translate3d(50px, -40px, 0) rotate3d(1, 1, 0.5, 120deg) scale(1.15);
-                border-radius: 58% 42% 38% 62% / 60% 35% 65% 40%;
-            }
-            66% {
-                transform: translate3d(-35px, 45px, 0) rotate3d(1, 1, 0.5, 240deg) scale(0.90);
-                border-radius: 35% 65% 60% 40% / 40% 65% 35% 60%;
-            }
-            100% {
-                transform: translate3d(0, 0, 0) rotate3d(1, 1, 0.5, 360deg) scale(1);
-                border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
-            }
+        @keyframes darkArcRotate1 {
+            0% { transform: rotateX(65deg) rotateY(15deg) rotateZ(0deg); }
+            100% { transform: rotateX(65deg) rotateY(15deg) rotateZ(360deg); }
         }
 
-        @keyframes darkBlobRotate3D2 {
-            0% {
-                transform: translate3d(0, 0, 0) rotate3d(0.5, 1, 1, 0deg) scale(1);
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            }
-            33% {
-                transform: translate3d(-45px, 40px, 0) rotate3d(0.5, 1, 1, -120deg) scale(1.10);
-                border-radius: 40% 60% 65% 35% / 45% 55% 45% 55%;
-            }
-            66% {
-                transform: translate3d(40px, -45px, 0) rotate3d(0.5, 1, 1, -240deg) scale(0.92);
-                border-radius: 65% 35% 45% 55% / 55% 40% 60% 45%;
-            }
-            100% {
-                transform: translate3d(0, 0, 0) rotate3d(0.5, 1, 1, -360deg) scale(1);
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            }
+        @keyframes darkArcRotate2 {
+            0% { transform: rotateX(60deg) rotateY(-20deg) rotateZ(0deg); }
+            100% { transform: rotateX(60deg) rotateY(-20deg) rotateZ(360deg); }
         }
 
-        @keyframes darkBlobRotate3D3 {
-            0% {
-                transform: translate3d(0, 0, 0) rotate3d(1, 0.5, 1, 0deg) scale(1);
-                border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%;
-            }
-            50% {
-                transform: translate3d(35px, 40px, 0) rotate3d(1, 0.5, 1, 180deg) scale(1.18);
-                border-radius: 35% 65% 58% 42% / 62% 38% 62% 38%;
-            }
-            100% {
-                transform: translate3d(0, 0, 0) rotate3d(1, 0.5, 1, 360deg) scale(1);
-                border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%;
-            }
+        @keyframes darkArcRotate3 {
+            0%, 100% { transform: rotateX(55deg) rotateY(30deg) rotateZ(0deg) scale(1); }
+            50% { transform: rotateX(65deg) rotateY(15deg) rotateZ(180deg) scale(1.06); }
         }
 
-        @keyframes darkBlobRotate3D4 {
-            0% {
-                transform: translate3d(0, 0, 0) rotate3d(0.8, 1, 0.3, 0deg) scale(1);
-                border-radius: 35% 65% 55% 45% / 55% 40% 60% 45%;
-            }
-            50% {
-                transform: translate3d(-40px, -35px, 0) rotate3d(0.8, 1, 0.3, -180deg) scale(1.12);
-                border-radius: 60% 40% 40% 60% / 45% 60% 40% 55%;
-            }
-            100% {
-                transform: translate3d(0, 0, 0) rotate3d(0.8, 1, 0.3, -360deg) scale(1);
-                border-radius: 35% 65% 55% 45% / 55% 40% 60% 45%;
-            }
+        @keyframes darkArcRotate4 {
+            0%, 100% { transform: rotateX(50deg) rotateY(-35deg) rotateZ(0deg) scale(1); }
+            50% { transform: rotateX(62deg) rotateY(-15deg) rotateZ(-180deg) scale(1.05); }
         }
     </style>
 </head>
@@ -1065,27 +1056,30 @@
             </div>
         </div>
 
-        <!-- ─── DARK MODE 3D ROTATING FLUID/BLOB AMBIENT LAYER (STRICTLY DARK THEME ONLY) ─── -->
-        <div class="absolute inset-0 hidden dark:block pointer-events-none overflow-hidden bg-[#06080f]">
-            <!-- 1. Deep Space Ambient Radial Lighting -->
-            <div class="absolute -top-[15%] -left-[10%] w-[65vw] h-[65vw] max-w-[950px] max-h-[950px] rounded-full bg-gradient-to-br from-purple-700/25 via-indigo-600/20 to-transparent blur-[140px]"></div>
-            <div class="absolute -bottom-[15%] -right-[10%] w-[65vw] h-[65vw] max-w-[950px] max-h-[950px] rounded-full bg-gradient-to-tl from-blue-700/25 via-violet-700/20 to-transparent blur-[140px]"></div>
+        <!-- ─── DARK MODE SUBTLE 3D ROTATING GLOWING ARCS LAYER (STRICTLY DARK THEME ONLY) ─── -->
+        <div class="absolute inset-0 hidden dark:block pointer-events-none overflow-hidden bg-[#04060b]">
+            <!-- 1. Smooth Deep Space Ambient Lighting Pools -->
+            <div class="absolute -top-[20%] -left-[15%] w-[70vw] h-[70vw] max-w-[1000px] max-h-[1000px] rounded-full bg-gradient-to-br from-purple-900/20 via-indigo-900/15 to-transparent blur-[160px]"></div>
+            <div class="absolute -bottom-[20%] -right-[15%] w-[70vw] h-[70vw] max-w-[1000px] max-h-[1000px] rounded-full bg-gradient-to-tl from-blue-900/20 via-violet-900/15 to-transparent blur-[160px]"></div>
+            <div class="absolute top-[30%] left-[25%] w-[50vw] h-[50vw] max-w-[750px] max-h-[750px] rounded-full bg-gradient-to-tr from-cyan-950/15 via-purple-950/10 to-transparent blur-[150px]"></div>
 
-            <!-- 2. 3D Rotating Glowing Fluid Blob Shapes (Deep Purple, Violet & Electric Blue) -->
-            <!-- Fluid Blob 1 (Top Left — 3D Rotating Purple-Blue-Cyan) -->
-            <div class="w-[50vw] h-[50vw] max-w-[720px] max-h-[720px] -top-[10%] -left-[8%] dark-fluid-blob-3d dark-fluid-blob-1"></div>
+            <!-- 2. Subtle, Thin 3D Rotational Glowing Curved Arcs -->
+            <div class="absolute inset-0 dark-arc-container">
+                <!-- 3D Arc 1 (Top-Left to Center — Soft Purple/Blue Glowing Arc) -->
+                <div class="dark-arc-3d dark-arc-1"></div>
 
-            <!-- Fluid Blob 2 (Bottom Right — 3D Rotating Electric Blue-Magenta) -->
-            <div class="w-[52vw] h-[52vw] max-w-[760px] max-h-[760px] -bottom-[12%] -right-[8%] dark-fluid-blob-3d dark-fluid-blob-2"></div>
+                <!-- 3D Arc 2 (Bottom-Right to Center — Electric Blue/Cyan Glowing Arc) -->
+                <div class="dark-arc-3d dark-arc-2"></div>
 
-            <!-- Fluid Blob 3 (Center / Mid Left — 3D Rotating Cyan-Indigo-Purple) -->
-            <div class="w-[42vw] h-[42vw] max-w-[600px] max-h-[600px] top-[28%] left-[12%] dark-fluid-blob-3d dark-fluid-blob-3"></div>
+                <!-- 3D Arc 3 (Mid-Left Floating Diagonal Arc — Violet/Indigo) -->
+                <div class="dark-arc-3d dark-arc-3"></div>
 
-            <!-- Fluid Blob 4 (Mid Right — 3D Rotating Deep Purple-Cyan) -->
-            <div class="w-[40vw] h-[40vw] max-w-[580px] max-h-[580px] top-[18%] right-[8%] dark-fluid-blob-3d dark-fluid-blob-4"></div>
+                <!-- 3D Arc 4 (Mid-Right Floating Orbital Arc — Cyan/Blue) -->
+                <div class="dark-arc-3d dark-arc-4"></div>
+            </div>
 
-            <!-- 3. Micro-Star Grid Accent -->
-            <div class="absolute inset-0 bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.04]"></div>
+            <!-- 3. Minimal Ambient Star Dust Accent -->
+            <div class="absolute inset-0 bg-[radial-gradient(#8b5cf6_1px,transparent_1px)] [background-size:36px_36px] opacity-[0.035]"></div>
         </div>
 
     </div>
