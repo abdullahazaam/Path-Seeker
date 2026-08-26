@@ -662,6 +662,33 @@
             }
         }
 
+        /* ══════════════════ LIGHT MODE 3D AMBIENT KEYFRAMES (90FPS GPU) ══════════════════ */
+        @keyframes floatParticle1 {
+            0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.35; }
+            50% { transform: translate3d(18px, -24px, 0); opacity: 0.75; }
+        }
+        @keyframes floatParticle2 {
+            0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.30; }
+            50% { transform: translate3d(-22px, 18px, 0); opacity: 0.70; }
+        }
+        @keyframes floatParticle3 {
+            0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.25; }
+            50% { transform: translate3d(15px, 20px, 0); opacity: 0.65; }
+        }
+        @keyframes nodePulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.15); opacity: 0.85; }
+        }
+        @keyframes gridLineDrift {
+            0% { stroke-dashoffset: 800; }
+            100% { stroke-dashoffset: 0; }
+        }
+        .animate-particle-1 { animation: floatParticle1 18s ease-in-out infinite; will-change: transform, opacity; }
+        .animate-particle-2 { animation: floatParticle2 22s ease-in-out infinite; will-change: transform, opacity; }
+        .animate-particle-3 { animation: floatParticle3 26s ease-in-out infinite; will-change: transform, opacity; }
+        .animate-node-glow { animation: nodePulseGlow 6s ease-in-out infinite; will-change: transform, opacity; }
+        .animate-grid-line { stroke-dasharray: 8, 12; animation: gridLineDrift 45s linear infinite; }
+
         /* ══════════════════ SOFT FUTURISTIC LIGHT MODE HIERARCHY ══════════════════ */
         html:not(.dark) {
             background-color: #F8FAFC;
@@ -870,24 +897,20 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased transition-colors duration-500 relative overflow-x-hidden bg-[#F8FAFC] dark:bg-[#06080f] text-[#111827] dark:text-[#f8fafc]">
 
-    <!-- ══════════════════ SAFE FULL-SCREEN ANIMATED AMBIENT BACKGROUND CONTAINER ══════════════════ -->
+    <!-- ══════════════════ ISOLATED FIXED AMBIENT BACKGROUND LAYER (LIGHT MODE ONLY) ══════════════════ -->
     <div id="ambientBackgroundLayer" class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-[#F8FAFC] dark:bg-[#06080f] transition-colors duration-500" aria-hidden="true">
         
-        <!-- ─── LIGHT MODE DEDICATED AMBIENT LAYER ─── -->
+        <!-- ─── STRICTLY LIGHT MODE AMBIENT GRAPHICS (ZERO DARK MODE IMPACT) ─── -->
         <div class="absolute inset-0 block dark:hidden pointer-events-none">
-            <!-- 1. Hero Ambient Zone (Cyan to Soft Violet Radial Gradient, blur-[140px], 6-8% opacity) -->
-            <div class="absolute -top-[12%] -left-[8%] w-[55vw] h-[55vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-br from-[#12CFF3]/[0.08] via-[#7657FF]/[0.05] to-transparent blur-[140px] animate-aurora-drift-1"></div>
-            
-            <!-- 2. Mid-Page Ambient Zone (Violet to Electric Blue Radial Gradient, blur-[140px], 5-7% opacity) -->
-            <div class="absolute top-[35%] -right-[8%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] rounded-full bg-gradient-to-bl from-[#7657FF]/[0.07] via-[#3b82f6]/[0.04] to-transparent blur-[140px] animate-aurora-drift-2"></div>
+            <!-- 1. Ambient Radial Zone Gradients (Soft, Restrained) -->
+            <div class="absolute -top-[12%] -left-[8%] w-[55vw] h-[55vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-br from-[#12CFF3]/[0.07] via-[#7657FF]/[0.04] to-transparent blur-[140px] animate-aurora-drift-1"></div>
+            <div class="absolute top-[35%] -right-[8%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] rounded-full bg-gradient-to-bl from-[#7657FF]/[0.06] via-[#3b82f6]/[0.03] to-transparent blur-[140px] animate-aurora-drift-2"></div>
+            <div class="absolute -bottom-[12%] left-[10%] w-[52vw] h-[52vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-tr from-[#3b82f6]/[0.05] via-[#12CFF3]/[0.03] to-transparent blur-[150px] animate-aurora-drift-3"></div>
 
-            <!-- 3. Bottom / Footer Ambient Zone (Sky Blue to Cyan Radial Gradient, blur-[150px], 5-7% opacity) -->
-            <div class="absolute -bottom-[12%] left-[10%] w-[52vw] h-[52vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-tr from-[#3b82f6]/[0.06] via-[#12CFF3]/[0.04] to-transparent blur-[150px] animate-aurora-drift-3"></div>
-
-            <!-- 4. Subtle Futuristic Career Trajectory Curving SVG Lines (Very Low Opacity 5-7%) -->
-            <svg class="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1440 900">
-                <path d="M-100,160 C320,60 540,340 880,200 C1200,60 1340,400 1600,300" fill="none" stroke="url(#lightTrajGrad1)" stroke-width="2" stroke-dasharray="10, 14" />
-                <path d="M-50,660 C300,500 620,800 980,620 C1260,480 1420,760 1550,670" fill="none" stroke="url(#lightTrajGrad2)" stroke-width="1.8" stroke-dasharray="10, 14" />
+            <!-- 2. Responsive 3D-Style Career Trajectory Grid Lines -->
+            <svg class="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
+                <path d="M-100,160 C320,60 540,340 880,200 C1200,60 1340,400 1600,300" fill="none" stroke="url(#lightTrajGrad1)" stroke-width="2" class="animate-grid-line" />
+                <path d="M-50,660 C300,500 620,800 980,620 C1260,480 1420,760 1550,670" fill="none" stroke="url(#lightTrajGrad2)" stroke-width="1.8" class="animate-grid-line" style="animation-direction: reverse; animation-duration: 55s;" />
                 <defs>
                     <linearGradient id="lightTrajGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stop-color="#12CFF3" />
@@ -902,10 +925,10 @@
                 </defs>
             </svg>
 
-            <!-- 5. Subtle Skill Constellation Nodes SVG (Very Low Opacity 6-8%) -->
-            <svg class="absolute inset-0 w-full h-full opacity-[0.07] pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900">
+            <!-- 3. Faint Glowing Constellation Nodes -->
+            <svg class="absolute inset-0 w-full h-full opacity-[0.07] pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
                 <!-- Cluster Top Right -->
-                <g>
+                <g class="animate-node-glow" style="transform-origin: 1160px 180px;">
                     <line x1="1080" y1="130" x2="1160" y2="180" stroke="#7657FF" stroke-width="1" stroke-dasharray="4,4" />
                     <line x1="1160" y1="180" x2="1240" y2="140" stroke="#12CFF3" stroke-width="1" />
                     <line x1="1160" y1="180" x2="1190" y2="250" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,4" />
@@ -915,7 +938,7 @@
                     <circle cx="1190" cy="250" r="4" fill="#3b82f6" />
                 </g>
                 <!-- Cluster Mid Left -->
-                <g>
+                <g class="animate-node-glow" style="animation-delay: 3s; transform-origin: 240px 520px;">
                     <line x1="160" y1="460" x2="240" y2="520" stroke="#12CFF3" stroke-width="1" />
                     <line x1="240" y1="520" x2="310" y2="470" stroke="#7657FF" stroke-width="1" stroke-dasharray="4,4" />
                     <line x1="240" y1="520" x2="210" y2="590" stroke="#3b82f6" stroke-width="1" />
@@ -926,8 +949,15 @@
                 </g>
             </svg>
 
-            <!-- 6. Micro Data Grid Dot Pattern Overlay (Opacity 3-4%) -->
-            <div class="absolute inset-0 bg-[radial-gradient(#7657FF_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.035] pointer-events-none"></div>
+            <!-- 4. Soft Floating Data Particles (Ultra-low speed, GPU composited) -->
+            <div class="absolute top-[20%] left-[30%] w-2 h-2 rounded-full bg-[#12CFF3] opacity-30 animate-particle-1"></div>
+            <div class="absolute top-[55%] left-[75%] w-2.5 h-2.5 rounded-full bg-[#7657FF] opacity-25 animate-particle-2"></div>
+            <div class="absolute top-[70%] left-[25%] w-2 h-2 rounded-full bg-[#3b82f6] opacity-30 animate-particle-3"></div>
+            <div class="absolute top-[35%] left-[85%] w-1.5 h-1.5 rounded-full bg-[#12CFF3] opacity-35 animate-particle-1" style="animation-delay: 4s;"></div>
+            <div class="absolute top-[80%] left-[60%] w-2 h-2 rounded-full bg-[#7657FF] opacity-20 animate-particle-2" style="animation-delay: 6s;"></div>
+
+            <!-- 5. Micro Data Grid Dot Pattern Overlay -->
+            <div class="absolute inset-0 bg-[radial-gradient(#7657FF_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.03] pointer-events-none"></div>
         </div>
 
         <!-- ─── DARK MODE AMBIENT LAYER (100% Preserved Pristine Obsidian Auroras) ─── -->
