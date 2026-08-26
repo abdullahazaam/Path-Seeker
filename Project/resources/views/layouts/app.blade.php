@@ -93,6 +93,10 @@
     <!-- html2pdf.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
+    <!-- GSAP & ScrollTrigger Animation Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -1238,100 +1242,202 @@
             });
         }
 
-        // 3. Exact Cinematic Staggered Scroll-Triggered Reveal Engine (60fps IntersectionObserver)
-        (function initScrollRevealEngine() {
+        // ══════════════════ 3. NEXORA-STYLE GSAP SCROLLTRIGGER ANIMATION ENGINE ══════════════════
+        (function initGsapScrollEngine() {
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             
-            function setupObserver() {
+            function setupScrollTriggerAnimations() {
+                // If reduced motion is requested, reveal all elements immediately and exit
                 if (prefersReducedMotion) {
                     document.querySelectorAll('.reveal-element, .reveal-on-scroll, [data-reveal], main section, .career-card, .app-card, .glass-panel, .card-tilt-3d, .grid > div').forEach(el => {
                         el.classList.add('revealed');
+                        el.style.opacity = '1';
+                        el.style.transform = 'none';
                     });
                     return;
                 }
 
-                const observerOptions = {
-                    root: null,
-                    rootMargin: '0px 0px -40px 0px',
-                    threshold: 0.08
-                };
+                // Check if GSAP & ScrollTrigger are available
+                const hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
 
-                const revealObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('revealed');
-                            // ONE-TIME TRIGGER: Locks in place, does not reverse on scroll up
-                            observer.unobserve(entry.target);
+                if (hasGsap) {
+                    gsap.registerPlugin(ScrollTrigger);
+
+                    // A. Reveal Major Sections & Hero Wrappers
+                    const sections = document.querySelectorAll('main > section, main > div > section, .reveal-element, .reveal-on-scroll, [data-reveal]');
+                    sections.forEach((section) => {
+                        if (section.dataset.gsapActive) return;
+                        section.dataset.gsapActive = 'true';
+
+                        const rect = section.getBoundingClientRect();
+                        const isAboveFold = rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
+
+                        if (isAboveFold) {
+                            gsap.fromTo(section, 
+                                { opacity: 0, y: 35, scale: 0.96 },
+                                { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: 'power3.out', overwrite: 'auto' }
+                            );
+                        } else {
+                            gsap.fromTo(section,
+                                { opacity: 0, y: 40, scale: 0.95 },
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    scale: 1,
+                                    duration: 0.9,
+                                    ease: 'power3.out',
+                                    scrollTrigger: {
+                                        trigger: section,
+                                        start: 'top 86%',
+                                        once: true,
+                                        toggleActions: 'play none none none'
+                                    }
+                                }
+                            );
                         }
                     });
-                }, observerOptions);
 
-                // Auto-collect all targeted sections, headings, cards, and containers
-                const selectors = [
-                    '.reveal-element',
-                    '.reveal-on-scroll',
-                    '[data-reveal]',
-                    'main > section',
-                    'main > div > section',
-                    '.app-card',
-                    '.career-card',
-                    '.glass-panel',
-                    '.card-tilt-3d',
-                    '#aiAdvisorOutput',
-                    '.perspective-stage',
-                    '.dashboard-widget',
-                    '.control-room-card'
-                ];
+                    // B. Staggered Cascades for All Card Grids (.grid > div)
+                    const grids = document.querySelectorAll('.grid, [data-stagger-grid]');
+                    grids.forEach((grid) => {
+                        if (grid.dataset.gsapGridActive) return;
+                        grid.dataset.gsapGridActive = 'true';
 
-                const elements = document.querySelectorAll(selectors.join(', '));
-                elements.forEach(el => {
-                    if (!el.dataset.revealObserved) {
-                        el.dataset.revealObserved = 'true';
-                        
-                        // Check if in initial viewport to avoid flashing
-                        const rect = el.getBoundingClientRect();
-                        if (rect.top < window.innerHeight && rect.bottom > 0) {
-                            el.classList.add('revealed');
-                        } else {
-                            if (!el.classList.contains('reveal-element') && !el.classList.contains('reveal-on-scroll') && !el.hasAttribute('data-reveal')) {
-                                el.classList.add('reveal-on-scroll');
-                            }
-                            revealObserver.observe(el);
-                        }
-                    }
-                });
+                        const cards = Array.from(grid.children).filter(child => {
+                            return !child.classList.contains('hidden') && child.tagName !== 'TEMPLATE';
+                        });
 
-                // Auto-stagger card grids (.grid > div) with 50-100ms sequential intervals (75ms)
-                document.querySelectorAll('.grid, [data-stagger-grid]').forEach(grid => {
-                    const children = Array.from(grid.children);
-                    if (children.length > 1 && !grid.dataset.staggerInit) {
-                        grid.dataset.staggerInit = 'true';
-                        children.forEach((child, index) => {
-                            if (!child.style.transitionDelay && !child.classList.contains('stagger-1')) {
-                                const delay = Math.min((index % 6) * 75, 450);
-                                child.style.transitionDelay = `${delay}ms`;
-                            }
-                            if (!child.classList.contains('reveal-element') && !child.classList.contains('reveal-on-scroll') && !child.hasAttribute('data-reveal')) {
-                                child.classList.add('reveal-on-scroll');
-                                const r = child.getBoundingClientRect();
-                                if (r.top < window.innerHeight && r.bottom > 0) {
-                                    child.classList.add('revealed');
-                                } else {
-                                    revealObserver.observe(child);
+                        if (cards.length === 0) return;
+
+                        const gridRect = grid.getBoundingClientRect();
+                        const isAboveFold = gridRect.top < window.innerHeight * 0.85 && gridRect.bottom > 0;
+
+                        if (isAboveFold) {
+                            gsap.fromTo(cards,
+                                { opacity: 0, y: 35, scale: 0.96 },
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    scale: 1,
+                                    duration: 0.8,
+                                    stagger: 0.08,
+                                    ease: 'power3.out',
+                                    overwrite: 'auto'
                                 }
+                            );
+                        } else {
+                            gsap.fromTo(cards,
+                                { opacity: 0, y: 40, scale: 0.95 },
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    scale: 1,
+                                    duration: 0.85,
+                                    stagger: 0.09,
+                                    ease: 'power3.out',
+                                    scrollTrigger: {
+                                        trigger: grid,
+                                        start: 'top 85%',
+                                        once: true,
+                                        toggleActions: 'play none none none'
+                                    }
+                                }
+                            );
+                        }
+                    });
+
+                    // C. Interactive Feature Blocks & Intelligence Monitors
+                    const widgets = document.querySelectorAll('.dashboard-widget, .control-room-card, #aiAdvisorOutput, .perspective-stage');
+                    widgets.forEach((widget) => {
+                        if (widget.dataset.gsapWidgetActive) return;
+                        widget.dataset.gsapWidgetActive = 'true';
+
+                        const wRect = widget.getBoundingClientRect();
+                        const isAboveFold = wRect.top < window.innerHeight * 0.85 && wRect.bottom > 0;
+
+                        if (isAboveFold) {
+                            gsap.fromTo(widget,
+                                { opacity: 0, y: 35, scale: 0.96 },
+                                { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: 'power3.out', overwrite: 'auto' }
+                            );
+                        } else {
+                            gsap.fromTo(widget,
+                                { opacity: 0, y: 40, scale: 0.95 },
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    scale: 1,
+                                    duration: 0.9,
+                                    ease: 'power3.out',
+                                    scrollTrigger: {
+                                        trigger: widget,
+                                        start: 'top 88%',
+                                        once: true,
+                                        toggleActions: 'play none none none'
+                                    }
+                                }
+                            );
+                        }
+                    });
+
+                } else {
+                    // High-performance IntersectionObserver Fallback
+                    const observerOptions = {
+                        root: null,
+                        rootMargin: '0px 0px -40px 0px',
+                        threshold: 0.08
+                    };
+
+                    const revealObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('revealed');
+                                observer.unobserve(entry.target);
                             }
                         });
-                    }
-                });
+                    }, observerOptions);
+
+                    const selectors = [
+                        '.reveal-element',
+                        '.reveal-on-scroll',
+                        '[data-reveal]',
+                        'main > section',
+                        'main > div > section',
+                        '.app-card',
+                        '.career-card',
+                        '.glass-panel',
+                        '.card-tilt-3d',
+                        '#aiAdvisorOutput',
+                        '.perspective-stage',
+                        '.dashboard-widget',
+                        '.control-room-card'
+                    ];
+
+                    document.querySelectorAll(selectors.join(', ')).forEach(el => {
+                        if (!el.dataset.revealObserved) {
+                            el.dataset.revealObserved = 'true';
+                            const rect = el.getBoundingClientRect();
+                            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                                el.classList.add('revealed');
+                            } else {
+                                if (!el.classList.contains('reveal-element') && !el.classList.contains('reveal-on-scroll') && !el.hasAttribute('data-reveal')) {
+                                    el.classList.add('reveal-on-scroll');
+                                }
+                                revealObserver.observe(el);
+                            }
+                        }
+                    });
+                }
             }
 
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', setupObserver);
+                document.addEventListener('DOMContentLoaded', setupScrollTriggerAnimations);
             } else {
-                setupObserver();
+                setupScrollTriggerAnimations();
             }
 
-            window.initScrollReveals = setupObserver;
+            window.initScrollReveals = setupScrollTriggerAnimations;
+            window.addEventListener('load', setupScrollTriggerAnimations);
         })();
 
         // 4. Universal 3D Tilt & Mouse-Tracking Light Reflection Engine Across All Cards
