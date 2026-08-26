@@ -696,24 +696,29 @@
             filter: blur(1px);
         }
 
-        /* ─── Dark Mode 3D Glass Bubble System (PathSeeker Brand Colors) ─── */
+        /* ─── Premium Subtle & Moody Dark Mode 3D Glass Bubbles (Deep Ambient Glow) ─── */
         .dark .glass-bubble-3d {
-            border: 1.5px solid rgba(255, 255, 255, 0.16);
-            box-shadow: inset -15px -15px 35px rgba(118, 87, 255, 0.22),
-                        inset 15px 15px 35px rgba(18, 207, 243, 0.18),
-                        0 25px 50px -10px rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset -10px -10px 30px rgba(118, 87, 255, 0.12),
+                        inset 10px 10px 30px rgba(18, 207, 243, 0.08),
+                        0 20px 40px -10px rgba(0, 0, 0, 0.6);
+            opacity: 0.22;
+            filter: blur(8px);
+            transform: scale(0.82);
         }
         .dark .glass-bubble-cyan {
-            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.25) 0%, rgba(18, 207, 243, 0.32) 40%, rgba(118, 87, 255, 0.22) 75%, rgba(6, 8, 15, 0.65) 100%);
+            background: radial-gradient(circle at 35% 30%, rgba(18, 207, 243, 0.18) 0%, rgba(15, 23, 42, 0.40) 40%, rgba(6, 8, 15, 0.85) 100%);
         }
         .dark .glass-bubble-purple {
-            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.25) 0%, rgba(118, 87, 255, 0.32) 40%, rgba(18, 207, 243, 0.18) 75%, rgba(6, 8, 15, 0.65) 100%);
+            background: radial-gradient(circle at 35% 30%, rgba(118, 87, 255, 0.18) 0%, rgba(20, 15, 45, 0.40) 40%, rgba(6, 8, 15, 0.85) 100%);
         }
         .dark .glass-bubble-blue {
-            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.25) 0%, rgba(59, 130, 246, 0.32) 40%, rgba(18, 207, 243, 0.20) 75%, rgba(6, 8, 15, 0.65) 100%);
+            background: radial-gradient(circle at 35% 30%, rgba(59, 130, 246, 0.18) 0%, rgba(10, 20, 40, 0.40) 40%, rgba(6, 8, 15, 0.85) 100%);
         }
         .dark .glass-bubble-specular {
-            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 80%);
+            opacity: 0.25;
+            filter: blur(3px);
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0) 80%);
         }
 
         @keyframes bubbleFloat1 {
@@ -914,28 +919,19 @@
             color: #111827;
         }
 
-        /* ══════════════════ UNIFORM 65% TRANSLUCENCY GLASSMORPHISM (DARK MODE) ══════════════════ */
+        /* ══════════════════ LAYERED GLASSMORPHISM HIERARCHY (DARK MODE) ══════════════════ */
         html.dark, .dark {
             background-color: #04060b;
             color: #F8FAFC;
         }
 
-        /* Universal 65% Translucency Glass Across ALL Cards, Filters, Panels & Containers */
-        html.dark .card-tilt, .dark .card-tilt,
-        html.dark .card-tilt-3d, .dark .card-tilt-3d,
-        html.dark .career-card, .dark .career-card,
-        html.dark .multimedia-card, .dark .multimedia-card,
-        html.dark .resource-card, .dark .resource-card,
-        html.dark .story-card, .dark .story-card,
-        html.dark .quiz-card, .dark .quiz-card,
-        html.dark [data-tilt], .dark [data-tilt],
-        html.dark .app-card, .dark .app-card,
-        html.dark .glass-panel, .dark .glass-panel,
-        html.dark .signature-card, .dark .signature-card,
+        /* ─── 1. Outer Containers / Main Section Wrappers (65% Dark Base) ─── */
         html.dark .signature-container, .dark .signature-container,
-        html.dark .dashboard-widget, .dark .dashboard-widget,
+        html.dark .section-wrapper, .dark .section-wrapper,
         html.dark .control-room-card, .dark .control-room-card,
-        html.dark .passport-card-3d, .dark .passport-card-3d,
+        html.dark .outer-container, .dark .outer-container,
+        html.dark .filter-bar-container, .dark .filter-bar-container,
+        html.dark .main-section-box, .dark .main-section-box,
         html.dark .bg-slate-900, .dark .bg-slate-900,
         html.dark .bg-slate-900\/90, .dark .bg-slate-900\/90,
         html.dark .bg-slate-950, .dark .bg-slate-950,
@@ -959,15 +955,58 @@
         html.dark .dark\:bg-slate-900\/60, .dark .dark\:bg-slate-900\/60,
         html.dark .dark\:bg-slate-950, .dark .dark\:bg-slate-950,
         html.dark .dark\:bg-slate-950\/50, .dark .dark\:bg-slate-950\/50,
-        html.dark .dark\:bg-slate-950\/85, .dark .dark\:bg-slate-950\/85,
-        html.dark .dark\:bg-black\/40, .dark .dark\:bg-black\/40,
-        html.dark .dark\:bg-black\/50, .dark .dark\:bg-black\/50 {
-            background: rgba(8, 11, 18, 0.35) !important;
-            background-color: rgba(8, 11, 18, 0.35) !important;
+        html.dark .dark\:bg-slate-950\/85, .dark .dark\:bg-slate-950\/85 {
+            background: rgba(4, 6, 11, 0.65) !important;
+            background-color: rgba(4, 6, 11, 0.65) !important;
             backdrop-filter: blur(24px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
-            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.45) !important;
+            border: 1px solid rgba(255, 255, 255, 0.10) !important;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.55) !important;
+        }
+
+        /* ─── 2. Inner Cards / Nested Elements / Feature Blocks (40% Translucent Dark Base) ─── */
+        html.dark .card-tilt, .dark .card-tilt,
+        html.dark .card-tilt-3d, .dark .card-tilt-3d,
+        html.dark .career-card, .dark .career-card,
+        html.dark .multimedia-card, .dark .multimedia-card,
+        html.dark .resource-card, .dark .resource-card,
+        html.dark .story-card, .dark .story-card,
+        html.dark .quiz-card, .dark .quiz-card,
+        html.dark [data-tilt], .dark [data-tilt],
+        html.dark .app-card, .dark .app-card,
+        html.dark .glass-panel, .dark .glass-panel,
+        html.dark .signature-card, .dark .signature-card,
+        html.dark .dashboard-widget, .dark .dashboard-widget,
+        html.dark .passport-card-3d, .dark .passport-card-3d,
+        html.dark .inner-card, .dark .inner-card,
+        html.dark .dark\:bg-black\/40, .dark .dark\:bg-black\/40,
+        html.dark .dark\:bg-black\/50, .dark .dark\:bg-black\/50,
+        html.dark .dark\:bg-white\/5, .dark .dark\:bg-white\/5,
+        html.dark .dark\:bg-white\/\[0\.03\], .dark .dark\:bg-white\/\[0\.03\],
+        html.dark .dark\:bg-white\/\[0\.02\], .dark .dark\:bg-white\/\[0\.02\],
+        html.dark .dark\:bg-slate-800, .dark .dark\:bg-slate-800,
+        html.dark .dark\:bg-slate-800\/50, .dark .dark\:bg-slate-800\/50,
+        html.dark .dark\:bg-slate-850, .dark .dark\:bg-slate-850,
+        html.dark .signature-container .card-tilt,
+        html.dark .signature-container .app-card,
+        html.dark .signature-container .career-card,
+        html.dark .signature-container .resource-card,
+        html.dark .signature-container .story-card,
+        html.dark .control-room-card > div,
+        html.dark .control-room-card .rounded-2xl,
+        html.dark .outer-container .card-tilt,
+        html.dark .outer-container .app-card,
+        html.dark .dark\:bg-\[\#080B12\] .card-tilt,
+        html.dark .dark\:bg-\[\#080B12\] .app-card,
+        html.dark .dark\:bg-\[\#080B12\] .career-card,
+        html.dark .dark\:bg-\[\#080B12\] .resource-card,
+        html.dark .dark\:bg-\[\#080B12\] .story-card {
+            background: rgba(6, 8, 15, 0.40) !important;
+            background-color: rgba(6, 8, 15, 0.40) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.35) !important;
         }
 
         /* Universal Interactive Card Hover State */
@@ -982,38 +1021,32 @@
         html.dark .app-card:hover, .dark .app-card:hover,
         html.dark .glass-panel:hover, .dark .glass-panel:hover,
         html.dark .signature-card:hover, .dark .signature-card:hover,
-        html.dark .dashboard-widget:hover, .dark .dashboard-widget:hover,
-        html.dark .control-room-card:hover, .dark .control-room-card:hover {
-            background: rgba(15, 23, 42, 0.45) !important;
-            background-color: rgba(15, 23, 42, 0.45) !important;
+        html.dark .dashboard-widget:hover, .dark .dashboard-widget:hover {
+            background: rgba(18, 24, 38, 0.55) !important;
+            background-color: rgba(18, 24, 38, 0.55) !important;
             backdrop-filter: blur(24px) saturate(190%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
             border-color: rgba(139, 92, 246, 0.35) !important;
             transform: translate3d(0, -3px, 0);
-            box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.60) !important;
+            box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.55) !important;
         }
 
-        /* Universal Dark Mode Secondary Panels, Drawers & Filter Bars */
-        html.dark .dark\:bg-slate-800, .dark .dark\:bg-slate-800,
-        html.dark .dark\:bg-slate-800\/50, .dark .dark\:bg-slate-800\/50,
-        html.dark .dark\:bg-slate-850, .dark .dark\:bg-slate-850,
-        html.dark .dark\:bg-white\/5, .dark .dark\:bg-white\/5,
-        html.dark .dark\:bg-white\/10, .dark .dark\:bg-white\/10,
+        /* Universal Dark Mode Secondary Panels, Drawers & Mini Elements */
         html.dark .inner-panel, .dark .inner-panel,
         html.dark .secondary-container, .dark .secondary-container {
-            background: rgba(6, 8, 15, 0.25) !important;
-            background-color: rgba(6, 8, 15, 0.25) !important;
+            background: rgba(6, 8, 15, 0.30) !important;
+            background-color: rgba(6, 8, 15, 0.30) !important;
             backdrop-filter: blur(16px) !important;
             -webkit-backdrop-filter: blur(16px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
         }
 
         /* Global Footer Glass Standard (Dark Mode) */
         html.dark footer {
-            background-color: rgba(4, 6, 11, 0.45) !important;
+            background-color: rgba(4, 6, 11, 0.65) !important;
             backdrop-filter: blur(24px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
         }
 
         /* Pristine Dark Mode Typography */
