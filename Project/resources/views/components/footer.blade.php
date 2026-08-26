@@ -1,5 +1,5 @@
 <!-- ══════════════════ STRUCTURED SLATE FOOTER COMPONENT ══════════════════ -->
-<footer class="relative z-10 mt-16 border-t border-slate-200/80 dark:border-white/[0.06] bg-white/90 dark:bg-[#050507] text-slate-600 dark:text-slate-400 backdrop-blur-2xl transition-colors duration-500">
+<footer id="globalFooter" class="relative z-10 w-full shrink-0 mt-16 border-t border-slate-200/80 dark:border-white/[0.06] bg-white/90 dark:bg-[#050507] text-slate-600 dark:text-slate-400 backdrop-blur-2xl transition-colors duration-500">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         
         {{-- Newsletter Subscription Banner --}}

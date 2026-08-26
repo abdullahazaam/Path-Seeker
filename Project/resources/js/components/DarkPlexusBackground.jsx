@@ -1,12 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 /**
- * DarkPlexusBackground - Scaled Floating Plexus Network Clusters ("Jal") (Dark Mode)
- * Features:
- *  1. 14 scaled floating constellation clusters with smooth drifting & rotation
- *  2. Connected nodes with distinct glowing lines (#7657FF and #12CFF3) at 20-32% opacity
- *  3. GPU-accelerated 60FPS canvas loop with auto pause on tab inactive / theme change
- *  4. Deep space background (#030508)
+ * DarkPlexusBackground - Ultra-Optimized Zero-Lag Plexus Background Component (Dark Mode)
  */
 export const DarkPlexusBackground = () => {
     const canvasRef = useRef(null);
@@ -20,60 +15,55 @@ export const DarkPlexusBackground = () => {
 
         let width = window.innerWidth;
         let height = window.innerHeight;
-        let dpr = Math.min(window.devicePixelRatio || 1, 2);
         let animationFrameId = null;
-        let lastTime = 0;
-        let time = 0;
+        let lastDrawTime = 0;
+        const TARGET_FPS = 45;
+        const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
-        const CLUSTER_COUNT = 14;
+        const CLUSTER_COUNT = 9;
         const clusters = [];
 
         const initClusters = () => {
             clusters.length = 0;
             const basePositions = [
-                { x: 0.10, y: 0.15 },
-                { x: 0.35, y: 0.12 },
-                { x: 0.65, y: 0.14 },
-                { x: 0.90, y: 0.16 },
-                { x: 0.22, y: 0.38 },
-                { x: 0.50, y: 0.32 },
-                { x: 0.78, y: 0.40 },
-                { x: 0.12, y: 0.62 },
-                { x: 0.42, y: 0.60 },
-                { x: 0.88, y: 0.64 },
-                { x: 0.25, y: 0.84 },
-                { x: 0.55, y: 0.82 },
-                { x: 0.75, y: 0.88 },
-                { x: 0.92, y: 0.85 }
+                { x: 0.12, y: 0.18 },
+                { x: 0.50, y: 0.15 },
+                { x: 0.88, y: 0.20 },
+                { x: 0.22, y: 0.48 },
+                { x: 0.78, y: 0.45 },
+                { x: 0.50, y: 0.55 },
+                { x: 0.15, y: 0.82 },
+                { x: 0.52, y: 0.85 },
+                { x: 0.85, y: 0.80 }
             ];
 
             for (let i = 0; i < CLUSTER_COUNT; i++) {
                 const pos = basePositions[i] || { x: Math.random(), y: Math.random() };
                 const isCyan = i % 2 === 0;
-                const nodeCount = 8 + Math.floor(Math.random() * 6);
-                const clusterRadius = 90 + Math.random() * 55;
+                const nodeCount = 6 + (i % 3);
+                const clusterRadius = 85 + (i % 4) * 15;
                 const nodes = [];
 
                 for (let j = 0; j < nodeCount; j++) {
-                    const angle = Math.random() * Math.PI * 2;
-                    const dist = Math.random() * clusterRadius;
+                    const angle = (j / nodeCount) * Math.PI * 2 + Math.random() * 0.5;
+                    const dist = 25 + Math.random() * (clusterRadius - 25);
                     nodes.push({
                         lx: Math.cos(angle) * dist,
                         ly: Math.sin(angle) * dist,
-                        vx: (Math.random() - 0.5) * 0.28,
-                        vy: (Math.random() - 0.5) * 0.28,
-                        radius: 1.6 + Math.random() * 1.6
+                        vx: ((j % 2 === 0 ? 1 : -1) * (0.15 + Math.random() * 0.12)),
+                        vy: ((j % 3 === 0 ? 1 : -1) * (0.15 + Math.random() * 0.12)),
+                        radius: 1.8
                     });
                 }
 
                 clusters.push({
                     cx: pos.x * width,
                     cy: pos.y * height,
-                    vx: (Math.random() - 0.5) * 0.38,
-                    vy: (Math.random() - 0.5) * 0.38,
-                    angle: Math.random() * Math.PI * 2,
-                    rotSpeed: (Math.random() - 0.5) * 0.0035,
-                    connectDist: 105,
+                    vx: (i % 2 === 0 ? 0.18 : -0.18),
+                    vy: (i % 3 === 0 ? 0.15 : -0.15),
+                    angle: (i * 0.7),
+                    rotSpeed: (i % 2 === 0 ? 0.0025 : -0.0025),
+                    connectDist: 100,
                     isCyan: isCyan,
                     r: isCyan ? 18 : 118,
                     g: isCyan ? 207 : 87,
@@ -84,36 +74,41 @@ export const DarkPlexusBackground = () => {
         };
 
         const handleResize = () => {
-            dpr = Math.min(window.devicePixelRatio || 1, 2);
             width = window.innerWidth;
             height = window.innerHeight;
-            canvas.width = Math.floor(width * dpr);
-            canvas.height = Math.floor(height * dpr);
+            canvas.width = width;
+            canvas.height = height;
             canvas.style.width = width + 'px';
             canvas.style.height = height + 'px';
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             initClusters();
         };
         handleResize();
-        window.addEventListener('resize', handleResize, { passive: true });
+
+        let resizeTimer = null;
+        const onResize = () => {
+            if (resizeTimer) clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(handleResize, 150);
+        };
+        window.addEventListener('resize', onResize, { passive: true });
 
         const draw = (now) => {
-            if (!lastTime) lastTime = now;
-            const dt = Math.min((now - lastTime) / 1000, 0.1);
-            lastTime = now;
-            time += dt;
+            animationFrameId = requestAnimationFrame(draw);
+
+            const elapsed = now - lastDrawTime;
+            if (elapsed < FRAME_INTERVAL) return;
+            lastDrawTime = now - (elapsed % FRAME_INTERVAL);
 
             ctx.fillStyle = '#030508';
             ctx.fillRect(0, 0, width, height);
 
-            const radialGrad1 = ctx.createRadialGradient(width * 0.2, height * 0.3, 10, width * 0.2, height * 0.3, width * 0.5);
-            radialGrad1.addColorStop(0, 'rgba(118, 87, 255, 0.045)');
+            const radialGrad1 = ctx.createRadialGradient(width * 0.25, height * 0.25, 20, width * 0.25, height * 0.25, width * 0.45);
+            radialGrad1.addColorStop(0, 'rgba(118, 87, 255, 0.035)');
             radialGrad1.addColorStop(1, 'rgba(3, 5, 8, 0)');
             ctx.fillStyle = radialGrad1;
             ctx.fillRect(0, 0, width, height);
 
-            const radialGrad2 = ctx.createRadialGradient(width * 0.8, height * 0.7, 10, width * 0.8, height * 0.7, width * 0.55);
-            radialGrad2.addColorStop(0, 'rgba(18, 207, 243, 0.040)');
+            const radialGrad2 = ctx.createRadialGradient(width * 0.75, height * 0.75, 20, width * 0.75, height * 0.75, width * 0.45);
+            radialGrad2.addColorStop(0, 'rgba(18, 207, 243, 0.035)');
             radialGrad2.addColorStop(1, 'rgba(3, 5, 8, 0)');
             ctx.fillStyle = radialGrad2;
             ctx.fillRect(0, 0, width, height);
@@ -121,15 +116,15 @@ export const DarkPlexusBackground = () => {
             for (let c = 0; c < clusters.length; c++) {
                 const cl = clusters[c];
 
-                cl.cx += cl.vx * (dt * 60);
-                cl.cy += cl.vy * (dt * 60);
-                cl.angle += cl.rotSpeed * (dt * 60);
+                cl.cx += cl.vx;
+                cl.cy += cl.vy;
+                cl.angle += cl.rotSpeed;
 
-                const padding = 120;
-                if (cl.cx < -padding) cl.cx = width + padding;
-                if (cl.cx > width + padding) cl.cx = -padding;
-                if (cl.cy < -padding) cl.cy = height + padding;
-                if (cl.cy > height + padding) cl.cy = -padding;
+                const pad = 100;
+                if (cl.cx < -pad) cl.cx = width + pad;
+                if (cl.cx > width + pad) cl.cx = -pad;
+                if (cl.cy < -pad) cl.cy = height + pad;
+                if (cl.cy > height + pad) cl.cy = -pad;
 
                 const cosA = Math.cos(cl.angle);
                 const sinA = Math.sin(cl.angle);
@@ -137,11 +132,10 @@ export const DarkPlexusBackground = () => {
                 const worldNodes = [];
                 for (let i = 0; i < cl.nodes.length; i++) {
                     const n = cl.nodes[i];
-                    n.lx += n.vx * (dt * 60);
-                    n.ly += n.vy * (dt * 60);
+                    n.lx += n.vx;
+                    n.ly += n.vy;
 
-                    const d = Math.hypot(n.lx, n.ly);
-                    if (d > 135) {
+                    if (n.lx * n.lx + n.ly * n.ly > 14400) {
                         n.vx *= -1;
                         n.vy *= -1;
                     }
@@ -151,16 +145,18 @@ export const DarkPlexusBackground = () => {
                     worldNodes.push({ wx, wy, radius: n.radius });
                 }
 
+                const connectDistSq = cl.connectDist * cl.connectDist;
                 for (let i = 0; i < worldNodes.length; i++) {
                     for (let j = i + 1; j < worldNodes.length; j++) {
                         const dx = worldNodes[i].wx - worldNodes[j].wx;
                         const dy = worldNodes[i].wy - worldNodes[j].wy;
-                        const dist = Math.hypot(dx, dy);
+                        const distSq = dx * dx + dy * dy;
 
-                        if (dist < cl.connectDist) {
-                            const alpha = (1 - dist / cl.connectDist) * 0.32;
+                        if (distSq < connectDistSq) {
+                            const dist = Math.sqrt(distSq);
+                            const alpha = (1 - dist / cl.connectDist) * 0.28;
                             ctx.strokeStyle = `rgba(${cl.r}, ${cl.g}, ${cl.b}, ${alpha})`;
-                            ctx.lineWidth = 1.0;
+                            ctx.lineWidth = 0.9;
                             ctx.beginPath();
                             ctx.moveTo(worldNodes[i].wx, worldNodes[i].wy);
                             ctx.lineTo(worldNodes[j].wx, worldNodes[j].wy);
@@ -172,26 +168,26 @@ export const DarkPlexusBackground = () => {
                 for (let i = 0; i < worldNodes.length; i++) {
                     const wn = worldNodes[i];
 
-                    ctx.fillStyle = `rgba(${cl.r}, ${cl.g}, ${cl.b}, 0.55)`;
+                    ctx.fillStyle = `rgba(${cl.r}, ${cl.g}, ${cl.b}, 0.50)`;
                     ctx.beginPath();
-                    ctx.arc(wn.wx, wn.wy, wn.radius, 0, Math.PI * 2);
+                    ctx.arc(wn.wx, wn.wy, wn.radius, 0, 6.283);
                     ctx.fill();
 
-                    ctx.fillStyle = `rgba(${cl.r}, ${cl.g}, ${cl.b}, 0.18)`;
+                    ctx.fillStyle = `rgba(${cl.r}, ${cl.g}, ${cl.b}, 0.15)`;
                     ctx.beginPath();
-                    ctx.arc(wn.wx, wn.wy, wn.radius * 2.4, 0, Math.PI * 2);
+                    ctx.arc(wn.wx, wn.wy, wn.radius * 2.2, 0, 6.283);
                     ctx.fill();
                 }
             }
-
-            animationFrameId = requestAnimationFrame(draw);
         };
 
+        lastDrawTime = performance.now();
         animationFrameId = requestAnimationFrame(draw);
 
         return () => {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', onResize);
+            if (resizeTimer) clearTimeout(resizeTimer);
         };
     }, []);
 
@@ -199,7 +195,7 @@ export const DarkPlexusBackground = () => {
         <canvas
             ref={canvasRef}
             id="darkPlexusCanvas"
-            className="fixed inset-0 w-full h-full pointer-events-none z-0 bg-[#030508]"
+            className="fixed inset-0 w-full h-full pointer-events-none z-0 bg-[#030508] will-change-transform transform-gpu"
         />
     );
 };
