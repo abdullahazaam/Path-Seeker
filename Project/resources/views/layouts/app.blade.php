@@ -696,6 +696,26 @@
             filter: blur(1px);
         }
 
+        /* ─── Dark Mode 3D Glass Bubble System (PathSeeker Brand Colors) ─── */
+        .dark .glass-bubble-3d {
+            border: 1.5px solid rgba(255, 255, 255, 0.16);
+            box-shadow: inset -15px -15px 35px rgba(118, 87, 255, 0.22),
+                        inset 15px 15px 35px rgba(18, 207, 243, 0.18),
+                        0 25px 50px -10px rgba(0, 0, 0, 0.55);
+        }
+        .dark .glass-bubble-cyan {
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.25) 0%, rgba(18, 207, 243, 0.32) 40%, rgba(118, 87, 255, 0.22) 75%, rgba(6, 8, 15, 0.65) 100%);
+        }
+        .dark .glass-bubble-purple {
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.25) 0%, rgba(118, 87, 255, 0.32) 40%, rgba(18, 207, 243, 0.18) 75%, rgba(6, 8, 15, 0.65) 100%);
+        }
+        .dark .glass-bubble-blue {
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.25) 0%, rgba(59, 130, 246, 0.32) 40%, rgba(18, 207, 243, 0.20) 75%, rgba(6, 8, 15, 0.65) 100%);
+        }
+        .dark .glass-bubble-specular {
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 80%);
+        }
+
         @keyframes bubbleFloat1 {
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
             50% { transform: translate3d(35px, -30px, 0) scale(1.05); }
@@ -1058,64 +1078,49 @@
             background: #080B12 !important;
             color: #F8FAFC !important;
         }
-        /* ══════════════════ DARK MODE 3D CANVAS BACKGROUND STYLING ══════════════════ */
-        #darkCanvasBg {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased transition-colors duration-500 relative overflow-x-hidden bg-[#F8FAFC] dark:bg-[#06080f] text-[#111827] dark:text-[#f8fafc]">
 
-    <!-- ══════════════════ LIGHT MODE 3D AMBIENT BACKGROUND LAYER (STRICTLY LIGHT THEME ONLY) ══════════════════ -->
-    <div id="ambientBackgroundLayer" class="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#F8FAFC] block dark:hidden transition-colors duration-500" aria-hidden="true">
+    <!-- ══════════════════ UNIFIED 3D AMBIENT BACKGROUND LAYER (LIGHT & DARK GLASS BUBBLES) ══════════════════ -->
+    <div id="ambientBackgroundLayer" class="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#F8FAFC] dark:bg-[#06080f] transition-colors duration-500" aria-hidden="true">
         
-        <!-- ─── 3D AMBIENT GLASS-BUBBLE & PASTEL GRADIENT LAYER (STRICTLY LIGHT THEME ONLY) ─── -->
-        <div class="absolute inset-0 block dark:hidden pointer-events-none">
-            <!-- 1. Soft Pastel Radial Gradient Light Pools -->
-            <div class="absolute -top-[12%] -left-[6%] w-[62vw] h-[62vw] max-w-[920px] max-h-[920px] rounded-full bg-gradient-to-br from-[#12CFF3]/[0.15] via-[#7657FF]/[0.09] to-transparent blur-[130px] animate-aurora-drift-1"></div>
-            <div class="absolute top-[32%] -right-[8%] w-[58vw] h-[58vw] max-w-[880px] max-h-[880px] rounded-full bg-gradient-to-bl from-[#7657FF]/[0.14] via-[#3b82f6]/[0.08] to-transparent blur-[130px] animate-aurora-drift-2"></div>
-            <div class="absolute -bottom-[12%] left-[8%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] rounded-full bg-gradient-to-tr from-[#3b82f6]/[0.12] via-[#12CFF3]/[0.09] to-transparent blur-[140px] animate-aurora-drift-3"></div>
+        <!-- 1. Soft Ambient Radial Gradient Light Pools -->
+        <div class="absolute -top-[12%] -left-[6%] w-[62vw] h-[62vw] max-w-[920px] max-h-[920px] rounded-full bg-gradient-to-br from-[#12CFF3]/[0.15] dark:from-[#12CFF3]/[0.16] via-[#7657FF]/[0.09] dark:via-[#7657FF]/[0.12] to-transparent blur-[130px] animate-aurora-drift-1"></div>
+        <div class="absolute top-[32%] -right-[8%] w-[58vw] h-[58vw] max-w-[880px] max-h-[880px] rounded-full bg-gradient-to-bl from-[#7657FF]/[0.14] dark:from-[#7657FF]/[0.15] via-[#3b82f6]/[0.08] dark:via-[#3b82f6]/[0.10] to-transparent blur-[130px] animate-aurora-drift-2"></div>
+        <div class="absolute -bottom-[12%] left-[8%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] rounded-full bg-gradient-to-tr from-[#3b82f6]/[0.12] dark:from-[#3b82f6]/[0.12] via-[#12CFF3]/[0.09] dark:via-[#12CFF3]/[0.10] to-transparent blur-[140px] animate-aurora-drift-3"></div>
 
-            <!-- 2. Smooth 3D Frosted Glass Spheres / Bubbles with Specular Highlights & Depth -->
-            <div class="w-72 h-72 top-[5%] left-[2%] glass-bubble-3d glass-bubble-cyan anim-bubble-1">
-                <div class="glass-bubble-specular"></div>
-            </div>
-            <div class="w-64 h-64 top-[8%] right-[5%] glass-bubble-3d glass-bubble-purple anim-bubble-2">
-                <div class="glass-bubble-specular"></div>
-            </div>
-            <div class="w-52 h-52 top-[38%] left-[4%] glass-bubble-3d glass-bubble-blue anim-bubble-3">
-                <div class="glass-bubble-specular"></div>
-            </div>
-            <div class="w-80 h-80 top-[45%] right-[2%] glass-bubble-3d glass-bubble-cyan anim-bubble-4">
-                <div class="glass-bubble-specular"></div>
-            </div>
-            <div class="w-60 h-60 bottom-[8%] left-[12%] glass-bubble-3d glass-bubble-purple anim-bubble-1">
-                <div class="glass-bubble-specular"></div>
-            </div>
-            <div class="w-56 h-56 bottom-[12%] right-[10%] glass-bubble-3d glass-bubble-blue anim-bubble-2">
-                <div class="glass-bubble-specular"></div>
-            </div>
-            <!-- Floating Micro Glass Pearls -->
-            <div class="w-20 h-20 top-[26%] left-[46%] glass-bubble-3d glass-bubble-cyan anim-bubble-3">
-                <div class="glass-bubble-specular"></div>
-            </div>
-            <div class="w-24 h-24 bottom-[28%] right-[25%] glass-bubble-3d glass-bubble-blue anim-bubble-4">
-                <div class="glass-bubble-specular"></div>
-            </div>
-            <div class="w-16 h-16 top-[68%] left-[32%] glass-bubble-3d glass-bubble-purple anim-bubble-1">
-                <div class="glass-bubble-specular"></div>
-            </div>
+        <!-- 2. Smooth 3D Frosted Glass Spheres / Bubbles with Specular Highlights & Depth (GPU Accelerated) -->
+        <div class="w-72 h-72 top-[5%] left-[2%] glass-bubble-3d glass-bubble-cyan anim-bubble-1">
+            <div class="glass-bubble-specular"></div>
+        </div>
+        <div class="w-64 h-64 top-[8%] right-[5%] glass-bubble-3d glass-bubble-purple anim-bubble-2">
+            <div class="glass-bubble-specular"></div>
+        </div>
+        <div class="w-52 h-52 top-[38%] left-[4%] glass-bubble-3d glass-bubble-blue anim-bubble-3">
+            <div class="glass-bubble-specular"></div>
+        </div>
+        <div class="w-80 h-80 top-[45%] right-[2%] glass-bubble-3d glass-bubble-cyan anim-bubble-4">
+            <div class="glass-bubble-specular"></div>
+        </div>
+        <div class="w-60 h-60 bottom-[8%] left-[12%] glass-bubble-3d glass-bubble-purple anim-bubble-1">
+            <div class="glass-bubble-specular"></div>
+        </div>
+        <div class="w-56 h-56 bottom-[12%] right-[10%] glass-bubble-3d glass-bubble-blue anim-bubble-2">
+            <div class="glass-bubble-specular"></div>
+        </div>
+        <!-- Floating Micro Glass Pearls -->
+        <div class="w-20 h-20 top-[26%] left-[46%] glass-bubble-3d glass-bubble-cyan anim-bubble-3">
+            <div class="glass-bubble-specular"></div>
+        </div>
+        <div class="w-24 h-24 bottom-[28%] right-[25%] glass-bubble-3d glass-bubble-blue anim-bubble-4">
+            <div class="glass-bubble-specular"></div>
+        </div>
+        <div class="w-16 h-16 top-[68%] left-[32%] glass-bubble-3d glass-bubble-purple anim-bubble-1">
+            <div class="glass-bubble-specular"></div>
         </div>
 
     </div>
-
-    <!-- ══════════════════ DEDICATED DARK MODE HTML5 CANVAS 3D BACKGROUND (STRICTLY DARK THEME ONLY) ══════════════════ -->
-    @include('components.dark-mode-canvas')
 
     <!-- ══════════════════ FLOATING GLASS PILL NAVBAR ══════════════════ -->
     @include('components.navbar')
@@ -1573,11 +1578,9 @@
             if (theme === 'light') {
                 html.classList.remove('dark');
                 html.setAttribute('data-theme', 'light');
-                if (window.stopDarkCanvasEngine) window.stopDarkCanvasEngine();
             } else {
                 html.classList.add('dark');
                 html.setAttribute('data-theme', 'dark');
-                if (window.startDarkCanvasEngine) window.startDarkCanvasEngine();
             }
             syncThemeIcon(theme);
         }
