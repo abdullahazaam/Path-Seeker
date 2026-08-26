@@ -733,6 +733,7 @@
                                     <i class="fa-solid fa-folder text-[8px] mr-0.5"></i>{{ $res->category }}
                                 </span>
                                 <h4 class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors line-clamp-1 font-display">{{ $res->title }}</h4>
+                                <p class="text-[10px] text-slate-500 dark:text-slate-400 line-clamp-1">{{ $res->description ?? 'Verified technical blueprint and engineering handbook' }}</p>
                             </div>
                         </div>
                         <a href="{{ $res->file_url }}" target="_blank" class="shrink-0 px-3 py-1.5 text-xs font-bold text-sky-600 dark:text-sky-400 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 hover:border-sky-500/40 hover:text-sky-700 dark:hover:text-sky-300 transition-all flex items-center gap-1.5 shadow-sm">
