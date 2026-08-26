@@ -518,37 +518,21 @@
         .reveal-element,
         .reveal-on-scroll,
         [data-reveal] {
-            opacity: 0;
-            transform: translate3d(0, 40px, 0) scale3d(0.96, 0.96, 1);
-            -webkit-transform: translate3d(0, 40px, 0) scale3d(0.96, 0.96, 1);
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
 
-        .reveal-element.reveal-fade,
-        .reveal-on-scroll.reveal-fade,
-        [data-reveal="fade"] {
-            transform: translate3d(0, 0, 0) scale3d(0.98, 0.98, 1);
-        }
-
-        .reveal-element.reveal-left,
-        .reveal-on-scroll.reveal-left,
-        [data-reveal="left"] {
-            transform: translate3d(-40px, 0, 0) scale3d(0.96, 0.96, 1);
-        }
-
-        .reveal-element.reveal-right,
-        .reveal-on-scroll.reveal-right,
-        [data-reveal="right"] {
-            transform: translate3d(40px, 0, 0) scale3d(0.96, 0.96, 1);
-        }
-
-        .reveal-element.reveal-scale,
-        .reveal-on-scroll.reveal-scale,
-        [data-reveal="scale"] {
-            transform: translate3d(0, 0, 0) scale3d(0.92, 0.92, 1);
+        .reveal-element.reveal-hidden,
+        .reveal-on-scroll.reveal-hidden,
+        [data-reveal].reveal-hidden {
+            opacity: 0 !important;
+            transform: translate3d(0, 30px, 0) scale3d(0.98, 0.98, 1) !important;
+            -webkit-transform: translate3d(0, 30px, 0) scale3d(0.98, 0.98, 1) !important;
         }
 
         /* Revealed State (locks in place, strictly composited) */
@@ -756,40 +740,28 @@
         }
 
         /* Strict Light Mode Text Hierarchy */
-        html:not(.dark) .text-slate-900,
-        html:not(.dark) .text-slate-800 {
-            color: #111827 !important;
-        }
-        html:not(.dark) .text-slate-700,
-        html:not(.dark) .text-slate-600 {
-            color: #374151 !important;
-        }
-        html:not(.dark) .text-slate-500,
-        html:not(.dark) .text-slate-400 {
-            color: #667085 !important;
-        }
-        html:not(.dark) .text-slate-300 {
-            color: #98A2B3 !important;
-        }
-        html:not(.dark) .text-white {
-            color: #111827;
-        }
+        html:not(.dark) .text-slate-900 { color: #111827 !important; }
+        html:not(.dark) .text-slate-800 { color: #1f2937 !important; }
+        html:not(.dark) .text-slate-700 { color: #374151 !important; }
+        html:not(.dark) .text-slate-600 { color: #4b5563 !important; }
+        html:not(.dark) .text-slate-500 { color: #6b7280 !important; }
+        html:not(.dark) .text-slate-400 { color: #9ca3af !important; }
+        html:not(.dark) .text-slate-300 { color: #d1d5db !important; }
 
-        /* Preserve Intentional White Text on Buttons, Modals & Footer */
+        /* Preserve Intentional White Text on Buttons, Dark Containers, Modals & Footer in Light Mode */
         html:not(.dark) a.text-white,
         html:not(.dark) button.text-white,
         html:not(.dark) span.text-white,
-        html:not(.dark) div.bg-gradient-to-tr .text-white,
-        html:not(.dark) a.bg-gradient-to-r,
-        html:not(.dark) button.bg-gradient-to-r,
         html:not(.dark) .btn-primary,
         html:not(.dark) .btn-danger,
         html:not(.dark) .btn-sweep,
         html:not(.dark) .btn-white-text,
-        html:not(.dark) .bg-[#050507] .text-white,
+        html:not(.dark) .bg-slate-900 .text-white,
         html:not(.dark) .bg-slate-950 .text-white,
+        html:not(.dark) .bg-[#080B12] .text-white,
         html:not(.dark) footer .text-white,
-        html:not(.dark) .text-slate-950 {
+        html:not(.dark) footer p,
+        html:not(.dark) footer a {
             color: inherit;
         }
         html:not(.dark) .btn-primary,
@@ -811,22 +783,88 @@
         html:not(.dark) select,
         html:not(.dark) textarea {
             background-color: #FFFFFF !important;
-            border-color: rgba(15, 23, 42, 0.12) !important;
+            border-color: rgba(15, 23, 42, 0.14) !important;
             color: #111827 !important;
+        }
+        html:not(.dark) input::placeholder,
+        html:not(.dark) textarea::placeholder {
+            color: #9ca3af !important;
         }
         html:not(.dark) input:focus,
         html:not(.dark) select:focus,
         html:not(.dark) textarea:focus {
             border-color: #7657FF !important;
             box-shadow: 0 0 0 3px rgba(118, 87, 255, 0.12) !important;
-        }
-        select.app-input option {
-            background: #050507;
-            color: #f1f5f9;
+            color: #111827 !important;
         }
         html:not(.dark) select.app-input option {
             background: #ffffff;
             color: #111827;
+        }
+
+        /* ══════════════════ PRISTINE DARK MODE TYPOGRAPHY & FORM CONTROLS ══════════════════ */
+        html.dark, .dark {
+            background-color: #06080f;
+            color: #F8FAFC;
+        }
+        html.dark h1, .dark h1,
+        html.dark h2, .dark h2,
+        html.dark h3, .dark h3,
+        html.dark h4, .dark h4,
+        html.dark h5, .dark h5,
+        html.dark h6, .dark h6 {
+            color: #FFFFFF;
+        }
+        html.dark p, .dark p {
+            color: #CBD5E1;
+        }
+        html.dark .text-slate-900, .dark .text-slate-900,
+        html.dark .text-slate-800, .dark .text-slate-800 {
+            color: #F8FAFC !important;
+        }
+        html.dark .text-slate-700, .dark .text-slate-700,
+        html.dark .text-slate-600, .dark .text-slate-600 {
+            color: #CBD5E1 !important;
+        }
+        html.dark .text-slate-500, .dark .text-slate-500,
+        html.dark .text-slate-400, .dark .text-slate-400 {
+            color: #94A3B8 !important;
+        }
+        html.dark .text-white, .dark .text-white {
+            color: #FFFFFF !important;
+        }
+        html.dark .btn-primary,
+        html.dark .btn-sweep,
+        html.dark .btn-primary *,
+        html.dark .btn-sweep * {
+            color: #040812 !important;
+        }
+
+        /* Dark Mode Form Inputs, Search Bars & Dropdowns */
+        html.dark .app-input, .dark .app-input,
+        html.dark input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="submit"]):not([type="button"]),
+        .dark input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="submit"]):not([type="button"]),
+        html.dark select, .dark select,
+        html.dark textarea, .dark textarea {
+            background-color: #080B12 !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            color: #F8FAFC !important;
+        }
+        html.dark input::placeholder, .dark input::placeholder,
+        html.dark textarea::placeholder, .dark textarea::placeholder {
+            color: #94A3B8 !important;
+        }
+        html.dark input:focus, .dark input:focus,
+        html.dark select:focus, .dark select:focus,
+        html.dark textarea:focus, .dark textarea:focus {
+            border-color: #00f2fe !important;
+            box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.15) !important;
+            color: #FFFFFF !important;
+        }
+        html.dark select option, .dark select option,
+        html.dark select.app-input option, .dark select.app-input option {
+            background: #080B12 !important;
+            color: #F8FAFC !important;
         }
     </style>
 </head>
@@ -1488,15 +1526,17 @@
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             
             function setupScrollTriggerAnimations() {
-                // If reduced motion is requested, reveal all elements immediately and exit
-                if (prefersReducedMotion) {
-                    document.querySelectorAll('.reveal-element, .reveal-on-scroll, [data-reveal], main section, .career-card, .app-card, .glass-panel, .card-tilt-3d, .grid > div').forEach(el => {
+                // Ensure all headers, navigation, above-the-fold content, and closing CTA banners are 100% visible
+                document.querySelectorAll('.reveal-element, .reveal-on-scroll, [data-reveal]').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (prefersReducedMotion || (rect.top < window.innerHeight * 1.05 && rect.bottom > -50)) {
                         el.classList.add('revealed');
                         el.style.opacity = '1';
                         el.style.transform = 'none';
-                    });
-                    return;
-                }
+                    }
+                });
+
+                if (prefersReducedMotion) return;
 
                 // Check if GSAP & ScrollTrigger are available
                 const hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
@@ -1511,7 +1551,7 @@
                     const bgLayer = document.getElementById('ambientBackgroundLayer');
                     if (bgLayer && !document.documentElement.classList.contains('dark')) {
                         gsap.to(bgLayer, {
-                            yPercent: 10,
+                            yPercent: 8,
                             ease: 'none',
                             scrollTrigger: {
                                 trigger: document.body,
@@ -1522,73 +1562,39 @@
                         });
                     }
 
-                    // 2. Cinematic Staggered Reveal for Sections (Heading -> Description -> Cards)
-                    const sections = document.querySelectorAll('main > section, main > div > section, .reveal-element, .reveal-on-scroll, [data-reveal]');
-                    sections.forEach((section) => {
-                        if (section.dataset.gsapActive) return;
-                        section.dataset.gsapActive = 'true';
+                    // 2. Controlled Below-the-fold Section & Card Reveals
+                    const revealTargets = document.querySelectorAll('.reveal-element, .reveal-on-scroll, [data-reveal]');
+                    revealTargets.forEach((target) => {
+                        if (target.dataset.gsapActive) return;
+                        target.dataset.gsapActive = 'true';
 
-                        const rect = section.getBoundingClientRect();
-                        const isAboveFold = rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
-
-                        // Find key child elements to stagger (Heading, Description/Subtext, Action Bars, Grids)
-                        const childrenToAnimate = section.querySelectorAll(':scope > h1, :scope > h2, :scope > div > h1, :scope > div > h2, :scope > p, :scope > div > p, :scope > .grid, :scope > div > .grid');
-
-                        if (childrenToAnimate.length > 1) {
-                            if (isAboveFold) {
-                                gsap.fromTo(childrenToAnimate,
-                                    { opacity: 0, y: 35, scale: 0.97, force3D: true },
-                                    { opacity: 1, y: 0, scale: 1, force3D: true, duration: 0.8, stagger: 0.08, ease: 'power3.out', overwrite: 'auto' }
-                                );
-                            } else {
-                                gsap.fromTo(childrenToAnimate,
-                                    { opacity: 0, y: 40, scale: 0.97, force3D: true },
-                                    {
-                                        opacity: 1,
-                                        y: 0,
-                                        scale: 1,
-                                        force3D: true,
-                                        duration: 0.8,
-                                        stagger: 0.08,
-                                        ease: 'power3.out',
-                                        scrollTrigger: {
-                                            trigger: section,
-                                            start: 'top 86%',
-                                            once: true,
-                                            toggleActions: 'play none none none'
-                                        }
+                        const rect = target.getBoundingClientRect();
+                        if (rect.top >= window.innerHeight * 0.95) {
+                            gsap.fromTo(target,
+                                { opacity: 0, y: 30, scale: 0.98, force3D: true },
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    scale: 1,
+                                    force3D: true,
+                                    duration: 0.7,
+                                    ease: 'power3.out',
+                                    scrollTrigger: {
+                                        trigger: target,
+                                        start: 'top 90%',
+                                        once: true,
+                                        onEnter: () => target.classList.add('revealed')
                                     }
-                                );
-                            }
+                                }
+                            );
                         } else {
-                            if (isAboveFold) {
-                                gsap.fromTo(section, 
-                                    { opacity: 0, y: 35, scale: 0.97, force3D: true },
-                                    { opacity: 1, y: 0, scale: 1, force3D: true, duration: 0.8, ease: 'power3.out', overwrite: 'auto' }
-                                );
-                            } else {
-                                gsap.fromTo(section,
-                                    { opacity: 0, y: 40, scale: 0.97, force3D: true },
-                                    {
-                                        opacity: 1,
-                                        y: 0,
-                                        scale: 1,
-                                        force3D: true,
-                                        duration: 0.8,
-                                        ease: 'power3.out',
-                                        scrollTrigger: {
-                                            trigger: section,
-                                            start: 'top 86%',
-                                            once: true,
-                                            toggleActions: 'play none none none'
-                                        }
-                                    }
-                                );
-                            }
+                            target.classList.add('revealed');
+                            target.style.opacity = '1';
+                            target.style.transform = 'none';
                         }
                     });
 
-                    // 3. Strict Sequential Staggered Cascades for All Card Grids (0.08s Interval)
+                    // 3. Strict Sequential Staggered Cascades for All Card Grids (0.07s Interval)
                     const grids = document.querySelectorAll('.grid, [data-stagger-grid], #careerCardsContainer, #multimediaGrid, #resourcesGrid, #storiesGrid');
                     grids.forEach((grid) => {
                         if (grid.dataset.gsapGridActive) return;
@@ -1601,38 +1607,35 @@
                         if (cards.length === 0) return;
 
                         const gridRect = grid.getBoundingClientRect();
-                        const isAboveFold = gridRect.top < window.innerHeight * 0.85 && gridRect.bottom > 0;
-
-                        if (isAboveFold) {
+                        if (gridRect.top < window.innerHeight * 0.9) {
                             gsap.fromTo(cards,
-                                { opacity: 0, y: 35, scale: 0.97, force3D: true },
+                                { opacity: 0, y: 25, scale: 0.98, force3D: true },
                                 {
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
                                     force3D: true,
-                                    duration: 0.8,
-                                    stagger: 0.08,
+                                    duration: 0.6,
+                                    stagger: 0.07,
                                     ease: 'power3.out',
                                     overwrite: 'auto'
                                 }
                             );
                         } else {
                             gsap.fromTo(cards,
-                                { opacity: 0, y: 40, scale: 0.97, force3D: true },
+                                { opacity: 0, y: 30, scale: 0.98, force3D: true },
                                 {
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
                                     force3D: true,
-                                    duration: 0.8,
-                                    stagger: 0.08,
+                                    duration: 0.7,
+                                    stagger: 0.07,
                                     ease: 'power3.out',
                                     scrollTrigger: {
                                         trigger: grid,
-                                        start: 'top 85%',
-                                        once: true,
-                                        toggleActions: 'play none none none'
+                                        start: 'top 88%',
+                                        once: true
                                     }
                                 }
                             );
@@ -1646,31 +1649,27 @@
                         widget.dataset.gsapWidgetActive = 'true';
 
                         const wRect = widget.getBoundingClientRect();
-                        const isAboveFold = wRect.top < window.innerHeight * 0.85 && wRect.bottom > 0;
-
-                        if (isAboveFold) {
+                        if (wRect.top >= window.innerHeight * 0.95) {
                             gsap.fromTo(widget,
-                                { opacity: 0, y: 35, scale: 0.97, force3D: true },
-                                { opacity: 1, y: 0, scale: 1, force3D: true, duration: 0.8, ease: 'power3.out', overwrite: 'auto' }
-                            );
-                        } else {
-                            gsap.fromTo(widget,
-                                { opacity: 0, y: 40, scale: 0.97, force3D: true },
+                                { opacity: 0, y: 30, scale: 0.98, force3D: true },
                                 {
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
                                     force3D: true,
-                                    duration: 0.8,
+                                    duration: 0.7,
                                     ease: 'power3.out',
                                     scrollTrigger: {
                                         trigger: widget,
-                                        start: 'top 88%',
-                                        once: true,
-                                        toggleActions: 'play none none none'
+                                        start: 'top 90%',
+                                        once: true
                                     }
                                 }
                             );
+                        } else {
+                            widget.classList.add('revealed');
+                            widget.style.opacity = '1';
+                            widget.style.transform = 'none';
                         }
                     });
 
@@ -1678,63 +1677,23 @@
                     // High-performance IntersectionObserver Fallback
                     const observerOptions = {
                         root: null,
-                        rootMargin: '0px 0px -40px 0px',
-                        threshold: 0.08
+                        rootMargin: '0px 0px -20px 0px',
+                        threshold: 0.05
                     };
 
                     const revealObserver = new IntersectionObserver((entries, observer) => {
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
                                 entry.target.classList.add('revealed');
+                                entry.target.style.opacity = '1';
+                                entry.target.style.transform = 'none';
                                 observer.unobserve(entry.target);
                             }
                         });
                     }, observerOptions);
 
-                    // Grid Sequential Stagger Fallback (80ms per card)
-                    document.querySelectorAll('.grid, [data-stagger-grid], #careerCardsContainer, #multimediaGrid, #resourcesGrid, #storiesGrid').forEach(grid => {
-                        const cards = Array.from(grid.children).filter(c => !c.classList.contains('hidden') && c.tagName !== 'TEMPLATE');
-                        if (cards.length > 0) {
-                            cards.forEach((card, index) => {
-                                const delay = card.dataset.staggerIndex ? (parseInt(card.dataset.staggerIndex) * 80) : (index * 80);
-                                card.style.transitionDelay = `${delay}ms`;
-                                if (!card.classList.contains('reveal-element') && !card.classList.contains('reveal-on-scroll') && !card.hasAttribute('data-reveal')) {
-                                    card.classList.add('reveal-on-scroll');
-                                }
-                                revealObserver.observe(card);
-                            });
-                        }
-                    });
-
-                    const selectors = [
-                        '.reveal-element',
-                        '.reveal-on-scroll',
-                        '[data-reveal]',
-                        'main > section',
-                        'main > div > section',
-                        '.app-card',
-                        '.career-card',
-                        '.glass-panel',
-                        '.card-tilt-3d',
-                        '#aiAdvisorOutput',
-                        '.perspective-stage',
-                        '.dashboard-widget',
-                        '.control-room-card'
-                    ];
-
-                    document.querySelectorAll(selectors.join(', ')).forEach(el => {
-                        if (!el.dataset.revealObserved) {
-                            el.dataset.revealObserved = 'true';
-                            const rect = el.getBoundingClientRect();
-                            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                                el.classList.add('revealed');
-                            } else {
-                                if (!el.classList.contains('reveal-element') && !el.classList.contains('reveal-on-scroll') && !el.hasAttribute('data-reveal')) {
-                                    el.classList.add('reveal-on-scroll');
-                                }
-                                revealObserver.observe(el);
-                            }
-                        }
+                    document.querySelectorAll('.reveal-element, .reveal-on-scroll, [data-reveal], .grid > div').forEach(el => {
+                        revealObserver.observe(el);
                     });
                 }
             }
