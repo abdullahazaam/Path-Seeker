@@ -451,57 +451,92 @@
             transition: left 0.75s ease-in-out;
         }
 
-        /* ══════════════════ ADVANCED SCROLL-TRIGGERED REVEAL SYSTEM ══════════════════ */
+        /* ══════════════════ EXACT STAGGERED SCROLL-TRIGGERED REVEAL SYSTEM ══════════════════ */
         .reveal-element,
         .reveal-on-scroll,
         [data-reveal] {
             opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(40px) scale(0.96);
+            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
 
         .reveal-element.reveal-fade,
         .reveal-on-scroll.reveal-fade,
         [data-reveal="fade"] {
-            transform: none;
+            transform: scale(0.98);
         }
 
         .reveal-element.reveal-left,
         .reveal-on-scroll.reveal-left,
         [data-reveal="left"] {
-            transform: translateX(-32px);
+            transform: translateX(-40px) scale(0.96);
         }
 
         .reveal-element.reveal-right,
         .reveal-on-scroll.reveal-right,
         [data-reveal="right"] {
-            transform: translateX(32px);
+            transform: translateX(40px) scale(0.96);
         }
 
         .reveal-element.reveal-scale,
         .reveal-on-scroll.reveal-scale,
         [data-reveal="scale"] {
-            transform: scale(0.94);
+            transform: scale(0.92);
         }
 
-        /* Revealed State */
+        /* Revealed State (locks in place, does not reverse on scroll up) */
         .reveal-element.revealed,
         .reveal-on-scroll.revealed,
         [data-reveal].revealed {
             opacity: 1 !important;
-            transform: translateY(0) translateX(0) scale(1) !important;
+            transform: translateY(0px) translateX(0px) scale(1) !important;
         }
 
-        /* Stagger Delays */
-        .stagger-1, [data-reveal-delay="100"] { transition-delay: 100ms !important; }
-        .stagger-2, [data-reveal-delay="200"] { transition-delay: 200ms !important; }
-        .stagger-3, [data-reveal-delay="300"] { transition-delay: 300ms !important; }
-        .stagger-4, [data-reveal-delay="400"] { transition-delay: 400ms !important; }
-        .stagger-5, [data-reveal-delay="500"] { transition-delay: 500ms !important; }
-        .stagger-6, [data-reveal-delay="600"] { transition-delay: 600ms !important; }
-        .stagger-7, [data-reveal-delay="700"] { transition-delay: 700ms !important; }
-        .stagger-8, [data-reveal-delay="800"] { transition-delay: 800ms !important; }
+        /* Precise Stagger Delays (50ms - 100ms sequential intervals) */
+        .stagger-1, [data-reveal-delay="75"]  { transition-delay: 75ms !important; }
+        .stagger-2, [data-reveal-delay="150"] { transition-delay: 150ms !important; }
+        .stagger-3, [data-reveal-delay="225"] { transition-delay: 225ms !important; }
+        .stagger-4, [data-reveal-delay="300"] { transition-delay: 300ms !important; }
+        .stagger-5, [data-reveal-delay="375"] { transition-delay: 375ms !important; }
+        .stagger-6, [data-reveal-delay="450"] { transition-delay: 450ms !important; }
+        .stagger-7, [data-reveal-delay="525"] { transition-delay: 525ms !important; }
+        .stagger-8, [data-reveal-delay="600"] { transition-delay: 600ms !important; }
+
+        /* ══════════════════ UNIVERSAL 3D TILT & LIGHT REFLECTION ENGINE ══════════════════ */
+        .card-tilt-3d,
+        .career-card,
+        .app-card,
+        .glass-panel,
+        [data-tilt] {
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            position: relative;
+        }
+
+        /* Dynamic Mouse Glare Reflection Overlay */
+        .tilt-glare-overlay {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            background: radial-gradient(circle 320px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 5;
+        }
+
+        .dark .tilt-glare-overlay {
+            background: radial-gradient(circle 320px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 242, 254, 0.12), transparent 70%);
+        }
+
+        .card-tilt-3d:hover .tilt-glare-overlay,
+        .career-card:hover .tilt-glare-overlay,
+        .app-card:hover .tilt-glare-overlay,
+        .glass-panel:hover .tilt-glare-overlay,
+        [data-tilt]:hover .tilt-glare-overlay {
+            opacity: 1;
+        }
 
         /* Inputs */
         .app-input {
@@ -1203,13 +1238,13 @@
             });
         }
 
-        // 3. Cinematic High-Performance Scroll Reveal Engine (60fps IntersectionObserver)
+        // 3. Exact Cinematic Staggered Scroll-Triggered Reveal Engine (60fps IntersectionObserver)
         (function initScrollRevealEngine() {
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             
             function setupObserver() {
                 if (prefersReducedMotion) {
-                    document.querySelectorAll('.reveal-element, .reveal-on-scroll, [data-reveal]').forEach(el => {
+                    document.querySelectorAll('.reveal-element, .reveal-on-scroll, [data-reveal], main section, .career-card, .app-card, .glass-panel, .card-tilt-3d, .grid > div').forEach(el => {
                         el.classList.add('revealed');
                     });
                     return;
@@ -1225,12 +1260,13 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('revealed');
+                            // ONE-TIME TRIGGER: Locks in place, does not reverse on scroll up
                             observer.unobserve(entry.target);
                         }
                     });
                 }, observerOptions);
 
-                // Auto-collect all targeted elements
+                // Auto-collect all targeted sections, headings, cards, and containers
                 const selectors = [
                     '.reveal-element',
                     '.reveal-on-scroll',
@@ -1242,7 +1278,9 @@
                     '.glass-panel',
                     '.card-tilt-3d',
                     '#aiAdvisorOutput',
-                    '.perspective-stage'
+                    '.perspective-stage',
+                    '.dashboard-widget',
+                    '.control-room-card'
                 ];
 
                 const elements = document.querySelectorAll(selectors.join(', '));
@@ -1250,7 +1288,7 @@
                     if (!el.dataset.revealObserved) {
                         el.dataset.revealObserved = 'true';
                         
-                        // Check if in initial viewport
+                        // Check if in initial viewport to avoid flashing
                         const rect = el.getBoundingClientRect();
                         if (rect.top < window.innerHeight && rect.bottom > 0) {
                             el.classList.add('revealed');
@@ -1263,15 +1301,24 @@
                     }
                 });
 
-                // Auto-stagger card grids (.grid > div)
+                // Auto-stagger card grids (.grid > div) with 50-100ms sequential intervals (75ms)
                 document.querySelectorAll('.grid, [data-stagger-grid]').forEach(grid => {
                     const children = Array.from(grid.children);
                     if (children.length > 1 && !grid.dataset.staggerInit) {
                         grid.dataset.staggerInit = 'true';
                         children.forEach((child, index) => {
                             if (!child.style.transitionDelay && !child.classList.contains('stagger-1')) {
-                                const delay = Math.min((index % 4) * 80, 400);
+                                const delay = Math.min((index % 6) * 75, 450);
                                 child.style.transitionDelay = `${delay}ms`;
+                            }
+                            if (!child.classList.contains('reveal-element') && !child.classList.contains('reveal-on-scroll') && !child.hasAttribute('data-reveal')) {
+                                child.classList.add('reveal-on-scroll');
+                                const r = child.getBoundingClientRect();
+                                if (r.top < window.innerHeight && r.bottom > 0) {
+                                    child.classList.add('revealed');
+                                } else {
+                                    revealObserver.observe(child);
+                                }
                             }
                         });
                     }
@@ -1287,42 +1334,76 @@
             window.initScrollReveals = setupObserver;
         })();
 
-        document.addEventListener('DOMContentLoaded', () => {
-
-            // Universal 3D Tilt & Parallax Physics Engine
+        // 4. Universal 3D Tilt & Mouse-Tracking Light Reflection Engine Across All Cards
+        (function initUniversalTiltEngine() {
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
-                document.querySelectorAll('.card-tilt-3d, .career-card, [data-tilt]').forEach(card => {
+            if (prefersReducedMotion || !window.matchMedia('(pointer: fine)').matches) return;
+
+            function setupCardTilt() {
+                const cardSelectors = [
+                    '.card-tilt-3d',
+                    '.career-card',
+                    '.app-card',
+                    '.glass-panel',
+                    '[data-tilt]',
+                    '.grid > .rounded-3xl',
+                    '.grid > div[class*="border"]',
+                    '.dashboard-widget',
+                    '#aiAdvisorOutput'
+                ];
+
+                const cards = document.querySelectorAll(cardSelectors.join(', '));
+                cards.forEach(card => {
+                    if (card.dataset.tiltInitialized) return;
+                    card.dataset.tiltInitialized = 'true';
+
                     card.style.transformStyle = 'preserve-3d';
-                    card.style.transition = 'transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease';
-                    
+                    card.style.transition = 'transform 0.18s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease, border-color 0.25s ease';
+
+                    // Inject glare reflection overlay if not already present
+                    if (!card.querySelector('.tilt-glare-overlay')) {
+                        const glare = document.createElement('div');
+                        glare.className = 'tilt-glare-overlay';
+                        card.appendChild(glare);
+                    }
+
+                    let rafId = null;
+
                     card.addEventListener('mousemove', (e) => {
                         const rect = card.getBoundingClientRect();
                         const x = e.clientX - rect.left;
                         const y = e.clientY - rect.top;
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
-                        const rotateX = ((y - centerY) / centerY) * -5;
-                        const rotateY = ((x - centerX) / centerX) * 6;
-                        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-2px)`;
+
+                        card.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
+                        card.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
+
+                        if (rafId) cancelAnimationFrame(rafId);
+                        rafId = requestAnimationFrame(() => {
+                            const rotateX = ((y - centerY) / centerY) * -5.5;
+                            const rotateY = ((x - centerX) / centerX) * 6.5;
+                            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-3px) scale3d(1.01, 1.01, 1.01)`;
+                        });
                     });
 
                     card.addEventListener('mouseleave', () => {
-                        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                        if (rafId) cancelAnimationFrame(rafId);
+                        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)';
                     });
                 });
             }
 
-            // Radial Glow Tracker on Cards
-            document.querySelectorAll('.card-tilt, .glass-panel').forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty('--mouse-x', `${x}px`);
-                    card.style.setProperty('--mouse-y', `${y}px`);
-                });
-            });
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupCardTilt);
+            } else {
+                setupCardTilt();
+            }
+
+            window.initUniversalTilt = setupCardTilt;
+        })();
+
+        document.addEventListener('DOMContentLoaded', () => {
 
             // Custom Desktop Cursor Physics
             const cursor = document.getElementById('customCursor');
