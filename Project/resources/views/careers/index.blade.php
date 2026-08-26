@@ -255,7 +255,7 @@
     </div>
 
     {{-- Career Bank — Editorial Career Wall (Full-Width Interactive Rows) --}}
-    <div class="space-y-4">
+    <div class="space-y-4" data-stagger-grid id="careerCardsContainer">
         @forelse($careers as $career)
             @php
                 $domLower = strtolower($career->domain);
@@ -309,7 +309,7 @@
             @endphp
 
             {{-- Full-Width Interactive Editorial Career Row --}}
-            <div class="career-card relative p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#090d18] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-50/90 dark:hover:bg-[#0d1322] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
+            <div class="career-card relative p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#090d18] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-50/90 dark:hover:bg-[#0d1322] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden" data-stagger-index="{{ $loop->index }}">
                 {{-- Ambient Hover Glow Accent --}}
                 <div class="absolute -right-20 -top-20 w-48 h-48 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 
