@@ -52,7 +52,11 @@ class ResourceController extends Controller
         $categories = Resource::distinct()->pluck('category')->filter()->values()->all();
         $resources = $query->orderBy('id', 'asc')->paginate(6)->withQueryString();
 
-        return view('resources.index', compact('resources', 'categories'));
+        $userBookmarkedResourceIds = Auth::check()
+            ? \App\Models\Bookmark::where('user_id', Auth::id())->where('item_type', 'resource')->pluck('item_id')->toArray()
+            : [];
+
+        return view('resources.index', compact('resources', 'categories', 'userBookmarkedResourceIds'));
     }
 
     /**

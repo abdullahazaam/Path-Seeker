@@ -1890,6 +1890,97 @@
                     closeCommandPalette();
                 }
             });
+            // ══════════════════ GLOBAL UNIVERSAL BOOKMARKING ENGINE ══════════════════
+            window.toggleBookmark = function(event, itemId, itemType = 'career') {
+                if (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                const btns = document.querySelectorAll(`#btn-bookmark-${itemType}-${itemId}, #btn-bookmark-${itemId}, [data-bookmark-target="${itemType}-${itemId}"]`);
+                if (btns.length === 0) return;
+
+                const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+                const token = csrfMeta ? csrfMeta.getAttribute('content') : '';
+
+                btns.forEach(b => {
+                    b.disabled = true;
+                    b.style.opacity = '0.6';
+                });
+
+                fetch('{{ route("bookmarks.toggle") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': token,
+                    },
+                    body: JSON.stringify({
+                        item_type: itemType,
+                        item_id: itemId,
+                    })
+                })
+                .then(async response => {
+                    if (response.status === 401) {
+                        window.location.href = '{{ route("login") }}';
+                        return;
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!data || !data.success) return;
+
+                    btns.forEach(btn => {
+                        const icon = btn.querySelector('i');
+                        if (data.bookmarked) {
+                            btn.setAttribute('data-bookmarked', 'true');
+                            btn.classList.remove('border-slate-200', 'dark:border-white/10', 'text-slate-400', 'bg-slate-50', 'dark:bg-white/[0.04]', 'border-white/20', 'text-white/80', 'bg-slate-900/80', 'dark:bg-black/75');
+                            btn.classList.add('bg-cyan-500/20', 'text-cyan-600', 'dark:text-cyan-400', 'border-cyan-500/40', 'shadow-sm');
+                            if (icon) {
+                                icon.className = 'fa-solid fa-bookmark text-xs text-cyan-600 dark:text-cyan-400 transition-transform scale-110';
+                            }
+                            btn.setAttribute('title', 'Saved in Passport Bookmarks');
+                        } else {
+                            btn.setAttribute('data-bookmarked', 'false');
+                            btn.classList.remove('bg-cyan-500/20', 'text-cyan-600', 'dark:text-cyan-400', 'border-cyan-500/40', 'shadow-sm');
+                            btn.classList.add('border-slate-200', 'dark:border-white/10', 'text-slate-400', 'bg-slate-50', 'dark:bg-white/[0.04]');
+                            if (icon) {
+                                icon.className = 'fa-regular fa-bookmark text-xs transition-transform';
+                            }
+                            btn.setAttribute('title', `Bookmark this ${itemType}`);
+                        }
+                    });
+
+                    window.showBookmarkNotification(data.bookmarked ? 'Saved to your Career Passport bookmarks!' : 'Removed from bookmarks.');
+                })
+                .catch(err => {
+                    console.error('Bookmark toggle error:', err);
+                })
+                .finally(() => {
+                    btns.forEach(b => {
+                        b.disabled = false;
+                        b.style.opacity = '1';
+                    });
+                });
+            };
+
+            window.showBookmarkNotification = function(message) {
+                let toast = document.getElementById('floatingBookmarkToast');
+                if (!toast) {
+                    toast = document.createElement('div');
+                    toast.id = 'floatingBookmarkToast';
+                    toast.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-2xl bg-slate-900/95 text-white text-xs font-bold shadow-2xl border border-cyan-500/30 flex items-center gap-2.5 transition-all duration-300 transform translate-y-4 opacity-0 pointer-events-none backdrop-blur-md';
+                    document.body.appendChild(toast);
+                }
+                toast.innerHTML = `<i class="fa-solid fa-circle-check text-cyan-400"></i> <span>${message}</span>`;
+                toast.classList.remove('translate-y-4', 'opacity-0', 'pointer-events-none');
+                toast.classList.add('translate-y-0', 'opacity-100');
+
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-4', 'opacity-0', 'pointer-events-none');
+                }, 2500);
+            };
         });
     </script>
     <!-- AOS (Animate On Scroll) JS & Initialization -->

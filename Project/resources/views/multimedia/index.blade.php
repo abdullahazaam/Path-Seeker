@@ -42,6 +42,18 @@
                             <span class="text-slate-950 font-black">Stream Masterclass</span>
                             <i class="fa-solid fa-arrow-right text-xs text-slate-950 group-hover:translate-x-1 transition-transform"></i>
                         </a>
+
+                        {{-- Bookmark Action for Hero Masterclass --}}
+                        <button type="button"
+                                onclick="toggleBookmark(event, {{ $heroItem->id }}, 'multimedia')"
+                                id="btn-bookmark-multimedia-{{ $heroItem->id }}"
+                                data-bookmark-target="multimedia-{{ $heroItem->id }}"
+                                data-bookmarked="{{ in_array($heroItem->id, $userBookmarkedMultimediaIds ?? []) ? 'true' : 'false' }}"
+                                class="w-11 h-11 rounded-full border transition-all flex items-center justify-center text-xs cursor-pointer {{ in_array($heroItem->id, $userBookmarkedMultimediaIds ?? []) ? 'bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border-cyan-500/40 shadow-sm' : 'border-slate-200/80 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 bg-slate-100/80 dark:bg-white/[0.04]' }}"
+                                title="{{ in_array($heroItem->id, $userBookmarkedMultimediaIds ?? []) ? 'Saved in Passport Bookmarks' : 'Bookmark this masterclass' }}">
+                            <i class="{{ in_array($heroItem->id, $userBookmarkedMultimediaIds ?? []) ? 'fa-solid text-cyan-600 dark:text-cyan-400' : 'fa-regular' }} fa-bookmark text-sm transition-transform"></i>
+                        </button>
+
                         <div class="flex items-center gap-3 px-4 py-2.5 rounded-full bg-slate-100/80 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 text-xs font-mono text-slate-700 dark:text-slate-300 backdrop-blur-md shadow-sm">
                             <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-cyan-500 dark:text-cyan-400"></i> {{ $heroItem->duration ?? '30:00' }}</span>
                             <span class="text-slate-300 dark:text-white/20">&bull;</span>
@@ -180,12 +192,21 @@
                             </span>
                         </div>
 
-                        {{-- Rating Badge --}}
-                        <div class="absolute top-3 right-3 z-20 pointer-events-none">
+                        {{-- Rating Badge & Top Bookmark Action --}}
+                        <div class="absolute top-3 right-3 z-20 flex items-center gap-1.5">
                             <span class="px-2.5 py-1 text-[10px] font-mono font-bold text-amber-300 bg-slate-900/80 dark:bg-black/75 rounded-full backdrop-blur-md flex items-center gap-1 border border-white/15 shadow-sm">
                                 <i class="fa-solid fa-star text-[9px] text-amber-400"></i>
                                 <span>{{ $item->average_rating }}</span>
                             </span>
+                            <button type="button"
+                                    onclick="toggleBookmark(event, {{ $item->id }}, 'multimedia')"
+                                    id="btn-bookmark-multimedia-thumb-{{ $item->id }}"
+                                    data-bookmark-target="multimedia-{{ $item->id }}"
+                                    data-bookmarked="{{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'true' : 'false' }}"
+                                    class="w-7 h-7 rounded-full border transition-all flex items-center justify-center text-xs cursor-pointer backdrop-blur-md {{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'bg-cyan-500/30 text-cyan-400 border-cyan-400/50 shadow-sm' : 'border-white/20 text-white/80 hover:text-cyan-300 hover:border-cyan-400/40 bg-slate-900/80 dark:bg-black/75' }}"
+                                    title="{{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'Saved in Passport Bookmarks' : 'Bookmark this masterclass' }}">
+                                <i class="{{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'fa-solid text-cyan-400' : 'fa-regular' }} fa-bookmark text-[10px] transition-transform"></i>
+                            </button>
                         </div>
 
                         {{-- Duration & Transcript Badge --}}
@@ -230,11 +251,21 @@
                 </div>
 
                 {{-- Card Clean CTA Footer --}}
-                <div class="mt-5 pt-4 border-t border-slate-200/80 dark:border-white/[0.07] relative z-10">
-                    <a href="{{ route('multimedia.show', $item->id) }}" class="w-full py-2.5 px-4 rounded-xl text-xs font-black text-center text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-md shadow-cyan-500/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 group/link cursor-pointer">
+                <div class="mt-5 pt-4 border-t border-slate-200/80 dark:border-white/[0.07] relative z-10 flex items-center gap-2">
+                    <a href="{{ route('multimedia.show', $item->id) }}" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-black text-center text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-md shadow-cyan-500/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 group/link cursor-pointer">
                         <span class="text-slate-950 font-black">Stream {{ ucfirst($item->type) }}</span>
                         <i class="fa-solid fa-arrow-right text-[10px] text-slate-950 group-hover/link:translate-x-1 transition-transform"></i>
                     </a>
+                    {{-- Dedicated Footer Bookmark Button matching Careers page --}}
+                    <button type="button"
+                            onclick="toggleBookmark(event, {{ $item->id }}, 'multimedia')"
+                            id="btn-bookmark-multimedia-{{ $item->id }}"
+                            data-bookmark-target="multimedia-{{ $item->id }}"
+                            data-bookmarked="{{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'true' : 'false' }}"
+                            class="w-10 h-10 rounded-xl border transition-all flex items-center justify-center text-xs shrink-0 cursor-pointer {{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border-cyan-500/40 shadow-sm' : 'border-slate-200 dark:border-white/10 text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 bg-slate-50 dark:bg-white/[0.04]' }}"
+                            title="{{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'Saved in Passport Bookmarks' : 'Bookmark this masterclass' }}">
+                        <i class="{{ in_array($item->id, $userBookmarkedMultimediaIds ?? []) ? 'fa-solid text-cyan-600 dark:text-cyan-400' : 'fa-regular' }} fa-bookmark text-xs transition-transform"></i>
+                    </button>
                 </div>
 
             </div>

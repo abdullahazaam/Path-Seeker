@@ -50,7 +50,11 @@ class MultimediaController extends Controller
 
         $multimedia = $query->orderBy('id')->paginate(6)->withQueryString();
 
-        return view('multimedia.index', compact('multimedia', 'allTags'));
+        $userBookmarkedMultimediaIds = Auth::check()
+            ? \App\Models\Bookmark::where('user_id', Auth::id())->where('item_type', 'multimedia')->pluck('item_id')->toArray()
+            : [];
+
+        return view('multimedia.index', compact('multimedia', 'allTags', 'userBookmarkedMultimediaIds'));
     }
 
     /**

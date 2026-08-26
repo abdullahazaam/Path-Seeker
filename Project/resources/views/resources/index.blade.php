@@ -192,6 +192,19 @@
                             </span>
                         </div>
 
+                        {{-- Top Bookmark Action --}}
+                        <div class="absolute top-3 right-3 z-20 flex items-center gap-1.5">
+                            <button type="button"
+                                    onclick="toggleBookmark(event, {{ $res->id }}, 'resource')"
+                                    id="btn-bookmark-resource-thumb-{{ $res->id }}"
+                                    data-bookmark-target="resource-{{ $res->id }}"
+                                    data-bookmarked="{{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'true' : 'false' }}"
+                                    class="w-7 h-7 rounded-full border transition-all flex items-center justify-center text-xs cursor-pointer backdrop-blur-md {{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'bg-cyan-500/30 text-cyan-400 border-cyan-400/50 shadow-sm' : 'border-white/20 text-white/80 hover:text-cyan-300 hover:border-cyan-400/40 bg-slate-900/80 dark:bg-black/75' }}"
+                                    title="{{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'Saved in Passport Bookmarks' : 'Bookmark this toolkit' }}">
+                                <i class="{{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'fa-solid text-cyan-400' : 'fa-regular' }} fa-bookmark text-[10px] transition-transform"></i>
+                            </button>
+                        </div>
+
                         {{-- Format Badge --}}
                         <div class="absolute bottom-3 right-3 z-20 pointer-events-none">
                             <span class="px-2.5 py-1 text-[10px] font-mono font-semibold text-white bg-slate-900/80 dark:bg-black/75 rounded-full backdrop-blur-md flex items-center gap-1 border border-white/15 shadow-sm">
@@ -224,13 +237,23 @@
                 </div>
 
                 {{-- Bottom Action Row (1. Intercept Download Click -> Open Auto-Preview Modal) --}}
-                <div class="mt-5 pt-4 border-t border-slate-200/80 dark:border-white/[0.07] relative z-10">
+                <div class="mt-5 pt-4 border-t border-slate-200/80 dark:border-white/[0.07] relative z-10 flex items-center gap-2">
                     <button type="button" 
                             @click="openPreview({{ $itemData }})"
-                            class="w-full py-2.5 px-4 rounded-xl text-xs font-black text-center text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-md shadow-cyan-500/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 group/link cursor-pointer">
+                            class="flex-1 py-2.5 px-4 rounded-xl text-xs font-black text-center text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-md shadow-cyan-500/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 group/link cursor-pointer">
                         <i class="fa-solid fa-eye text-xs text-slate-950"></i>
                         <span class="text-slate-950 font-black">Preview &amp; Download Toolkit</span>
                         <i class="fa-solid fa-arrow-right text-[10px] text-slate-950 group-hover/link:translate-x-1 transition-transform"></i>
+                    </button>
+                    {{-- Dedicated Footer Bookmark Button matching Careers & Multimedia pages --}}
+                    <button type="button"
+                            onclick="toggleBookmark(event, {{ $res->id }}, 'resource')"
+                            id="btn-bookmark-resource-{{ $res->id }}"
+                            data-bookmark-target="resource-{{ $res->id }}"
+                            data-bookmarked="{{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'true' : 'false' }}"
+                            class="w-10 h-10 rounded-xl border transition-all flex items-center justify-center text-xs shrink-0 cursor-pointer {{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border-cyan-500/40 shadow-sm' : 'border-slate-200 dark:border-white/10 text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 bg-slate-50 dark:bg-white/[0.04]' }}"
+                            title="{{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'Saved in Passport Bookmarks' : 'Bookmark this toolkit' }}">
+                        <i class="{{ in_array($res->id, $userBookmarkedResourceIds ?? []) ? 'fa-solid text-cyan-600 dark:text-cyan-400' : 'fa-regular' }} fa-bookmark text-xs transition-transform"></i>
                     </button>
                 </div>
 
@@ -326,11 +349,20 @@
                         x-text="activeResource?.title"></h3>
                 </div>
 
-                <button type="button" 
-                        @click="closePreview()"
-                        class="w-9 h-9 rounded-xl bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-300 dark:hover:bg-white/20 transition-all flex items-center justify-center cursor-pointer shrink-0">
-                    <i class="fa-solid fa-xmark text-sm"></i>
-                </button>
+                <div class="flex items-center gap-2 shrink-0">
+                    <button type="button" 
+                            @click="if (activeResource) toggleBookmark($event, activeResource.id, 'resource')"
+                            class="w-9 h-9 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 transition-all flex items-center justify-center cursor-pointer"
+                            title="Bookmark this toolkit">
+                        <i class="fa-solid fa-bookmark text-xs"></i>
+                    </button>
+
+                    <button type="button" 
+                            @click="closePreview()"
+                            class="w-9 h-9 rounded-xl bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-300 dark:hover:bg-white/20 transition-all flex items-center justify-center cursor-pointer">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
+                </div>
             </div>
 
             {{-- Modal Document Preview Frame --}}

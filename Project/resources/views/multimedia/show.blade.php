@@ -63,6 +63,21 @@
         </a>
 
         <div class="flex items-center gap-3">
+            @php
+                $isItemBookmarked = Auth::check() && \App\Models\Bookmark::where('user_id', Auth::id())->where('item_type', 'multimedia')->where('item_id', $item->id)->exists();
+            @endphp
+            {{-- Bookmark Action --}}
+            <button type="button"
+                    onclick="toggleBookmark(event, {{ $item->id }}, 'multimedia')"
+                    id="btn-bookmark-multimedia-{{ $item->id }}"
+                    data-bookmark-target="multimedia-{{ $item->id }}"
+                    data-bookmarked="{{ $isItemBookmarked ? 'true' : 'false' }}"
+                    class="px-3.5 py-1.5 rounded-full border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer {{ $isItemBookmarked ? 'bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border-cyan-500/40 shadow-sm' : 'border-slate-200/80 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 bg-slate-100/80 dark:bg-white/[0.04]' }}"
+                    title="{{ $isItemBookmarked ? 'Saved in Passport Bookmarks' : 'Bookmark this masterclass' }}">
+                <i class="{{ $isItemBookmarked ? 'fa-solid text-cyan-600 dark:text-cyan-400' : 'fa-regular' }} fa-bookmark text-xs transition-transform"></i>
+                <span class="font-mono">Save</span>
+            </button>
+
             {{-- Average Rating Pill --}}
             <div class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono font-bold text-amber-700 dark:text-amber-400 flex items-center gap-1.5 shadow-sm">
                 <i class="fa-solid fa-star text-amber-500 text-[11px]"></i>
