@@ -254,8 +254,8 @@
         </div>
     </div>
 
-    {{-- Career Bank — Editorial Career Wall (Full-Width Interactive Rows) --}}
-    <div class="space-y-4" data-stagger-grid id="careerCardsContainer">
+    {{-- Career Bank — Responsive Grid of Individual Clean Cards with Staggered Entry Animation --}}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="careerCardsContainer">
         @forelse($careers as $career)
             @php
                 $domLower = strtolower($career->domain);
@@ -279,20 +279,16 @@
 
                 $cRole = $career->target_role ?? 'all';
                 if ($cRole === 'student') {
-                    $roleLabel = 'Student Foundational';
-                    $roleIconSvg = '<svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>';
+                    $roleLabel = 'Student';
                     $roleBadge = 'bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-500/20';
                 } elseif ($cRole === 'graduate') {
-                    $roleLabel = 'Graduate Track';
-                    $roleIconSvg = '<svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>';
+                    $roleLabel = 'Graduate';
                     $roleBadge = 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/20';
                 } elseif ($cRole === 'professional') {
-                    $roleLabel = 'Professional Architecture';
-                    $roleIconSvg = '<svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>';
+                    $roleLabel = 'Professional';
                     $roleBadge = 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/20';
                 } else {
-                    $roleLabel = 'Universal Track';
-                    $roleIconSvg = '<svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>';
+                    $roleLabel = 'Universal';
                     $roleBadge = 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-500/20';
                 }
 
@@ -308,103 +304,106 @@
                 $rowIndex = sprintf('%02d', $loop->iteration + (($careers->currentPage() - 1) * $careers->perPage()));
             @endphp
 
-            {{-- Full-Width Interactive Editorial Career Row --}}
-            <div class="career-card relative p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#090d18] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-50/90 dark:hover:bg-[#0d1322] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden" data-stagger-index="{{ $loop->index }}">
-                {{-- Ambient Hover Glow Accent --}}
-                <div class="absolute -right-20 -top-20 w-48 h-48 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+            {{-- Individual Clean Career Card with Staggered Fade-In-Up Animation --}}
+            <div class="career-card career-stagger-card relative p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#090d18] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-50/90 dark:hover:bg-[#0d1322] shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group flex flex-col justify-between overflow-hidden"
+                 style="animation-delay: {{ min($loop->index * 60, 600) }}ms;">
+                
+                {{-- Ambient Corner Glow --}}
+                <div class="absolute -right-20 -top-20 w-40 h-40 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 
-                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
-                    {{-- Left Editorial Meta: Numbering · Domain — Role Title — Match Score --}}
-                    <div class="space-y-2.5 flex-1 min-w-0">
-                        {{-- Row Index & Domain Header --}}
-                        <div class="flex flex-wrap items-center gap-3">
-                            <span class="text-xs font-mono font-black text-cyan-600 dark:text-cyan-400 tracking-wider">
-                                {{ $rowIndex }} &middot; {{ strtoupper($career->domain) }}
-                            </span>
-                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border {{ $roleBadge }} inline-flex items-center gap-1.5 shadow-sm">
-                                {!! $roleIconSvg !!}
-                                <span>{{ $roleLabel }}</span>
-                            </span>
-                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] font-mono font-black text-emerald-700 dark:text-emerald-400">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block mr-1"></span>{{ $demandVal }}% Match
-                            </span>
-                        </div>
-
-                        {{-- Role Title & Description --}}
-                        <div class="space-y-1">
-                            <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display tracking-tight group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors truncate">
-                                {{ $career->title }}
-                            </h2>
-                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-1 leading-relaxed">
-                                {{ $career->description }}
-                            </p>
-                        </div>
-
-                        {{-- Micro-Skill Tags Preview --}}
-                        <div class="flex flex-wrap items-center gap-1.5 pt-1">
-                            @foreach(array_slice($skills, 0, 4) as $sk)
-                                <span class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/5 text-[10px] font-mono font-medium text-slate-600 dark:text-slate-300">
-                                    {{ $sk }}
+                <div class="space-y-4 relative z-10">
+                    {{-- Card Header: Domain Badge + Actions --}}
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-xl bg-cyan-500/10 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-xs shrink-0 font-mono">
+                                <i class="fa-solid {{ $domIcon }}"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="text-[11px] font-mono font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider block truncate">
+                                    {{ $career->domain }}
                                 </span>
-                            @endforeach
-                            @if(count($skills) > 4)
-                                <span class="text-[10px] font-mono text-slate-400">+{{ count($skills) - 4 }} more</span>
-                            @endif
-                        </div>
-                    </div>
-
-                    {{-- Center Telemetry: Benchmark Salary & Demand Sparkline --}}
-                    <div class="flex items-center justify-between lg:justify-end gap-6 sm:gap-8 pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-200/80 dark:border-white/5 shrink-0">
-                        {{-- Salary Benchmark --}}
-                        <div class="text-left lg:text-right">
-                            <span class="block text-[9px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Target Benchmark</span>
-                            <span class="text-base sm:text-lg font-black text-emerald-600 dark:text-emerald-400 font-mono">{{ $career->expected_salary }}</span>
-                        </div>
-
-                        {{-- Abstract Micro-Visualization (Readiness / Demand Gauge) --}}
-                        <div class="hidden sm:block text-right">
-                            <div class="flex items-center justify-end gap-2 mb-1">
-                                <span class="text-[9px] font-mono uppercase font-bold text-slate-500 dark:text-slate-400">Demand Level</span>
-                                <span class="text-xs font-mono font-black text-cyan-600 dark:text-cyan-400">{{ $demandVal }}%</span>
-                            </div>
-                            <div class="w-28 h-2 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden shadow-inner">
-                                <div class="h-full bg-gradient-to-r from-cyan-400 to-indigo-500 rounded-full" style="width: {{ $demandVal }}%;"></div>
                             </div>
                         </div>
 
-                        {{-- Right Actions Toolbar --}}
-                        <div class="flex items-center gap-2 shrink-0">
-                            {{-- Compare Button --}}
-                            <button type="button"
-                                    onclick="toggleCompare({{ $cId }}, '{{ $tEsc }}', '{{ $dEsc }}', '{{ $sEsc }}', '{{ $demandVal }}%', '{{ $diffLevel }}', '{{ $skEsc }}', '{{ $urlEsc }}', '{{ $badgeClass }}', '{{ $domIcon }}')"
-                                    id="btn-compare-{{ $cId }}"
-                                    class="compare-toggle-btn px-3 py-2 text-xs font-bold rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 transition-all flex items-center gap-1.5 bg-slate-50 dark:bg-white/[0.04] shadow-sm"
-                                    title="Add to career comparison matrix">
-                                <i class="fa-solid fa-plus text-[10px] icon-state"></i>
-                                <span class="label-state hidden sm:inline">Compare</span>
-                            </button>
-
-                            {{-- Bookmark Button --}}
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            {{-- Bookmark Action --}}
                             <button type="button"
                                     onclick="toggleBookmark(event, {{ $career->id }}, 'career')"
                                     id="btn-bookmark-{{ $career->id }}"
                                     data-bookmarked="{{ $isBookmarked ? 'true' : 'false' }}"
-                                    class="w-9 h-9 rounded-xl border transition-all flex items-center justify-center text-xs shrink-0 shadow-sm cursor-pointer {{ $isBookmarked ? 'bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border-cyan-500/40 shadow-sm' : 'border-slate-200 dark:border-white/10 text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 bg-slate-50 dark:bg-white/[0.04]' }}"
+                                    class="w-8 h-8 rounded-xl border transition-all flex items-center justify-center text-xs cursor-pointer {{ $isBookmarked ? 'bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border-cyan-500/40 shadow-sm' : 'border-slate-200 dark:border-white/10 text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 bg-slate-50 dark:bg-white/[0.04]' }}"
                                     title="{{ $isBookmarked ? 'Saved in Passport Bookmarks' : 'Bookmark this career' }}">
                                 <i class="{{ $isBookmarked ? 'fa-solid text-cyan-600 dark:text-cyan-400' : 'fa-regular' }} fa-bookmark text-xs transition-transform"></i>
                             </button>
 
-                            {{-- Direct View Path CTA --}}
-                            <a href="{{ route('careers.show', $career->id) }}" class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs font-mono font-bold text-white bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/35 hover:scale-105 transition-all group/link">
-                                <span>View Path</span>
-                                <i class="fa-solid fa-arrow-right text-[10px] group-hover/link:translate-x-1 transition-transform"></i>
-                            </a>
+                            {{-- Compare Action --}}
+                            <button type="button"
+                                    onclick="toggleCompare({{ $cId }}, '{{ $tEsc }}', '{{ $dEsc }}', '{{ $sEsc }}', '{{ $demandVal }}%', '{{ $diffLevel }}', '{{ $skEsc }}', '{{ $urlEsc }}', '{{ $badgeClass }}', '{{ $domIcon }}')"
+                                    id="btn-compare-{{ $cId }}"
+                                    class="compare-toggle-btn w-8 h-8 rounded-xl border border-slate-200 dark:border-white/10 text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30 transition-all flex items-center justify-center bg-slate-50 dark:bg-white/[0.04]"
+                                    title="Add to career comparison matrix">
+                                <i class="fa-solid fa-plus text-[10px] icon-state"></i>
+                            </button>
                         </div>
                     </div>
+
+                    {{-- Title and Role Badge --}}
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border {{ $roleBadge }} inline-flex items-center gap-1 shadow-xs">
+                                <span>{{ $roleLabel }}</span>
+                            </span>
+                            <span class="text-[10px] font-mono text-slate-400">{{ $rowIndex }}</span>
+                        </div>
+                        <h2 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white font-display tracking-tight group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors line-clamp-1">
+                            <a href="{{ route('careers.show', $career->id) }}">{{ $career->title }}</a>
+                        </h2>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                            {{ $career->description }}
+                        </p>
+                    </div>
+
+                    {{-- Micro-Skill Tags Preview --}}
+                    <div class="flex flex-wrap items-center gap-1.5 pt-1">
+                        @foreach(array_slice($skills, 0, 3) as $sk)
+                            <span class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/5 text-[10px] font-mono font-medium text-slate-600 dark:text-slate-300">
+                                {{ $sk }}
+                            </span>
+                        @endforeach
+                        @if(count($skills) > 3)
+                            <span class="text-[10px] font-mono text-slate-400">+{{ count($skills) - 3 }}</span>
+                        @endif
+                    </div>
+                </div>
+
+                {{-- Bottom Telemetry & CTA Box --}}
+                <div class="mt-6 pt-4 border-t border-slate-200/80 dark:border-white/5 space-y-4 relative z-10">
+                    {{-- Benchmark Metrics Row --}}
+                    <div class="flex items-center justify-between text-xs font-mono">
+                        <div>
+                            <span class="block text-[9px] uppercase text-slate-500 dark:text-slate-400 font-bold">Salary Avg</span>
+                            <span class="text-sm font-black text-emerald-600 dark:text-emerald-400">{{ $career->expected_salary }}</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-[9px] uppercase text-slate-500 dark:text-slate-400 font-bold">Demand</span>
+                            <span class="text-xs font-black text-cyan-600 dark:text-cyan-400">{{ $demandVal }}%</span>
+                        </div>
+                    </div>
+
+                    {{-- Demand Progress Bar --}}
+                    <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-cyan-400 to-indigo-500 rounded-full" style="width: {{ $demandVal }}%;"></div>
+                    </div>
+
+                    {{-- View Path CTA Link Button --}}
+                    <a href="{{ route('careers.show', $career->id) }}" class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-2xl text-xs font-mono font-bold text-slate-950 bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/35 transition-all group/btn">
+                        <span>Explore Career Path</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] group-hover/btn:translate-x-1 transition-transform"></i>
+                    </a>
                 </div>
             </div>
         @empty
-            <div class="py-16 rounded-3xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/5 text-center space-y-3 shadow-sm">
+            <div class="col-span-full py-16 rounded-3xl bg-slate-100/80 dark:bg-slate-950/50 border border-slate-200/80 dark:border-white/5 text-center space-y-3 shadow-sm">
                 <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-2xl mx-auto mb-2 shadow-sm">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
@@ -417,6 +416,25 @@
             </div>
         @endforelse
     </div>
+
+    <style>
+    /* ══════════════════ SMOOTH STAGGERED FADE-IN-UP ANIMATION ══════════════════ */
+    @keyframes cardFadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(24px) scale(0.97);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+    .career-stagger-card {
+        animation: cardFadeInUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        opacity: 0;
+        will-change: transform, opacity;
+    }
+    </style>
 
     {{-- ══════════════════ PAGINATION ══════════════════ --}}
     {{-- ══════════════════ PAGINATION ══════════════════ --}}

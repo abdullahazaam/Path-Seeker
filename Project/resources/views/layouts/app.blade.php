@@ -843,6 +843,26 @@
             color: #FFFFFF !important;
         }
 
+        /* Solid Opaque Navbar Dropdown Panels (No Glass Overlap) */
+        .nav-dropdown-solid,
+        header .nav-dropdown-solid,
+        header [x-show].nav-dropdown-solid {
+            background-color: #ffffff !important;
+            color: #111827 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15) !important;
+        }
+        html.dark .nav-dropdown-solid,
+        html.dark header .nav-dropdown-solid,
+        html.dark header [x-show].nav-dropdown-solid {
+            background-color: #030712 !important; /* bg-gray-950 */
+            color: #ffffff !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.70) !important;
+        }
+
         /* Light Mode High-Contrast Footer Styling */
         html:not(.dark) footer {
             background-color: rgba(255, 255, 255, 0.90) !important;
@@ -1172,7 +1192,7 @@
     <!-- ══════════════════ 6. INNER PAGE CLOSING STATEMENT & GLOBAL FOOTER ══════════════════ -->
     <section class="relative z-10 my-10 md:my-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <!-- The Bold Closing Statement Banner -->
-        <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 text-center space-y-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden reveal-element">
+        <div class="relative rounded-3xl p-8 sm:p-12 lg:p-14 text-center space-y-8 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
             {{-- Ambient Corner Glows --}}
             <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none"></div>

@@ -41,7 +41,7 @@
                     <i :class="exploreOpen ? 'rotate-180 text-purple-600 dark:text-purple-400' : 'text-slate-400 dark:text-slate-500'" class="fa-solid fa-chevron-down text-[9px] transition-transform duration-200"></i>
                 </button>
 
-                <!-- Dropdown Menu Glass Panel -->
+                <!-- Dropdown Menu Solid Surface Panel -->
                 <div x-show="exploreOpen"
                      x-transition:enter="transition ease-out duration-200"
                      x-transition:enter-start="opacity-0 translate-y-2 scale-95"
@@ -49,8 +49,9 @@
                      x-transition:leave="transition ease-in duration-150"
                      x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                      x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                     @click.outside="exploreOpen = false"
                      style="display: none;"
-                     class="absolute left-0 mt-3 w-64 rounded-3xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden z-50 p-2 space-y-1">
+                     class="absolute left-0 mt-3 w-64 rounded-3xl bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden z-50 p-2 space-y-1 nav-dropdown-solid">
                     
                     <!-- Multimedia Hub -->
                     <a href="{{ route('multimedia.index') }}"
@@ -205,7 +206,7 @@
                         </span>
                     </button>
 
-                    <!-- Notifications Dropdown Panel -->
+                    <!-- Notifications Dropdown Panel (Solid Surface) -->
                     <div x-show="notifOpen"
                          x-transition:enter="transition ease-out duration-200"
                          x-transition:enter-start="opacity-0 translate-y-2 scale-95"
@@ -215,9 +216,9 @@
                          x-transition:leave-end="opacity-0 translate-y-2 scale-95"
                          @click.outside="notifOpen = false"
                          style="display: none;"
-                         class="absolute right-0 mt-3 w-80 sm:w-96 rounded-3xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden z-50">
+                         class="absolute right-0 mt-3 w-80 sm:w-96 rounded-3xl bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden z-50 nav-dropdown-solid">
                         
-                        <div class="px-5 py-4 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between bg-slate-50/80 dark:bg-white/[0.02]">
+                        <div class="px-5 py-4 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between bg-slate-50 dark:bg-white/[0.02]">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-bell text-purple-500 text-xs"></i>
                                 <span class="text-xs font-black text-slate-900 dark:text-white font-display">Live Notifications</span>
@@ -286,7 +287,7 @@
                         <i :class="profileOpen ? 'rotate-180 text-cyan-600 dark:text-cyan-400' : 'text-slate-400 dark:text-slate-500'" class="fa-solid fa-chevron-down text-[9px] sm:text-[10px] transition-transform duration-200"></i>
                     </button>
 
-                    <!-- Dropdown Panel -->
+                    <!-- Dropdown Panel (Solid Surface) -->
                     <div x-show="profileOpen"
                          x-transition:enter="transition ease-out duration-200"
                          x-transition:enter-start="opacity-0 translate-y-2 scale-95"
@@ -296,7 +297,7 @@
                          x-transition:leave-end="opacity-0 translate-y-2 scale-95"
                          @click.outside="profileOpen = false"
                          style="display: none;"
-                         class="absolute right-0 mt-3 w-64 rounded-3xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden z-50 p-2 space-y-1">
+                         class="absolute right-0 mt-3 w-64 rounded-3xl bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden z-50 p-2 space-y-1 nav-dropdown-solid">
                         
                         <!-- User Card Header -->
                         <div class="px-3.5 py-3 rounded-2xl bg-[#F5F6FA] dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 space-y-1 mb-1">
@@ -381,7 +382,7 @@
          x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
          @click.outside="mobileMenuOpen = false"
          style="display: none;"
-         class="mt-3 p-4 bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col gap-1.5 lg:hidden z-50 overflow-hidden">
+         class="mt-3 p-4 bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-slate-200 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col gap-1.5 lg:hidden z-50 overflow-hidden nav-dropdown-solid">
         
         <a href="{{ route('home') }}"
            class="px-4 py-3 rounded-2xl text-xs sm:text-sm font-bold flex items-center justify-between transition-colors {{ request()->routeIs('home') ? 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 border border-indigo-500/30' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5' }}">

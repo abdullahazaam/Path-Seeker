@@ -80,16 +80,16 @@
     @endif
 
     {{-- ══════════════════ 2.5 MY CAREER CONTROL ROOM (FUTURISTIC OS COMMAND CENTER) ══════════════════ --}}
-    <div class="control-room-card app-card relative rounded-3xl p-6 sm:p-8 md:p-10 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden reveal-element">
+    <div class="control-room-card app-card relative rounded-3xl p-6 sm:p-8 md:p-10 bg-white dark:bg-[#080B12] border-0 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden reveal-element">
         {{-- Ambient Corner Glows --}}
         <div class="absolute -top-28 -right-28 w-80 h-80 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-[120px] pointer-events-none"></div>
         <div class="absolute -bottom-28 -left-28 w-80 h-80 rounded-full bg-blue-500/10 dark:bg-blue-500/15 blur-[120px] pointer-events-none"></div>
 
         <div class="relative z-10 space-y-6">
             {{-- Control Room Header --}}
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/80 dark:border-white/10">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
                 <div class="space-y-1">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/30 text-xs font-mono font-bold text-cyan-700 dark:text-cyan-400">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 text-xs font-mono font-bold text-cyan-700 dark:text-cyan-400">
                         <span class="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-ping"></span>
                         <span>MY CAREER CONTROL ROOM // OS v4.0</span>
                     </div>
@@ -100,10 +100,10 @@
                 </div>
 
                 <div class="flex items-center gap-2 font-mono text-xs text-slate-600 dark:text-slate-400">
-                    <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-cyan-700 dark:text-cyan-300 font-bold">
+                    <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-cyan-700 dark:text-cyan-300 font-bold">
                         NODE: {{ strtoupper($user->role ?? 'SCHOLAR') }}
                     </span>
-                    <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 font-bold">
+                    <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 font-bold">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
                         TELEMETRY SYNCED
                     </span>
@@ -114,7 +114,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 
                 {{-- Column 1: Multi-Tier Readiness Telemetry Bars --}}
-                <div class="lg:col-span-5 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 space-y-4">
+                <div class="lg:col-span-5 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.03] space-y-4">
                     <div class="flex items-center justify-between font-mono text-xs">
                         <span class="text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                             <i class="fa-solid fa-chart-simple text-cyan-600 dark:text-cyan-400"></i> Competency Flight Deck
@@ -170,7 +170,7 @@
                 </div>
 
                 {{-- Column 2: Active Tactical Directives --}}
-                <div class="lg:col-span-4 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 space-y-3 font-mono">
+                <div class="lg:col-span-4 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.03] space-y-3 font-mono">
                     <div class="flex items-center justify-between text-xs">
                         <span class="text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                             <i class="fa-solid fa-crosshairs text-cyan-600 dark:text-cyan-400"></i> Next Mission Objectives
@@ -179,7 +179,7 @@
                     </div>
 
                     <div class="space-y-2 text-xs">
-                        <div class="p-2.5 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/5 flex items-start gap-2.5 hover:border-cyan-500/40 transition-colors shadow-2xs dark:shadow-none">
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-white/[0.03] flex items-start gap-2.5 hover:border-cyan-500/40 transition-colors shadow-2xs dark:shadow-none">
                             <i class="fa-regular fa-circle-dot text-cyan-600 dark:text-cyan-400 mt-0.5 text-xs"></i>
                             <div class="min-w-0 flex-1">
                                 <div class="text-slate-900 dark:text-white font-bold truncate">01. Execute Interest Assessment</div>
@@ -187,7 +187,7 @@
                             </div>
                         </div>
 
-                        <div class="p-2.5 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/5 flex items-start gap-2.5 hover:border-cyan-500/40 transition-colors shadow-2xs dark:shadow-none">
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-white/[0.03] flex items-start gap-2.5 hover:border-cyan-500/40 transition-colors shadow-2xs dark:shadow-none">
                             <i class="fa-regular fa-circle-dot text-sky-600 dark:text-sky-400 mt-0.5 text-xs"></i>
                             <div class="min-w-0 flex-1">
                                 <div class="text-slate-900 dark:text-white font-bold truncate">02. Synchronize Verified Resume</div>
@@ -195,7 +195,7 @@
                             </div>
                         </div>
 
-                        <div class="p-2.5 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/5 flex items-start gap-2.5 hover:border-cyan-500/40 transition-colors shadow-2xs dark:shadow-none">
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-white/[0.03] flex items-start gap-2.5 hover:border-cyan-500/40 transition-colors shadow-2xs dark:shadow-none">
                             <i class="fa-regular fa-circle-dot text-emerald-600 dark:text-emerald-400 mt-0.5 text-xs"></i>
                             <div class="min-w-0 flex-1">
                                 <div class="text-slate-900 dark:text-white font-bold truncate">03. Compare 3 Target Pathways</div>
@@ -206,7 +206,7 @@
                 </div>
 
                 {{-- Column 3: Instant Action Command Hub --}}
-                <div class="lg:col-span-3 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 flex flex-col justify-between space-y-3 font-mono">
+                <div class="lg:col-span-3 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.03] flex flex-col justify-between space-y-3 font-mono">
                     <div class="text-xs text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                         <i class="fa-solid fa-bolt text-cyan-600 dark:text-cyan-400"></i> Command Hub
                     </div>
@@ -217,12 +217,12 @@
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
 
-                        <a href="{{ route('careers.index') }}" class="w-full py-2.5 px-3 rounded-xl bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-bold text-xs flex items-center justify-between transition-all hover:border-cyan-500/40 shadow-2xs dark:shadow-none">
+                        <a href="{{ route('careers.index') }}" class="w-full py-2.5 px-3 rounded-xl bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-800 dark:text-white font-bold text-xs flex items-center justify-between transition-all hover:border-cyan-500/40 shadow-2xs dark:shadow-none">
                             <span class="flex items-center gap-2"><i class="fa-solid fa-compass text-cyan-600 dark:text-cyan-400"></i> Career Bank</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
 
-                        <a href="{{ route('resources.index') }}" class="w-full py-2.5 px-3 rounded-xl bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-bold text-xs flex items-center justify-between transition-all hover:border-cyan-500/40 shadow-2xs dark:shadow-none">
+                        <a href="{{ route('resources.index') }}" class="w-full py-2.5 px-3 rounded-xl bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-800 dark:text-white font-bold text-xs flex items-center justify-between transition-all hover:border-cyan-500/40 shadow-2xs dark:shadow-none">
                             <span class="flex items-center gap-2"><i class="fa-solid fa-file-pdf text-cyan-600 dark:text-cyan-400"></i> Toolkits</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
