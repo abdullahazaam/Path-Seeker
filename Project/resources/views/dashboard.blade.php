@@ -80,15 +80,14 @@
     @endif
 
     {{-- ══════════════════ 2.5 MY CAREER CONTROL ROOM (FUTURISTIC OS COMMAND CENTER) ══════════════════ --}}
-    <div class="relative rounded-3xl p-6 sm:p-8 md:p-10 bg-white dark:bg-[#060913] border border-slate-200 dark:border-cyan-500/30 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] dark:shadow-[0_0_50px_rgba(0,242,254,0.12)] overflow-hidden reveal-element">
-        {{-- High-Tech Ambient Grid & Glows --}}
-        <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.04] pointer-events-none bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:18px_18px]"></div>
+    <div class="control-room-card app-card relative rounded-3xl p-6 sm:p-8 md:p-10 bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden reveal-element">
+        {{-- Ambient Corner Glows --}}
         <div class="absolute -top-28 -right-28 w-80 h-80 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-[120px] pointer-events-none"></div>
         <div class="absolute -bottom-28 -left-28 w-80 h-80 rounded-full bg-blue-500/10 dark:bg-blue-500/15 blur-[120px] pointer-events-none"></div>
 
         <div class="relative z-10 space-y-6">
             {{-- Control Room Header --}}
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-cyan-500/20">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/80 dark:border-white/10">
                 <div class="space-y-1">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/30 text-xs font-mono font-bold text-cyan-700 dark:text-cyan-400">
                         <span class="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-ping"></span>
@@ -115,7 +114,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 
                 {{-- Column 1: Multi-Tier Readiness Telemetry Bars --}}
-                <div class="lg:col-span-5 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 space-y-4">
+                <div class="lg:col-span-5 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 space-y-4">
                     <div class="flex items-center justify-between font-mono text-xs">
                         <span class="text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                             <i class="fa-solid fa-chart-simple text-cyan-600 dark:text-cyan-400"></i> Competency Flight Deck
@@ -171,7 +170,7 @@
                 </div>
 
                 {{-- Column 2: Active Tactical Directives --}}
-                <div class="lg:col-span-4 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 space-y-3 font-mono">
+                <div class="lg:col-span-4 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 space-y-3 font-mono">
                     <div class="flex items-center justify-between text-xs">
                         <span class="text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                             <i class="fa-solid fa-crosshairs text-cyan-600 dark:text-cyan-400"></i> Next Mission Objectives
@@ -207,7 +206,7 @@
                 </div>
 
                 {{-- Column 3: Instant Action Command Hub --}}
-                <div class="lg:col-span-3 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 flex flex-col justify-between space-y-3 font-mono">
+                <div class="lg:col-span-3 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 flex flex-col justify-between space-y-3 font-mono">
                     <div class="text-xs text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                         <i class="fa-solid fa-bolt text-cyan-600 dark:text-cyan-400"></i> Command Hub
                     </div>
