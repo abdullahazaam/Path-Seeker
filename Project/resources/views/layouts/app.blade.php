@@ -662,32 +662,32 @@
             }
         }
 
-        /* ══════════════════ LIGHT MODE 3D AMBIENT KEYFRAMES (90FPS GPU) ══════════════════ */
-        @keyframes floatParticle1 {
-            0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.35; }
-            50% { transform: translate3d(18px, -24px, 0); opacity: 0.75; }
+        /* ══════════════════ VISIBLE LIGHT-MODE SVG CONSTELLATION ANIMATIONS (90FPS GPU) ══════════════════ */
+        @keyframes floatDrift1 {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(25px, -20px, 0); }
         }
-        @keyframes floatParticle2 {
-            0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.30; }
-            50% { transform: translate3d(-22px, 18px, 0); opacity: 0.70; }
+        @keyframes floatDrift2 {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(-30px, 25px, 0); }
         }
-        @keyframes floatParticle3 {
-            0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.25; }
-            50% { transform: translate3d(15px, 20px, 0); opacity: 0.65; }
+        @keyframes floatDrift3 {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(20px, 30px, 0); }
         }
-        @keyframes nodePulseGlow {
-            0%, 100% { transform: scale(1); opacity: 0.4; }
-            50% { transform: scale(1.15); opacity: 0.85; }
+        @keyframes nodeGlowPulse {
+            0%, 100% { transform: scale(1); opacity: 0.20; }
+            50% { transform: scale(1.25); opacity: 0.40; }
         }
-        @keyframes gridLineDrift {
-            0% { stroke-dashoffset: 800; }
+        @keyframes lineDashMove {
+            0% { stroke-dashoffset: 600; }
             100% { stroke-dashoffset: 0; }
         }
-        .animate-particle-1 { animation: floatParticle1 18s ease-in-out infinite; will-change: transform, opacity; }
-        .animate-particle-2 { animation: floatParticle2 22s ease-in-out infinite; will-change: transform, opacity; }
-        .animate-particle-3 { animation: floatParticle3 26s ease-in-out infinite; will-change: transform, opacity; }
-        .animate-node-glow { animation: nodePulseGlow 6s ease-in-out infinite; will-change: transform, opacity; }
-        .animate-grid-line { stroke-dasharray: 8, 12; animation: gridLineDrift 45s linear infinite; }
+        .anim-drift-1 { animation: floatDrift1 14s ease-in-out infinite; will-change: transform; }
+        .anim-drift-2 { animation: floatDrift2 18s ease-in-out infinite; will-change: transform; }
+        .anim-drift-3 { animation: floatDrift3 22s ease-in-out infinite; will-change: transform; }
+        .anim-pulse-glow { animation: nodeGlowPulse 4s ease-in-out infinite; will-change: transform, opacity; }
+        .anim-dash-line { stroke-dasharray: 8, 10; animation: lineDashMove 30s linear infinite; }
 
         /* ══════════════════ SOFT FUTURISTIC LIGHT MODE HIERARCHY ══════════════════ */
         html:not(.dark) {
@@ -898,66 +898,98 @@
 <body class="min-h-screen flex flex-col antialiased transition-colors duration-500 relative overflow-x-hidden bg-[#F8FAFC] dark:bg-[#06080f] text-[#111827] dark:text-[#f8fafc]">
 
     <!-- ══════════════════ ISOLATED FIXED AMBIENT BACKGROUND LAYER (LIGHT MODE ONLY) ══════════════════ -->
-    <div id="ambientBackgroundLayer" class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-[#F8FAFC] dark:bg-[#06080f] transition-colors duration-500" aria-hidden="true">
+    <div id="ambientBackgroundLayer" class="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#F8FAFC] dark:bg-[#06080f] transition-colors duration-500" aria-hidden="true">
         
-        <!-- ─── STRICTLY LIGHT MODE AMBIENT GRAPHICS (ZERO DARK MODE IMPACT) ─── -->
+        <!-- ─── VISIBLE LIGHT-MODE SVG CONSTELLATION & GRID LAYER (STRICTLY LIGHT THEME ONLY) ─── -->
         <div class="absolute inset-0 block dark:hidden pointer-events-none">
-            <!-- 1. Ambient Radial Zone Gradients (Soft, Restrained) -->
-            <div class="absolute -top-[12%] -left-[8%] w-[55vw] h-[55vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-br from-[#12CFF3]/[0.07] via-[#7657FF]/[0.04] to-transparent blur-[140px] animate-aurora-drift-1"></div>
-            <div class="absolute top-[35%] -right-[8%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] rounded-full bg-gradient-to-bl from-[#7657FF]/[0.06] via-[#3b82f6]/[0.03] to-transparent blur-[140px] animate-aurora-drift-2"></div>
-            <div class="absolute -bottom-[12%] left-[10%] w-[52vw] h-[52vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-tr from-[#3b82f6]/[0.05] via-[#12CFF3]/[0.03] to-transparent blur-[150px] animate-aurora-drift-3"></div>
+            <!-- 1. Ambient Radial Glow Zones -->
+            <div class="absolute -top-[10%] -left-[5%] w-[55vw] h-[55vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-br from-[#12CFF3]/[0.12] via-[#7657FF]/[0.08] to-transparent blur-[120px] animate-aurora-drift-1"></div>
+            <div class="absolute top-[35%] -right-[8%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] rounded-full bg-gradient-to-bl from-[#7657FF]/[0.10] via-[#3b82f6]/[0.06] to-transparent blur-[120px] animate-aurora-drift-2"></div>
+            <div class="absolute -bottom-[10%] left-[10%] w-[52vw] h-[52vw] max-w-[850px] max-h-[850px] rounded-full bg-gradient-to-tr from-[#3b82f6]/[0.09] via-[#12CFF3]/[0.07] to-transparent blur-[130px] animate-aurora-drift-3"></div>
 
-            <!-- 2. Responsive 3D-Style Career Trajectory Grid Lines -->
-            <svg class="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
-                <path d="M-100,160 C320,60 540,340 880,200 C1200,60 1340,400 1600,300" fill="none" stroke="url(#lightTrajGrad1)" stroke-width="2" class="animate-grid-line" />
-                <path d="M-50,660 C300,500 620,800 980,620 C1260,480 1420,760 1550,670" fill="none" stroke="url(#lightTrajGrad2)" stroke-width="1.8" class="animate-grid-line" style="animation-direction: reverse; animation-duration: 55s;" />
+            <!-- 2. Visible SVG Constellation Nodes, Trajectory Lines & Particles (15-25% Opacity) -->
+            <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
                 <defs>
-                    <linearGradient id="lightTrajGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#12CFF3" />
-                        <stop offset="50%" stop-color="#7657FF" />
-                        <stop offset="100%" stop-color="#3b82f6" />
+                    <linearGradient id="visLightGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#12CFF3" stop-opacity="0.25" />
+                        <stop offset="50%" stop-color="#7657FF" stop-opacity="0.22" />
+                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.25" />
                     </linearGradient>
-                    <linearGradient id="lightTrajGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#7657FF" />
-                        <stop offset="50%" stop-color="#12CFF3" />
-                        <stop offset="100%" stop-color="#8b5cf6" />
+                    <linearGradient id="visLightGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#7657FF" stop-opacity="0.25" />
+                        <stop offset="50%" stop-color="#12CFF3" stop-opacity="0.20" />
+                        <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.24" />
                     </linearGradient>
                 </defs>
+
+                <!-- Drifting Trajectory Grid Curves (Visibly moving at 15-25% opacity) -->
+                <path d="M-80,180 C320,80 520,380 860,220 C1200,80 1340,420 1580,310" fill="none" stroke="url(#visLightGrad1)" stroke-width="2.5" class="anim-dash-line" />
+                <path d="M-40,680 C280,520 600,820 960,640 C1240,500 1400,780 1560,680" fill="none" stroke="url(#visLightGrad2)" stroke-width="2" class="anim-dash-line" style="animation-direction: reverse; animation-duration: 45s;" />
+                <path d="M100,50 C400,250 700,50 1100,350 C1300,500 1450,200 1520,250" fill="none" stroke="#7657FF" stroke-opacity="0.16" stroke-width="1.8" stroke-dasharray="6, 8" />
+
+                <!-- Cluster A (Top Right — Animated Drift 1) -->
+                <g class="anim-drift-1">
+                    <line x1="1050" y1="120" x2="1150" y2="170" stroke="#7657FF" stroke-opacity="0.24" stroke-width="1.5" stroke-dasharray="4,4" />
+                    <line x1="1150" y1="170" x2="1260" y2="130" stroke="#12CFF3" stroke-opacity="0.26" stroke-width="1.5" />
+                    <line x1="1150" y1="170" x2="1200" y2="260" stroke="#7657FF" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="4,4" />
+                    <line x1="1260" y1="130" x2="1340" y2="190" stroke="#12CFF3" stroke-opacity="0.20" stroke-width="1.5" />
+                    
+                    <!-- Nodes -->
+                    <circle cx="1050" cy="120" r="5" fill="#7657FF" fill-opacity="0.24" />
+                    <circle cx="1150" cy="170" r="10" fill="#12CFF3" fill-opacity="0.22" stroke="#12CFF3" stroke-opacity="0.28" stroke-width="2" class="anim-pulse-glow" style="transform-origin: 1150px 170px;" />
+                    <circle cx="1150" cy="170" r="4.5" fill="#12CFF3" fill-opacity="0.30" />
+                    <circle cx="1260" cy="130" r="6" fill="#7657FF" fill-opacity="0.25" />
+                    <circle cx="1200" cy="260" r="8" fill="#3b82f6" fill-opacity="0.22" stroke="#3b82f6" stroke-opacity="0.26" stroke-width="1.5" />
+                    <circle cx="1340" cy="190" r="5" fill="#12CFF3" fill-opacity="0.24" />
+                </g>
+
+                <!-- Cluster B (Center Left — Animated Drift 2) -->
+                <g class="anim-drift-2">
+                    <line x1="120" y1="440" x2="220" y2="500" stroke="#12CFF3" stroke-opacity="0.25" stroke-width="1.5" />
+                    <line x1="220" y1="500" x2="310" y2="440" stroke="#7657FF" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="4,4" />
+                    <line x1="220" y1="500" x2="180" y2="580" stroke="#3b82f6" stroke-opacity="0.24" stroke-width="1.5" />
+                    <line x1="310" y1="440" x2="390" y2="510" stroke="#7657FF" stroke-opacity="0.20" stroke-width="1.5" />
+
+                    <!-- Nodes -->
+                    <circle cx="120" cy="440" r="6" fill="#12CFF3" fill-opacity="0.24" />
+                    <circle cx="220" cy="500" r="12" fill="#7657FF" fill-opacity="0.20" stroke="#7657FF" stroke-opacity="0.30" stroke-width="2" class="anim-pulse-glow" style="transform-origin: 220px 500px;" />
+                    <circle cx="220" cy="500" r="5" fill="#7657FF" fill-opacity="0.30" />
+                    <circle cx="310" cy="440" r="6" fill="#12CFF3" fill-opacity="0.25" />
+                    <circle cx="180" cy="580" r="5" fill="#3b82f6" fill-opacity="0.22" />
+                    <circle cx="390" cy="510" r="7" fill="#7657FF" fill-opacity="0.22" />
+                </g>
+
+                <!-- Cluster C (Bottom Right — Animated Drift 3) -->
+                <g class="anim-drift-3">
+                    <line x1="980" y1="680" x2="1080" y2="740" stroke="#12CFF3" stroke-opacity="0.24" stroke-width="1.5" stroke-dasharray="4,4" />
+                    <line x1="1080" y1="740" x2="1190" y2="700" stroke="#7657FF" stroke-opacity="0.25" stroke-width="1.5" />
+                    <line x1="1080" y1="740" x2="1120" y2="820" stroke="#12CFF3" stroke-opacity="0.22" stroke-width="1.5" />
+
+                    <!-- Nodes -->
+                    <circle cx="980" cy="680" r="5" fill="#12CFF3" fill-opacity="0.24" />
+                    <circle cx="1080" cy="740" r="11" fill="#7657FF" fill-opacity="0.20" stroke="#7657FF" stroke-opacity="0.28" stroke-width="2" class="anim-pulse-glow" style="transform-origin: 1080px 740px;" />
+                    <circle cx="1080" cy="740" r="4.5" fill="#7657FF" fill-opacity="0.30" />
+                    <circle cx="1190" cy="700" r="6.5" fill="#12CFF3" fill-opacity="0.25" />
+                    <circle cx="1120" cy="820" r="5" fill="#3b82f6" fill-opacity="0.22" />
+                </g>
+
+                <!-- Additional Floating Constellation Stars across viewport -->
+                <g class="anim-drift-1">
+                    <circle cx="580" cy="160" r="7" fill="#12CFF3" fill-opacity="0.24" stroke="#12CFF3" stroke-opacity="0.26" stroke-width="1.5" />
+                    <circle cx="580" cy="160" r="3" fill="#12CFF3" fill-opacity="0.35" />
+                </g>
+                <g class="anim-drift-2">
+                    <circle cx="820" cy="460" r="8" fill="#7657FF" fill-opacity="0.22" stroke="#7657FF" stroke-opacity="0.26" stroke-width="1.5" />
+                    <circle cx="820" cy="460" r="3.5" fill="#7657FF" fill-opacity="0.35" />
+                </g>
+                <g class="anim-drift-3">
+                    <circle cx="460" cy="720" r="7" fill="#12CFF3" fill-opacity="0.22" stroke="#12CFF3" stroke-opacity="0.26" stroke-width="1.5" />
+                    <circle cx="460" cy="720" r="3" fill="#12CFF3" fill-opacity="0.35" />
+                </g>
             </svg>
 
-            <!-- 3. Faint Glowing Constellation Nodes -->
-            <svg class="absolute inset-0 w-full h-full opacity-[0.07] pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
-                <!-- Cluster Top Right -->
-                <g class="animate-node-glow" style="transform-origin: 1160px 180px;">
-                    <line x1="1080" y1="130" x2="1160" y2="180" stroke="#7657FF" stroke-width="1" stroke-dasharray="4,4" />
-                    <line x1="1160" y1="180" x2="1240" y2="140" stroke="#12CFF3" stroke-width="1" />
-                    <line x1="1160" y1="180" x2="1190" y2="250" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,4" />
-                    <circle cx="1080" cy="130" r="3.5" fill="#7657FF" />
-                    <circle cx="1160" cy="180" r="5" fill="#12CFF3" />
-                    <circle cx="1240" cy="140" r="3" fill="#7657FF" />
-                    <circle cx="1190" cy="250" r="4" fill="#3b82f6" />
-                </g>
-                <!-- Cluster Mid Left -->
-                <g class="animate-node-glow" style="animation-delay: 3s; transform-origin: 240px 520px;">
-                    <line x1="160" y1="460" x2="240" y2="520" stroke="#12CFF3" stroke-width="1" />
-                    <line x1="240" y1="520" x2="310" y2="470" stroke="#7657FF" stroke-width="1" stroke-dasharray="4,4" />
-                    <line x1="240" y1="520" x2="210" y2="590" stroke="#3b82f6" stroke-width="1" />
-                    <circle cx="160" cy="460" r="3" fill="#12CFF3" />
-                    <circle cx="240" cy="520" r="5" fill="#7657FF" />
-                    <circle cx="310" cy="470" r="3.5" fill="#12CFF3" />
-                    <circle cx="210" cy="590" r="3" fill="#3b82f6" />
-                </g>
-            </svg>
-
-            <!-- 4. Soft Floating Data Particles (Ultra-low speed, GPU composited) -->
-            <div class="absolute top-[20%] left-[30%] w-2 h-2 rounded-full bg-[#12CFF3] opacity-30 animate-particle-1"></div>
-            <div class="absolute top-[55%] left-[75%] w-2.5 h-2.5 rounded-full bg-[#7657FF] opacity-25 animate-particle-2"></div>
-            <div class="absolute top-[70%] left-[25%] w-2 h-2 rounded-full bg-[#3b82f6] opacity-30 animate-particle-3"></div>
-            <div class="absolute top-[35%] left-[85%] w-1.5 h-1.5 rounded-full bg-[#12CFF3] opacity-35 animate-particle-1" style="animation-delay: 4s;"></div>
-            <div class="absolute top-[80%] left-[60%] w-2 h-2 rounded-full bg-[#7657FF] opacity-20 animate-particle-2" style="animation-delay: 6s;"></div>
-
-            <!-- 5. Micro Data Grid Dot Pattern Overlay -->
-            <div class="absolute inset-0 bg-[radial-gradient(#7657FF_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.03] pointer-events-none"></div>
+            <!-- 3. Soft Micro Data Grid Dot Pattern Overlay -->
+            <div class="absolute inset-0 bg-[radial-gradient(#7657FF_1px,transparent_1px)] [background-size:30px_30px] opacity-[0.04] pointer-events-none"></div>
         </div>
 
         <!-- ─── DARK MODE AMBIENT LAYER (100% Preserved Pristine Obsidian Auroras) ─── -->
