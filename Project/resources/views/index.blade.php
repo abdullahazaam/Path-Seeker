@@ -594,7 +594,7 @@
                     $rowIndex = sprintf('%02d', $loop->iteration);
                 @endphp
 
-                <div data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}" class="career-card relative p-6 sm:p-7 rounded-3xl bg-slate-50/80 dark:bg-[#0b0f19] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-100/90 dark:hover:bg-[#0e1424] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
+                <div data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}" class="career-card relative p-6 sm:p-7 rounded-3xl bg-slate-50/80 dark:bg-[#0b0f19] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-100/90 dark:hover:bg-[#0e1424] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
                     {{-- Ambient Hover Glow --}}
                     <div class="absolute -right-20 -top-20 w-48 h-48 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 
@@ -682,7 +682,7 @@
             </div>
             <div class="divide-y divide-slate-200/80 dark:divide-white/[0.05] flex-1 p-2 sm:p-3">
                 @forelse($featuredMultimedia as $media)
-                    <div data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 80 }}" class="p-4 rounded-2xl flex items-center justify-between gap-4 hover:bg-slate-100/80 dark:hover:bg-white/[0.04] transition-all group">
+                    <div data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}" class="p-4 rounded-2xl flex items-center justify-between gap-4 hover:bg-slate-100/80 dark:hover:bg-white/[0.04] transition-all group">
                         <div class="flex items-center gap-3.5 min-w-0">
                             <div class="relative w-16 h-12 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-200/80 dark:border-white/5 shadow-sm">
                                 <img src="{{ $media->thumbnail_url ?? 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=200&auto=format&fit=crop&q=80' }}" alt="{{ $media->title }}" class="w-full h-full object-cover">
@@ -723,7 +723,7 @@
             </div>
             <div class="divide-y divide-slate-200/80 dark:divide-white/[0.05] flex-1 p-2 sm:p-3">
                 @forelse($featuredResources as $res)
-                    <div data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 80 }}" class="p-4 rounded-2xl flex items-center justify-between gap-4 hover:bg-slate-100/80 dark:hover:bg-white/[0.04] transition-all group">
+                    <div data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}" class="p-4 rounded-2xl flex items-center justify-between gap-4 hover:bg-slate-100/80 dark:hover:bg-white/[0.04] transition-all group">
                         <div class="flex items-center gap-3.5 min-w-0">
                             <div class="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-200/80 dark:border-white/5 shadow-sm">
                                 <img src="{{ $res->thumbnail_url ?? 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=200&auto=format&fit=crop&q=80' }}" alt="{{ $res->title }}" class="w-full h-full object-cover">

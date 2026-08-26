@@ -89,7 +89,7 @@
                         default => url('/'),
                     };
                 @endphp
-                <div data-aos="fade-up" data-aos-delay="{{ (($loop->iteration - 1) % 4 + 1) * 80 }}" id="bookmark-card-{{ $bm->id }}" x-data="{ 
+                <div data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}" id="bookmark-card-{{ $bm->id }}" x-data="{ 
                     editingNote: false, 
                     showShare: false,
                     noteContent: '{{ addslashes($bm->notes ?? '') }}',

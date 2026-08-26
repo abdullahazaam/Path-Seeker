@@ -46,7 +46,7 @@
                 $authorDisplayName = str_contains($story->title, ' — ') ? explode(' — ', $story->title)[0] : ($story->author?->name ?? 'PathSeeker Scholar');
                 $storyHeadline = str_contains($story->title, ' — ') ? explode(' — ', $story->title)[1] : $story->title;
             @endphp
-            <div data-aos="fade-up" data-aos-delay="{{ (($loop->iteration - 1) % 6 + 1) * 80 }}" class="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group app-card">
+            <div data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}" class="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group app-card">
                 
                 <div class="space-y-4">
                     

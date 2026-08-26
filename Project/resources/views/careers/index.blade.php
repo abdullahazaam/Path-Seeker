@@ -305,7 +305,7 @@
             @endphp
 
             {{-- Individual Clean Career Card --}}
-            <div data-aos="fade-up" data-aos-delay="{{ (($loop->iteration - 1) % 6 + 1) * 80 }}" class="career-card relative p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#090d18] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-50/90 dark:hover:bg-[#0d1322] shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group flex flex-col justify-between overflow-hidden">
+            <div data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}" class="career-card relative p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#090d18] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-50/90 dark:hover:bg-[#0d1322] shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group flex flex-col justify-between overflow-hidden">
                 
                 {{-- Ambient Corner Glow --}}
                 <div class="absolute -right-20 -top-20 w-40 h-40 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
