@@ -84,7 +84,59 @@
                 <div>
                     <label for="interests" class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase font-mono mb-1.5">Primary Focus / Specializations</label>
                     <input type="text" name="interests" id="interests" value="{{ old('interests', $profile->interests) }}" placeholder="e.g. AI Architecture, Full-Stack Development, Cloud Ops" class="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500">
+                    @error('interests')
+                        <p class="text-rose-500 text-xs mt-1 font-mono">{{ $message }}</p>
+                    @enderror
                 </div>
+            </div>
+
+            {{-- Technical & Professional Skills Section --}}
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 space-y-3">
+                <div class="flex items-center justify-between">
+                    <label for="skills" class="block text-xs font-bold text-slate-900 dark:text-white font-display uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-code text-cyan-500"></i>
+                        <span>Technical &amp; Domain Skills</span>
+                    </label>
+                    <span class="text-[11px] text-slate-400 font-mono">Comma-separated</span>
+                </div>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">
+                    List your programming languages, frameworks, cloud tools, or methodologies (e.g. <code class="font-mono text-cyan-600 dark:text-cyan-400 font-semibold">Laravel, PHP, Vue.js, Tailwind CSS, Docker, PostgreSQL, CI/CD</code>).
+                </p>
+                <textarea name="skills" id="skills" rows="3" placeholder="Laravel, PHP, Python, JavaScript, TypeScript, React, Tailwind CSS, Docker, MySQL, AWS..." class="w-full px-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-cyan-500 leading-relaxed">{{ old('skills', $profile->skills) }}</textarea>
+                @error('skills')
+                    <p class="text-rose-500 text-xs mt-1 font-mono">{{ $message }}</p>
+                @enderror
+                @if(!empty($profile->skills))
+                    <div class="pt-2 flex flex-wrap gap-1.5 items-center">
+                        <span class="text-[10px] font-mono font-bold text-slate-400 uppercase mr-1">Active Skills:</span>
+                        @foreach(array_filter(array_map('trim', explode(',', $profile->skills))) as $skillBadge)
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20 font-mono inline-flex items-center gap-1">
+                                <i class="fa-solid fa-check text-[9px] text-cyan-500"></i>
+                                <span>{{ $skillBadge }}</span>
+                            </span>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+
+            {{-- Work Experience & Professional Milestones Section --}}
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 space-y-3">
+                <div class="flex items-center justify-between">
+                    <label for="work_experience" class="block text-xs font-bold text-slate-900 dark:text-white font-display uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase text-purple-500"></i>
+                        <span>Work Experience &amp; Career Journey</span>
+                    </label>
+                    <span class="text-[11px] text-slate-400 font-mono">Roles &amp; Milestones</span>
+                </div>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">
+                    Detail previous employment, internships, open-source projects, or engineering milestones.
+                </p>
+                <textarea name="work_experience" id="work_experience" rows="4" placeholder="e.g.
+• Senior Full-Stack Engineer at Zynex Technologies (2023 - Present) — Architected high-throughput microservices and responsive Blade frontends.
+• Backend Developer at CloudScale Inc (2021 - 2023) — Engineered secure RESTful APIs, optimized SQL queries, and automated CI/CD pipelines." class="w-full px-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 leading-relaxed font-sans">{{ old('work_experience', $profile->work_experience) }}</textarea>
+                @error('work_experience')
+                    <p class="text-rose-500 text-xs mt-1 font-mono">{{ $message }}</p>
+                @enderror
             </div>
 
             {{-- Resume Document Upload & Download Section --}}

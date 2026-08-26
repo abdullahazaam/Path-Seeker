@@ -10,6 +10,8 @@ class UserProfile extends Model
         'user_id',
         'education_level',
         'interests',
+        'skills',
+        'work_experience',
         'profile_image',
         'resume_path',
         'resume_filename',

@@ -41,6 +41,8 @@ class UserProfileController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'education_level' => ['nullable', 'string', 'max:100'],
             'interests' => ['nullable', 'string', 'max:500'],
+            'skills' => ['nullable', 'string', 'max:1000'],
+            'work_experience' => ['nullable', 'string', 'max:3000'],
             'resume' => ['nullable', 'file', 'mimes:pdf,docx,doc', 'max:10240'],
             'current_password' => ['nullable', 'required_with:new_password', 'current_password'],
             'new_password' => ['nullable', 'string', 'min:8', 'confirmed'],
@@ -58,6 +60,8 @@ class UserProfileController extends Controller
         $profileData = [
             'education_level' => $validated['education_level'] ?? null,
             'interests' => $validated['interests'] ?? null,
+            'skills' => $validated['skills'] ?? null,
+            'work_experience' => $validated['work_experience'] ?? null,
         ];
 
         // Handle Resume Upload

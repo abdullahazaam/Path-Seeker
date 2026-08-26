@@ -240,6 +240,8 @@ class RoutesTest extends TestCase
             'email' => 'student@pathseeker.com',
             'education_level' => 'Senior Computer Science Undergraduate',
             'interests' => 'Distributed Cloud Systems, Generative AI',
+            'skills' => 'Laravel, PHP, Vue.js, Docker, PostgreSQL',
+            'work_experience' => 'Full-Stack Software Engineering Intern at TechLabs (2024)',
         ]);
         $updateRes->assertRedirect('/profile');
         $updateRes->assertSessionHas('success');
@@ -252,6 +254,8 @@ class RoutesTest extends TestCase
         $this->assertDatabaseHas('user_profiles', [
             'user_id' => $student->id,
             'education_level' => 'Senior Computer Science Undergraduate',
+            'skills' => 'Laravel, PHP, Vue.js, Docker, PostgreSQL',
+            'work_experience' => 'Full-Stack Software Engineering Intern at TechLabs (2024)',
         ]);
     }
 

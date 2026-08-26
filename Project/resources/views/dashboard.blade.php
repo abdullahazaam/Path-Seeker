@@ -40,9 +40,20 @@
                     </p>
                     @if($user->profile && $user->profile->interests)
                         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 flex items-center gap-1.5 flex-wrap pt-0.5">
-                            <strong class="text-slate-800 dark:text-slate-200"><i class="fa-solid fa-crosshairs text-cyan-500 mr-1 text-xs"></i>Focus Areas:</strong>
+                            <strong class="text-slate-800 dark:text-slate-200"><i class="fa-solid fa-crosshairs text-cyan-500 mr-1 text-xs"></i>Focus:</strong>
                             <span class="px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 font-medium text-slate-700 dark:text-slate-300">{{ $user->profile->interests }}</span>
                         </p>
+                    @endif
+                    @if($user->profile && !empty($user->profile->skills))
+                        <div class="flex items-center gap-1.5 flex-wrap pt-0.5">
+                            <span class="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1"><i class="fa-solid fa-code text-cyan-500 text-[11px]"></i>Skills:</span>
+                            @foreach(array_slice(array_filter(array_map('trim', explode(',', $user->profile->skills))), 0, 5) as $skillTag)
+                                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono font-medium bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">{{ $skillTag }}</span>
+                            @endforeach
+                            @if(count(array_filter(array_map('trim', explode(',', $user->profile->skills)))) > 5)
+                                <span class="text-[10px] font-mono text-slate-400">+{{ count(array_filter(array_map('trim', explode(',', $user->profile->skills)))) - 5 }} more</span>
+                            @endif
+                        </div>
                     @endif
                 </div>
             </div>
