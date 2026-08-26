@@ -80,32 +80,32 @@
     @endif
 
     {{-- ══════════════════ 2.5 MY CAREER CONTROL ROOM (FUTURISTIC OS COMMAND CENTER) ══════════════════ --}}
-    <div class="relative rounded-3xl p-6 sm:p-8 md:p-10 bg-slate-950/95 dark:bg-[#060913] border border-cyan-500/30 shadow-[0_0_50px_rgba(0,242,254,0.12)] overflow-hidden">
+    <div class="relative rounded-3xl p-6 sm:p-8 md:p-10 bg-white dark:bg-[#060913] border border-slate-200 dark:border-cyan-500/30 shadow-2xl dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] dark:shadow-[0_0_50px_rgba(0,242,254,0.12)] overflow-hidden reveal-element">
         {{-- High-Tech Ambient Grid & Glows --}}
-        <div class="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:18px_18px]"></div>
-        <div class="absolute -top-28 -right-28 w-80 h-80 rounded-full bg-cyan-500/15 blur-[120px] pointer-events-none"></div>
-        <div class="absolute -bottom-28 -left-28 w-80 h-80 rounded-full bg-purple-500/15 blur-[120px] pointer-events-none"></div>
+        <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.04] pointer-events-none bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:18px_18px]"></div>
+        <div class="absolute -top-28 -right-28 w-80 h-80 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-[120px] pointer-events-none"></div>
+        <div class="absolute -bottom-28 -left-28 w-80 h-80 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-[120px] pointer-events-none"></div>
 
         <div class="relative z-10 space-y-6">
             {{-- Control Room Header --}}
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-cyan-500/20">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-cyan-500/20">
                 <div class="space-y-1">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs font-mono font-bold text-cyan-400">
-                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/30 text-xs font-mono font-bold text-cyan-700 dark:text-cyan-400">
+                        <span class="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-ping"></span>
                         <span>MY CAREER CONTROL ROOM // OS v4.0</span>
                     </div>
-                    <h2 class="text-xl sm:text-2xl font-black text-white font-display tracking-tight flex items-center gap-2">
-                        <i class="fa-solid fa-gamepad text-cyan-400 text-lg"></i>
+                    <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display tracking-tight flex items-center gap-2">
+                        <i class="fa-solid fa-gamepad text-cyan-600 dark:text-cyan-400 text-lg"></i>
                         <span>Autonomous Command Center</span>
                     </h2>
                 </div>
 
-                <div class="flex items-center gap-2 font-mono text-xs text-slate-400">
-                    <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-cyan-300">
+                <div class="flex items-center gap-2 font-mono text-xs text-slate-600 dark:text-slate-400">
+                    <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-cyan-700 dark:text-cyan-300 font-bold">
                         NODE: {{ strtoupper($user->role ?? 'SCHOLAR') }}
                     </span>
-                    <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 font-bold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
                         TELEMETRY SYNCED
                     </span>
                 </div>
@@ -115,55 +115,55 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 
                 {{-- Column 1: Multi-Tier Readiness Telemetry Bars --}}
-                <div class="lg:col-span-5 p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+                <div class="lg:col-span-5 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 space-y-4">
                     <div class="flex items-center justify-between font-mono text-xs">
-                        <span class="text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                            <i class="fa-solid fa-chart-simple text-cyan-400"></i> Competency Flight Deck
+                        <span class="text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-chart-simple text-cyan-600 dark:text-cyan-400"></i> Competency Flight Deck
                         </span>
-                        <span class="text-cyan-400 font-bold">88% Aggregate</span>
+                        <span class="text-cyan-600 dark:text-cyan-400 font-bold">88% Aggregate</span>
                     </div>
 
                     <div class="space-y-3 font-mono text-xs">
                         {{-- Bar 1 --}}
                         <div class="space-y-1">
-                            <div class="flex justify-between text-slate-300">
+                            <div class="flex justify-between text-slate-700 dark:text-slate-300 font-medium">
                                 <span>Foundational Architecture</span>
-                                <span class="text-cyan-400 font-bold">92%</span>
+                                <span class="text-cyan-600 dark:text-cyan-400 font-bold">92%</span>
                             </div>
-                            <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                            <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
                                 <div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-sky-500" style="width: 92%;"></div>
                             </div>
                         </div>
 
                         {{-- Bar 2 --}}
                         <div class="space-y-1">
-                            <div class="flex justify-between text-slate-300">
+                            <div class="flex justify-between text-slate-700 dark:text-slate-300 font-medium">
                                 <span>Toolchain &amp; Cloud Mastery</span>
-                                <span class="text-purple-400 font-bold">85%</span>
+                                <span class="text-purple-600 dark:text-purple-400 font-bold">85%</span>
                             </div>
-                            <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                            <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
                                 <div class="h-full rounded-full bg-gradient-to-r from-purple-400 to-pink-500" style="width: 85%;"></div>
                             </div>
                         </div>
 
                         {{-- Bar 3 --}}
                         <div class="space-y-1">
-                            <div class="flex justify-between text-slate-300">
+                            <div class="flex justify-between text-slate-700 dark:text-slate-300 font-medium">
                                 <span>Interview &amp; System Design</span>
-                                <span class="text-emerald-400 font-bold">80%</span>
+                                <span class="text-emerald-600 dark:text-emerald-400 font-bold">80%</span>
                             </div>
-                            <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                            <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
                                 <div class="h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-400" style="width: 80%;"></div>
                             </div>
                         </div>
 
                         {{-- Bar 4 --}}
                         <div class="space-y-1">
-                            <div class="flex justify-between text-slate-300">
+                            <div class="flex justify-between text-slate-700 dark:text-slate-300 font-medium">
                                 <span>Threat Defense &amp; Security</span>
-                                <span class="text-indigo-400 font-bold">94%</span>
+                                <span class="text-indigo-600 dark:text-indigo-400 font-bold">94%</span>
                             </div>
-                            <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                            <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
                                 <div class="h-full rounded-full bg-gradient-to-r from-indigo-400 to-cyan-400" style="width: 94%;"></div>
                             </div>
                         </div>
@@ -171,60 +171,60 @@
                 </div>
 
                 {{-- Column 2: Active Tactical Directives --}}
-                <div class="lg:col-span-4 p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3 font-mono">
+                <div class="lg:col-span-4 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 space-y-3 font-mono">
                     <div class="flex items-center justify-between text-xs">
-                        <span class="text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                            <i class="fa-solid fa-crosshairs text-purple-400"></i> Next Mission Objectives
+                        <span class="text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-crosshairs text-purple-600 dark:text-purple-400"></i> Next Mission Objectives
                         </span>
-                        <span class="text-purple-400 font-bold">3 Pending</span>
+                        <span class="text-purple-600 dark:text-purple-400 font-bold">3 Pending</span>
                     </div>
 
                     <div class="space-y-2 text-xs">
-                        <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 flex items-start gap-2.5 hover:border-cyan-500/30 transition-colors">
-                            <i class="fa-regular fa-circle-dot text-cyan-400 mt-0.5 text-xs"></i>
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/5 flex items-start gap-2.5 hover:border-cyan-500/40 transition-colors shadow-2xs dark:shadow-none">
+                            <i class="fa-regular fa-circle-dot text-cyan-600 dark:text-cyan-400 mt-0.5 text-xs"></i>
                             <div class="min-w-0 flex-1">
-                                <div class="text-white font-bold truncate">01. Execute Interest Assessment</div>
-                                <div class="text-[10px] text-slate-400 mt-0.5">Recalculate RIASEC weighted matches</div>
+                                <div class="text-slate-900 dark:text-white font-bold truncate">01. Execute Interest Assessment</div>
+                                <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Recalculate RIASEC weighted matches</div>
                             </div>
                         </div>
 
-                        <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 flex items-start gap-2.5 hover:border-cyan-500/30 transition-colors">
-                            <i class="fa-regular fa-circle-dot text-purple-400 mt-0.5 text-xs"></i>
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/5 flex items-start gap-2.5 hover:border-cyan-500/40 transition-colors shadow-2xs dark:shadow-none">
+                            <i class="fa-regular fa-circle-dot text-purple-600 dark:text-purple-400 mt-0.5 text-xs"></i>
                             <div class="min-w-0 flex-1">
-                                <div class="text-white font-bold truncate">02. Synchronize Verified Resume</div>
-                                <div class="text-[10px] text-slate-400 mt-0.5">Upload latest PDF for AI parsing</div>
+                                <div class="text-slate-900 dark:text-white font-bold truncate">02. Synchronize Verified Resume</div>
+                                <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Upload latest PDF for AI parsing</div>
                             </div>
                         </div>
 
-                        <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 flex items-start gap-2.5 hover:border-cyan-500/30 transition-colors">
-                            <i class="fa-regular fa-circle-dot text-emerald-400 mt-0.5 text-xs"></i>
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/5 flex items-start gap-2.5 hover:border-cyan-500/40 transition-colors shadow-2xs dark:shadow-none">
+                            <i class="fa-regular fa-circle-dot text-emerald-600 dark:text-emerald-400 mt-0.5 text-xs"></i>
                             <div class="min-w-0 flex-1">
-                                <div class="text-white font-bold truncate">03. Compare 3 Target Pathways</div>
-                                <div class="text-[10px] text-slate-400 mt-0.5">Benchmarking salary &amp; toolchains</div>
+                                <div class="text-slate-900 dark:text-white font-bold truncate">03. Compare 3 Target Pathways</div>
+                                <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Benchmarking salary &amp; toolchains</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {{-- Column 3: Instant Action Command Hub --}}
-                <div class="lg:col-span-3 p-5 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col justify-between space-y-3 font-mono">
-                    <div class="text-xs text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fa-solid fa-bolt text-cyan-400"></i> Command Hub
+                <div class="lg:col-span-3 p-5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 flex flex-col justify-between space-y-3 font-mono">
+                    <div class="text-xs text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-bolt text-cyan-600 dark:text-cyan-400"></i> Command Hub
                     </div>
 
                     <div class="space-y-2">
-                        <a href="{{ route('quiz.index') }}" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-black text-xs flex items-center justify-between transition-all shadow-[0_0_20px_rgba(0,242,254,0.3)] hover:scale-102">
+                        <a href="{{ route('quiz.index') }}" class="btn-sweep w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#00f2fe] via-sky-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 font-black text-xs flex items-center justify-between transition-all shadow-[0_0_20px_rgba(0,242,254,0.3)] hover:scale-102">
                             <span class="flex items-center gap-2"><i class="fa-solid fa-brain"></i> Assessment</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
 
-                        <a href="{{ route('careers.index') }}" class="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-xs flex items-center justify-between transition-all hover:border-cyan-500/40">
-                            <span class="flex items-center gap-2"><i class="fa-solid fa-compass text-cyan-400"></i> Career Bank</span>
+                        <a href="{{ route('careers.index') }}" class="w-full py-2.5 px-3 rounded-xl bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-bold text-xs flex items-center justify-between transition-all hover:border-cyan-500/40 shadow-2xs dark:shadow-none">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-compass text-cyan-600 dark:text-cyan-400"></i> Career Bank</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
 
-                        <a href="{{ route('resources.index') }}" class="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-xs flex items-center justify-between transition-all hover:border-purple-500/40">
-                            <span class="flex items-center gap-2"><i class="fa-solid fa-file-pdf text-purple-400"></i> Toolkits</span>
+                        <a href="{{ route('resources.index') }}" class="w-full py-2.5 px-3 rounded-xl bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-bold text-xs flex items-center justify-between transition-all hover:border-purple-500/40 shadow-2xs dark:shadow-none">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-file-pdf text-purple-600 dark:text-purple-400"></i> Toolkits</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
                     </div>
