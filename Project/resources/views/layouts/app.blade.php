@@ -902,7 +902,7 @@
             color: #F8FAFC;
         }
 
-        /* ─── 1. Outer Containers / Main Section Wrappers (65% Dark Base) ─── */
+        /* ─── 1. Outer Containers / Main Section Wrappers (75% Dark Base) ─── */
         html.dark .signature-container, .dark .signature-container,
         html.dark .section-wrapper, .dark .section-wrapper,
         html.dark .control-room-card, .dark .control-room-card,
@@ -933,15 +933,15 @@
         html.dark .dark\:bg-slate-950, .dark .dark\:bg-slate-950,
         html.dark .dark\:bg-slate-950\/50, .dark .dark\:bg-slate-950\/50,
         html.dark .dark\:bg-slate-950\/85, .dark .dark\:bg-slate-950\/85 {
-            background: rgba(4, 6, 11, 0.65) !important;
-            background-color: rgba(4, 6, 11, 0.65) !important;
+            background: rgba(4, 6, 11, 0.75) !important;
+            background-color: rgba(4, 6, 11, 0.75) !important;
             backdrop-filter: blur(24px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
             border: 1px solid rgba(255, 255, 255, 0.10) !important;
-            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.55) !important;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.60) !important;
         }
 
-        /* ─── 2. Inner Cards / Nested Elements / Feature Blocks (40% Translucent Dark Base) ─── */
+        /* ─── 2. Inner Cards / Nested Elements / Feature Blocks (50% Translucent Dark Base) ─── */
         html.dark .card-tilt, .dark .card-tilt,
         html.dark .card-tilt-3d, .dark .card-tilt-3d,
         html.dark .career-card, .dark .career-card,
@@ -978,8 +978,8 @@
         html.dark .dark\:bg-\[\#080B12\] .career-card,
         html.dark .dark\:bg-\[\#080B12\] .resource-card,
         html.dark .dark\:bg-\[\#080B12\] .story-card {
-            background: rgba(6, 8, 15, 0.40) !important;
-            background-color: rgba(6, 8, 15, 0.40) !important;
+            background: rgba(6, 8, 15, 0.50) !important;
+            background-color: rgba(6, 8, 15, 0.50) !important;
             backdrop-filter: blur(20px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
             border: 1px solid rgba(255, 255, 255, 0.05) !important;
@@ -999,8 +999,8 @@
         html.dark .glass-panel:hover, .dark .glass-panel:hover,
         html.dark .signature-card:hover, .dark .signature-card:hover,
         html.dark .dashboard-widget:hover, .dark .dashboard-widget:hover {
-            background: rgba(18, 24, 38, 0.55) !important;
-            background-color: rgba(18, 24, 38, 0.55) !important;
+            background: rgba(18, 24, 38, 0.65) !important;
+            background-color: rgba(18, 24, 38, 0.65) !important;
             backdrop-filter: blur(24px) saturate(190%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
             border-color: rgba(139, 92, 246, 0.35) !important;
@@ -1011,8 +1011,8 @@
         /* Universal Dark Mode Secondary Panels, Drawers & Mini Elements */
         html.dark .inner-panel, .dark .inner-panel,
         html.dark .secondary-container, .dark .secondary-container {
-            background: rgba(6, 8, 15, 0.30) !important;
-            background-color: rgba(6, 8, 15, 0.30) !important;
+            background: rgba(6, 8, 15, 0.40) !important;
+            background-color: rgba(6, 8, 15, 0.40) !important;
             backdrop-filter: blur(16px) !important;
             -webkit-backdrop-filter: blur(16px) !important;
             border: 1px solid rgba(255, 255, 255, 0.05) !important;
@@ -1020,7 +1020,7 @@
 
         /* Global Footer Glass Standard (Dark Mode) */
         html.dark footer {
-            background-color: rgba(4, 6, 11, 0.65) !important;
+            background-color: rgba(4, 6, 11, 0.75) !important;
             backdrop-filter: blur(24px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
             border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
@@ -1132,8 +1132,8 @@
 
     </div>
 
-    <!-- ══════════════════ DEDICATED DARK MODE AMBIENT GLOW BEAM & AURA BACKGROUND (STRICTLY DARK THEME ONLY) ══════════════════ -->
-    @include('components.dark-glow-beam-background')
+    <!-- ══════════════════ DEDICATED DARK MODE FLOATING PLEXUS NETWORK BACKGROUND (STRICTLY DARK THEME ONLY) ══════════════════ -->
+    @include('components.dark-plexus-background')
 
     <!-- ══════════════════ FLOATING GLASS PILL NAVBAR ══════════════════ -->
     @include('components.navbar')
@@ -1591,9 +1591,11 @@
             if (theme === 'light') {
                 html.classList.remove('dark');
                 html.setAttribute('data-theme', 'light');
+                if (window.stopDarkPlexusEngine) window.stopDarkPlexusEngine();
             } else {
                 html.classList.add('dark');
                 html.setAttribute('data-theme', 'dark');
+                if (window.startDarkPlexusEngine) window.startDarkPlexusEngine();
             }
             syncThemeIcon(theme);
         }
