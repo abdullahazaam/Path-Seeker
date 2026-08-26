@@ -97,12 +97,10 @@
         {{-- Top accent bar --}}
         <div class="h-1 bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600"></div>
 
-        <div class="p-6 sm:p-8 lg:p-10 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                
-                {{-- Left Column: 1. Node Badges -> 2. Title & Description -> 3. Status Badges -> 4. Tech Stack --}}
-                <div class="lg:col-span-7 space-y-4">
-                    {{-- 1. Small top category/node badges --}}
+        <div class="p-6 sm:p-10 lg:p-12 relative z-10">
+            <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
+                <div class="space-y-4 flex-1">
+                    {{-- 1. Top Badges --}}
                     <div class="flex items-center gap-2 flex-wrap">
                         <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold border {{ $badgeClass }}">
                             <i class="fa-solid {{ $domIcon }} text-[10px]"></i>
@@ -113,7 +111,7 @@
                         </span>
                     </div>
 
-                    {{-- 2. Main Title and description text underneath --}}
+                    {{-- 2. Title & Description --}}
                     <div class="space-y-2">
                         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white leading-tight font-display">
                             {{ $career->title }}
@@ -125,8 +123,8 @@
                         @endif
                     </div>
 
-                    {{-- 3. Role status badges --}}
-                    <div class="flex flex-wrap items-center gap-2.5 pt-1">
+                    {{-- 3. Status Badges --}}
+                    <div class="flex flex-wrap items-center gap-2.5">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">
                             <i class="fa-solid fa-circle-check text-[10px]"></i> Verified 2026 Role
                         </span>
@@ -138,7 +136,7 @@
                         </span>
                     </div>
 
-                    {{-- 4. CORE TECH STACK & COMPETENCIES heading and pill items --}}
+                    {{-- 4. Tech Stack Pills --}}
                     @if(count($skills) > 0)
                         <div class="pt-2 space-y-1.5">
                             <div class="text-[10px] uppercase tracking-wider font-bold text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5">
@@ -156,15 +154,14 @@
                     @endif
                 </div>
 
-                {{-- Right Column: Interactive Salary Calculator Card --}}
-                <div class="lg:col-span-5 w-full flex justify-center lg:justify-end">
-                    @php
-                        $salaryParts = explode('-', str_replace(['$', ',', '/ yr', ' '], '', $career->expected_salary));
-                        $rawMin = isset($salaryParts[0]) ? (int)$salaryParts[0] : 75000;
-                        $rawMax = isset($salaryParts[1]) ? (int)$salaryParts[1] : 130000;
-                    @endphp
-                    <div x-data="salaryCalculator({{ $rawMin }}, {{ $rawMax }})"
-                         class="shrink-0 p-5 sm:p-6 rounded-3xl bg-slate-100/90 dark:bg-slate-950/70 border border-emerald-500/30 text-center w-full max-w-sm shadow-xl space-y-4">
+                {{-- Interactive Salary Calculator Card (Feature 1) --}}
+                @php
+                    $salaryParts = explode('-', str_replace(['$', ',', '/ yr', ' '], '', $career->expected_salary));
+                    $rawMin = isset($salaryParts[0]) ? (int)$salaryParts[0] : 75000;
+                    $rawMax = isset($salaryParts[1]) ? (int)$salaryParts[1] : 130000;
+                @endphp
+                <div x-data="salaryCalculator({{ $rawMin }}, {{ $rawMax }})"
+                     class="shrink-0 p-5 sm:p-6 rounded-3xl bg-slate-100/90 dark:bg-slate-950/70 border border-emerald-500/30 text-center w-full lg:w-80 shadow-xl  space-y-4">
                     <div class="flex items-center justify-between">
                         <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
                             <i class="fa-solid fa-calculator text-[10px]"></i> Salary Estimator
