@@ -1483,7 +1483,7 @@
             });
         }
 
-        // ══════════════════ 3. 90FPS GSAP SCROLLTRIGGER HARDWARE ACCELERATION ENGINE ══════════════════
+        // ══════════════════ 3. 90FPS GSAP SCROLLTRIGGER HARDWARE ACCELERATION & PARALLAX ENGINE ══════════════════
         (function initGsapScrollEngine() {
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             
@@ -1507,7 +1507,22 @@
                     gsap.defaults({ force3D: true, ease: 'power3.out' });
                     gsap.registerPlugin(ScrollTrigger);
 
-                    // A. Reveal Major Sections & Hero Wrappers (Composited Transform & Opacity Only)
+                    // 1. Subtle Ambient Background Layer Parallax (Light Mode Only)
+                    const bgLayer = document.getElementById('ambientBackgroundLayer');
+                    if (bgLayer && !document.documentElement.classList.contains('dark')) {
+                        gsap.to(bgLayer, {
+                            yPercent: 10,
+                            ease: 'none',
+                            scrollTrigger: {
+                                trigger: document.body,
+                                start: 'top top',
+                                end: 'bottom bottom',
+                                scrub: 1.2
+                            }
+                        });
+                    }
+
+                    // 2. Cinematic Staggered Reveal for Sections (Heading -> Description -> Cards)
                     const sections = document.querySelectorAll('main > section, main > div > section, .reveal-element, .reveal-on-scroll, [data-reveal]');
                     sections.forEach((section) => {
                         if (section.dataset.gsapActive) return;
@@ -1516,33 +1531,64 @@
                         const rect = section.getBoundingClientRect();
                         const isAboveFold = rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
 
-                        if (isAboveFold) {
-                            gsap.fromTo(section, 
-                                { opacity: 0, y: 35, scale: 0.96, force3D: true },
-                                { opacity: 1, y: 0, scale: 1, force3D: true, duration: 0.85, ease: 'power3.out', overwrite: 'auto' }
-                            );
-                        } else {
-                            gsap.fromTo(section,
-                                { opacity: 0, y: 40, scale: 0.95, force3D: true },
-                                {
-                                    opacity: 1,
-                                    y: 0,
-                                    scale: 1,
-                                    force3D: true,
-                                    duration: 0.9,
-                                    ease: 'power3.out',
-                                    scrollTrigger: {
-                                        trigger: section,
-                                        start: 'top 86%',
-                                        once: true,
-                                        toggleActions: 'play none none none'
+                        // Find key child elements to stagger (Heading, Description/Subtext, Action Bars, Grids)
+                        const childrenToAnimate = section.querySelectorAll(':scope > h1, :scope > h2, :scope > div > h1, :scope > div > h2, :scope > p, :scope > div > p, :scope > .grid, :scope > div > .grid');
+
+                        if (childrenToAnimate.length > 1) {
+                            if (isAboveFold) {
+                                gsap.fromTo(childrenToAnimate,
+                                    { opacity: 0, y: 35, scale: 0.97, force3D: true },
+                                    { opacity: 1, y: 0, scale: 1, force3D: true, duration: 0.8, stagger: 0.08, ease: 'power3.out', overwrite: 'auto' }
+                                );
+                            } else {
+                                gsap.fromTo(childrenToAnimate,
+                                    { opacity: 0, y: 40, scale: 0.97, force3D: true },
+                                    {
+                                        opacity: 1,
+                                        y: 0,
+                                        scale: 1,
+                                        force3D: true,
+                                        duration: 0.8,
+                                        stagger: 0.08,
+                                        ease: 'power3.out',
+                                        scrollTrigger: {
+                                            trigger: section,
+                                            start: 'top 86%',
+                                            once: true,
+                                            toggleActions: 'play none none none'
+                                        }
                                     }
-                                }
-                            );
+                                );
+                            }
+                        } else {
+                            if (isAboveFold) {
+                                gsap.fromTo(section, 
+                                    { opacity: 0, y: 35, scale: 0.97, force3D: true },
+                                    { opacity: 1, y: 0, scale: 1, force3D: true, duration: 0.8, ease: 'power3.out', overwrite: 'auto' }
+                                );
+                            } else {
+                                gsap.fromTo(section,
+                                    { opacity: 0, y: 40, scale: 0.97, force3D: true },
+                                    {
+                                        opacity: 1,
+                                        y: 0,
+                                        scale: 1,
+                                        force3D: true,
+                                        duration: 0.8,
+                                        ease: 'power3.out',
+                                        scrollTrigger: {
+                                            trigger: section,
+                                            start: 'top 86%',
+                                            once: true,
+                                            toggleActions: 'play none none none'
+                                        }
+                                    }
+                                );
+                            }
                         }
                     });
 
-                    // B. Strict Sequential Staggered 1-by-1 Cascades for All Card Grids (0.1s Interval)
+                    // 3. Strict Sequential Staggered Cascades for All Card Grids (0.08s Interval)
                     const grids = document.querySelectorAll('.grid, [data-stagger-grid], #careerCardsContainer, #multimediaGrid, #resourcesGrid, #storiesGrid');
                     grids.forEach((grid) => {
                         if (grid.dataset.gsapGridActive) return;
@@ -1559,28 +1605,28 @@
 
                         if (isAboveFold) {
                             gsap.fromTo(cards,
-                                { opacity: 0, y: 35, scale: 0.96, force3D: true },
+                                { opacity: 0, y: 35, scale: 0.97, force3D: true },
                                 {
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
                                     force3D: true,
                                     duration: 0.8,
-                                    stagger: 0.1, // Strict 0.1s (100ms) sequential delay: Card 1 -> Card 2 -> Card 3
+                                    stagger: 0.08,
                                     ease: 'power3.out',
                                     overwrite: 'auto'
                                 }
                             );
                         } else {
                             gsap.fromTo(cards,
-                                { opacity: 0, y: 40, scale: 0.96, force3D: true },
+                                { opacity: 0, y: 40, scale: 0.97, force3D: true },
                                 {
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
                                     force3D: true,
-                                    duration: 0.85,
-                                    stagger: 0.1, // Strict 0.1s (100ms) sequential delay: Card 1 -> Card 2 -> Card 3
+                                    duration: 0.8,
+                                    stagger: 0.08,
                                     ease: 'power3.out',
                                     scrollTrigger: {
                                         trigger: grid,
@@ -1593,7 +1639,7 @@
                         }
                     });
 
-                    // C. Interactive Feature Blocks & Intelligence Monitors
+                    // 4. Interactive Feature Blocks & Intelligence Monitors
                     const widgets = document.querySelectorAll('.dashboard-widget, .control-room-card, #aiAdvisorOutput, .perspective-stage');
                     widgets.forEach((widget) => {
                         if (widget.dataset.gsapWidgetActive) return;
@@ -1604,18 +1650,18 @@
 
                         if (isAboveFold) {
                             gsap.fromTo(widget,
-                                { opacity: 0, y: 35, scale: 0.96, force3D: true },
-                                { opacity: 1, y: 0, scale: 1, force3D: true, duration: 0.85, ease: 'power3.out', overwrite: 'auto' }
+                                { opacity: 0, y: 35, scale: 0.97, force3D: true },
+                                { opacity: 1, y: 0, scale: 1, force3D: true, duration: 0.8, ease: 'power3.out', overwrite: 'auto' }
                             );
                         } else {
                             gsap.fromTo(widget,
-                                { opacity: 0, y: 40, scale: 0.95, force3D: true },
+                                { opacity: 0, y: 40, scale: 0.97, force3D: true },
                                 {
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
                                     force3D: true,
-                                    duration: 0.9,
+                                    duration: 0.8,
                                     ease: 'power3.out',
                                     scrollTrigger: {
                                         trigger: widget,
@@ -1645,12 +1691,12 @@
                         });
                     }, observerOptions);
 
-                    // Grid Sequential Stagger Fallback (100ms per card)
+                    // Grid Sequential Stagger Fallback (80ms per card)
                     document.querySelectorAll('.grid, [data-stagger-grid], #careerCardsContainer, #multimediaGrid, #resourcesGrid, #storiesGrid').forEach(grid => {
                         const cards = Array.from(grid.children).filter(c => !c.classList.contains('hidden') && c.tagName !== 'TEMPLATE');
                         if (cards.length > 0) {
                             cards.forEach((card, index) => {
-                                const delay = card.dataset.staggerIndex ? (parseInt(card.dataset.staggerIndex) * 100) : (index * 100);
+                                const delay = card.dataset.staggerIndex ? (parseInt(card.dataset.staggerIndex) * 80) : (index * 80);
                                 card.style.transitionDelay = `${delay}ms`;
                                 if (!card.classList.contains('reveal-element') && !card.classList.contains('reveal-on-scroll') && !card.hasAttribute('data-reveal')) {
                                     card.classList.add('reveal-on-scroll');
