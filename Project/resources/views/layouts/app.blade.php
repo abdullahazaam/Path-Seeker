@@ -690,7 +690,7 @@
             color: #111827 !important;
         }
 
-        /* Main Elevated Cards (Pure White #FFFFFF with Crisp Clean Boundaries) */
+        /* Main Elevated Frosted Glass Cards (70-85% Translucent White with 20px Blur) */
         html:not(.dark) .card-tilt,
         html:not(.dark) .card-tilt-3d,
         html:not(.dark) .career-card,
@@ -705,12 +705,14 @@
         html:not(.dark) .bg-white,
         html:not(.dark) .bg-white\/90,
         html:not(.dark) .bg-white\/95 {
-            background-color: #FFFFFF !important;
-            border-color: rgba(15, 23, 42, 0.07) !important;
-            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+            background: rgba(255, 255, 255, 0.82) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.70) !important;
+            box-shadow: 0 10px 35px -5px rgba(30, 40, 70, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.04) !important;
         }
 
-        /* Elevated Card Hover Elevation */
+        /* Elevated Frosted Glass Card Hover Elevation */
         html:not(.dark) .card-tilt:hover,
         html:not(.dark) .card-tilt-3d:hover,
         html:not(.dark) .career-card:hover,
@@ -722,12 +724,13 @@
         html:not(.dark) .control-room-card:hover,
         html:not(.dark) .grid > .rounded-3xl:hover,
         html:not(.dark) .grid > div[class*="rounded-3xl"]:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
-            border-color: rgba(118, 87, 255, 0.25) !important;
+            background: rgba(255, 255, 255, 0.92) !important;
+            transform: translate3d(0, -3px, 0);
+            box-shadow: 0 14px 38px -4px rgba(30, 40, 70, 0.10), 0 0 0 1px rgba(118, 87, 255, 0.25) !important;
+            border-color: rgba(118, 87, 255, 0.35) !important;
         }
 
-        /* Inner Panels & Secondary Containers (Soft Gray-White #F5F6FA) */
+        /* Inner Panels & Secondary Containers (Translucent Neutral Hierarchy #F5F7FA) */
         html:not(.dark) .bg-slate-50,
         html:not(.dark) .bg-slate-50\/50,
         html:not(.dark) .bg-slate-50\/60,
@@ -737,8 +740,10 @@
         html:not(.dark) .bg-slate-100\/90,
         html:not(.dark) .inner-panel,
         html:not(.dark) .secondary-container {
-            background-color: #F5F6FA !important;
-            border-color: rgba(15, 23, 42, 0.07) !important;
+            background-color: rgba(245, 247, 250, 0.85) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border-color: rgba(15, 23, 42, 0.06) !important;
         }
 
         /* Clean Boundaries across All Dividers */
