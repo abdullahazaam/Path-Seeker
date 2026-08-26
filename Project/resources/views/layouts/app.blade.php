@@ -1297,7 +1297,7 @@
                         }
                     });
 
-                    // B. Staggered Cascades for All Card Grids (.grid > div)
+                    // B. Sequential Staggered 1-by-1 Cascades for All Card Grids
                     const grids = document.querySelectorAll('.grid, [data-stagger-grid]');
                     grids.forEach((grid) => {
                         if (grid.dataset.gsapGridActive) return;
@@ -1319,8 +1319,8 @@
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
-                                    duration: 0.8,
-                                    stagger: 0.08,
+                                    duration: 0.75,
+                                    stagger: 0.08, // Sequential 80ms delay per card: Card 1 -> Card 2 -> Card 3
                                     ease: 'power3.out',
                                     overwrite: 'auto'
                                 }
@@ -1332,8 +1332,8 @@
                                     opacity: 1,
                                     y: 0,
                                     scale: 1,
-                                    duration: 0.85,
-                                    stagger: 0.09,
+                                    duration: 0.8,
+                                    stagger: 0.08, // Sequential 80ms delay per card: Card 1 -> Card 2 -> Card 3
                                     ease: 'power3.out',
                                     scrollTrigger: {
                                         trigger: grid,
@@ -1397,6 +1397,20 @@
                         });
                     }, observerOptions);
 
+                    // Grid Sequential Stagger Fallback (80ms per card)
+                    document.querySelectorAll('.grid, [data-stagger-grid]').forEach(grid => {
+                        const cards = Array.from(grid.children).filter(c => !c.classList.contains('hidden') && c.tagName !== 'TEMPLATE');
+                        if (cards.length > 0) {
+                            cards.forEach((card, index) => {
+                                card.style.transitionDelay = `${index * 80}ms`;
+                                if (!card.classList.contains('reveal-element') && !card.classList.contains('reveal-on-scroll') && !card.hasAttribute('data-reveal')) {
+                                    card.classList.add('reveal-on-scroll');
+                                }
+                                revealObserver.observe(card);
+                            });
+                        }
+                    });
+
                     const selectors = [
                         '.reveal-element',
                         '.reveal-on-scroll',
@@ -1453,8 +1467,11 @@
                     '.glass-panel',
                     '[data-tilt]',
                     '.grid > .rounded-3xl',
+                    '.grid > div[class*="rounded-3xl"]',
                     '.grid > div[class*="border"]',
                     '.dashboard-widget',
+                    '.control-room-card',
+                    '.perspective-stage',
                     '#aiAdvisorOutput'
                 ];
 
