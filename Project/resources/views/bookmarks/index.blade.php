@@ -77,7 +77,7 @@
             </a>
         </div>
     @else
-        <div class="stagger-wrapper grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @foreach($bookmarks as $bm)
                 @php 
                     $item = $bm->item;
@@ -89,7 +89,7 @@
                         default => url('/'),
                     };
                 @endphp
-                <div id="bookmark-card-{{ $bm->id }}" class="reveal-card" x-data="{ 
+                <div id="bookmark-card-{{ $bm->id }}" x-data="{ 
                     editingNote: false, 
                     showShare: false,
                     noteContent: '{{ addslashes($bm->notes ?? '') }}',

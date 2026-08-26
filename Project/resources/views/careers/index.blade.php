@@ -254,8 +254,8 @@
         </div>
     </div>
 
-    {{-- Career Bank — Responsive Grid of Individual Clean Cards with Staggered Entry Animation --}}
-    <div class="stagger-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="careerCardsContainer">
+    {{-- Career Bank — Responsive Grid of Individual Clean Cards --}}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="careerCardsContainer">
         @forelse($careers as $career)
             @php
                 $domLower = strtolower($career->domain);
@@ -304,8 +304,8 @@
                 $rowIndex = sprintf('%02d', $loop->iteration + (($careers->currentPage() - 1) * $careers->perPage()));
             @endphp
 
-            {{-- Individual Clean Career Card with Staggered Fade-In-Up Animation --}}
-            <div class="career-card reveal-card relative p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#090d18] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-50/90 dark:hover:bg-[#0d1322] shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group flex flex-col justify-between overflow-hidden">
+            {{-- Individual Clean Career Card --}}
+            <div class="career-card relative p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#090d18] border border-slate-200/90 dark:border-white/10 hover:border-cyan-500/50 hover:bg-slate-50/90 dark:hover:bg-[#0d1322] shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group flex flex-col justify-between overflow-hidden">
                 
                 {{-- Ambient Corner Glow --}}
                 <div class="absolute -right-20 -top-20 w-40 h-40 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>

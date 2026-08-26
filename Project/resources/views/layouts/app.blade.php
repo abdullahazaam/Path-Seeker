@@ -1044,30 +1044,6 @@
             box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.55) !important;
         }
 
-        /* ══════════════════ REUSABLE STAGGERED SCROLL REVEAL ANIMATION ENGINE ══════════════════ */
-        .stagger-wrapper {
-            position: relative;
-        }
-
-        .reveal-card {
-            opacity: 0;
-            transform: translateY(40px) translateX(15px);
-            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: opacity, transform;
-        }
-
-        .reveal-card.is-visible {
-            opacity: 1 !important;
-            transform: translate(0, 0) !important;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .reveal-card {
-                opacity: 1 !important;
-                transform: none !important;
-                transition: none !important;
-            }
-        }
 
         /* Universal Dark Mode Secondary Panels, Drawers & Mini Elements */
         html.dark .inner-panel, .dark .inner-panel,
@@ -2116,42 +2092,6 @@
                 });
             }
 
-            // ══════════════════ GLOBAL STAGGERED SCROLL REVEAL (VANILLA JS) ══════════════════
-            const initStaggerObserver = () => {
-                const staggerWrappers = document.querySelectorAll('.stagger-wrapper');
-                if (!staggerWrappers.length) return;
-
-                if (!('IntersectionObserver' in window)) {
-                    document.querySelectorAll('.reveal-card').forEach(card => card.classList.add('is-visible'));
-                    return;
-                }
-
-                const observerOptions = {
-                    root: null,
-                    rootMargin: '0px 0px -40px 0px',
-                    threshold: 0.08
-                };
-
-                const observer = new IntersectionObserver((entries, obs) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const wrapper = entry.target;
-                            const cards = wrapper.querySelectorAll('.reveal-card:not(.is-visible)');
-                            cards.forEach((card, index) => {
-                                setTimeout(() => {
-                                    card.classList.add('is-visible');
-                                }, index * 120);
-                            });
-                            obs.unobserve(wrapper);
-                        }
-                    });
-                }, observerOptions);
-
-                staggerWrappers.forEach(wrapper => observer.observe(wrapper));
-            };
-
-            initStaggerObserver();
-            window.initStaggerObserver = initStaggerObserver;
 
             // Global Keyboard Shortcut: Cmd/Ctrl + K or Escape
             document.addEventListener('keydown', (e) => {

@@ -40,13 +40,13 @@
     </div>
 
     {{-- Timeline Stories Grid --}}
-    <div class="stagger-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch" data-stagger-grid id="storiesGrid">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch" data-stagger-grid id="storiesGrid">
         @forelse($stories as $story)
             @php
                 $authorDisplayName = str_contains($story->title, ' — ') ? explode(' — ', $story->title)[0] : ($story->author?->name ?? 'PathSeeker Scholar');
                 $storyHeadline = str_contains($story->title, ' — ') ? explode(' — ', $story->title)[1] : $story->title;
             @endphp
-            <div class="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group app-card reveal-card">
+            <div class="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#080B12] border border-slate-200 dark:border-white/10 shadow-md dark:shadow-sm hover:shadow-xl hover:border-purple-500/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group app-card">
                 
                 <div class="space-y-4">
                     
