@@ -514,45 +514,13 @@
             transition: left 0.75s ease-in-out;
         }
 
-        /* ══════════════════ EXACT STAGGERED SCROLL-TRIGGERED REVEAL SYSTEM (GPU COMPOSITED) ══════════════════ */
+        /* ══════════════════ 100% VISIBLE DEFAULT CONTENT ══════════════════ */
         .reveal-element,
         .reveal-on-scroll,
         [data-reveal] {
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-            -webkit-transform: translate3d(0, 0, 0);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-
-        .reveal-element.reveal-hidden,
-        .reveal-on-scroll.reveal-hidden,
-        [data-reveal].reveal-hidden {
-            opacity: 0 !important;
-            transform: translate3d(0, 30px, 0) scale3d(0.98, 0.98, 1) !important;
-            -webkit-transform: translate3d(0, 30px, 0) scale3d(0.98, 0.98, 1) !important;
-        }
-
-        /* Revealed State (locks in place, strictly composited) */
-        .reveal-element.revealed,
-        .reveal-on-scroll.revealed,
-        [data-reveal].revealed {
             opacity: 1 !important;
-            transform: translate3d(0, 0, 0) scale3d(1, 1, 1) !important;
-            -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) !important;
+            transform: none !important;
         }
-
-        /* Precise Stagger Delays (50ms - 100ms sequential intervals) */
-        .stagger-1, [data-reveal-delay="75"]  { transition-delay: 75ms !important; }
-        .stagger-2, [data-reveal-delay="150"] { transition-delay: 150ms !important; }
-        .stagger-3, [data-reveal-delay="225"] { transition-delay: 225ms !important; }
-        .stagger-4, [data-reveal-delay="300"] { transition-delay: 300ms !important; }
-        .stagger-5, [data-reveal-delay="375"] { transition-delay: 375ms !important; }
-        .stagger-6, [data-reveal-delay="450"] { transition-delay: 450ms !important; }
-        .stagger-7, [data-reveal-delay="525"] { transition-delay: 525ms !important; }
-        .stagger-8, [data-reveal-delay="600"] { transition-delay: 600ms !important; }
 
         /* ══════════════════ UNIVERSAL 3D TILT & LIGHT REFLECTION ENGINE ══════════════════ */
         .card-tilt-3d,
@@ -1042,27 +1010,6 @@
             border-color: rgba(139, 92, 246, 0.35) !important;
             transform: translate3d(0, -3px, 0);
             box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.55) !important;
-        }
-
-        /* ══════════════════ LARAVEL BLADE STAGGERED SCROLL-REVEAL SYSTEM ══════════════════ */
-        .reveal-card {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: opacity, transform;
-        }
-
-        .reveal-card.is-visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .reveal-card {
-                opacity: 1 !important;
-                transform: none !important;
-                transition: none !important;
-            }
         }
 
         /* Universal Dark Mode Secondary Panels, Drawers & Mini Elements */
@@ -1768,193 +1715,6 @@
             });
         }
 
-        // ══════════════════ 3. 90FPS GSAP SCROLLTRIGGER HARDWARE ACCELERATION & PARALLAX ENGINE ══════════════════
-        (function initGsapScrollEngine() {
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            
-            function setupScrollTriggerAnimations() {
-                // Ensure all headers, navigation, above-the-fold content, and closing CTA banners are 100% visible
-                document.querySelectorAll('.reveal-element, .reveal-on-scroll, [data-reveal]').forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (prefersReducedMotion || (rect.top < window.innerHeight * 1.05 && rect.bottom > -50)) {
-                        el.classList.add('revealed');
-                        el.style.opacity = '1';
-                        el.style.transform = 'none';
-                    }
-                });
-
-                if (prefersReducedMotion) return;
-
-                // Check if GSAP & ScrollTrigger are available
-                const hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
-
-                if (hasGsap) {
-                    // Global GPU Hardware Offloading (force3D: true on all tweens)
-                    gsap.config({ force3D: true, nullTargetWarn: false });
-                    gsap.defaults({ force3D: true, ease: 'power3.out' });
-                    gsap.registerPlugin(ScrollTrigger);
-
-                    // 1. Subtle Ambient Background Layer Parallax (Light Mode Only)
-                    const bgLayer = document.getElementById('ambientBackgroundLayer');
-                    if (bgLayer && !document.documentElement.classList.contains('dark')) {
-                        gsap.to(bgLayer, {
-                            yPercent: 8,
-                            ease: 'none',
-                            scrollTrigger: {
-                                trigger: document.body,
-                                start: 'top top',
-                                end: 'bottom bottom',
-                                scrub: 1.2
-                            }
-                        });
-                    }
-
-                    // 2. Controlled Below-the-fold Section & Card Reveals
-                    const revealTargets = document.querySelectorAll('.reveal-element, .reveal-on-scroll, [data-reveal]');
-                    revealTargets.forEach((target) => {
-                        if (target.dataset.gsapActive) return;
-                        target.dataset.gsapActive = 'true';
-
-                        const rect = target.getBoundingClientRect();
-                        if (rect.top >= window.innerHeight * 0.95) {
-                            gsap.fromTo(target,
-                                { opacity: 0, y: 30, scale: 0.98, force3D: true },
-                                {
-                                    opacity: 1,
-                                    y: 0,
-                                    scale: 1,
-                                    force3D: true,
-                                    duration: 0.7,
-                                    ease: 'power3.out',
-                                    scrollTrigger: {
-                                        trigger: target,
-                                        start: 'top 90%',
-                                        once: true,
-                                        onEnter: () => target.classList.add('revealed')
-                                    }
-                                }
-                            );
-                        } else {
-                            target.classList.add('revealed');
-                            target.style.opacity = '1';
-                            target.style.transform = 'none';
-                        }
-                    });
-
-                    // 3. Strict Sequential Staggered Cascades for All Card Grids (0.07s Interval)
-                    const grids = document.querySelectorAll('.grid, [data-stagger-grid], #careerCardsContainer, #multimediaGrid, #resourcesGrid, #storiesGrid');
-                    grids.forEach((grid) => {
-                        if (grid.dataset.gsapGridActive) return;
-                        grid.dataset.gsapGridActive = 'true';
-
-                        const cards = Array.from(grid.children).filter(child => {
-                            return !child.classList.contains('hidden') && child.tagName !== 'TEMPLATE';
-                        });
-
-                        if (cards.length === 0) return;
-
-                        const gridRect = grid.getBoundingClientRect();
-                        if (gridRect.top < window.innerHeight * 0.9) {
-                            gsap.fromTo(cards,
-                                { opacity: 0, y: 25, scale: 0.98, force3D: true },
-                                {
-                                    opacity: 1,
-                                    y: 0,
-                                    scale: 1,
-                                    force3D: true,
-                                    duration: 0.6,
-                                    stagger: 0.07,
-                                    ease: 'power3.out',
-                                    overwrite: 'auto'
-                                }
-                            );
-                        } else {
-                            gsap.fromTo(cards,
-                                { opacity: 0, y: 30, scale: 0.98, force3D: true },
-                                {
-                                    opacity: 1,
-                                    y: 0,
-                                    scale: 1,
-                                    force3D: true,
-                                    duration: 0.7,
-                                    stagger: 0.07,
-                                    ease: 'power3.out',
-                                    scrollTrigger: {
-                                        trigger: grid,
-                                        start: 'top 88%',
-                                        once: true
-                                    }
-                                }
-                            );
-                        }
-                    });
-
-                    // 4. Interactive Feature Blocks & Intelligence Monitors
-                    const widgets = document.querySelectorAll('.dashboard-widget, .control-room-card, #aiAdvisorOutput, .perspective-stage');
-                    widgets.forEach((widget) => {
-                        if (widget.dataset.gsapWidgetActive) return;
-                        widget.dataset.gsapWidgetActive = 'true';
-
-                        const wRect = widget.getBoundingClientRect();
-                        if (wRect.top >= window.innerHeight * 0.95) {
-                            gsap.fromTo(widget,
-                                { opacity: 0, y: 30, scale: 0.98, force3D: true },
-                                {
-                                    opacity: 1,
-                                    y: 0,
-                                    scale: 1,
-                                    force3D: true,
-                                    duration: 0.7,
-                                    ease: 'power3.out',
-                                    scrollTrigger: {
-                                        trigger: widget,
-                                        start: 'top 90%',
-                                        once: true
-                                    }
-                                }
-                            );
-                        } else {
-                            widget.classList.add('revealed');
-                            widget.style.opacity = '1';
-                            widget.style.transform = 'none';
-                        }
-                    });
-
-                } else {
-                    // High-performance IntersectionObserver Fallback
-                    const observerOptions = {
-                        root: null,
-                        rootMargin: '0px 0px -20px 0px',
-                        threshold: 0.05
-                    };
-
-                    const revealObserver = new IntersectionObserver((entries, observer) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add('revealed');
-                                entry.target.style.opacity = '1';
-                                entry.target.style.transform = 'none';
-                                observer.unobserve(entry.target);
-                            }
-                        });
-                    }, observerOptions);
-
-                    document.querySelectorAll('.reveal-element, .reveal-on-scroll, [data-reveal], .grid > div').forEach(el => {
-                        revealObserver.observe(el);
-                    });
-                }
-            }
-
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', setupScrollTriggerAnimations);
-            } else {
-                setupScrollTriggerAnimations();
-            }
-
-            window.initScrollReveals = setupScrollTriggerAnimations;
-            window.addEventListener('load', setupScrollTriggerAnimations);
-        })();
-
         // ══════════════════ 4. 90FPS SMART 3D TILT & MOUSE-TRACKING ENGINE (rAF THROTTLED & TOUCH DISABLED) ══════════════════
         (function initUniversalTiltEngine() {
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2111,25 +1871,6 @@
                     }
                 });
             }
-
-            // ══════════════════ BULLETPROOF LARAVEL BLADE STAGGERED OBSERVER ══════════════════
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const cards = entry.target.querySelectorAll('.reveal-card');
-                        cards.forEach((card, index) => {
-                            setTimeout(() => {
-                                card.classList.add('is-visible');
-                            }, index * 120); // 120ms staggered delay
-                        });
-                        observer.unobserve(entry.target); // Trigger only once
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.stagger-wrapper').forEach(wrapper => {
-                observer.observe(wrapper);
-            });
 
 
             // Global Keyboard Shortcut: Cmd/Ctrl + K or Escape
