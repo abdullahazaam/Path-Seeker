@@ -1,10 +1,8 @@
-# PathSeeker Laravel Application
+# PathSeeker application
 
-This directory contains the Laravel 12 application for **PathSeeker — Career Passport**.
+This folder contains the Laravel application. For an overview of the project, see the [main README](../README.md).
 
-For the feature overview, live demo, architecture, setup instructions, and portfolio notes, see the [repository README](../README.md).
-
-## Quick start
+## Start the application
 
 ```bash
 composer install
@@ -16,9 +14,8 @@ npm run build
 php artisan serve
 ```
 
-Run the automated checks with:
+Run the tests with:
 
 ```bash
 php artisan test
 ```
-
