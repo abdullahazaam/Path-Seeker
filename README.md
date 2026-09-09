@@ -2,7 +2,7 @@
 
 PathSeeker is a Laravel career guidance project for students, graduates and people considering a career change. I built it to bring assessments, career information and useful learning resources into one place.
 
-Live demo: [PathSeeker](https://path-seeker-production.up.railway.app)
+**[Live Demo](https://path-seeker-production.up.railway.app) · [Source Code](https://github.com/abdullahazaam/Path-Seeker)**
 
 ## What it does
 
